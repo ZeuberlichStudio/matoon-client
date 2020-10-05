@@ -1,0 +1,97 @@
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .product-filters {
+        width: t-get-vw(246px);
+        height: max-content;
+        padding: t-get-vw(10px);
+        padding-bottom: t-get-vw(100px);
+        background-color: white;
+        border-radius: t-get-vw(22px);
+        box-shadow: 0 get-vw(1px) get-vw(30px) rgba(black, .15);
+
+        h2 { 
+            width: 100%;
+            height: t-get-vw(40px);
+            @include proxima-bold(t-get-vw(16px), t-get-vw(40px));
+            text-align: center;
+            background-color: rgba(white, .3);
+            backdrop-filter: blur(8px);
+            border-radius: t-get-vw(12px);
+        }
+    
+        &_block {
+            margin-top: t-get-vw(38px);
+            padding: 0 t-get-vw(7px);
+    
+            h3 { 
+                padding: 0 t-get-vw(3px);
+                @include proxima-bold(t-get-vw(16px), t-get-vw(21px));
+            }
+    
+            div {
+                display: flex;
+                flex-wrap: wrap;
+    
+                button {
+                    @include t-button-small;
+                    @include t-button-picture (#B7B9BA, 'assets/images/icon_more.svg', 'assets/images/icon_less.svg');
+                    margin: t-get-vw(3px);
+                    border: none;
+                    background-color: #E9EAEA;
+                    
+                    &.active { background-color: #E9EAEA; }
+                }
+            }
+        }
+    }
+    
+    .checkbox-filter {
+        margin: t-get-vw(3px);
+        @include t-checkbox-filter;
+    }
+    
+    .field-filter {
+        margin: t-get-vw(3px);
+    
+        input {
+            width: t-get-vw(100px);
+            height: t-get-vw(24px);
+            padding: 0 t-get-vw(8px);
+            border-radius: t-get-vw(8px);
+            background-color: rgba(black, .05);
+            color: rgba(black, .5);
+            @include proxima-semibold(12px, 24px);
+        }
+    
+        ::placeholder { color: rgba(black, .5); }
+    }
+    
+    .product-filters_controls {
+        left: t-get-vw(10px);
+        right: t-get-vw(10px);
+        bottom: t-get-vw(10px);
+        position: absolute;
+        border-radius: t-get-vw(12px);
+        background-color: rgba(white, .3);
+        backdrop-filter: blur(8px);
+    
+        span { 
+            padding-left: t-get-vw(10px);
+            @include proxima-bold(t-get-vw(16px));
+        }
+    
+        #filters-reset {
+            margin-left: t-get-vw(6px);
+            @include proxima-semibold(t-get-vw(12px));
+            color: rgba(black, .5);
+            text-decoration: underline;
+
+            cursor: pointer;
+        }
+    
+        #filters-apply {
+            margin-top: t-get-vw(10px);
+            @include t-button-big;
+            width: 100%;
+        }
+    }
+}

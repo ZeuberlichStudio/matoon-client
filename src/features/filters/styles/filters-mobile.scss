@@ -1,0 +1,106 @@
+@media screen and (max-width: 767px) {
+    .product-filters {
+        width: 100%;
+        height: max-content;
+        padding: m-get-vw(14px);
+        //border-radius: m-get-vw(26px);
+    
+        h2 { 
+            width: 100%;
+            height: m-get-vw(42px);
+            @include proxima-bold(m-get-vw(18px), m-get-vw(42px));
+            text-align: center;
+            background-color: rgba(white, .3);
+            backdrop-filter: blur(8px);
+            border-radius: m-get-vw(12px);
+            //
+            display: none;
+        }
+    
+        &_block {
+            &:not(:nth-child(2)) { margin-top: m-get-vw(32px); }
+            padding: 0 m-get-vw(7px);
+    
+            h3 { 
+                padding: 0 m-get-vw(4px);
+                @include proxima-bold(m-get-vw(18px), m-get-vw(24px));
+            }
+    
+            div {
+                display: flex;
+                flex-wrap: wrap;
+    
+                button {
+                    @include m-button-small;
+                    @include m-button-picture (#B7B9BA, 'assets/images/icon_more.svg', 'assets/images/icon_less.svg');
+                    margin: m-get-vw(4px);
+                    border: none;
+                    background-color: #E9EAEA;
+                    
+                    &.active { background-color: #E9EAEA; }
+                }
+            }
+        }
+    }
+    
+    .checkbox-filter {
+        margin: m-get-vw(4px);
+        @include m-checkbox-filter;
+        background-color: transparent;
+    }
+    
+    .field-filter {
+        margin: m-get-vw(3px);
+    
+        input {
+            width: m-get-vw(138px);
+            height: m-get-vw(32px);
+            padding: 0 m-get-vw(12px);
+            border-radius: m-get-vw(8px);
+            background-color: rgba(black, .05);
+            color: rgba(black, .5);
+            @include proxima-semibold(m-get-vw(16px), m-get-vw(32px));
+        }
+    
+        ::placeholder { color: rgba(black, .5); }
+    }
+    
+    .product-filters_controls {
+        left: m-get-vw(7px);
+        right: m-get-vw(7px);
+        bottom: m-get-vw(14px);
+
+        margin-top: m-get-vw(32px);
+        padding: m-get-vw(7px);
+
+        position: sticky;
+        border-radius: m-get-vw(19px);
+        background-color: rgba(white, 1);
+        //backdrop-filter: blur(8px);
+        box-shadow: 0 m-get-vw(1px) m-get-vw(15px) rgba(black, .25);
+        z-index: 3;
+        will-change: transform;
+    
+        span { 
+            padding-left: m-get-vw(12px);
+            @include proxima-bold(m-get-vw(18px), m-get-vw(28px));
+        }
+    
+        #filters-reset {
+            margin-left: m-get-vw(6px);
+            @include proxima-semibold(m-get-vw(12px));
+            color: rgba(black, .5);
+            text-decoration: underline;
+
+            cursor: pointer;
+        }
+    
+        #filters-apply {
+            margin-top: m-get-vw(4px);
+            @include m-button-big;
+            width: 100%;
+            box-shadow: 0 m-get-vw(1px) m-get-vw(15px) rgba(black, .25);
+
+        }
+    }
+}

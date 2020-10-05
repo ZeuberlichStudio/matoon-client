@@ -1,0 +1,32 @@
+@import 'assets/scss/fonts';
+
+body { 
+    background-color: gray; 
+    overflow-x: hidden;
+
+}
+
+*, ::before, ::after{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    background-color: unset;
+    list-style: none;
+    //
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    //
+    mask-size: contain;
+    mask-position: center;
+    mask-repeat: no-repeat;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}

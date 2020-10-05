@@ -1,0 +1,142 @@
+//buttons with text
+
+@mixin button-small {
+    width: max-content;
+    min-width: get-vw(32px);
+    height: get-vw(32px);
+    position: relative;
+    display: block;
+    border-radius: get-vw(8px);
+    border: get-vw(2px) solid black;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+
+    span{ 
+        width: 100%;
+        height: 100%;
+        padding: 0 get-vw(12px);
+        position: relative; 
+        display: block;
+        z-index: 1; 
+        @include proxima-semibold(get-vw(16px), get-vw(29px));
+    }
+
+    &.active{
+        background-color: black;
+        color: white;
+    }
+}
+
+@mixin button-picture( $color, $image, $active_image: false, $size: 'small' ) {
+    span {
+        mask-image: url($image);
+        @if $size == 'small' {
+            mask-size: get-vw(16px);
+        }
+        @else if $size == 'big' {
+            mask-size: get-vw(24px);
+        }
+        background-color: $color;
+    }
+
+    @if $active_image {
+        &.active span { 
+            mask-image: url($active_image); 
+            background-color: white;
+        }
+    }
+}
+
+@mixin button-big{
+    min-width: get-vw(48px);
+    width: max-content;
+    height: get-vw(48px);
+    position: relative;
+    display: block;
+    border-radius: get-vw(15px);
+    background-color: white;
+    box-shadow: 0 get-vw(1px) get-vw(15px) rgba(black, .1);
+    color: black;
+    cursor: pointer;
+
+    span{ 
+        width: 100%;
+        height: 100%;
+        padding: 0 get-vw(12px);
+        position: relative; 
+        display: block;
+        z-index: 1; 
+        @include proxima-semibold(get-vw(18px), get-vw(48px));
+        text-align: center;
+    }
+
+    &.active{
+        background-color: black;
+        color: white;
+    }
+}
+
+@mixin checkbox-filter{
+    @include button-small;
+    overflow: hidden;
+    color: var(--colorData, black);
+    border-color: var(--colorData, black);
+
+    input{
+        width: 0; height: 0;
+        position: absolute;
+    }
+
+    span{ transition: padding 0.3s; }
+
+    &::before{
+        width: get-vw(14px);
+        height: get-vw(14px);
+        top: 0; bottom: 0;
+        margin: auto;
+        left: get-vw(10px);
+        position: absolute;
+        mask-image: url('assets/images/icon_plus.svg');
+        background-color: var(--colorData, black);
+        transition: left 0.3s;
+        content: '';
+    }
+
+    &::after{
+        width: get-vw(10px);
+        height: get-vw(10px);
+        top: 0; bottom: 0;
+        margin: auto;
+        right: get-vw(10px);
+        position: absolute;
+        mask-image: url('assets/images/icon_cross.svg');
+        background-color: white;
+        transition: right 0.3s;
+        content: '';
+    }
+
+    &:not(.active) {
+        span{
+            padding-right: get-vw(10px);
+            padding-left: get-vw(28px);
+        }
+
+        &::after{
+            right: get-vw(-8px);
+        }
+    }
+
+    &.active {
+        background-color: var(--colorData, black);
+
+        span{
+            padding-right: get-vw(28px);
+            padding-left: get-vw(10px);
+        }
+
+        &::before{
+            left: get-vw(-8px);
+        }
+    }
+}

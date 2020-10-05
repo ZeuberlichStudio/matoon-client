@@ -1,0 +1,12 @@
+@media screen and (max-width: 767px) {
+    .product-grid {
+        grid-area: grid;
+
+        width: 100%;
+        display: grid;
+        grid-template-columns: max-content;
+        grid-auto-rows: max-content;
+        justify-content: center;
+        grid-row-gap: m-get-vw(16px);
+    }
+}

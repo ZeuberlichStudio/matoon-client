@@ -1,0 +1,60 @@
+@media screen and (min-width: 1024px) {
+    .resizable-text {
+        &_content {
+            min-height: get-vw(145px);
+            max-height: get-vw(145px);
+
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        &.resizable &_content::after {
+            width: 100%;
+            height: get-vw(20px);
+            bottom: 0;
+
+            display: block;
+            position: absolute;
+
+            background-image: linear-gradient(to bottom, rgba(white, 0), rgba(white, 1));
+            transition: 0.3s;
+
+            content: '';
+        }
+
+        &_toggle {
+            height: get-vw(20px);
+            @include proxima-semibold(get-vw(16px));
+            padding-left: get-vw(16px);
+            color: rgba(black, .5);
+        }
+
+        &_toggle::after {
+            width: get-vw(12px);
+            height: get-vw(12px);
+            left: 0; top: get-vw(4px);
+
+            display: block;
+            position: absolute;
+
+            mask-image: url('assets/images/icon_more.svg');
+            background-color: rgba(black, .4);
+
+            content: '';
+        }
+    }
+
+    .resizable-text.open {
+        .resizable-text_content {
+            max-height: get-vw(1000px);
+        }
+
+        .resizable-text_content::after {
+            opacity: 0;
+        }
+
+        .resizable-text_toggle::after {
+            mask-image: url('assets/images/icon_less.svg');
+        }
+    }
+}

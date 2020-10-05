@@ -1,0 +1,98 @@
+@media screen and (min-width: 1024px) {
+    .product-filters {
+        width: get-vw(336px);
+        height: max-content;
+        padding: get-vw(6px);
+        padding-bottom: get-vw(120px);
+        background-color: white;
+        border-radius: get-vw(28px);
+        box-shadow: 0 get-vw(1px) get-vw(30px) rgba(black, .15);
+    
+        h2 { 
+            width: 100%;
+            height: get-vw(58px);
+            @include proxima-bold(get-vw(22px), get-vw(58px));
+            text-align: center;
+            background-color: rgba(white, .3);
+            backdrop-filter: blur(8px);
+            border-radius: get-vw(22px);
+        }
+    
+        &_block {
+            margin-top: get-vw(28px);
+            padding: 0 get-vw(14px);
+    
+            h3 { 
+                padding: 0 get-vw(4px);
+                @include proxima-bold(get-vw(22px), get-vw(30px)); 
+            }
+    
+            div {
+                display: flex;
+                flex-wrap: wrap;
+    
+                button {
+                    @include button-small;
+                    @include button-picture (#B7B9BA, 'assets/images/icon_more.svg', 'assets/images/icon_less.svg');
+                    margin: get-vw(4px);
+                    border: none;
+                    background-color: #E9EAEA;
+                    
+                    &.active { background-color: #E9EAEA; }
+                }
+            }
+        }
+    }
+    
+    .checkbox-filter {
+        margin: get-vw(4px);
+        @include checkbox-filter;
+    }
+    
+    .field-filter {
+        margin: get-vw(4px);
+    
+        input {
+            width: get-vw(140px);
+            height: get-vw(32px);
+            padding: 0 get-vw(12px);
+            border-radius: get-vw(8px);
+            background-color: rgba(black, .05);
+            color: rgba(black, .5);
+            @include proxima-semibold(get-vw(16px), get-vw(32px));
+        }
+    
+        ::placeholder { color: rgba(black, .5); }
+    }
+    
+    .product-filters_controls {
+        padding: get-vw(6px);
+        left: get-vw(6px);
+        right: get-vw(6px);
+        bottom: get-vw(6px);
+        position: absolute;
+        border-radius: get-vw(22px);
+        background-color: rgba(white, .3);
+        backdrop-filter: blur(8px);
+    
+        span { 
+            padding-left: get-vw(12px);
+            @include proxima-bold(get-vw(22px)); 
+        }
+    
+        #filters-reset {
+            margin-left: get-vw(6px);
+            @include proxima-semibold(get-vw(16px));
+            color: rgba(black, .5);
+            text-decoration: underline;
+
+            cursor: pointer;
+        }
+    
+        #filters-apply {
+            margin-top: get-vw(10px);
+            @include button-big;
+            width: 100%;
+        }
+    }
+}

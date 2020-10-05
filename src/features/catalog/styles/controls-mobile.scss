@@ -1,0 +1,75 @@
+@media screen and (max-width: 767px) {
+    .product-grid_controls {
+        grid-area: controls;
+
+        width: 100%;
+        height: max-content;
+        padding-top: m-get-vw(10px);
+        display: flex;
+        justify-content: space-between;
+        background-color: white;
+
+        &_sorting {
+            height: m-get-vw(52px);
+            border-radius: m-get-vw(20px);
+            background-color: rgba(black, .05);
+            overflow: hidden;
+
+            h3 { display: none; }
+
+            &_buttons-wrapper {
+                overflow-x: auto;
+                @include hide-scrollbar;
+            }
+
+            &_buttons { 
+                width: max-content;
+                padding: m-get-vw(8px);
+                display: grid;
+                grid-auto-flow: column;
+                grid-column-gap: m-get-vw(8px);
+            }
+
+            button { @include m-button-medium(true); }
+
+            &::before,
+            &::after {
+                width: 10%;
+                height: 100%;
+                top: 0;
+                position: absolute;
+                display: block;
+                opacity: 0.1;
+                z-index: 2;
+                content: '';
+            }
+
+            &::before {
+                left: 0;
+                background-image: linear-gradient(to left, rgba(black, 0) 0%, black 100%);
+            }
+
+            &::after {
+                right: 0;
+                background-image: linear-gradient(to right, rgba(black, 0) 0%, black 100%);
+            }
+        }
+    
+        &_filters {
+            margin-left: m-get-vw(16px);
+            border-radius: m-get-vw(20px);
+            background-color: rgba(black, .05);
+
+            div { 
+                width: max-content;
+                padding: m-get-vw(8px);
+            }
+
+            button { @include m-button-medium(true); }
+
+            button {
+                @include m-button-picture(black, 'assets/images/mobile-icon_filters.svg', 'assets/images/mobile-icon_filters.svg', 'big');
+            }
+        }
+    }
+}

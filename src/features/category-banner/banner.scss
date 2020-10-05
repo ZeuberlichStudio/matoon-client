@@ -1,0 +1,12 @@
+@import 'assets/scss/functions';
+@import 'assets/scss/typography';
+@import 'assets/scss/buttons';
+
+@import './styles/banner-pc.scss';
+@import './styles/banner-tablet.scss';
+@import './styles/banner-mobile.scss';
+
+//
+body {
+    background-color: white;
+}

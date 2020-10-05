@@ -1,0 +1,92 @@
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .product-grid_controls {
+        grid-area: controls;
+        
+        width: 100%;
+        height: max-content;
+        padding: 
+        t-get-vw(16px) t-get-vw(24px)
+        t-get-vw(12px) t-get-vw(24px);
+        display: flex;
+        justify-content: space-between;
+        background-color: white;
+    
+        &_sorting {
+            height: t-get-vw(60px);
+            border-radius: t-get-vw(22px);
+            background-color: rgba(black, .05);
+            overflow: hidden;
+    
+            h3 { display: none; }
+            
+            &_buttons-wrapper {
+                width: 100%;
+                overflow-x: auto;
+                @include hide-scrollbar;
+            }
+
+            &_buttons {
+                width: max-content;
+                padding: t-get-vw(10px);
+                display: grid;
+                grid-auto-flow: column;
+                grid-column-gap: t-get-vw(10px);
+            }
+    
+            button {
+                @include t-button-big;
+            }
+
+            &::before,
+            &::after {
+                width: 10%;
+                height: 100%;
+                top: 0;
+                position: absolute;
+                display: block;
+                opacity: 0.1;
+                z-index: 2;
+                pointer-events: none;
+                content: '';
+            }
+
+            &::before {
+                left: 0;
+                background-image: linear-gradient(to left, rgba(black, 0) 0%, black 100%);
+            }
+
+            &::after {
+                right: 0;
+                background-image: linear-gradient(to right, rgba(black, 0) 0%, black 100%);
+            }
+        }
+
+        &_view {
+            margin-left: t-get-vw(24px);
+            border-radius: t-get-vw(22px);
+            background-color: rgba(black, .05);
+
+            h3 { display: none; }
+
+            div {
+                width: max-content;
+                padding: t-get-vw(10px);
+                display: grid;
+                grid-auto-flow: column;
+                grid-column-gap: t-get-vw(10px);
+            }
+
+            button {
+                @include t-button-big;
+            }
+
+            button:nth-child(1) {
+                @include t-button-picture(black, 'assets/images/tablet-icon_grid.svg', 'assets/images/tablet-icon_grid.svg', 'big');
+            }
+    
+            button:nth-child(2) {
+                @include t-button-picture(black, 'assets/images/tablet-icon_list.svg', 'assets/images/tablet-icon_list.svg', 'big');
+            }
+        }
+    }
+}

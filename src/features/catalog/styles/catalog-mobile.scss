@@ -1,0 +1,27 @@
+@media screen and (max-width: 767px) {
+    .catalog {
+        width: 100vw;
+        min-height: 100vh;
+        padding: 
+        0 m-get-vw(16px)
+        m-get-vw(16px) m-get-vw(16px);
+
+        display: grid;
+        grid-template-areas: 
+        'controls'
+        'grid';
+        grid-template-columns: 100%;
+        grid-auto-rows: max-content;
+        grid-gap: m-get-vw(16px);
+
+        background-color: white;
+    }
+    
+    .product-grid_controls {
+        top: 0;
+        position: sticky;
+
+        background-color: rgba(white, 0);
+        z-index: 2;
+    }
+}

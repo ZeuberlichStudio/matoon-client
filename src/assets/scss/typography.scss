@@ -1,0 +1,20 @@
+@mixin proxima-bold ($size, $line: $size) {
+    font-family: 'Proxima Nova';
+    font-size: $size;
+    line-height: $line;
+    font-weight: 700;
+}
+
+@mixin proxima-semibold ($size, $line: $size) {
+    font-family: 'Proxima Nova';
+    font-size: $size;
+    line-height: $line;
+    font-weight: 600;
+}
+
+@mixin proxima-regular ($size, $line: $size) {
+    font-family: 'Proxima Nova';
+    font-size: $size;
+    line-height: $line;
+    font-weight: 400;
+}

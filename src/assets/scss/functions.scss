@@ -1,0 +1,23 @@
+$pc-vw-context: 1920;
+
+@function get-vw($px) {
+    $vw: $pc-vw-context / 100;
+    $result: $px / 1px / $vw * 1vw;
+    @return $result; 
+}
+
+$tablet-vw-context: 834;
+
+@function t-get-vw($px) {
+    $vw: $tablet-vw-context / 100;
+    $result: $px / 1px / $vw * 1vw;
+    @return $result; 
+}
+
+$mobile-vw-context: 375;
+
+@function m-get-vw($px) {
+    $vw: $mobile-vw-context / 100;
+    $result: $px / 1px / $vw * 1vw;
+    @return $result; 
+}

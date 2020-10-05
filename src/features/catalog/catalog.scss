@@ -1,0 +1,21 @@
+@import 'assets/scss/functions';
+@import 'assets/scss/typography';
+@import 'assets/scss/buttons';
+@import 'assets/scss/hide-scrollbar';
+
+@import './styles/controls-pc.scss';
+@import './styles/controls-tablet.scss';
+@import './styles/controls-mobile.scss';
+
+@import './styles/grid-pc.scss';
+@import './styles/grid-tablet.scss';
+@import './styles/grid-mobile.scss';
+
+@import './styles/item-pc.scss';
+@import './styles/item-tablet.scss';
+@import './styles/item-mobile.scss';
+
+@import './styles/catalog-pc.scss';
+@import './styles/catalog-tablet.scss';
+@import './styles/catalog-mobile.scss';
+

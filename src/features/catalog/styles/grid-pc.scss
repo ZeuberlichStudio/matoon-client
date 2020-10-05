@@ -1,0 +1,17 @@
+@media screen and (min-width: 1024px) {
+    .product-grid {
+        grid-area: grid;
+
+        width: 100%;
+        padding: 
+        get-vw(20px) get-vw(40px) 
+        get-vw(40px) get-vw(40px);
+
+        display: grid;
+        grid-auto-rows: max-content;
+        grid-gap: get-vw(40px);
+
+        &-mini { grid-template-columns: repeat(4, 1fr); }
+        &-full { grid-template-columns: repeat(2, 1fr); }
+    }
+}

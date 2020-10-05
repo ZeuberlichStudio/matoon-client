@@ -1,0 +1,111 @@
+@media screen and (max-width: 767px) {
+    .category-banner {
+        padding: m-get-vw(20px) m-get-vw(16px);
+
+        display: flex;
+        flex-direction: column;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+
+    .category-banner_title {
+        width: max-content;
+        padding: 0 m-get-vw(8px);
+        @include proxima-bold(m-get-vw(26px));
+    }
+
+    .category-banner_breadcrumbs {
+        width: max-content;
+        padding: 0 m-get-vw(4px);
+
+        @include proxima-semibold(m-get-vw(16px));
+        color: rgba(black, .5);
+
+        li { display: inline-block; }
+    }
+
+    .category-banner_post-images {
+        height: m-get-vw(245px);
+        margin-top: m-get-vw(14px);
+
+        border-radius: m-get-vw(20px);
+        overflow: hidden;
+
+        .images-container {
+            width: max-content;
+            height: 100%;
+
+            display: flex;
+            transform: translateX(calc( -1 * (var(--slide, 0) * #{m-get-vw(343px + 40px)} + #{m-get-vw(20px)}) ));
+
+            transition: 0.3s;
+        }
+
+        .image-wrapper {
+            width: m-get-vw(343px);
+            margin: 0 m-get-vw(20px);
+
+            border-radius: m-get-vw(20px);
+            overflow: hidden;
+        }
+    }
+
+    .category-banner_post {
+        margin-top: m-get-vw(20px);
+        padding: 0 m-get-vw(8px);
+
+        display: flex;
+        flex-direction: column;
+
+        h2 { @include proxima-bold(m-get-vw(26px)); }
+        p { 
+            margin-top: m-get-vw(10px);
+            @include proxima-regular(m-get-vw(14px), m-get-vw(16px)); 
+        }
+        a {
+            @include m-button-big;
+            align-self: flex-start;
+            margin-top: m-get-vw(18px);
+            width: m-get-vw(134px);
+        }
+    }
+
+    .category-banner_posts-preview {
+        right: m-get-vw(24px);
+        bottom: m-get-vw(19px);
+
+        position: absolute;
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-rows: m-get-vw(44px);
+        grid-auto-columns: m-get-vw(44px);
+        justify-items: center;
+        align-items: center;
+
+        button {
+            width: m-get-vw(36px);
+            height: m-get-vw(36px);
+
+            border-radius: m-get-vw(12px);
+            background-color: rgba(black, .1);
+            box-shadow: 0 m-get-vw(1px) m-get-vw(10px) rgba(black, .1);
+            transition: 0.3s;
+            cursor: pointer;
+
+            img {
+                border-radius: m-get-vw(12px);
+            }
+        }
+
+        button.active {
+            width: m-get-vw(44px);
+            height: m-get-vw(44px);
+            padding: m-get-vw(4px);
+        }
+    }
+}
