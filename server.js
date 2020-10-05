@@ -1,11 +1,7 @@
-import express from 'express';
-import "@babel/polyfill";
-import React from 'react';
-import { renderToString } from 'react-dom/server';
-import { StaticRouter as Router } from 'react-router-dom';
+const express = require('express');
+require("@babel/polyfill");
 
-import MasterComponent from './dist/app';
-
+require('dotenv').config();
 const app = express();
 
 app.use( express.static("dist") );
@@ -15,7 +11,7 @@ app.get('/*', (req, res) => {
     res.end(generateHtml());
 });
 
-function generateHtml(domRender) {
+function generateHtml() {
     return (`
         <html lang="en">
         <head>
@@ -32,4 +28,5 @@ function generateHtml(domRender) {
     `);
 }
 
-app.listen(3000, () => console.log(`app is running on ${3000}`));
+const port = process.env.PORT || 3000;
+const server = app.listen(port, () => console.log(`client is running on port ${server.address().port}`));
