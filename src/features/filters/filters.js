@@ -9,7 +9,9 @@ import './filters.scss';
 
 export default function Filters({ catSlug }) {
 
-    const API_URL = 'http://localhost:3001';
+    const {
+        API_URL
+    } = process.env;
 
     const initialSelectedFilters = {
         color: [],

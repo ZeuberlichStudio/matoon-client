@@ -6,7 +6,9 @@ import './banner.scss';
 
 export default function CategoryBanner({ catSlug }) {
 
-    const API_URL = 'http://localhost:3001';
+    const {
+        API_URL
+    } = process.env;
 
     const targetDevice = useSelector(state => state.device.target);
 

@@ -15,7 +15,9 @@ export default function ProductGrid({ catSlug, view = 'mini' }) {
     const targetDevice = useSelector(selectTarget);
     const apiQueryParamsState = useSelector(state => state.query );
 
-    const API_URL = 'http://localhost:3001';
+    const {
+        API_URL
+    } = process.env;
 
     const [status, setStatus] = React.useState('idle');
     const [error, setError] = React.useState(null);

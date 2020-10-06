@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "npx webpack -w -c webpack.config",
+    "watch": "npx webpack --env.ENVIRONMENT=dev -w -c webpack.config",
     "develop": "nodemon -x babel-node server",
+    "build": "npx webpack --env.ENVIRONMENT=prod -c webpack.config",
     "start": "node server"
   },
   "keywords": [],
@@ -22,6 +23,7 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-module-resolver": "^4.0.0",
     "css-loader": "^4.2.1",
+    "dotenv": "^8.2.0",
     "file-loader": "^6.0.0",
     "mini-css-extract-plugin": "^0.10.0",
     "nodemon": "^2.0.4",
@@ -40,7 +42,6 @@
     "@babel/polyfill": "^7.11.5",
     "@reduxjs/toolkit": "^1.4.0",
     "axios": "^0.19.2",
-    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
