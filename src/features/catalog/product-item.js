@@ -3,6 +3,8 @@ import React from 'react';
 import { Tabs, Tab } from 'features/tabs/tabs';
 import { ResizableText, ButtonsBlock } from 'features/resizable-containers/containers';
 
+const { API_URL } = process.env;
+
 export function ProductItemMini({data, i}) {
 
     const {
@@ -18,7 +20,7 @@ export function ProductItemMini({data, i}) {
     return (
         <div className={`product-item product-item-${ i } product-item-mini`} key={ i }>
             <div className="product-item-mini_image">
-                <img src={ image } alt={ name }/>
+                <img src={ API_URL + image } alt={ name }/>
             </div>
 
             <div className="product-item-mini_share">
@@ -61,7 +63,7 @@ export function ProductItemMobile({data, i}) {
             onClick={ () => setSelectedImage(i) }
             className={selectedImage === i ? 'active' : null}
         >
-            <img src={image} alt=""/>
+            <img src={API_URL + image} alt=""/>
         </button>
     );
 
@@ -69,7 +71,7 @@ export function ProductItemMobile({data, i}) {
         <div className={`product-item product-item-${i} product-item-mobile`} key={ i }>
             <div className="product-item-mobile_images">
                 <div className="product-item-mobile_images_selected">
-                    <img src={ images[selectedImage] } alt=""/>
+                    <img src={ API_URL + images[selectedImage] } alt=""/>
                 </div>
                 <div className="product-item-mobile_images_preview">
                     { images.map(renderImagePreview) }
@@ -156,7 +158,7 @@ export function ProductItemFull({data, i}) {
             onClick={ () => setSelectedImage(i) }
             className={selectedImage === i ? 'active' : null}
         >
-            <img src={image} alt=""/>
+            <img src={API_URL + image} alt=""/>
         </button>
     );
 
@@ -186,7 +188,7 @@ export function ProductItemFull({data, i}) {
                 typeof(selectedVariant) !== 'undefined' ?
                 <div className="product-item-full_images">
                     <div className="product-item-full_images_selected">
-                        <img src={variants[selectedVariant].images[selectedImage]} alt=""/>
+                        <img src={API_URL + variants[selectedVariant].images[selectedImage]} alt=""/>
                     </div>
 
                     <div className="product-item-full_images_preview">
