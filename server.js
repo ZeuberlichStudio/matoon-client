@@ -1,7 +1,6 @@
 const express = require('express');
 require("@babel/polyfill");
 
-require('dotenv').config();
 const app = express();
 
 app.use( express.static("dist") );
