@@ -44,7 +44,7 @@ export default function ProductGrid({ catSlug, view = 'mini' }) {
 
     React.useEffect(() => {
         console.log(buildApiQuery());
-        fetch(API_URL + `/products?${buildApiQuery()}`)
+        fetch(API_URL + `products?${buildApiQuery()}`)
             .then( data => data.json() )
             .then( result => {
                 setProducts(result);

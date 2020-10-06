@@ -57,7 +57,7 @@ export default function Filters({ catSlug }) {
             return;
         }
 
-        fetch(`${API_URL}/products/available-filters?${buildApiQuery()}`)
+        fetch(`${API_URL}products/available-filters?${buildApiQuery()}`)
             .then( data => data.json() )
             .then( result => {
                 setAvailableFilters(result);

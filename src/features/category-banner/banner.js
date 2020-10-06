@@ -10,6 +10,8 @@ export default function CategoryBanner({ catSlug }) {
         API_URL
     } = process.env;
 
+    console.log(process.env);
+
     const targetDevice = useSelector(state => state.device.target);
 
     const [currentPost, setCurrentPost] = React.useState(0);
@@ -20,7 +22,7 @@ export default function CategoryBanner({ catSlug }) {
 
     React.useEffect(() => {
         setStatus('loading');
-        fetch(`http://localhost:3001/categories/${catSlug}`)
+        fetch(`${API_URL}categories/${catSlug}`)
             .then( data => data.json())
             .then( result => {
                 setCat(result[0]);

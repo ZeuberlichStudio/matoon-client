@@ -12,7 +12,7 @@ module.exports = (env) => {
     const envConfig = dotenv.config({ path: envPath }).parsed;
     
     const envKeys = Object.keys(envConfig).reduce((acc, next) => {
-        acc[`process.env.${next}`] = JSON.stringify(envConfig.next);
+        acc[`process.env.${next}`] = JSON.stringify(envConfig[next]);
         return acc;
     }, {});
 
