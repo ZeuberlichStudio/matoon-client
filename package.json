@@ -7,7 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "npx webpack --env.ENVIRONMENT=dev -w -c webpack.config",
     "develop": "nodemon -x babel-node server",
-    "heroku-postbuild": "npm run start",
     "build": "npx webpack --env.ENVIRONMENT=prod -c webpack.config",
     "start": "node server"
   },

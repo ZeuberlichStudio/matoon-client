@@ -36,11 +36,11 @@ module.exports = (env) => {
             }
         },
         plugins: [
-            new webpack.DefinePlugin(envKeys),
             new MiniCssExtractPlugin({
                 filename: 'css/style.css',
                 chunkFilename: 'css.style.chunk.css'
             }),
+            new webpack.DefinePlugin(envKeys)
         ],
         module: {
             rules: [
