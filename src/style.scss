@@ -1,9 +1,10 @@
+@import 'assets/scss/variables';
 @import 'assets/scss/fonts';
 
 body { 
-    background-color: gray; 
+    background-color: white; 
+    color: $black;
     overflow-x: hidden;
-
 }
 
 *, ::before, ::after{

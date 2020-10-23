@@ -24,7 +24,7 @@
         padding: 0 m-get-vw(4px);
 
         @include proxima-semibold(m-get-vw(16px));
-        color: rgba(black, .5);
+        color: rgba($black, .5);
 
         li { display: inline-block; }
     }
@@ -92,8 +92,8 @@
             height: m-get-vw(36px);
 
             border-radius: m-get-vw(12px);
-            background-color: rgba(black, .1);
-            box-shadow: 0 m-get-vw(1px) m-get-vw(10px) rgba(black, .1);
+            background-color: rgba($black, .1);
+            box-shadow: 0 m-get-vw(1px) m-get-vw(10px) rgba($black, .1);
             transition: 0.3s;
             cursor: pointer;
 

@@ -12,14 +12,13 @@
             grid-column-gap: t-get-vw(10px);
     
             button {
-                @include t-button-big;
-    
-    
+                @include t-button-big;    
+                color: rgba( $black, .5 );
             }
     
             button.active {
-                background-color: unset;
-                color: black;
+                background-color: rgba( $black, .05 );
+                color: $black;
                 box-shadow: none;
             }
         }
@@ -28,7 +27,7 @@
             flex: 1 0 auto;
     
             width: 100%;
-            margin-top: t-get-vw(10px);
+            margin-top: t-get-vw(14px);
         }
     }
 }

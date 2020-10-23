@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import {deviceReducer} from './device';
-import productsReducer from 'features/products/productsSlice';
-import queryReducer from 'features/products/querySlice';
+import productsReducer from 'features/catalog/productsSlice';
+import queryReducer from 'features/catalog/querySlice';
 import filtersReducer from 'features/filters/filtersSlice';
 
 export default configureStore({

@@ -12,7 +12,7 @@
         &_sorting {
             height: m-get-vw(52px);
             border-radius: m-get-vw(20px);
-            background-color: rgba(black, .05);
+            background-color: rgba($black, .05);
             overflow: hidden;
 
             h3 { display: none; }
@@ -46,19 +46,19 @@
 
             &::before {
                 left: 0;
-                background-image: linear-gradient(to left, rgba(black, 0) 0%, black 100%);
+                background-image: linear-gradient(to left, rgba($black, 0) 0%, $black 100%);
             }
 
             &::after {
                 right: 0;
-                background-image: linear-gradient(to right, rgba(black, 0) 0%, black 100%);
+                background-image: linear-gradient(to right, rgba($black, 0) 0%, $black 100%);
             }
         }
     
         &_filters {
             margin-left: m-get-vw(16px);
             border-radius: m-get-vw(20px);
-            background-color: rgba(black, .05);
+            background-color: rgba($black, .05);
 
             div { 
                 width: max-content;
@@ -68,7 +68,7 @@
             button { @include m-button-medium(true); }
 
             button {
-                @include m-button-picture(black, 'assets/images/mobile-icon_filters.svg', 'assets/images/mobile-icon_filters.svg', 'big');
+                @include m-button-picture($black, 'assets/images/mobile-icon_filters.svg', 'assets/images/mobile-icon_filters.svg', 'big');
             }
         }
     }

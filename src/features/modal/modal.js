@@ -1,11 +1,12 @@
 import React from 'react';
-import { useTransition, animated } from 'react-spring';
+import { useHistory } from 'react-router-dom';
 
 import './modal.scss';
 
-export function Modal({children, title, closeCallback}) {
+export function Modal({children, title, headerContent, closeCallback}) {
 
     const [initialized, setInitialized] = React.useState(true);
+    const history = useHistory();
 
     React.useEffect(() => {
         initModal();
@@ -19,7 +20,7 @@ export function Modal({children, title, closeCallback}) {
     function close() {
         setInitialized(false);
         document.body.style.overflowY = '';
-        setTimeout(closeCallback, 600);
+        setTimeout(closeCallback || history.goBack(), 600);
     }
 
     const wrapperAnimation = {
@@ -34,13 +35,20 @@ export function Modal({children, title, closeCallback}) {
         <div id="modal-wrapper" className="modal-wrapper" style={wrapperAnimation}>
             <div id="modal-container" className="modal-container" style={containerAnimation}>
                 <div className="modal-header">
-                    <h2>{ title }</h2>
+                    { headerContent || <h2>{ title }</h2> }
                     <button onClick={close} id="modal-close" className="modal-close"><span></span></button>
                 </div>
+
                 <div className="modal-content">
                     { children }
                 </div>
             </div>
         </div>
+    );
+}
+
+export function ModalClose() {
+    return (
+        <button onClick={close} id="modal-close" className="modal-close"><span></span></button>
     );
 }

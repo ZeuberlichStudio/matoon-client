@@ -1,0 +1,14 @@
+@media screen and ( min-width: 768px ) and ( max-width: 1023px ) {
+    .product-add-to-cart {
+        width: 100%;
+        max-width: max-content;
+
+        button {
+            @include t-button-big;
+            width: 100%;
+
+            background-color: $black;
+            color: white;
+        }
+    }
+}

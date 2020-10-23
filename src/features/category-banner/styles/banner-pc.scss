@@ -25,7 +25,7 @@
 
     .category-banner_breadcrumbs {
         @include proxima-semibold(get-vw(18px));
-        color: rgba(black, .5);
+        color: rgba($black, .5);
 
         li { display: inline-block; }
     }
@@ -34,7 +34,7 @@
         margin-top: get-vw(42px);
         width: 100%;
         height: get-vw(48px);
-        background-color: rgba(black, .1);
+        background-color: rgba($black, .1);
         border-radius: get-vw(16px);
     }
 
@@ -72,8 +72,8 @@
             height: get-vw(112px);
 
             border-radius: get-vw(28px);
-            background-color: rgba(black, .1);
-            box-shadow: 0 get-vw(1px) get-vw(15px) rgba(black, .1);
+            background-color: rgba($black, .1);
+            box-shadow: 0 get-vw(1px) get-vw(15px) rgba($black, .1);
             transition: 0.3s;
             cursor: pointer;
 

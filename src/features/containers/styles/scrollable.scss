@@ -1,0 +1,25 @@
+.scrollable-wrapper {
+    width: var(--scrollableWidth, 100%);
+    height: max-content;
+
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    & {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+}
+
+.scrollable-container {
+    width: max-content;
+    padding: var(--scrollablePadding, 0);
+
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    grid-column-gap: var(--scrollableGap, 0);
+}

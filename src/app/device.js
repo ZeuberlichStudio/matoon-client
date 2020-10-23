@@ -13,7 +13,8 @@ export function listenToResize(dispatch) {
 
 const initialState = {
     platform: '',
-    target: ''
+    target: '',
+    listener: false
 }
 
 const deviceSlice = createSlice({

@@ -17,7 +17,7 @@
             h3 {
                 padding-left: get-vw(12px);;
                 @include proxima-semibold(get-vw(16px));
-                color: rgba(black, .25);
+                color: rgba($black, .25);
             }
             
             &_buttons {
@@ -27,7 +27,7 @@
                 grid-auto-flow: column;
                 grid-column-gap: get-vw(12px);
                 border-radius: get-vw(28px);
-                background-color: rgba(black, .05);
+                background-color: rgba($black, .05);
             }
     
             button {
@@ -37,11 +37,11 @@
     
         &_view {
             button:nth-child(1) {
-                @include button-picture(black, 'assets/images/pc_icon_grid.svg', 'assets/images/pc_icon_grid.svg', 'big');
+                @include button-picture($black, 'assets/images/pc_icon_grid.svg', 'assets/images/pc_icon_grid.svg', 'big');
             }
     
             button:nth-child(2) {
-                @include button-picture(black, 'assets/images/pc_icon_list.svg', 'assets/images/pc_icon_list.svg', 'big');
+                @include button-picture($black, 'assets/images/pc_icon_list.svg', 'assets/images/pc_icon_list.svg', 'big');
             }
         }
     }

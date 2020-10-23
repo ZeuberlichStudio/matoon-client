@@ -1,0 +1,9 @@
+@media screen and ( min-width: 768px ) and ( max-width: 1023px ) {
+    .product-option {
+        @include t-button-small;
+        color: var( --colorData, $black );
+        border-color: var( --colorData, $black );
+
+        &.active { background-color: var( --colorData, $black ); }
+    }
+}

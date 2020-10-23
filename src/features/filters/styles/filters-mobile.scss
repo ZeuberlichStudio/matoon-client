@@ -57,12 +57,12 @@
             height: m-get-vw(32px);
             padding: 0 m-get-vw(12px);
             border-radius: m-get-vw(8px);
-            background-color: rgba(black, .05);
-            color: rgba(black, .5);
+            background-color: rgba($black, .05);
+            color: rgba($black, .5);
             @include proxima-semibold(m-get-vw(16px), m-get-vw(32px));
         }
     
-        ::placeholder { color: rgba(black, .5); }
+        ::placeholder { color: rgba($black, .5); }
     }
     
     .product-filters_controls {
@@ -77,7 +77,7 @@
         border-radius: m-get-vw(19px);
         background-color: rgba(white, 1);
         //backdrop-filter: blur(8px);
-        box-shadow: 0 m-get-vw(1px) m-get-vw(15px) rgba(black, .25);
+        box-shadow: 0 m-get-vw(1px) m-get-vw(15px) rgba($black, .25);
         z-index: 3;
         will-change: transform;
     
@@ -89,7 +89,7 @@
         #filters-reset {
             margin-left: m-get-vw(6px);
             @include proxima-semibold(m-get-vw(12px));
-            color: rgba(black, .5);
+            color: rgba($black, .5);
             text-decoration: underline;
 
             cursor: pointer;
@@ -99,7 +99,7 @@
             margin-top: m-get-vw(4px);
             @include m-button-big;
             width: 100%;
-            box-shadow: 0 m-get-vw(1px) m-get-vw(15px) rgba(black, .25);
+            box-shadow: 0 m-get-vw(1px) m-get-vw(15px) rgba($black, .25);
 
         }
     }

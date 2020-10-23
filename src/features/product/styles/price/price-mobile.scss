@@ -1,0 +1,34 @@
+@media screen and ( max-width: 767px ) {
+    .product-price {
+        width: 100%;
+        max-width: m-get-vw(340px);
+
+        display: grid;
+        grid-auto-flow: column;
+        grid-column-gap: m-get-vw(14px);
+        grid-template-columns: m-get-vw(96px) 1fr max-content;
+        justify-items: center;
+        align-items: center;
+
+        &_qty {
+            width: 100%;
+            padding: 0 m-get-vw(10px);
+
+            background-color: rgba( $black, .05 );
+            border-radius: m-get-vw(12px);
+
+            input { 
+                @include proxima-semibold( m-get-vw(14px), m-get-vw(28px) ); 
+                
+                ::placeholder { color: rgba( $black, .25 ); }
+            }
+        }
+
+        &_total { @include proxima-bold( m-get-vw(18px) ); }
+
+        &_single { 
+            @include proxima-semibold( m-get-vw(14px) ); 
+            color: rgba( $black, .2 );
+        }
+    }     
+}

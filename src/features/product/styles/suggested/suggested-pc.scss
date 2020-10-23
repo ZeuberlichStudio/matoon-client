@@ -1,0 +1,87 @@
+@media screen and (min-width: 1024px) {
+    .suggested {
+        width: get-vw(282px);
+        height: get-vw(784px);
+        max-height: 100%;
+        padding: get-vw(12px) get-vw(6px);
+
+        display: flex;
+        flex-direction: column;
+
+        background-color: white;
+        border-radius: get-vw(28px);
+
+        h3 { 
+            width: calc( 100% - #{ get-vw(6px * 2) } );
+            height: get-vw(48px);
+            margin-left: get-vw(6px);
+
+            @include proxima-bold(get-vw(22px), get-vw(48px));
+            text-align: center;
+
+            border-radius: get-vw(16px);
+            box-shadow: 0 0 get-vw(10px) rgba($black, .1);
+        }
+    }
+
+    #suggested_slider {
+        
+        flex: 1 1;
+
+        margin-top: get-vw(12px);
+        --slideWidth: #{get-vw(258px)};
+        --slideGap: #{get-vw(12px)};
+
+        .slider_slides-wrapper { border-radius: get-vw(16px); }
+    }
+
+    .suggested_group {
+        height: 100%;
+        padding: get-vw(6px) 0;
+
+        display: grid;
+        grid-template: repeat(2, 1fr) / 1fr;
+        grid-row-gap: get-vw(12px);
+    }
+
+    .slider_prev {
+        width: get-vw(12px)!important;
+        height: get-vw(12px)!important;
+        left: get-vw(-22px)!important;
+        background-color: var(--uiColor, white)!important;
+    }
+
+    .slider_next {
+        width: get-vw(12px)!important;
+        height: get-vw(12px)!important;
+        right: get-vw(-22px)!important;
+        background-color: var(--uiColor, white)!important;
+    }
+
+    .slider_indicator {
+        width: max-content;
+        left: 0; right: 0;
+        bottom: get-vw(-28px);
+        margin: auto;
+
+        position: absolute;
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: max-content;
+
+        grid-column-gap: get-vw(6px);
+
+        .dot {
+            width: get-vw(6px);
+            height: get-vw(6px);
+
+            background-color: var(--uiColor, white);
+            border-radius: 50%;
+            opacity: 0.5;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .dot.active { opacity: 1; }
+    }
+}

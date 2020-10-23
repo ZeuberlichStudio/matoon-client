@@ -32,7 +32,7 @@
         width: max-content;
 
         @include proxima-semibold(t-get-vw(16px));
-        color: rgba(black, .5);
+        color: rgba($black, .5);
 
         li { display: inline-block; }
     }
@@ -43,7 +43,7 @@
 
         width: t-get-vw(374px);
         height: t-get-vw(48px);
-        background-color: rgba(black, .1);
+        background-color: rgba($black, .1);
         border-radius: t-get-vw(16px);
     }
 
@@ -87,8 +87,8 @@
             height: t-get-vw(96px);
 
             border-radius: t-get-vw(18px);
-            background-color: rgba(black, .1);
-            box-shadow: 0 t-get-vw(1px) t-get-vw(10px) rgba(black, .1);
+            background-color: rgba($black, .1);
+            box-shadow: 0 t-get-vw(1px) t-get-vw(10px) rgba($black, .1);
             transition: 0.3s;
             cursor: pointer;
 

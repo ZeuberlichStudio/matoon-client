@@ -1,0 +1,9 @@
+@media screen and ( max-width: 767px ) {
+    .product-option {
+        @include m-button-small;
+        color: var( --colorData, $black );
+        border-color: var( --colorData, $black );
+
+        &.active { background-color: var( --colorData, $black ); }
+    }   
+}

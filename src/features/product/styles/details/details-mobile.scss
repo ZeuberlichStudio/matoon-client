@@ -1,0 +1,33 @@
+@media screen and (max-width: 767px) {
+    .product-details {
+        width: 100%;
+        max-width: m-get-vw(375px);
+
+        p{ @include proxima-regular( m-get-vw(14px), m-get-vw(16px) ); }
+
+        ul {
+            max-width: m-get-vw(254px);
+
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-auto-rows: max-content;
+        }
+
+        li {
+            width: 100%;
+            height: m-get-vw(24px);
+            padding: 0 m-get-vw(5px);
+
+            display: flex;
+            justify-content: space-between;
+
+            @include proxima-regular( m-get-vw(14px), m-get-vw(24px) );
+
+            border-radius: m-get-vw(6px);
+
+            &:nth-child(odd) { background-color: rgba( black, .05 ); }
+
+            span:nth-child(2) { font-weight: 600; }
+        }
+    }
+}

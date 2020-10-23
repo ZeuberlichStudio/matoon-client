@@ -1,0 +1,33 @@
+@media screen and (max-width: 767px) {
+    .tabs {
+        display: flex;
+        flex-direction: column;
+    
+        &_controls {
+            flex: 0 0 auto;
+    
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: max-content;
+            grid-column-gap: m-get-vw(10px);
+    
+            button {
+                @include m-button-big;    
+                color: rgba( $black, .5 );
+            }
+    
+            button.active {
+                background-color: rgba( $black, .05 );
+                color: $black;
+                box-shadow: none;
+            }
+        }
+    
+        &_content {
+            flex: 1 0 auto;
+    
+            width: 100%;
+            margin-top: m-get-vw(14px);
+        }
+    }
+}

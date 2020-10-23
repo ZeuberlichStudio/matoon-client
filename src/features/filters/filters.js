@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterChanged } from 'features/products/querySlice';
+import { filterChanged } from 'features/catalog/querySlice';
 
 import Checkbox from './checkbox';
 import Field from './field';
@@ -99,7 +99,9 @@ export default function Filters({ catSlug }) {
 
     function countApplied() {
         let count = 0;
-        console.log(apiQueryParamsState.filter);
+
+        //console.log(apiQueryParamsState.filter);
+
         for ( let [field, value] of Object.entries(apiQueryParamsState.filter) ) {
             count += Array.isArray(value) ? value.length : (value ? 1 : 0);
         }
@@ -123,9 +125,9 @@ export default function Filters({ catSlug }) {
     <Field key={name} name={name} attr={attr} fresh={fresh} setFilter={setFilter}/>;
 
     const {
-        color,
-        brand,
-        material,
+        colors,
+        brands,
+        materials,
         sex
     } = availableFilters;
 
@@ -133,15 +135,15 @@ export default function Filters({ catSlug }) {
         <div ref={ containerRef } id="product-filters" className="product-filters">
             <h2>Фильтры</h2>
             <ResizableFilterBlock name={"Цвет"}>
-                { color && color.map((filter, i) => renderCheckbox(filter, "color", i)) }
+                { colors && colors.map((filter, i) => renderCheckbox(filter, "color", i)) }
             </ResizableFilterBlock>
 
             <ResizableFilterBlock name={"Логотип на товаре / бренд"}>
-                { brand && brand.map((filter, i) => renderCheckbox(filter, "brand", i)) }
+                { brands && brands.map((filter, i) => renderCheckbox(filter, "brand", i)) }
             </ResizableFilterBlock>
 
             <ResizableFilterBlock name={"Материалы"}>
-                { material && material.map((filter, i) => renderCheckbox(filter, "material", i)) }
+                { materials && materials.map((filter, i) => renderCheckbox(filter, "material", i)) }
             </ResizableFilterBlock>
 
             <ResizableFilterBlock name={"Пол / возраст"}>

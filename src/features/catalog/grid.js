@@ -1,14 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectTarget } from 'app/device';
-import { ProductItemMini, ProductItemFull, ProductItemMobile } from './product-item';
-
-import LoadingIndicator from 'features/indicators/loading';
-
-/*remove later*/
-import './catalog.scss';
-import { data } from 'autoprefixer';
-/*remove later*/
+import { ProductItemMini, ProductItemFull, ProductItemMobile } from 'features/product-item/product-item';
 
 export default function ProductGrid({ catSlug, view = 'mini' }) {
 
@@ -43,12 +36,12 @@ export default function ProductGrid({ catSlug, view = 'mini' }) {
     }
 
     React.useEffect(() => {
-        console.log(buildApiQuery());
         fetch(API_URL + `products?${buildApiQuery()}`)
             .then( data => data.json() )
             .then( result => {
                 setProducts(result);
                 setStatus('succeeded');
+                console.log(buildApiQuery());
             })
             .catch( err => {
                 setError(err);
@@ -70,7 +63,6 @@ export default function ProductGrid({ catSlug, view = 'mini' }) {
     return (
         <div className={`product-grid product-grid-${view}`}>
             { products && products.map(renderProduct) }
-            { status === 'loading' && <LoadingIndicator/> }
         </div>
     );
 }

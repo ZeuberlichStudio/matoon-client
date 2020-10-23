@@ -1,0 +1,76 @@
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .suggested {
+        width: max-content;
+        height: max-content;
+        min-width: t-get-vw(754px);
+        padding: t-get-vw(10px);
+
+        background-color: white;
+        border-radius: t-get-vw(22px);
+
+        h3 { 
+            width: 100%;
+            height: t-get-vw(40px);
+            @include proxima-bold(t-get-vw(18px), t-get-vw(40px));
+            text-align: center;
+
+            border-radius: t-get-vw(12px);
+            box-shadow: 0 0 t-get-vw(10px) rgba($black, .1);
+        }
+    }
+
+    .suggested_group {
+        display: grid;
+        grid-auto-flow: column;
+        grid-template: max-content / repeat(3, max-content);
+        grid-column-gap: t-get-vw(10px);
+    }
+
+    #suggested_slider {
+        margin-top: t-get-vw(10px);
+        --slideWidth: #{t-get-vw(734px)};
+
+        .slider_slides-wrapper { border-radius: t-get-vw(12px); }
+    }
+
+    .slider_prev {
+        width: t-get-vw(12px)!important;
+        height: t-get-vw(12px)!important;
+        left: t-get-vw(-30px)!important;
+        background-color: white!important;
+    }
+
+    .slider_next {
+        width: t-get-vw(12px)!important;
+        height: t-get-vw(12px)!important;
+        right: t-get-vw(-30px)!important;
+        background-color: white!important;
+    }
+
+    .slider_indicator {
+        width: max-content;
+        left: 0; right: 0;
+        bottom: t-get-vw(-26px);
+        margin: auto;
+
+        position: absolute;
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: max-content;
+
+        grid-column-gap: t-get-vw(6px);
+
+        .dot {
+            width: t-get-vw(6px);
+            height: t-get-vw(6px);
+
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0.5;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .dot.active { opacity: 1; }
+    }
+}

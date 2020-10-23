@@ -1,0 +1,34 @@
+@media screen and ( min-width: 1024px ) {
+    .product-price {
+        width: 100%;
+        max-width: get-vw(433px);
+
+        display: grid;
+        grid-auto-flow: column;
+        grid-column-gap: get-vw(14px);
+        grid-template-columns: minmax( #{ get-vw(110px) }, 1fr  ) minmax( get-vw(120px), max-content ) max-content;
+        justify-items: center;
+        align-items: center;
+
+        &_qty {
+            width: 100%;
+            padding: 0 get-vw(14px);
+
+            background-color: rgba( $black, .05 );
+            border-radius: get-vw(15px);
+
+            input { 
+                @include proxima-semibold( get-vw(18px), get-vw(42px) ); 
+                
+                ::placeholder { color: rgba( $black, .25 ); }
+            }
+        }
+
+        &_total { @include proxima-bold( get-vw(26px) ); }
+
+        &_single { 
+            @include proxima-semibold( get-vw(18px) ); 
+            color: rgba( $black, .2 );
+        }
+    }
+}

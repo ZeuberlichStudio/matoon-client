@@ -1,0 +1,33 @@
+@media screen and ( min-width: 1024px ) {
+
+    .product-options {
+        max-width: get-vw(465px);
+    }
+
+    .product-options_attribute-block {
+        width: 100%;
+        padding: get-vw(4px) 0;
+        position: relative;
+
+        &:not(:last-child)::after {
+            height: get-vw(1.5px);
+            left: get-vw(20px);
+            right: get-vw(20px);
+            bottom: get-vw(-.75px);
+
+            position: absolute;
+
+            background-color: rgba( $black, .05 );
+
+            content: '';
+        }
+    }
+
+    .product-option {
+        @include button-small;
+        color: var( --colorData, $black );
+        border-color: var( --colorData, $black );
+
+        &.active { background-color: var( --colorData, $black ); }
+    }
+}

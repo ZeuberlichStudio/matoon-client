@@ -6,7 +6,7 @@
         padding-bottom: get-vw(120px);
         background-color: white;
         border-radius: get-vw(28px);
-        box-shadow: 0 get-vw(1px) get-vw(30px) rgba(black, .15);
+        box-shadow: 0 get-vw(1px) get-vw(30px) rgba($black, .15);
     
         h2 { 
             width: 100%;
@@ -57,12 +57,12 @@
             height: get-vw(32px);
             padding: 0 get-vw(12px);
             border-radius: get-vw(8px);
-            background-color: rgba(black, .05);
-            color: rgba(black, .5);
+            background-color: rgba($black, .05);
+            color: rgba($black, .5);
             @include proxima-semibold(get-vw(16px), get-vw(32px));
         }
     
-        ::placeholder { color: rgba(black, .5); }
+        ::placeholder { color: rgba($black, .5); }
     }
     
     .product-filters_controls {
@@ -83,7 +83,7 @@
         #filters-reset {
             margin-left: get-vw(6px);
             @include proxima-semibold(get-vw(16px));
-            color: rgba(black, .5);
+            color: rgba($black, .5);
             text-decoration: underline;
 
             cursor: pointer;

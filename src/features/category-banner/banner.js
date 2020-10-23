@@ -10,8 +10,6 @@ export default function CategoryBanner({ catSlug }) {
         API_URL
     } = process.env;
 
-    console.log(process.env);
-
     const targetDevice = useSelector(state => state.device.target);
 
     const [currentPost, setCurrentPost] = React.useState(0);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { sortingChanged } from 'features/products/querySlice';
+import { sortingChanged } from 'features/catalog/querySlice';
 
 export default function GridControls({
     className = 'product-grid_controls',

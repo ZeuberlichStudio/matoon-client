@@ -1,0 +1,107 @@
+@media screen and ( min-width: 1024px ) {
+    #product-page {
+        width: 100vw;
+        padding: 8.64vh get-vw(306px);
+
+        display: flex;
+        justify-content: space-between;
+
+        --uiColor: #{ var( --uiColorModal, $black ) };
+    }
+
+    .product-page_suggested-wrapper {
+        height: calc( 100vh - 8.64vh * 2 );
+        margin-top: get-vw(-4px);
+        top: 0;
+
+        position: sticky;
+
+        border-radius: get-vw(28px);
+        border: get-vw(1px) rgba( $black, .1 ) solid;
+    }
+
+    .product-page_product-wrapper {
+        &::before {
+            width: calc(100% - #{ get-vw(12px * 2) });
+            height: get-vw(12px);
+            margin-left: get-vw(12px);
+            margin-bottom: get-vw(-16px);
+            top: 0;
+
+            display: block;
+            position: sticky;
+
+            background-color: white;
+            border-radius: get-vw(28px);
+            z-index: 2;
+            content: '';
+        }
+    }
+
+    .product-page_product {
+        background-color: white;
+
+        .product-header {
+            grid-area: header;
+
+            top: get-vw(12px);
+            position: sticky;
+            z-index: 3;
+        }
+    
+        .product-gallery {
+            grid-area: gallery;
+
+            margin-top: get-vw(12px);
+            max-height: 73.6vh;
+            top: get-vw(74px);
+            position: sticky;
+        }
+
+        .product-options-wrapper {
+            grid-area: options;
+
+            margin-top: get-vw(22px);
+
+            h3 { @include proxima-bold( get-vw(22px) ); }
+            .product-options { margin-top: get-vw(16px); }
+        }
+    
+        .product-details {
+            grid-area: details;
+
+            margin-top: get-vw(30px);
+        }
+
+        .product-price {
+            grid-area: price;
+
+            margin-top: get-vw(20px);
+        }
+
+        .product-add-to-cart {
+            grid-area: add-to-cart;
+
+            margin-top: get-vw(12px);
+        }
+
+        display: grid;
+        grid-template-areas: 
+        'header header'
+        'gallery options'
+        'gallery details'
+        'gallery price'
+        'gallery add-to-cart';
+        grid-column-gap: get-vw(20px);
+        grid-template-rows: repeat(2, max-content) 1fr repeat(2, max-content);
+        grid-template-columns: get-vw(480px) 1fr;
+
+        width: get-vw(998px);
+        height: max-content;
+        min-height: calc( 100vh - 8.64vh * 2 );
+        padding: get-vw(12px);
+
+        border-radius: get-vw(28px);
+        border: get-vw(1px) rgba( $black, .1 ) solid;
+    }
+}
