@@ -123,7 +123,7 @@ export function ProductItemFull({data, i}) {
 
             return found;
         })
-        console.log(variant)
+
         setVariant( variant );
     }
 

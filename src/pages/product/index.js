@@ -177,8 +177,7 @@ export default function ProductPage({ closeButton }) {
             {
                 status == 'succeeded' &&
                 <>
-                { console.log(targetDevice) }
-                {
+               {
                     targetDevice !== 'mobile' &&
                     <div className="product-page_suggested-wrapper">
                         <Product.Suggested/>
