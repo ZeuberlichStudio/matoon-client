@@ -6,7 +6,7 @@
   "scripts": {
     "develop": "yarn webpack-dev-server --open --config webpack.client --env.NODE_ENV=dev",
     "build": "yarn webpack --config webpack.client --env.NODE_ENV=production",
-    "start": "node ./dist/server.js"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
