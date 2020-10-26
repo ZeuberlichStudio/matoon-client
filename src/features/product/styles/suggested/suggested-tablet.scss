@@ -1,6 +1,7 @@
 @media screen and (min-width: 768px) and (max-width: 1023px) {
     .suggested {
-        width: max-content;
+        width: 100%;
+        max-width: t-get-vw(754px);
         height: max-content;
         min-width: t-get-vw(754px);
         padding: t-get-vw(10px);
@@ -28,7 +29,10 @@
 
     #suggested_slider {
         margin-top: t-get-vw(10px);
+        min-height: t-get-vw(318px);
+
         --slideWidth: #{t-get-vw(734px)};
+        --slideGap: #{t-get-vw(10px)};
 
         .slider_slides-wrapper { border-radius: t-get-vw(12px); }
     }
@@ -37,14 +41,14 @@
         width: t-get-vw(12px)!important;
         height: t-get-vw(12px)!important;
         left: t-get-vw(-30px)!important;
-        background-color: white!important;
+        background-color: var(--uiColor, white)!important;
     }
 
     .slider_next {
         width: t-get-vw(12px)!important;
         height: t-get-vw(12px)!important;
         right: t-get-vw(-30px)!important;
-        background-color: white!important;
+        background-color: var(--uiColor, white)!important;
     }
 
     .slider_indicator {
@@ -64,7 +68,7 @@
             width: t-get-vw(6px);
             height: t-get-vw(6px);
 
-            background-color: white;
+            background-color: var(--uiColor, white)!important;
             border-radius: 50%;
             opacity: 0.5;
             cursor: pointer;

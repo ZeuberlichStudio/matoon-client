@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
+import { useSelector } from 'react-redux';
 import ButtonsGroup from 'features/containers/buttons-group';
+import Scrollable from 'features/containers/scrollable';
 
 import './styles/options.scss';
 
@@ -16,11 +18,21 @@ export default function ProductOptions({ attributes, shown, config, setConfig })
 }
 
 function AttributeBlock({ attr, options, shown, config, setConfig }) {
+
+    const targetDevice = useSelector( state => state.device.target );
+
     return (
         <div className="product-options_attribute-block">
-            <ButtonsGroup shown={ shown }>
-                { options.map( (option, i) => <Option {...{attr, option, i, config, setConfig}}/> ) }
-            </ButtonsGroup>
+            {
+                targetDevice === 'desktop' ?
+                <ButtonsGroup shown={ shown }>
+                    { options.map( (option, i) => <Option {...{attr, option, i, config, setConfig}}/> ) }
+                </ButtonsGroup>
+                :
+                <Scrollable>
+                    { options.map( (option, i) => <Option {...{attr, option, i, config, setConfig}}/> ) }
+                </Scrollable>
+            }
         </div>
     );
 }

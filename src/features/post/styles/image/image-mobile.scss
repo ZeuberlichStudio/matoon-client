@@ -1,0 +1,20 @@
+@media screen and ( max-width: 767px ) {
+    .post-image {
+        max-width: m-get-vw(164px);
+        min-height: m-get-vw(164px);
+        height: 100%;
+
+        img {
+            width: 100%;
+            min-height: 100%;
+            height: auto;
+
+            display: block;
+
+            object-fit: cover;
+            object-position: center;
+            border-radius: m-get-vw(12px);
+            box-shadow: 0 0 m-get-vw(10px) rgba( $black, .1 );
+        }
+    }
+}

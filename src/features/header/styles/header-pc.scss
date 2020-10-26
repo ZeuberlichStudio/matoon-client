@@ -1,0 +1,27 @@
+@media screen and ( min-width: 1024px ) {
+    .app-header {
+        height: get-vw(58px);
+        top: get-vw(20px);
+        left: get-vw(20px); 
+        right: get-vw(20px);
+
+        position: fixed;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        background-color: rgba( $black, .05);
+        border-radius: get-vw(20px);
+        backdrop-filter: blur(.5vw);
+        z-index: 10;
+
+        a {
+            width: get-vw(44px);
+            height: get-vw(44px);
+            margin-left: get-vw(8px);
+
+            border-radius: get-vw(12px);
+            background-color: rgba( $black, .1);
+        }
+    }
+}

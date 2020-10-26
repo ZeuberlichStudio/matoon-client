@@ -1,0 +1,100 @@
+@media screen and ( min-width: 768px ) and ( max-width: 1023px ) {
+    .feed-post {
+        width: t-get-vw(246px);
+        min-height: t-get-vw(210px);
+        padding: t-get-vw(10px);
+
+        margin: t-get-vw(12px);
+
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+
+        box-shadow: 0 0 t-get-vw(10px) rgba( $black, .1 );
+        border-radius: t-get-vw(22px);
+        overflow: hidden;
+
+        &_image {
+            width: 100%;
+            height: 100%;
+            left: 0; top: 0;
+            position: absolute;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        &_content {
+            height: max-content;
+            padding: t-get-vw(12px);
+
+            background-color: rgba( white, .95 );
+            border-radius: t-get-vw(10px);
+            overflow: hidden;
+            transition: 300ms;
+
+            h2 {
+                @include proxima-bold( t-get-vw(18px) );
+            }
+
+            p {
+                margin-top: t-get-vw(6px);
+                @include proxima-regular( t-get-vw(16px), t-get-vw(18px) );
+                overflow: hidden;
+                transition: 300ms;
+            }
+        }
+
+        a {
+            margin-top: t-get-vw(10px);
+            @include t-button-big;
+            width: 100%;
+            background-color: rgba( white, .95 );
+            transition: 300ms;
+        }
+
+        /*folded start*/
+        &_content {
+            transform: translateY(t-get-vw(50px));
+
+            p { 
+                margin-top: 0px;
+                max-height: 0px;
+                //transform: translateY(100%); 
+            }
+        }
+
+        a {
+            transform: translateY(t-get-vw(50px));
+        }
+        /*folded end*/
+
+        /*hover start*/
+        &:hover &_content {
+            transform: translateY(0px);
+
+            p { 
+                margin-top: t-get-vw(6px);
+                max-height: 250px;
+                transform: translateY(0px); 
+            }
+        }
+
+        &:hover a {
+            transform: translateY(0px);
+        }
+        /*hover end*/
+    }
+
+    .feed-post.small {
+        height: t-get-vw(210px);
+    }
+
+    .feed-post.medium {
+        height: t-get-vw(210px);
+    }
+
+    .feed-post.big {
+        height: t-get-vw(444px);
+    }
+}

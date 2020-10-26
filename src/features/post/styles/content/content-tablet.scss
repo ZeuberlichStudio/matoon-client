@@ -1,0 +1,19 @@
+@media screen and ( min-width: 768px ) and ( max-width: 1023px ) {
+    .post-content {
+        width: 100%;
+        max-width: t-get-vw(334px);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+        p { @include proxima-regular( t-get-vw(14px), t-get-vw(16px) ); }
+
+        a, button {
+            margin-top: t-get-vw(16px);
+            @include t-button-big;
+            width: t-get-vw(202px);
+        }
+    }
+}

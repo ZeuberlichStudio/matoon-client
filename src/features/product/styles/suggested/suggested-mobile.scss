@@ -2,7 +2,6 @@
     .suggested {
         height: max-content;
         max-width: m-get-vw(315px);
-        padding: m-get-vw(6px);
 
         background-color: white;
         border-radius: t-get-vw(22px);
@@ -13,22 +12,10 @@
             @include proxima-bold(m-get-vw(16px));
             opacity: .5; 
         }
-    }
 
-    .suggested_mobile-scrollable-wrapper {
-        margin-top: m-get-vw(10px);
-        @include hide-scrollbar;
-        overflow-x: auto;
-        border-radius: m-get-vw(6px);
-        background-color: #F3F3F3;
+        .scrollable-wrapper { margin-top: m-get-vw(8px); }
 
-        .suggested_mobile-scrollable {
-            width: max-content;
-            padding: m-get-vw(6px);
-            display: grid;
-            grid-auto-flow: column;
-            grid-auto-columns: max-content;
-            grid-column-gap: m-get-vw(6px);
-        }
+        --scrollablePadding: #{ m-get-vw(6px) };
+        --scrollableGap: #{ m-get-vw(6px) };
     }
 }

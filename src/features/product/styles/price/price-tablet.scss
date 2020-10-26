@@ -6,7 +6,7 @@
         display: grid;
         grid-auto-flow: column;
         grid-column-gap: t-get-vw(14px);
-        grid-template-columns: minmax( #{ t-get-vw(96px) }, 1fr  ) minmax( t-get-vw(132px), max-content ) max-content;
+        grid-template-columns: minmax( #{ t-get-vw(96px) }, 1fr  ) minmax( t-get-vw(64px), max-content ) max-content;
         justify-items: center;
         align-items: center;
 

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 
 import './styles/suggested.scss';
 import Slider from 'features/slider/slider';
+import Scrollable from 'features/containers/scrollable';
 import { ProductItemSuggested as SuggestedItem } from 'features/product-item/product-item';
 
 export default function Suggested() {
@@ -29,7 +30,7 @@ export default function Suggested() {
     }, []);
 
     return (
-        <div className="suggested">
+        <div className="suggested product-suggested">
             <h3>Похожие товары</h3>
             {
                 targetDevice === 'desktop' ?
@@ -43,11 +44,9 @@ export default function Suggested() {
                     <div className="suggested_group">{ data.slice(0,3).map( (item, i) => <SuggestedItem data={ item } i={ i }/> ) }</div>
                     <div className="suggested_group">{ data.slice(3,6).map( (item, i) => <SuggestedItem data={ item } i={ i }/> ) }</div>
                 </Slider> :
-                <div className="suggested_mobile-scrollable-wrapper">
-                    <div className="suggested_mobile-scrollable">
-                        { data.map( (item, i) => <SuggestedItem data={ item } i={ i }/> ) }
-                    </div>
-                </div>
+                <Scrollable>
+                    { data.map( (item, i) => <SuggestedItem data={ item } i={ i }/> ) }
+                </Scrollable>
             }
         </div>
     );

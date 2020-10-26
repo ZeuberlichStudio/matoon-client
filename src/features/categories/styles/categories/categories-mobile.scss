@@ -1,0 +1,14 @@
+@media screen and ( max-width: 767px ) {
+    .categories {
+        display: grid;
+        padding:  m-get-vw(64px) m-get-vw(40px);
+
+        grid-auto-flow: column;
+        grid-template-rows: max-content;
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: m-get-vw(20px);
+
+        transform: translateX(calc( (100vw - #{ m-get-vw(60px) }) * -1 * var(--dimension, 0)) );
+        transition: .3s;
+    }
+}

@@ -35,10 +35,10 @@ export default function Modal({ children: child, closeCallback }) {
 
     const contentStyles = {
         initial: {
-            transform: 'translateY(100vh)'
+            transform: 'scale(0)'
         },
         final: {
-            transform: 'translateY(0)'
+            transform: 'scale(1)'
         }
     };
 

@@ -1,0 +1,25 @@
+@media screen and ( min-width: 768px ) and ( max-width: 1023px ) {
+    .buttons-group {
+        width: 100%;
+
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+
+        & > * {
+            margin: get-vw(4px);
+        }
+    }
+
+    .buttons-group_toggle {
+        @include button-small;
+        @include button-picture( 
+            rgba( $black, .2 )!important, 
+            'assets/images/icon_more.svg',
+            'assets/images/icon_less.svg'
+        );
+
+        background-color: rgba( $black, .05 )!important;
+        border: none;
+    }
+}

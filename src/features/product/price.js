@@ -6,8 +6,6 @@ export default function Price({ stock, price }) {
 
     const [qty, setQty] = React.useState(1);
 
-    React.useEffect( () => console.log(qty), [qty] )
-
     function changeHandler(e) {
         const { value } = e.target;
 

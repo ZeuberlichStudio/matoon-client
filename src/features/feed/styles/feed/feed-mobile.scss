@@ -1,0 +1,9 @@
+@media screen and ( max-width: 767px ) {
+    .feed-grid {
+        padding: 0 m-get-vw(8px) m-get-vw(8px) m-get-vw(8px);
+
+        display: flex;
+    
+        &_column { flex: 1 0 m-get-vw(164px); }
+    }
+}

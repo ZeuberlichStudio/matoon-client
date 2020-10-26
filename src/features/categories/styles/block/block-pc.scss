@@ -1,0 +1,73 @@
+@media screen and ( min-width: 1024px ) {
+    .categories-block {
+        min-width: get-vw(343px);
+        width: max-content;
+        padding: get-vw(12px);
+
+        background-color: white;
+        border-radius: get-vw(28px);
+        border: get-vw(1px) rgba( $black, .1 ) solid;
+
+        h3 {
+            @include button-big;
+            width: 100%;
+            span { 
+                font-weight: 700; 
+                text-align: left;
+            }
+        }
+
+        ul {
+            margin-top: get-vw(12px);
+
+            display: grid;
+            grid-auto-rows: max-content;
+
+            li { 
+                @include button-big;
+                width: 100%;
+
+                box-shadow: 0 0 0 rgba( $black, 0);
+
+                cursor: pointer;
+                span { text-align: left; }
+
+                &::before {
+                    width: get-vw(12px);
+                    height: get-vw(12px);
+                    right: get-vw(12px);
+                    top: 0; bottom: 0;
+                    margin: auto;
+                    position: absolute;
+            
+                    mask-image: url('assets/images/slider_arrow.svg');
+                    transform: scaleX(-1);
+                    background-color: $black;
+                    opacity: 0;
+
+                    content: '';
+                }
+            }
+
+            
+            li.active,
+            li:hover { 
+                position: relative;
+
+                background-color: rgba( $black, .1 );
+                box-shadow: 0 0 get-vw(10px) rgba( $black, .1);
+                color: $black;
+
+                &::before { opacity: 1; }
+            }
+        }
+
+        ul:hover {
+            li:not( :hover ) {
+                background-color: rgba( $black, 0);
+                box-shadow: 0 0 0 rgba( $black, 0)!important;
+                &::before { opacity: 0; }
+            }
+        }
+    }
+}

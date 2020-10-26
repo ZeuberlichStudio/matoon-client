@@ -1,0 +1,11 @@
+@media screen and ( min-width: 768px ) and ( max-width: 1023px ) {
+    .categories {
+        display: grid;
+        padding: t-get-vw(12px);
+
+        grid-auto-flow: column;
+        grid-template-rows: max-content;
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: t-get-vw(12px);
+    }
+}

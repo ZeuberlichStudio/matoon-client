@@ -1,8 +1,13 @@
+@import 'assets/scss/index.scss';
+
 .scrollable-wrapper {
     width: var(--scrollableWidth, 100%);
     height: max-content;
 
     overflow-x: auto;
+
+    border-radius: calc( var(--scrollableGap, 0) * 2 );
+    background-color: rgba( $black, .05 );
 
     &::-webkit-scrollbar {
         display: none;

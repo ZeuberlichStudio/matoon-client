@@ -1,0 +1,43 @@
+@media screen and ( max-width: 767px ) {
+    #post-page {
+        width: 100vw;
+        min-height: 100vh;
+        padding: m-get-vw(76px) m-get-vw(16px);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .post-page_post-wrapper {
+        width: m-get-vw(343px);
+        height: max-content;
+        padding: m-get-vw(14px);
+
+        background-color: white;
+        border-radius: m-get-vw(26px);
+        border: m-get-vw(1px) rgba( $black, .1 ) solid;
+    }
+
+    .post-page_post {
+
+        .post-image { grid-area: image; }
+        .post-header { grid-area: header; }
+        .post-content { 
+            padding: 0 get-vw(8px);
+            grid-area: content; 
+        }
+
+        width: 100%;
+
+        display: grid;
+        grid-template-areas:
+        'header header'
+        'image content';
+        grid-template-columns: max-content 1fr;
+        grid-template-rows: max-content 1fr;
+
+        grid-gap: m-get-vw(14px) m-get-vw(6px);
+        justify-items: flex-start;
+    }
+}

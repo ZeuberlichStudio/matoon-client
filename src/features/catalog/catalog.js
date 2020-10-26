@@ -37,14 +37,15 @@ export default function Catalog({ catSlug }) {
 
     React.useEffect(() => {
         stickFilters();
-    }, [stickFilters]);
+    }, [stickFilters, isMobile]);
 
     function stickFilters() {
         const catalog = document.getElementById('catalog');
         const controls = document.getElementById('controls');
         const filters = document.getElementById('product-filters-wrapper');
         let lastScroll = window.scrollY;
-        window.addEventListener('scroll', handleScroll);
+        window.removeEventListener('scroll', handleScroll);
+        !isMobile && window.addEventListener('scroll', handleScroll);
 
         function handleScroll() {
             if ( window.scrollY > window.innerHeight && !controls.classList.contains('hide-annotation') ) {

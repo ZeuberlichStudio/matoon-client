@@ -1,0 +1,20 @@
+@media screen and ( min-width: 768px ) and ( max-width: 1023px ) {
+    .post-image {
+        max-width: t-get-vw(246px);
+        min-height: t-get-vw(210px);
+        height: 100%;
+
+        img {
+            width: 100%;
+            min-height: 100%;
+            height: auto;
+
+            display: block;
+
+            object-fit: cover;
+            object-position: center;
+            border-radius: t-get-vw(12px);
+            box-shadow: 0 0 t-get-vw(10px) rgba( $black, .1 );
+        }
+    }
+}

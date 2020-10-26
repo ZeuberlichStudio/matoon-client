@@ -6,6 +6,18 @@ module.exports = [
         componentName: 'MainPage'
     },
     {
+        path: '*',
+        exact: true,
+        moduleName: 'pages/404',
+        componentName: 'NotFoundPage'
+    },
+    {
+        path: '/feed/post=:slug',
+        exact: false,
+        moduleName: `pages/post/index`,
+        componentName: 'PostPage'
+    },
+    {
         path: '/catalog/category=:slug',
         exact: false,
         moduleName: `pages/category/index`,
@@ -19,10 +31,10 @@ module.exports = [
     },
 
     //DEVELOPMENT PAGE
-    {
-        path: '/dev',
-        exact: false,
-        moduleName: `pages/dev`,
-        componentName: 'DevPage'
-    }
+    // {
+    //     path: '/dev',
+    //     exact: false,
+    //     moduleName: `pages/dev`,
+    //     componentName: 'DevPage'
+    // }
 ]

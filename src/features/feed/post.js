@@ -4,12 +4,12 @@ import './styles/post.scss';
 
 const { API_URL } = process.env;
 
-export default function FeedPost({ i, image, title, content, link, size }) {
+export default function FeedPost({ i, slug, image, title, shortDescription, size }) {
 
     const backgroundLocation = useLocation();
 
     const postLink = {
-        pathname: `/post=:slugORidORlink`,
+        pathname: `/feed/post=${ slug }`,
         state: { backgroundLocation }
     }
 
@@ -19,7 +19,7 @@ export default function FeedPost({ i, image, title, content, link, size }) {
 
             <div className="feed-post_content">
                 <h2>{ title }</h2>
-                <p>{ content }</p>
+                <p>{ shortDescription }</p>
             </div>
 
             <Link to={ postLink }>

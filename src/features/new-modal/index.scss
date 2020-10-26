@@ -24,16 +24,6 @@
     will-change: transform;
 }
 
-#modal-close {
-    margin-top: get-vw(7px);
-    margin-right: get-vw(7px);
-
-    @include button-small;
-    @include button-picture( rgba($black, .5), 'assets/images/icon_cross.svg' );
-    width: get-vw(34px);
-    height: get-vw(34px);
-
-    border: none;
-    background-color: white;
-    box-shadow: 0 0 get-vw(10px) rgba( $black, .1 );
-}
+@import './styles/modal-pc.scss';
+@import './styles/modal-tablet.scss';
+@import './styles/modal-mobile.scss';

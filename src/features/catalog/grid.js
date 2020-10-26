@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectTarget } from 'app/device';
-import { ProductItemMini, ProductItemFull, ProductItemMobile } from 'features/product-item/product-item';
+import ProductItemMobile from 'features/product-item/mobile';
+import { ProductItemMini, ProductItemFull } from 'features/product-item/product-item';
 
 export default function ProductGrid({ catSlug, view = 'mini' }) {
 
@@ -41,7 +42,6 @@ export default function ProductGrid({ catSlug, view = 'mini' }) {
             .then( result => {
                 setProducts(result);
                 setStatus('succeeded');
-                console.log(buildApiQuery());
             })
             .catch( err => {
                 setError(err);

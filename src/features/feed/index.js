@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import FeedPost from './post';
 import './styles/feed.scss';
 
@@ -26,6 +27,8 @@ export default function Feed() {
                 setStatus('failed');
             });
     }
+
+    const targetDevice = useSelector( state => state.device.target );
 
     function arrangePosts(posts, columns) {
         const arrangedPosts = [];
@@ -57,7 +60,7 @@ export default function Feed() {
             <div className="feed-grid">
                 { 
                     status === 'succeeded' &&
-                    arrangePosts(posts, 4).map((column, i) => 
+                    arrangePosts(posts, targetDevice === 'mobile' ? 2 : targetDevice === 'tablet' ? 3 : 4 ).map((column, i) => 
                         <div className="feed-grid_column">
                             { column.map((post, i) => <FeedPost {...{ ...post, i, key: i }}/> ) }
                         </div> 

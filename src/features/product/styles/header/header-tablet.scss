@@ -5,13 +5,14 @@
         min-height: t-get-vw(40px);
 
         display: flex;
-        justify-content: space-between;
 
         background-color: white;
         border-radius: t-get-vw(12px);
         box-shadow: 0 0 t-get-vw(10px) rgba($black, .1);
 
         &_title {
+            flex: 1 0;
+
             padding: t-get-vw(12px) t-get-vw(10px) t-get-vw(10px) t-get-vw(10px);
             @include proxima-bold(t-get-vw(18px), t-get-vw(20px));
         }
@@ -40,6 +41,11 @@
             &_vk { mask-image: url('assets/images/icon_vk.svg'); }
             &_fb { mask-image: url('assets/images/icon_fb.svg'); }
             &_fav { mask-image: url('assets/images/icon_fav.svg'); }
+        }
+
+        #modal-close {
+            margin-top: t-get-vw(6px);
+            margin-right: t-get-vw(6px);
         }
     }
 }

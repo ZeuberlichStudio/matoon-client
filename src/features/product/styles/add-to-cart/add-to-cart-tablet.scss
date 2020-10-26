@@ -1,6 +1,7 @@
 @media screen and ( min-width: 768px ) and ( max-width: 1023px ) {
     .product-add-to-cart {
         width: 100%;
+        min-width: t-get-vw(156px);
         max-width: max-content;
 
         button {
@@ -9,6 +10,8 @@
 
             background-color: $black;
             color: white;
+
+            span { padding: 0 t-get-vw(10px); }
         }
     }
 }

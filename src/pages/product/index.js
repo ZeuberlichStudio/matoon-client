@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Product from 'features/product';
 
 import './index.scss';
@@ -116,6 +117,18 @@ export default function ProductPage({ closeButton }) {
     const [status, setStatus] = React.useState('idle');
     const [error, setError] = React.useState(null)
 
+    React.useEffect(() => {
+        if ( status === 'idle' ) {
+            fetch(`${ API_URL }products/slug=${ slugParam }`)
+                .then( data => data.json() )
+                .then( data => {
+                    setItem( data[0] );
+                    setStatus('succeeded');
+                })
+                .catch( err => setError( err ) );
+        }
+    }, []);
+
     //User interaction logic
     const [variant, setVariant] = React.useState(0);
     const [config, setConfig] = React.useState({ color: 'black' });
@@ -141,18 +154,10 @@ export default function ProductPage({ closeButton }) {
     }
 
     React.useEffect(() => {
-        if ( status === 'idle' ) {
-            fetch(`${ API_URL }products/slug=${ slugParam }`)
-                .then( data => data.json() )
-                .then( data => {
-                    setItem( data[0] );
-                    setStatus('succeeded');
-                })
-                .catch( err => setError( err ) );
-        }
-
         if ( status === 'succeeded' ) findVariant();
-    }, [status, config]);
+    }, [status, config])
+
+    const targetDevice = useSelector( state => state.device.target );
 
     //Destructuring data
     const {
@@ -166,14 +171,19 @@ export default function ProductPage({ closeButton }) {
         price,
     } = item;
 
+
     return(
         <main id="product-page" className="product-page">
             {
                 status == 'succeeded' &&
                 <>
-                <div className="product-page_suggested-wrapper">
-                    <Product.Suggested/>
-                </div>
+                { console.log(targetDevice) }
+                {
+                    targetDevice !== 'mobile' &&
+                    <div className="product-page_suggested-wrapper">
+                        <Product.Suggested/>
+                    </div>
+                }
 
                 <div className="product-page_product-wrapper">
                     <div className="product-page_product">
@@ -186,8 +196,18 @@ export default function ProductPage({ closeButton }) {
                         </div>
 
                         <Product.Details {...{ description, specs, sku, stock: meta.stock }}/>
-                        <Product.Price price={ price }/>
-                        <Product.AddToCart/>
+                        { targetDevice === 'mobile' && <Product.Suggested/> }
+                        {
+                            targetDevice === 'mobile' ?
+                            <div className="product-purchase-wrapper">
+                                <Product.Price price={ price }/>
+                                <Product.AddToCart/>
+                            </div> :
+                            <>
+                                <Product.Price price={ price }/>
+                                <Product.AddToCart/>
+                            </>                            
+                        }
                     </div>
                 </div>
                 </>

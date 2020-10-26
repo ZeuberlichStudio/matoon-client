@@ -12,15 +12,15 @@
 
         &_qty {
             width: 100%;
-            padding: 0 get-vw(14px);
-
-            background-color: rgba( $black, .05 );
-            border-radius: get-vw(15px);
 
             input { 
+                width: 100%;
+                padding-left: get-vw(14px);
                 @include proxima-semibold( get-vw(18px), get-vw(42px) ); 
+                background-color: rgba( $black, .05 );
+                border-radius: get-vw(15px);
                 
-                ::placeholder { color: rgba( $black, .25 ); }
+                ::placeholder { color: rgba( $black, .25 ); width: 120%; }
             }
         }
 

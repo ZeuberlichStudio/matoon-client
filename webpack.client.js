@@ -75,12 +75,12 @@ module.exports = env => {
             }),
             isDevelopment && new HotModuleReplacementPlugin(),
             isDevelopment && new ReactRefreshPlugin(),
-            isDevelopment && new HtmlPlugin({
+            new HtmlPlugin({
                 title: 'Matoon',
                 template: './template.html',
                 alwaysWriteToDisk: true,
             }),
-            isDevelopment && new HtmlHarddiskPlugin(),
+            new HtmlHarddiskPlugin(),
             new webpack.DefinePlugin(generateEnvKeys())
         ].filter(Boolean),
 
@@ -104,6 +104,7 @@ module.exports = env => {
                             loader: MiniCssExtractPlugin.loader,
                             options: { publicPath: '../' }
                         },
+                        // 'style-loader',
                         'css-loader',
                         {
                             loader: 'postcss-loader',

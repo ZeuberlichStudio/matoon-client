@@ -6,6 +6,8 @@ import routesConfig from 'app/routes';
 
 import { listenToResize, setPlatform } from './app/device';
 
+import Header from 'features/header';
+
 import './style.scss';
 
 const routes = routesConfig.reduce( (acc, next) => {
@@ -19,9 +21,11 @@ const routes = routesConfig.reduce( (acc, next) => {
 
 const {
     MainPage,
+    PostPage,
     CategoryPage,
     ProductPage,
-    DevPage
+    DevPage,
+    NotFoundPage
 } = routes;
 
 import NewModal from 'features/new-modal';
@@ -53,9 +57,11 @@ function App() {
         <React.Fragment>
             <Switch location={ background || location }>
                 <Route exact={ true } path="/" component={ MainPage }/>
+                <Route path="/feed/post=:slug" component={ PostPage }/>
                 <Route path="/catalog/category=:slug" component={ CategoryPage }/>
                 <Route path="/catalog/product=:slug" component={ ProductPage }/>
                 <Route path="/dev" component={ DevPage }/>
+                <Route path="*" component={ NotFoundPage }/>
             </Switch>
             { 
                 background && 
@@ -63,6 +69,12 @@ function App() {
                     <Route path="/catalog/product=:slug">
                         <NewModal>
                             <ProductPage/>
+                        </NewModal>
+                    </Route>
+
+                    <Route path="/feed/post=:slug">
+                        <NewModal>
+                            <PostPage/>
                         </NewModal>
                     </Route>
                 </Switch>

@@ -1,4 +1,17 @@
 @media screen and ( min-width: 768px ) and ( max-width: 1023px ) {
+
+    .product-options {
+        width: max-content;
+        max-width: t-t-get-vw(340px);
+    }
+
+    .product-options_attribute-block {
+        width: 100%;
+
+        --scrollablePadding: #{ t-get-vw(6px) };
+        --scrollableGap: #{ t-get-vw(6px) };
+    }
+
     .product-option {
         @include t-button-small;
         color: var( --colorData, $black );

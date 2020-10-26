@@ -1,69 +1,61 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-
+import { Link, useLocation } from 'react-router-dom';
 import './banner.scss';
 
-export default function CategoryBanner({ catSlug }) {
+const { API_URL } = process.env;
 
-    const {
-        API_URL
-    } = process.env;
+export default function CategoryBanner({ cat }) {
 
     const targetDevice = useSelector(state => state.device.target);
 
+    //main page banner tweak
+    const location = useLocation();
+
     const [currentPost, setCurrentPost] = React.useState(0);
 
-    const [status, setStatus] = React.useState('idle');
-    const [error, setError] = React.useState(null);
-    const [cat, setCat] = React.useState(null);
-
     React.useEffect(() => {
-        setStatus('loading');
-        fetch(`${API_URL}categories/${catSlug}`)
-            .then( data => data.json())
-            .then( result => {
-                setCat(result[0]);
-                setStatus('succeeded');
-            })
-            .catch( err => {
-                setError(err);
-                setStatus('failed');
-            });
-    }, []);
+        const timer = setInterval(() => {
+            const nextPost = currentPost + 1 < 4 ? currentPost + 1 : 0;
+            setCurrentPost(nextPost);
+        }, 5000);
 
-    function changePost(postIndex) {
-        setCurrentPost(postIndex);
-    }
+        return () =>  clearInterval( timer );
+    }, [currentPost])
 
     const renderBreadCrumbs = () => (
         cat.ancestors.map((ancestor, i) => 
             i < cat.ancestors.length - 1 ? 
-            <li>{ i > 0 && '/' }<Link>&nbsp;{ ancestor.name }&nbsp;</Link></li> :
-            <React.Fragment>
-                <li>{ i > 0 && '/' }<Link>&nbsp;{ ancestor.name }&nbsp;</Link></li>
-                <li>/<Link>&nbsp;{ cat.name }&nbsp;</Link></li>
+            <li key={i}>{ i > 0 && '/' }
+                <Link to={`/catalog/category=${ ancestor.slug }`}>&nbsp;{ ancestor.name }&nbsp;</Link>
+            </li> :
+            <React.Fragment key={i}>
+                <li>{ i > 0 && '/' }<Link to={`/catalog/category=${ ancestor.slug }`}>&nbsp;{ ancestor.name }&nbsp;</Link></li>
+                <span>/</span>
+                <li><span>&nbsp;{ cat.name }&nbsp;</span></li>
             </React.Fragment>
         )
     );
 
     const renderPostPreview = (post, i) => (
-        <button onClick={ () => changePost(i) } className={`${currentPost === i ? 'active' : null}`}>
+        <button key={i} onClick={ () => setCurrentPost(i) } className={`${currentPost === i ? 'active' : null}`}>
             <img src={ API_URL + post.thumbnail } alt={ post.title }/>
         </button>
     );
 
-    const renderPostImage = (post) => (
-        <div className="image-wrapper">
+    const renderPostImage = (post, i) => (
+        <div className="image-wrapper" key={i}>
             <img src={ API_URL + post.image } alt={ post.title }/>
         </div> 
     );
 
     return (
         <div className="category-banner">
-            <h1 className="category-banner_title">{ cat && cat.name }</h1>
-
-            <ul className="category-banner_breadcrumbs">{ cat && renderBreadCrumbs() }</ul>
+            { /*main page name tweak*/ }
+            <h1 className="category-banner_title">{ location.pathname !== '/' && cat ? cat.name : 'Matoon Store' }</h1>
+ 
+            { /*main page breadcrumbs tweak*/ }
+            <ul className="category-banner_breadcrumbs">{ location.pathname !== '/' && cat && renderBreadCrumbs() }</ul>
 
             { targetDevice !== 'mobile' ? <div className="category-search-placeholder"></div> : null }
 

@@ -119,7 +119,7 @@
         flex-direction: column;
         justify-content: flex-end;
         border-radius: get-vw(28px);
-        box-shadow: 0 get-vw(1px) get-vw(15px) rgba($black, .1);
+        box-shadow: 0 0 get-vw(10px) rgba($black, .1);
         overflow: hidden;
         transform: translate3d(0,0,0);
 
@@ -206,7 +206,6 @@
         
             a {
                 @include button-big;
-                box-shadow: 0 get-vw(1px) get-vw(30px) rgba($black, .15);
                 width: 100%;
                 margin-top: get-vw(12px);
             }
@@ -244,231 +243,68 @@
     //PRODUCT FULL
     .product-item-full {
         width: 100%;
+        max-width: get-vw(712px);
         height: max-content;
         min-height: get-vw(516px);
         padding: get-vw(12px);
 
-        // top: get-vw(142px);
-        // position: sticky;
+        border-radius: get-vw(28px);
+        box-shadow: 0 0 get-vw(10px) rgba($black, .1);
 
         display: grid;
         grid-template-areas: 
-        'images info info'
-        'images price price'
-        'images order share';
-        grid-template-rows: 1fr max-content max-content;
-        grid-template-columns: max-content 1fr max-content;
-        grid-gap: get-vw(16px);
+        'gallery name name'
+        'gallery options options'
+        'gallery details details'
+        'gallery price price'
+        'gallery add2cart share';
+        grid-template-rows: max-content max-content 1fr max-content max-content;
+        grid-template-columns: get-vw(324px) get-vw(232px) 1fr;
+        grid-column-gap: get-vw(16px);
 
-        border-radius: get-vw(22px);
-        box-shadow: 0 get-vw(1px) get-vw(15px) rgba($black, .1);
-
-        &_images {
-            grid-area: images;
-
-            height: max-content;
-            min-width: get-vw(324px);
-
-            top: get-vw(142px);
-            position: sticky;
-
-            img {
-                width: 100%;
-                height: 100%;
-                display: block;
-                object-fit: cover;
-                object-position: center;
-                box-shadow: 0 get-vw(1px) get-vw(15px) rgba($black, .1);
-            }
-
-            &_selected {
-                width: get-vw(324px);
-                height: get-vw(432px);
-                
-                img { border-radius: get-vw(16px); }
-            }
-
-            &_preview {
-                margin-top: get-vw(4px);
-
-                display: grid;
-                grid-auto-flow: column;
-                grid-template-rows: get-vw(56px);
-                grid-auto-columns: get-vw(56px);
-                grid-column-gap: get-vw(4px);
-                justify-items: center;
-                align-items: center;
-
-                transform: translate(get-vw(-4px), get-vw(4px));
-
-                button {
-                    width: get-vw(48px);
-                    height: get-vw(48px);
-
-                    border-radius: get-vw(16px);
-                    background-color: rgba($black, .1);
-                    transition: 0.3s;
-                    cursor: pointer;
-
-                    img {
-                        border-radius: get-vw(16px);
-                    }
-                }
-
-                button.active {
-                    width: get-vw(56px);
-                    height: get-vw(56px);
-                    padding: get-vw(4px);
-                }
-            }
+        .product-gallery { grid-area: gallery; }
+        .product-name { 
+            grid-area: name; 
+            padding-top: get-vw(4px);
+            @include proxima-bold( get-vw(22px) );
         }
-
-        &_info {
-            grid-area: info;
-    
-            &_name { 
-                height: get-vw(44px);
-                @include proxima-bold(get-vw(22px));
-            }
-
-            &_sku-and-stock {
-                @include proxima-semibold(get-vw(16px), get-vw(20px));
-                color: rgba($black, .5);
-
-                span:last-child { margin-left: get-vw(20px); }
-            }
-
-            &_options {
-                transform: translateX(get-vw(-4px));
-
-                &_block_option {
-                    margin: get-vw(4px);
-                    @include button-small;
-                    border-color: var(--colorData, $black);
-                    color: var(--colorData, $black);
-                }
-
-                &_block_option.active {
-                    background-color: var(--colorData, $black);
-                }
-
-                &_block {
-                    padding: get-vw(4px) 0;
-
-                    position: relative;
-                    display: flex;
-                    flex-wrap: wrap;
-
-                    &:not(:last-child)::after {
-                        margin: 0 get-vw(20px);
-                        height: get-vw(1.5px);
-                        left: 0; right: 0;
-                        bottom: get-vw(-0.75px);
-
-                        position: absolute;
-                        background-color: rgba($black, .1);
-                        content: '';
-                    }
-
-                    &_resize {
-                        @include button-small;
-                        @include button-picture (#B7B9BA, 'assets/images/icon_more.svg', 'assets/images/icon_less.svg');
-                        margin: get-vw(4px);
-                        border: none;
-                        background-color: #E9EAEA;
-                        
-                        &.active { 
-                            background-color: #E9EAEA; 
-                            span { background-color: #B7B9BA };
-                        }
-                    }
-                }
-            }
-
-            &_description-and-specs {
-                margin-top: get-vw(10px);
-
-                p { @include proxima-regular(get-vw(16px), get-vw(18px)) }
-
-                li {
-                    display: flex;
-                    @include proxima-regular(get-vw(16px), get-vw(20px));
-
-                    hr {
-                        margin: 0 get-vw(6px);
-                        margin-bottom: get-vw(3px);
-                        flex-grow: 1;
-                        border-bottom: get-vw(1.5px) dashed rgba($black, .25);
-                    }
-
-                    span:last-child {
-                        font-weight: 600;
-                    }
-                }
-            }
+        .product-options { 
+            margin-top: get-vw(10px);
+            grid-area: options; 
+        }
+        .product-details { 
+            margin-top: get-vw(10px);
+            grid-area: details; 
+        }
+        .product-price { 
+            margin-top: get-vw(10px);
+            grid-area: price; 
+        }
+        .product-add-to-cart { 
+            margin-top: get-vw(16px);
+            width: get-vw(232px);
+            grid-area: add2cart; 
+        }
+        .product-share { 
+            margin-top: get-vw(16px);
+            grid-area: share; 
         }
     
-        &_price-and-quantity {
-            grid-area: price;
-
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            input {
-                width: get-vw(144px);
-                height: get-vw(32px);
-                padding-left: get-vw(10px);
-
-                border-radius: get-vw(8px);
-                background-color: #F4F4F4;
-                color: rgba($black, .4);
-                
-                @include proxima-semibold(get-vw(16px), get-vw(32px));
-
-                &::placeholder { color: rgba($black, .4); }
-            }
-
-            .price {
-                margin: 0 get-vw(10px);
-                @include proxima-bold(get-vw(26px));
-                text-align: right;
-            }
-
-            .per-item {
-                @include proxima-semibold(get-vw(16px));
-                color: rgba($black, .5);
-                text-decoration: underline;
-            }
-        }
-    
-        &_add-to-cart {
-            grid-area: order;
-
-            height: max-content;
-
-            button { 
-                @include button-big; 
-                width: 100%;
-                background-color: $black;
-                color: white;
-            }
-        }
-    
-        &_share {
+        .product-share {
             grid-area: share;
             align-self: center;
 
-            width: max-content;
+            width: get-vw(92px);
             height: get-vw(40px);
             padding: 0 get-vw(10px);
             margin-right: get-vw(4px);
             display: grid;
             grid-auto-flow: column;
             grid-auto-columns: get-vw(24px);
+            justify-content: space-between;
             
             background-color: white;
-            box-shadow: 0 get-vw(1px) get-vw(15px) rgba($black, .1);
+            box-shadow: 0 0 get-vw(10px) rgba($black, .1);
             border-radius: get-vw(16px);
         
             &_vk,

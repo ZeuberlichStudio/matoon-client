@@ -3,6 +3,15 @@
         width: 100%;
         max-width: t-get-vw(334px);
 
+        &_sku, &_stock {
+            @include proxima-bold( t-get-vw(12px) );
+            color: rgba( $black, .2 );
+        }
+
+        &_stock{ margin-left: t-get-vw(10px); }
+
+        &_more { margin-top: t-get-vw(16px); }
+
         p{ @include proxima-regular( t-get-vw(14px), t-get-vw(16px) ); }
 
         ul {

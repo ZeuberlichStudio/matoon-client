@@ -15,7 +15,7 @@
         z-index: 2;
 
         mask-image: url('assets/images/slider_arrow.svg');
-        background-color: $black;
+        background-color: var(--uiColor, white)!important;
         cursor: pointer;
     }
 
@@ -30,13 +30,13 @@
         
         mask-image: url('assets/images/slider_arrow.svg');
         transform: scaleX(-1);
-        background-color: $black;
+        background-color: var(--uiColor, white)!important;
         cursor: pointer;
     }
 }
 
 .slider_slides-wrapper {
-    width: calc( var(--slideWidth, 400px) + var(--slideGap, 400px) );
+    width: calc( var(--slideWidth, 400px) + var(--slideGap, 0px) );
     height: 100%;
     overflow-x: hidden;
 }
