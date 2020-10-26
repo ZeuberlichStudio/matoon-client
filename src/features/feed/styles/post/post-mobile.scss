@@ -57,10 +57,12 @@
 
     .feed-post.small {
         height: m-get-vw(164px);
+        .feed-post_content { display: none; }
     }
 
     .feed-post.medium {
         height: m-get-vw(164px);
+        .feed-post_content { display: none; }
     }
 
     .feed-post.big {

@@ -40,7 +40,7 @@ export function Modal({children, title, headerContent, closeCallback}) {
                 </div>
 
                 <div className="modal-content">
-                    { children }
+                    { React.cloneElement(children, { close }) }
                 </div>
             </div>
         </div>

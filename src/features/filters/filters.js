@@ -7,7 +7,7 @@ import Field from './field';
 
 import './filters.scss';
 
-export default function Filters({ catSlug }) {
+export default function Filters({ catSlug, close }) {
 
     const {
         API_URL
@@ -115,6 +115,7 @@ export default function Filters({ catSlug }) {
     }
 
     function apply() {
+        close && close();
         dispatch(filterChanged(selectedFilters));
     }
 
