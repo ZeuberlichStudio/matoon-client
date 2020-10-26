@@ -6,8 +6,6 @@ import routesConfig from 'app/routes';
 
 import { listenToResize, setPlatform } from './app/device';
 
-import Header from 'features/header';
-
 import './style.scss';
 
 const routes = routesConfig.reduce( (acc, next) => {
