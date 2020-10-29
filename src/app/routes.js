@@ -31,10 +31,10 @@ module.exports = [
     },
 
     //DEVELOPMENT PAGE
-    {
-        path: '/dev',
-        exact: false,
-        moduleName: `pages/dev`,
-        componentName: 'DevPage'
-    }
+    // {
+    //     path: '/dev',
+    //     exact: false,
+    //     moduleName: `pages/dev`,
+    //     componentName: 'DevPage'
+    // }
 ]
