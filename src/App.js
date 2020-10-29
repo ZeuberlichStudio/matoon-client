@@ -42,16 +42,7 @@ function App() {
             dispatch(setPlatform(window.navigator.platform));
             listenToResize(dispatch);
         }
-
-        if ( background ) {
-            document.body.style.overflowY = 'hidden';
-            document.body.ariaHidden = 'true';
-        }
-        else {
-            document.body.style.overflowY = null;
-            document.body.ariaHidden = null;
-        }
-    }, [listener, background]);
+    }, [listener]);
 
     const [navFocus, setNavFocus] = React.useState(false);
 

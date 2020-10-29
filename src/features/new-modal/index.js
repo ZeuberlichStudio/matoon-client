@@ -36,9 +36,13 @@ export function Modal({ children: child, closeCallback, ...props }, ref) {
         }
 
         ref.current.addEventListener('click', outerClickHandler);
+        document.body.style.overflowY = 'hidden';
+        document.body.ariaHidden = 'true';
 
         return function cleanUp() {
             ref.current.removeEventListener('click', outerClickHandler);
+            document.body.style.overflowY = null;
+            document.body.ariaHidden = null;
         };
     }, []);
 
