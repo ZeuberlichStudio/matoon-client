@@ -52,8 +52,8 @@ export default function ProductGrid({ catSlug, view = 'mini' }) {
     }, [apiQueryParamsState]);
 
     const renderProduct = (item, i) => {
-        if ( targetDevice === 'mobile' ) return <ProductItemMobile data={item} i={i} key={i}/>;
-        else if( view === 'mini' ) return <ProductItemMini data={item} i={i} key={i}/>;
+        if ( targetDevice === 'mobile' ) return <ProductItemMobile data={item} i={i} key={item._id}/>;
+        else if( view === 'mini' ) return <ProductItemMini data={item} i={i} key={item._id}/>;
         else if( view === 'full' ) return (
             <div key={i} className="product-item-wrapper">
                 <ProductItemFull data={item} i={i} key={item._id}/>

@@ -33,7 +33,7 @@ export default function CategoriesBlock({
                                 <span>{ cat.name }</span>
                             </li> :
                             <li className={i === selection[dimension + 1] ? 'active' : ''}>
-                                <span><Link to={`/catalog/category=${ cat.slug }`}>{ cat.name }</Link></span>
+                                <Link to={`/catalog/category=${ cat.slug }`}><span>{ cat.name }</span></Link>
                             </li>
                         ) 
                     }
