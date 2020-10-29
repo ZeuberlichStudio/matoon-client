@@ -20,7 +20,7 @@ export default function Price({ stock, price }) {
     return (
         <div className="product-price">
             <div className="product-price_qty">
-                <input onChange={ changeHandler } min="1" max={ stock } placeholder="кол-во (шт)" type="number"/>
+                <input onChange={ changeHandler } min="1" max={ stock } placeholder="кол-во (шт)" type="number" inputmode="numeric" />
             </div>
 
             <div className="product-price_total">
