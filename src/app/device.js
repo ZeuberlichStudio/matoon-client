@@ -5,6 +5,9 @@ export function listenToResize(dispatch) {
         const width = window.innerWidth;
         const target = width > 1023 ? 'desktop' : ( width > 767 ? 'tablet' : 'mobile' );
         dispatch(setTarget(target));
+
+        const height = window.innerHeight
+        document.documentElement.style.setProperty('--vh', height + 'px');
     }
 
     resizeHandler();

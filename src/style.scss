@@ -3,6 +3,7 @@
 @import 'assets/scss/fonts';
 
 body { 
+    width: 100vw;
     background-color: white; 
     color: $black;
     overflow-x: hidden;
@@ -34,7 +35,3 @@ a {
     text-decoration: none;
     color: inherit;
 }
-
-// #app {
-//     padding-top: get-vw(20px * 2 + 58px);
-// }

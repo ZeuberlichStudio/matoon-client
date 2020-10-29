@@ -1,21 +1,135 @@
 @media screen and ( max-width: 767px ) {
+    .categories-block-wrapper {
+        width: 100%;
+        height: max-content;
+        max-height: 100%;
+
+        border-radius: m-get-vw(26px) m-get-vw(26px) 0 0;
+        overflow: hidden auto;
+
+
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    
+        & {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    }
+
     .categories-block {
         width: m-get-vw(294px);
         padding: m-get-vw(12px);
+        margin-bottom: m-get-vw(64px);
 
-        background-color: white;
+        background-color: #F5F5F5;
         border-radius: m-get-vw(26px);
-        border: m-get-vw(1px) rgba( $black, .1 ) solid;
 
-        
-
-        h3 {
-            @include m-button-big;
+        &::before {
             width: 100%;
-            span { 
-                font-weight: 700; 
-                text-align: left;
+            height: m-get-vw(20px);
+
+            position: sticky;
+            display: block;
+
+            background-color: #F5F5F5;
+            border-radius: m-get-vw(26px) m-get-vw(26px) 0 0;
+            z-index: 2;
+            content: '';
+        }
+
+        &::before {
+            margin-bottom: m-get-vw(-20px);
+            top: 0;
+        }
+
+        &_header {
+            width: 100%;
+            height: m-get-vw(40px);
+            top: m-get-vw(13px);
+            position: sticky;
+            
+            background-color: white;
+            border-radius: m-get-vw(10px);
+            box-shadow: 0 0 m-get-vw(10px) rgba( $black, .1 );
+
+            z-index: 3;
+
+            h3 { 
+                width: 100%;
+                @include proxima-bold( m-get-vw(16px), m-get-vw(40px) );
+                text-align: center;
             }
+
+            button {
+                width: m-get-vw(24px);
+                height: m-get-vw(24px);
+                top: 0; bottom: 0;
+                margin-right: 0;
+                margin: auto;
+
+                position: absolute!important;
+
+                z-index: 3;
+            }
+
+            .categories-block_go-back {
+                left: m-get-vw(4px);
+
+                mask-image: url('assets/images/icon_arrow.svg');
+                mask-size: 50%;
+                background-color: rgba( $black, .4 );
+            }
+
+            #modal-close {
+                right: m-get-vw(4px);
+
+                box-shadow: unset;
+                span { mask-size: 50%; }
+            }
+        }
+
+        &_link {
+            width: m-get-vw(280px);
+            height: m-get-vw(54px);
+            padding: m-get-vw(6px);
+            margin-left: m-get-vw(-6px);
+            margin-top: m-get-vw(6px);
+            margin-bottom: m-get-vw(-6px);
+            bottom: m-get-vw(6px);
+
+            position: sticky;
+            display: block;
+
+            background-color: white;
+            border-radius: m-get-vw(19px);
+            z-index: 3;
+
+            a {
+                @include m-button-big;
+                width: 100%;
+                background-color: #F5F5F5;
+                box-shadow: none;
+            }
+        }
+
+        &::after {
+            width: 100%;
+            height: m-get-vw(20px);
+
+            position: sticky;
+            display: block;
+
+            background-color: #F5F5F5;
+            z-index: 2;
+            content: '';
+        }
+        
+        &::after {
+            margin-top: m-get-vw(-26px);
+            bottom: 0;
         }
 
         ul {
@@ -28,10 +142,14 @@
                 @include m-button-big;
                 width: 100%;
 
+                background-color: rgba( $black, 0);
                 box-shadow: 0 0 0 rgba( $black, 0);
+                color: rgba( $black, .6 );
 
                 cursor: pointer;
-                span { text-align: left; }
+                span { 
+                    text-align: left; 
+                }
             }
 
             
@@ -40,7 +158,6 @@
                 position: relative;
 
                 background-color: rgba( $black, .1 );
-                box-shadow: 0 0 m-get-vw(10px) rgba( $black, .1);
                 color: $black;
             }
         }
@@ -49,6 +166,7 @@
             li:not( :hover ) {
                 background-color: rgba( $black, 0);
                 box-shadow: 0 0 0 rgba( $black, 0)!important;
+                color: rgba( $black, .6 );
             }
         }
     }

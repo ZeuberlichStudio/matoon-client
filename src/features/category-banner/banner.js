@@ -31,8 +31,7 @@ export default function CategoryBanner({ cat }) {
             </li> :
             <React.Fragment key={i}>
                 <li>{ i > 0 && '/' }<Link to={`/catalog/category=${ ancestor.slug }`}>&nbsp;{ ancestor.name }&nbsp;</Link></li>
-                <span>/</span>
-                <li><span>&nbsp;{ cat.name }&nbsp;</span></li>
+                <li>/<span>&nbsp;{ cat.name }&nbsp;</span></li>
             </React.Fragment>
         )
     );
@@ -48,6 +47,13 @@ export default function CategoryBanner({ cat }) {
             <img src={ API_URL + post.image } alt={ post.title }/>
         </div> 
     );
+
+    const demoPostLink = {
+        pathname: "/catalog/product=product-0",
+        state: {
+            backgroundLocation: location
+        }
+    }
 
     return (
         <div className="category-banner">
@@ -68,7 +74,7 @@ export default function CategoryBanner({ cat }) {
             <div className="category-banner_post">
                 <h2>{ (cat && cat.posts.length > 0) && cat.posts[currentPost].title }</h2>
                 <p>{ (cat && cat.posts.length > 0) && cat.posts[currentPost].content }</p>
-                <Link><span>Подробнее</span></Link>
+                <Link to={ demoPostLink }><span>Подробнее</span></Link>
             </div>
 
             <div className="category-banner_posts-preview">{ cat && cat.posts.map(renderPostPreview) }</div>

@@ -18,7 +18,7 @@ export default function CategoryPage() {
         if ( status === 'idle' ) {
             setStatus('loading');
 
-            fetch(`${API_URL}categories/${params.slug}`)
+            fetch(`${API_URL}categories/${ params.slug }`)
             .then( data => data.json())
             .then( result => {
                 setCat(result[0]);
@@ -29,18 +29,16 @@ export default function CategoryPage() {
                 setStatus('failed');
             });
         }
-    }, []);
+    }, [status]);
+
+    React.useEffect(() => { setStatus('idle') }, [params])
 
     return(
         <>
-            {
-                status === 'succeeded' && !cat ? 
-                <NotFoundPage/> : 
-                <main>
-                    <CategoryBanner {...{cat, error}}/>
-                    <Catalog catSlug={ params.slug }/>
-                </main>
-            }
+            <main>
+                <CategoryBanner {...{cat, error}}/>
+                <Catalog catSlug={ params.slug }/>
+            </main>
         </>
     );
 }

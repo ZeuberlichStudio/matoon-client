@@ -7,11 +7,36 @@
         border-radius: t-get-vw(18px);
         border: t-get-vw(1px) rgba( $black, .1 ) solid;
 
-        h3 {
-            @include t-button-big;
+        &_header {
             width: 100%;
-            span { 
-                font-weight: 700; 
+            height: t-get-vw(40px);
+            
+            background-color: white;
+            border-radius: t-get-vw(10px);
+            box-shadow: 0 0 t-get-vw(10px) rgba( $black, .1 );
+
+            z-index: 3;
+
+            h3 { 
+                width: 100%;
+                padding: 0 t-get-vw(8px);
+                @include proxima-bold( t-get-vw(14px), t-get-vw(40px) );
+                text-align: left;
+            }
+        }
+
+        &_link {
+            width: 100%;
+            height: t-get-vw(40px);
+
+            a {
+                padding: 0 t-get-vw(8px);
+
+                display: block;
+
+                @include proxima-semibold( t-get-vw(14px), t-get-vw(48px) );
+                color: rgba( $black, .8 );
+                text-decoration: underline;
                 text-align: left;
             }
         }
@@ -26,10 +51,14 @@
                 @include t-button-big;
                 width: 100%;
 
-                box-shadow: 0 0 0 rgba( $black, 0);
+                color: rgba( $black, .6 );
+                box-shadow: none;
 
                 cursor: pointer;
-                span { text-align: left; }
+                span { 
+                    padding: 0 t-get-vw(8px);
+                    text-align: left; 
+                }
 
                 &::before {
                     width: t-get-vw(8px);
@@ -47,14 +76,12 @@
                     content: '';
                 }
             }
-
             
             li.active,
             li:hover { 
                 position: relative;
 
                 background-color: rgba( $black, .1 );
-                box-shadow: 0 0 t-get-vw(10px) rgba( $black, .1);
                 color: $black;
 
                 &::before { opacity: 1; }
@@ -64,7 +91,6 @@
         ul:hover {
             li:not( :hover ) {
                 background-color: rgba( $black, 0);
-                box-shadow: 0 0 0 rgba( $black, 0)!important;
                 &::before { opacity: 0; }
             }
         }

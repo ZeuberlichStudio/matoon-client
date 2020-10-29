@@ -4,27 +4,45 @@ import { useLocation, useHistory } from 'react-router-dom';
 
 import './index.scss';
 
-export default function Modal({ children: child, closeCallback }) {
+export function Modal({ children: child, closeCallback, ...props }, ref) {
     
     const location = useLocation();
-    const history = useHistory();
+    const contentRef = React.useRef();
 
+    const history = useHistory();
     const [visible, setVisible] = React.useState(false);
 
-    function closeModal() {
-        if ( closeCallback ) return closeCallback();
-        
+    function close() {        
         setVisible(false);
 
         setTimeout(() => {
-            const { backgroundLocation } = location.state && location.state;
-            history.push( backgroundLocation );
+            if ( closeCallback ) {
+                closeCallback();
+            } else {
+                const { backgroundLocation } = location.state && location.state;
+                history.push( backgroundLocation );
+            }
         }, 200);
     }
 
-    React.useEffect(() => setVisible(true), []);
+    React.useEffect(() => {
+        setVisible(true);
 
-    const containerStyles = {
+        function outerClickHandler(e) {
+            if ( !contentRef.current ) return console.log('content ref is not defined!');
+
+            const closest = e.target.closest(`#${contentRef.current.id}`);
+            if ( !closest || closest === e.target ) close();
+        }
+
+        ref.current.addEventListener('click', outerClickHandler);
+
+        return function cleanUp() {
+            ref.current.removeEventListener('click', outerClickHandler);
+        };
+    }, []);
+
+    const containerStyles = props.containerStyles || {
         initial: {
             backgroundColor: 'rgba(0,0,0,0)'
         },
@@ -33,7 +51,8 @@ export default function Modal({ children: child, closeCallback }) {
         }
     };
 
-    const contentStyles = {
+
+    const contentStyles = props.contentStyles || {
         initial: {
             transform: 'scale(0)'
         },
@@ -42,20 +61,26 @@ export default function Modal({ children: child, closeCallback }) {
         }
     };
 
+    React.useEffect(() => {
+        visible && close();
+    }, [location]);
+
     return createPortal (
-        <div style={ containerStyles[visible ? 'final' : 'initial'] } id="modal">
+        <div ref={ ref } style={ containerStyles[visible ? 'final' : 'initial'] } id="modal">
             <div style={ contentStyles[visible ? 'final' : 'initial'] } id="modal-content">
-                { React.cloneElement( child, { closeButton: <ModalClose {...{closeModal}}/> } ) }
+                { React.cloneElement( child, { ref: contentRef, closeModal: close, closeButton: <CloseButton {...{ closeModal: close }}/> } ) }
             </div>
         </div>,
         document.body
     );
 }
 
-function ModalClose({ closeModal }) {
+function CloseButton({ closeModal }) {
     return (
         <button onClick={ closeModal } id="modal-close">
             <span></span>
         </button>
     );
 }
+
+export default React.forwardRef(Modal);

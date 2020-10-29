@@ -3,15 +3,15 @@
 @import 'assets/scss/buttons';
 @import 'assets/scss/hide-scrollbar';
 
-@import './styles/controls-pc.scss';
-@import './styles/controls-tablet.scss';
-@import './styles/controls-mobile.scss';
+@import './styles/controls/controls-pc.scss';
+@import './styles/controls/controls-tablet.scss';
+@import './styles/controls/controls-mobile.scss';
 
-@import './styles/grid-pc.scss';
-@import './styles/grid-tablet.scss';
-@import './styles/grid-mobile.scss';
+@import './styles/grid/grid-pc.scss';
+@import './styles/grid/grid-tablet.scss';
+@import './styles/grid/grid-mobile.scss';
 
-@import './styles/catalog-pc.scss';
-@import './styles/catalog-tablet.scss';
-@import './styles/catalog-mobile.scss';
+@import './styles/catalog/catalog-pc.scss';
+@import './styles/catalog/catalog-tablet.scss';
+@import './styles/catalog/catalog-mobile.scss';
 

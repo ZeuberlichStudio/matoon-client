@@ -4,7 +4,7 @@
 
 #modal {
     width: 100vw;
-    height: 100vh;
+    height: var(--vh, 100vh);
     left: 0; top: 0;
 
     position: fixed;
@@ -20,6 +20,7 @@
 }
 
 #modal-content {
+    //height: var(--vh, 100vh);
     transition: 200ms;
     will-change: transform;
 }

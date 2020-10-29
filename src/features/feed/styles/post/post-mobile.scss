@@ -2,6 +2,7 @@
     .feed-post {
         width: m-get-vw(164px);
         min-height: m-get-vw(164px);
+        height: max-content;
         padding: m-get-vw(6px);
 
         margin: m-get-vw(8px);
@@ -25,6 +26,7 @@
         }
 
         &_content {
+            width: 100%;
             height: max-content;
             padding: m-get-vw(8px);
 

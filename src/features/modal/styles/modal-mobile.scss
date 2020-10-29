@@ -16,7 +16,7 @@
     .modal-container {
         left: 0; right: 0;
         margin: m-get-vw(90px) m-get-vw(16px);
-        min-height: 100vh;
+        min-height: var(--vh, 100vh);
         will-change: transform;
         transform: translateY(0);
     }
@@ -46,7 +46,7 @@
             margin: auto;
             position: absolute!important;
             @include m-button-small; 
-            @include m-button-picture($black, 'assets/images/icon_cross.svg');
+            @include m-button-picture($black, 'assets/images/icon_close.svg');
             border: none;
             background-color: #E9EAEA;
             

@@ -19,7 +19,9 @@ export default function ProductGrid({ catSlug, view = 'mini' }) {
 
     function buildApiQuery() {
         const params = {
-            cat: catSlug,
+            //change after showcase!!!
+            //cat: catSlug,
+            cat: '',
             sort: apiQueryParamsState.sort
         };
 

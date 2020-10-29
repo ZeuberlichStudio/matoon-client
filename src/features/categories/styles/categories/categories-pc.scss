@@ -1,5 +1,7 @@
 @media screen and ( min-width: 1024px ) {
     .categories {
+        padding: get-vw(98px) get-vw(20px);
+
         display: grid;
 
         grid-auto-flow: column;

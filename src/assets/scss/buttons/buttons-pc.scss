@@ -58,7 +58,7 @@
     }
 }
 
-@mixin button-picture( $color, $image, $active_image: false, $size: 'small' ) {
+@mixin button-picture( $color, $image, $active_image: false, $size: 'small', $active-color: $color ) {
     span {
         mask-image: url($image);
         @if $size == 'small' {
@@ -76,6 +76,12 @@
             background-color: white;
         }
     }
+
+    &:hover {
+        span {
+           background-color: $active-color; 
+        }
+    }
 }
 
 @mixin button-big{
@@ -84,9 +90,9 @@
     height: get-vw(48px);
     position: relative;
     display: block;
-    border-radius: get-vw(15px);
+    border-radius: get-vw(16px);
     background-color: white;
-    box-shadow: 0 get-vw(0px) get-vw(10px) rgba(black, .1);
+    box-shadow: 0 0 get-vw(10px) rgba(black, .1);
     color: black;
     cursor: pointer;
 

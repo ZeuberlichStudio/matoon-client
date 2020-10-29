@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { PostHeader, PostContent, PostImage } from 'features/post';
 
@@ -6,7 +6,7 @@ import './index.scss';
 
 const { API_URL } = process.env;
 
-export default function PostPage({ closeButton }) {
+export function PostPage({ closeButton }, ref) {
 
     const { slug: slugParam } = useParams();
 
@@ -37,7 +37,7 @@ export default function PostPage({ closeButton }) {
     } = post;
 
     return (
-        <main id="post-page" className="post-page">
+        <main ref={ ref } id="post-page" className="post-page">
             <div className="post-page_post-wrapper">
                 <div className="post-page_post">
                     <PostImage {...{ image, title }}/>
@@ -48,3 +48,5 @@ export default function PostPage({ closeButton }) {
         </main>
     );
 }
+
+export default forwardRef(PostPage);

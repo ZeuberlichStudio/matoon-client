@@ -1,32 +1,50 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './styles/block.scss';
 
-export default function CategoriesBlock({ title, cats, dimension, selection, select }) {
+export default function CategoriesBlock({ 
+    title, 
+    slug, 
+    cats, 
+    dimension, 
+    selection, 
+    select, 
+    goBack, 
+    closeButton
+}) {
 
     return (
-        <div className="categories-block">
-            <h3><span>{ title }</span></h3>
+        <div className="categories-block-wrapper">
+            <div className="categories-block">
+                <div className="categories-block_header">
+                    { goBack && <button onClick={ goBack } className="categories-block_go-back"/> }
+                    <h3><span>{ title }</span></h3>
+                    { closeButton && closeButton }
+                </div>
 
-            <ul>
-                { 
-                    cats.map( (cat, i) => {
-
-                        function handleClick() {
-                            if ( !cat.children ) return ;
-                            select( dimension + 1, i )
-                        }
-
-                        return (
+                <ul>
+                    { 
+                        cats.map( (cat, i) => 
+                            cat.children ?
                             <li 
                                 className={i === selection[dimension + 1] ? 'active' : ''} 
-                                onClick={ handleClick }
+                                onClick={ () => select( dimension + 1, i ) }
                             >
                                 <span>{ cat.name }</span>
+                            </li> :
+                            <li className={i === selection[dimension + 1] ? 'active' : ''}>
+                                <span><Link to={`/catalog/category=${ cat.slug }`}>{ cat.name }</Link></span>
                             </li>
-                        );
-                    }) 
-                }
-            </ul>
+                        ) 
+                    }
+                </ul>
+                    
+                <div className="categories-block_link">
+                    <Link to={`/catalog/category=${ slug || "all" }`}>
+                        <span>{ dimension > 0 ? "Все товары в категории" : "Все товары в каталоге" }</span>
+                    </Link>
+                </div>
+            </div>
         </div>
     );
 }

@@ -5,6 +5,7 @@
         max-height: get-vw(840px);
 
         padding: get-vw(20px) get-vw(64px);
+        padding-top: get-vw(98px);
 
         display: grid;
         grid-template-rows: repeat(3, max-content) 1fr max-content;
@@ -20,6 +21,7 @@
     }
 
     .category-banner_title {
+        width: 100%;
         @include proxima-bold(get-vw(48px));
     }
 

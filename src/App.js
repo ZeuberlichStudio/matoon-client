@@ -27,6 +27,8 @@ const {
 } = routes;
 
 import NewModal from 'features/new-modal';
+import Header from 'features/header';
+import Categories from 'features/categories';
 
 function App() {
     const listener = useSelector( state => state.device.listener );
@@ -51,8 +53,40 @@ function App() {
         }
     }, [listener, background]);
 
+    const [navFocus, setNavFocus] = React.useState(false);
+
+    const [menu, setMenu] = React.useState(false);
+    const modalRef = React.useRef();
+
+    const menuContentStyles = {
+      initial: {
+        transform: 'translateX(-100%)'
+      },
+      final: {
+          transform: 'translateX(0)'
+      }
+    }
+    
+    function toggleMenu() {
+      if ( !menu ) { 
+        setMenu(true);
+      } else {
+        modalRef.current.style.backgroundColor = 'rgba(0,0,0,0)';
+        modalRef.current.children[0].style.transform = 'translateX(-100%)';
+        setTimeout(() => setMenu(false), 200);
+      }
+    }
+
+    React.useEffect(() => {
+      if ( menu ) setNavFocus('menu');
+      else if ( background ) setNavFocus('background');
+      else setNavFocus(null);
+    }, [menu, background]);
+
     return (
         <React.Fragment>
+            <Header {...{toggleMenu, focus: navFocus}}/>
+
             <Switch location={ background || location }>
                 <Route exact={ true } path="/" component={ MainPage }/>
                 <Route path="/feed/post=:slug" component={ PostPage }/>
@@ -65,17 +99,23 @@ function App() {
                 background && 
                 <Switch>
                     <Route path="/catalog/product=:slug">
-                        <NewModal>
+                        <NewModal ref={ modalRef }>
                             <ProductPage/>
                         </NewModal>
                     </Route>
 
                     <Route path="/feed/post=:slug">
-                        <NewModal>
+                        <NewModal ref={ modalRef }>
                             <PostPage/>
                         </NewModal>
                     </Route>
                 </Switch>
+            }
+            { 
+                menu && 
+                <NewModal ref={modalRef} contentStyles={menuContentStyles} closeCallback={toggleMenu}> 
+                    <Categories/>
+                </NewModal>
             }
         </React.Fragment>
     );

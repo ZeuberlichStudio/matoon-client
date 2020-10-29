@@ -1,7 +1,7 @@
 @media screen and ( max-width: 767px ) {
     .product-add-to-cart {
         width: 100%;
-        max-width: m-get-vw(315px);
+        max-width: m-get-vw(317px);
 
         button {
             @include m-button-big;

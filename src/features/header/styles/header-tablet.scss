@@ -1,35 +1,29 @@
-@media screen and ( min-width: 1024px ) {
+@media screen and ( min-width: 768px ) and ( max-width: 1023.5px ) {
     .app-header {
-        height: get-vw(58px);
-        padding: get-vw(8px);
-        top: get-vw(20px);
-        left: get-vw(20px); 
-        right: get-vw(20px);
+        height: t-get-vw(48px);
+        padding: t-get-vw(8px);
+        top: t-get-vw(12px);
+        left: t-get-vw(12px); 
+        right: t-get-vw(12px);
 
         position: fixed;
         display: grid;
         grid-template-rows: 100%;
         grid-template-columns: repeat(3, max-content) 1fr repeat(4, max-content);
         grid-template-areas: 'logo cats search . info favs cart account';
-        grid-column-gap: get-vw(8px);
+        grid-column-gap: t-get-vw(8px);
         align-items: center;
 
-        background-color: rgba( white, .95 );
-
-        border-radius: get-vw(18px);
-
-        & > div,
-        & > button {
-            box-shadow: 0 0 get-vw(10px) rgba( $black, .1 );
-        }
+        background-color: rgba( white, .95);
+        border-radius: t-get-vw(18px);
 
         &_logo {
             grid-area: logo;
-            width: get-vw(50px);
-            height: get-vw(42px);
+            width: t-get-vw(38px);
+            height: t-get-vw(32px);
+            border-radius: t-get-vw(10px);
             overflow: hidden;
 
-            border-radius: get-vw(12px);
             img {
                 width: 100%;
                 height: auto;
@@ -39,20 +33,20 @@
         &_categories {
             grid-area: cats;
             width: max-content;
-            height: get-vw(42px);
-            padding: 0 get-vw(14px);
+            height: t-get-vw(32px);
+            padding: 0 t-get-vw(14px);
 
             span {
                 display: flex;
                 align-items: center;
-                @include proxima-semibold( get-vw(18px), get-vw(42px) );
+                @include proxima-semibold( t-get-vw(16px), t-get-vw(32px) );
             }
 
             span::before {
-                width: get-vw(24px);
-                height: get-vw(42px);
-                margin-left: get-vw(-6px);
-                margin-right: get-vw(6px);
+                width: t-get-vw(18px);
+                height: t-get-vw(18px);
+                margin-left: t-get-vw(-7px);
+                margin-right: t-get-vw(7px);
 
                 display: inline-block;
                 mask-image: url('assets/images/icon_menu.svg');
@@ -62,28 +56,28 @@
             }
 
             background-color: #E9E9E9;
-            border-radius: get-vw(12px);
+            border-radius: t-get-vw(10px);
         }
 
         &_search {
             grid-area: search;
-            width: get-vw(358px);
-            height: get-vw(42px);
-            padding: 0 get-vw(14px);
+            width: t-get-vw(220px);
+            height: t-get-vw(32px);
+            padding: 0 t-get-vw(14px);
             background-color: #E9E9E9;
-            border-radius: get-vw(12px);
+            border-radius: t-get-vw(10px);
 
             span {
                 display: flex;
                 align-items: center;
-                @include proxima-semibold( get-vw(18px), get-vw(42px) );
+                @include proxima-semibold( t-get-vw(16px), t-get-vw(32px) );
             }
 
             span::before {
-                width: get-vw(24px);
-                height: get-vw(42px);
-                margin-left: get-vw(-6px);
-                margin-right: get-vw(6px);
+                width: t-get-vw(20px);
+                height: t-get-vw(20px);
+                margin-left: t-get-vw(-7px);
+                margin-right: t-get-vw(4px);
 
                 display: inline-block;
                 mask-image: url('assets/images/icon_search.svg');
@@ -95,24 +89,23 @@
 
         &_info {
             grid-area: info;
-            width: get-vw(100px);
-            height: get-vw(42px);
-            padding: 0 get-vw(14px);
-
+            width: max-content;
+            height: t-get-vw(32px);
+            padding: 0 t-get-vw(14px);
             background-color: #E9E9E9;
-            border-radius: get-vw(12px);
+            border-radius: t-get-vw(10px);
 
             span {
                 display: flex;
                 align-items: center;
-                @include proxima-semibold( get-vw(18px), get-vw(42px) );
+                @include proxima-semibold( t-get-vw(16px), t-get-vw(32px) );
             }
 
             span::before {
-                width: get-vw(24px);
-                height: get-vw(42px);
-                margin-left: get-vw(-6px);
-                margin-right: get-vw(6px);
+                width: t-get-vw(20px);
+                height: t-get-vw(20px);
+                margin-left: t-get-vw(-7px);
+                margin-right: t-get-vw(4px);
 
                 display: inline-block;
                 mask-image: url('assets/images/icon_info.svg');
@@ -121,19 +114,20 @@
                 content: '';
             }
         }
+
         &_favourite,
         &_cart,
         &_account {
             @include button-medium;
-            width: get-vw(42px);
-            height: get-vw(42px);
+            width: t-get-vw(32px);
+            height: t-get-vw(32px);
             background-color: #E9E9E9;
-            border-radius: get-vw(12px);
+            border-radius: t-get-vw(10px);
         }
 
         &_favourite { 
             grid-area: favs; 
-            @include button-picture( 
+            @include t-button-picture( 
                 rgba( $black, .4 ), 
                 'assets/images/icon_fav.svg', 
                 $size: 'big',
@@ -143,7 +137,7 @@
 
         &_cart { 
             grid-area: cart; 
-            @include button-picture( 
+            @include t-button-picture( 
                 rgba( $black, .4 ), 
                 'assets/images/icon_cart.svg', 
                 $size: 'big',
@@ -153,7 +147,7 @@
 
         &_account { 
             grid-area: account; 
-            @include button-picture( 
+            @include t-button-picture( 
                 rgba( $black, .4 ), 
                 'assets/images/icon_user.svg', 
                 $size: 'big',

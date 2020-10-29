@@ -1,6 +1,7 @@
 @media screen and (max-width: 767px) {
     .category-banner {
         padding: m-get-vw(20px) m-get-vw(16px);
+        padding-top: m-get-vw(64px);
 
         display: flex;
         flex-direction: column;
@@ -15,16 +16,21 @@
 
     .category-banner_title {
         width: max-content;
+        max-width: 100%;
         padding: 0 m-get-vw(8px);
         @include proxima-bold(m-get-vw(26px));
     }
 
     .category-banner_breadcrumbs {
-        width: max-content;
+        margin-top: m-get-vw(6px);
+        width: 100%;
         padding: 0 m-get-vw(4px);
 
-        @include proxima-semibold(m-get-vw(16px));
+        @include proxima-semibold( m-get-vw(16px) );
         color: rgba($black, .5);
+
+        display: flex;
+        flex-wrap: wrap;
 
         li { display: inline-block; }
     }

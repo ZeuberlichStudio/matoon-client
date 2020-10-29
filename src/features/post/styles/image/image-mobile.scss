@@ -2,11 +2,13 @@
     .post-image {
         max-width: m-get-vw(164px);
         min-height: m-get-vw(164px);
-        height: 100%;
+
+        display: flex;
+        flex-direction: column;
 
         img {
+            flex: 1 1;
             width: 100%;
-            min-height: 100%;
             height: auto;
 
             display: block;

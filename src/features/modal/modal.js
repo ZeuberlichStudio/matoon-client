@@ -7,6 +7,7 @@ export function Modal({children, title, headerContent, closeCallback}) {
 
     const [initialized, setInitialized] = React.useState(true);
     const history = useHistory();
+    const modalRef = React.useRef();
 
     React.useEffect(() => {
         initModal();
@@ -32,7 +33,7 @@ export function Modal({children, title, headerContent, closeCallback}) {
     }
 
     return (
-        <div id="modal-wrapper" className="modal-wrapper" style={wrapperAnimation}>
+        <div ref={modalRef} id="modal-wrapper" className="modal-wrapper" style={wrapperAnimation}>
             <div id="modal-container" className="modal-container" style={containerAnimation}>
                 <div className="modal-header">
                     { headerContent || <h2>{ title }</h2> }
@@ -40,7 +41,7 @@ export function Modal({children, title, headerContent, closeCallback}) {
                 </div>
 
                 <div className="modal-content">
-                    { React.cloneElement(children, { close }) }
+                    { React.cloneElement(children, { close, modalRef }) }
                 </div>
             </div>
         </div>

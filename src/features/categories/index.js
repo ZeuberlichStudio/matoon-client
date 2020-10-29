@@ -1,96 +1,79 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import CategoriesBlock from './block';
 
 import './styles/categories.scss';
 
-const cats = [
-    {
-        name: "Cat 1",
-        slug: "cat-1",
-        children: [
-            {
-                name: "Subcat 1",
-                slug: "subcat-1",
-                parent: "cat-1"
-            },
-            {
-                name: "Subcat 2",
-                slug: "subcat-2",
-                parent: "cat-1",
-                children: [
-                    {
-                        name: "Subcat 3",
-                        slug: "subcat-3",
-                        parent: "subcat-2"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        name: "Cat 2",
-        slug: "cat-2"
-    },
-    {
-        name: "Cat 3",
-        slug: "cat-3",
-        children: [
-            {
-                name: "Subcat 4",
-                slug: "subcat-4",
-                parent: "cat-3",
-                children: [
-                    {
-                        name: "Subcat 6",
-                        slug: "subcat-6",
-                        parent: "subcat-4"
-                    }
-                ]
-            },
-            {
-                name: "Subcat 5",
-                slug: "subcat-5",
-                parent: "cat-3"
-            }
-        ]
-    },
-    {
-        name: "Cat 4",
-        slug: "cat-4"
-    },
-    {
-        name: "Cat 5",
-        slug: "cat-5"
-    }
-];
+const { API_URL } = process.env;
 
-export default function Categories() {
+export function Categories({ closeButton, modalRef }, ref) {
+    const [cats, setCats] = React.useState([]);
+    const [status, setStatus] = React.useState('idle');
+    const [error, setError] = React.useState(null);
+
+    React.useEffect(() => {
+        fetch(`${ API_URL }categories/tree`)
+            .then( data => data.json() )
+            .then( cats => {
+                setCats(cats);
+                setStatus('succeeded');
+            })
+            .catch( err => {
+                setError(err);
+                setStatus('failed');
+            });
+    }, []);
+
+    const targetDevice = useSelector( state => state.device.target );
 
     const [selection, setSelection] = React.useState([0]);
+    const [dimension, setDimension] = React.useState(0);
+    
+    React.useEffect(() => {
+        setDimension(selection.length - 1);
+    }, [selection]);
 
     function select(catDimension, catIndex) {
         const newSelection = [...selection.slice(0, catDimension), catIndex];
         setSelection(newSelection);
     }
 
-    React.useEffect(() => {
-        
-    }, [selection]);
+    function goBack() {
+        const newDimension = dimension - 1;
+        setDimension( newDimension < 0 ? 0 : newDimension );
+    }
 
     const style = {
-        "--dimension": selection.length - 1
+        "--dimension": dimension
     }
     
     return (
-        <div id="categories" className="categories" style={style}>
+        <div ref={ ref } id="categories" className="categories" style={style}>
             {
                 selection.map((catIndex, catDimension) => { 
                     return (
                         <CategoriesBlock 
-                            title={ 'sda' }
-                            cats={ catDimension === 0 ? cats : catDimension === 1 ? cats[catIndex].children : catDimension === 2 ? cats[selection[1]].children[catIndex].children : null } 
+                            title={ 
+                                catDimension === 0 ? 'Категории' : 
+                                catDimension === 1 ? cats[catIndex].name : 
+                                catDimension === 2 ? cats[selection[1]].children[catIndex].name :
+                                ''
+                            }
+                            slug={
+                                catDimension === 0 ? null : 
+                                catDimension === 1 ? cats[catIndex].slug : 
+                                catDimension === 2 ? cats[selection[1]].children[catIndex].slug :
+                                ''
+                            }
+                            cats={ 
+                                catDimension === 0 ? cats : 
+                                catDimension === 1 ? cats[catIndex].children : 
+                                catDimension === 2 ? cats[selection[1]].children[catIndex].children : 
+                                null 
+                            } 
                             dimension={ catDimension } 
-                            {...{selection, select}}
+                            goBack={ (targetDevice === 'mobile' && catDimension > 0) && goBack }
+                            {...{selection, select, closeButton: targetDevice === 'mobile' && closeButton}}
                         />
                     );
                 })
@@ -98,3 +81,5 @@ export default function Categories() {
         </div>
     );
 }
+
+export default React.forwardRef(Categories);

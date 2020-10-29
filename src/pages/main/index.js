@@ -15,7 +15,7 @@ export default function MainPage() {
         if ( status === 'idle' ) {
             setStatus('loading');
 
-            fetch(`${API_URL}categories/subcat-1`)
+            fetch(`${API_URL}categories/аксессуары`)
             .then( data => data.json())
             .then( result => {
                 setCat(result[0]);

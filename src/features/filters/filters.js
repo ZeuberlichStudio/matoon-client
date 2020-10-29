@@ -7,11 +7,11 @@ import Field from './field';
 
 import './filters.scss';
 
-export default function Filters({ catSlug, close }) {
+const {
+    API_URL
+} = process.env;
 
-    const {
-        API_URL
-    } = process.env;
+export default function Filters({ catSlug, closeButton, closeModal }) {
 
     const initialSelectedFilters = {
         color: [],
@@ -36,7 +36,9 @@ export default function Filters({ catSlug, close }) {
     function buildApiQuery() {
 
         const params =  {
-            cat: catSlug,
+            //change after showcase!!!
+            //cat: catSlug,
+            cat: '',
             minPrice: apiQueryParamsState.filter.minPrice,
             maxPrice: apiQueryParamsState.filter.maxPrice,
             minStock: apiQueryParamsState.filter.minStock
@@ -100,8 +102,6 @@ export default function Filters({ catSlug, close }) {
     function countApplied() {
         let count = 0;
 
-        //console.log(apiQueryParamsState.filter);
-
         for ( let [field, value] of Object.entries(apiQueryParamsState.filter) ) {
             count += Array.isArray(value) ? value.length : (value ? 1 : 0);
         }
@@ -115,8 +115,8 @@ export default function Filters({ catSlug, close }) {
     }
 
     function apply() {
-        close && close();
         dispatch(filterChanged(selectedFilters));
+        closeModal && closeModal();
     }
 
     const renderCheckbox = (filter, attr, key) => 
@@ -133,8 +133,12 @@ export default function Filters({ catSlug, close }) {
     } = availableFilters;
 
     return(
+        <div id="product-filters-wrapper" className="product-filters-wrapper">
         <div ref={ containerRef } id="product-filters" className="product-filters">
-            <h2>Фильтры</h2>
+            <div className="product-filters_header">
+                <h3>Фильтры</h3>
+                { closeButton && closeButton }
+            </div>
             <ResizableFilterBlock name={"Цвет"}>
                 { colors && colors.map((filter, i) => renderCheckbox(filter, "color", i)) }
             </ResizableFilterBlock>
@@ -161,6 +165,7 @@ export default function Filters({ catSlug, close }) {
             </FilterBlock>
 
             <Controls apply={apply} reset={reset} count={countApplied()} />
+        </div>
         </div>
     );
 }

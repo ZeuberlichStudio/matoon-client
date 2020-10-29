@@ -14,20 +14,10 @@
     }
 
     .product-grid_controls {
-        top: 0;
-        position: sticky;
+        //top: 0;
+        //position: sticky;
         z-index: 2;
 
         background-color: rgba(white, .0);
-    }
-
-    .product-filters-wrapper {
-        grid-area: filters;
-
-        top: var(--offset);
-
-        height: max-content;
-        padding: t-get-vw(16px) 0;
-        position: sticky;
     }
 }

@@ -1,25 +1,75 @@
 @media screen and (min-width: 768px) and (max-width: 1023px) {
+    .product-filters-wrapper {
+        grid-area: filters;
+
+        width: t-get-vw(246px);
+        height: max-content;
+        max-height: calc( var(--vh, 100vh) - #{t-get-vw(72px + 16px)} );
+        margin-top: t-get-vw(16px);
+        top: t-get-vw(72px);
+
+        position: sticky;
+
+        border-radius: t-get-vw(22px);
+        box-shadow: 0 0 t-get-vw(10px) rgba($black, .1);
+        will-change: transform;
+        z-index: 2;
+        overflow: hidden scroll;
+
+        &::-webkit-scrollbar {
+            width: t-get-vw(6px);
+            height: max-content;
+        }
+
+        &::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 t-get-vw(3px) t-get-vw(3px) rgba( $black, .1 );
+            border-right: solid t-get-vw(3px) transparent;
+            margin-top: t-get-vw(82px);
+            margin-bottom: t-get-vw(120px);
+            border-radius: t-get-vw(10px);
+            
+        }
+
+        
+        &::-webkit-scrollbar-thumb {
+            box-shadow: inset 0 0 t-get-vw(3px) t-get-vw(3px) rgba( $black, .4 );
+            border-right: solid t-get-vw(3px) transparent;
+            border-radius: t-get-vw(10px);
+        }
+    
+        & {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    }
+
     .product-filters {
         width: t-get-vw(246px);
         height: max-content;
         padding: t-get-vw(10px);
-        padding-bottom: t-get-vw(100px);
         background-color: white;
         border-radius: t-get-vw(22px);
-        box-shadow: 0 get-vw(1px) get-vw(30px) rgba($black, .15);
 
-        h2 { 
+        &_header { 
             width: 100%;
             height: t-get-vw(40px);
-            @include proxima-bold(t-get-vw(16px), t-get-vw(40px));
-            text-align: center;
-            background-color: rgba(white, .3);
-            backdrop-filter: blur(8px);
+            top: t-get-vw(10px);
+
+            position: sticky;
+
+            box-shadow: 0 0 t-get-vw(10px) rgba( $black, .1 );
+            background-color: white;
             border-radius: t-get-vw(12px);
+            z-index: 2;
+
+            h3 {
+                @include proxima-bold(t-get-vw(16px), t-get-vw(40px));
+                text-align: center;
+            }
         }
     
         &_block {
-            margin-top: t-get-vw(38px);
+            margin-top: t-get-vw(28px);
             padding: 0 t-get-vw(7px);
     
             h3 { 
@@ -66,14 +116,21 @@
     }
     
     .product-filters_controls {
+        margin-top: t-get-vw(28px);
+        width: t-get-vw(236px);
+        padding: t-get-vw(5px);
         left: t-get-vw(10px);
         right: t-get-vw(10px);
         bottom: t-get-vw(10px);
-        position: absolute;
+
+        position: sticky;
+
         border-radius: t-get-vw(12px);
-        background-color: rgba(white, .3);
-        backdrop-filter: blur(8px);
-    
+        background-color: #F5F5F5;
+        transform: translate( t-get-vw(-5px), t-get-vw(5px) );
+
+        z-index: 2;
+
         span { 
             padding-left: t-get-vw(10px);
             @include proxima-bold(t-get-vw(16px));

@@ -1,11 +1,14 @@
 @media screen and ( max-width: 767px ) {
     .categories {
+        height: var(--vh, 100vh);
+
         display: grid;
-        padding:  m-get-vw(64px) m-get-vw(40px);
+        padding: m-get-vw(64px) m-get-vw(40px);
+        padding-bottom: 0;
 
         grid-auto-flow: column;
-        grid-template-rows: max-content;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 100%;
+        grid-template-columns: repeat(3, m-get-vw(294px));
         grid-column-gap: m-get-vw(20px);
 
         transform: translateX(calc( (100vw - #{ m-get-vw(60px) }) * -1 * var(--dimension, 0)) );

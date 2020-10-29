@@ -28,7 +28,7 @@
     }
 }
 
-@mixin m-button-picture( $color, $image, $active_image: false, $size: 'small' ) {
+@mixin m-button-picture( $color, $image, $active_image: false, $size: 'small', $active_color: $color ) {
     span {
         mask-image: url($image);
         
@@ -46,6 +46,12 @@
         background-color: white;
         @if $active_image {
             mask-image: url($active_image);
+        }
+    }
+    
+    &:hover {
+        span {
+           background-color: $active-color; 
         }
     }
 }
