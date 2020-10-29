@@ -28,7 +28,7 @@ export default function CategoriesBlock({
                             cat.children ?
                             <li 
                                 className={i === selection[dimension + 1] ? 'active' : ''} 
-                                onClick={ () => select( dimension + 1, i ) }
+                                onMouseEnter={ () => select( dimension + 1, i ) }
                             >
                                 <span>{ cat.name }</span>
                             </li> :
