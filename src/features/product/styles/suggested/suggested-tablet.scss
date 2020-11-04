@@ -4,14 +4,16 @@
         max-width: t-get-vw(754px);
         height: max-content;
         min-width: t-get-vw(754px);
-        padding: t-get-vw(10px);
+        padding: t-get-vw(10px) t-get-vw(5px);
 
         background-color: white;
         border-radius: t-get-vw(22px);
 
         h3 { 
-            width: 100%;
+            width: auto;
             height: t-get-vw(40px);
+            margin: 0 t-get-vw(5px);
+
             @include proxima-bold(t-get-vw(18px), t-get-vw(40px));
             text-align: center;
 

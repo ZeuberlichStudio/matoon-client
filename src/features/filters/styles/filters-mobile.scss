@@ -23,13 +23,13 @@
         border-radius: m-get-vw(26px);
 
         &::before {
-            width: m-get-vw(329px);
+            width: 100%;
             height: m-get-vw(20px);
 
             position: sticky;
             display: block;
             background-color: white;
-            transform: translateX( m-get-vw(-7px) );
+            border-radius: m-get-vw(26px);
             z-index: 2;
             content: '';
         }
@@ -41,7 +41,7 @@
 
         &::after {
             width: 100%;
-            height: m-get-vw(20px);
+            height: m-get-vw(14px);
     
             position: sticky;
             display: block;

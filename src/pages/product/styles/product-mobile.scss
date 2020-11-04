@@ -24,6 +24,10 @@
         }
     }
 
+    #modal .product-page_product {
+      .product-header { top: m-get-vw(12px); }
+    }
+
     .product-page_product {
         background-color: white;
 
@@ -45,13 +49,12 @@
         }
 
         .product-header {
-            top: m-get-vw(12px);
+            top: m-get-vw(64px);
 
             position: sticky;
 
             z-index: 3;
-        }
-    
+        }    
         .product-gallery {
             margin-top: m-get-vw(14px);
             max-height: m-get-vw(534px);

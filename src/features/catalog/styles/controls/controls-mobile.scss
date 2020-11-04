@@ -18,6 +18,8 @@
             h3 { display: none; }
 
             &_buttons-wrapper {
+                border-radius: m-get-vw(20px);
+
                 overflow-x: auto;
                 @include hide-scrollbar;
             }

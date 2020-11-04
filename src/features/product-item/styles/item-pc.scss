@@ -10,7 +10,8 @@
         flex-direction: column;
         justify-content: flex-end;
         border-radius: get-vw(16px);
-        box-shadow: 0 0 get-vw(10px) rgba($black, .1);
+        border: get-vw(1px) solid rgba($black, .1);
+        //box-shadow: 0 0 get-vw(10px) rgba($black, .1);
         overflow: hidden;
         transform: translate3d(0,0,0);
 

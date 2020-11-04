@@ -94,7 +94,8 @@
                 rgba( $black, .4 ), 
                 'assets/images/icon_fav.svg', 
                 $size: 'big',
-                $active_color: #F8512A
+                $active_color: #F8512A,
+                $hover: true
             );
         }
         &_cart { 
@@ -103,7 +104,8 @@
                 rgba( $black, .4 ), 
                 'assets/images/icon_cart.svg', 
                 $size: 'big',
-                $active_color: #4A8BF7
+                $active_color: #4A8BF7,
+                $hover: true
             );
         }
 

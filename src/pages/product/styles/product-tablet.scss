@@ -1,7 +1,7 @@
 @media screen and ( min-width: 768px ) and ( max-width: 1023px ) {
     #product-page {
         width: 100vw;
-        padding: t-get-vw(48px) t-get-vw(40px);
+        padding: t-get-vw(72px) t-get-vw(40px);
 
         display: flex;
         flex-direction: column-reverse;
@@ -22,7 +22,7 @@
             height: t-get-vw(12px);
             margin-left: t-get-vw(12px);
             margin-bottom: t-get-vw(-16px);
-            top: 0;
+            top: t-get-vw(60px);
 
             display: block;
             position: sticky;
@@ -40,7 +40,7 @@
         .product-header {
             grid-area: header;
 
-            //top: t-get-vw(12px);
+            top: t-get-vw(68px);
             position: sticky;
             z-index: 3;
         }
@@ -48,9 +48,9 @@
         .product-gallery {
             grid-area: gallery;
 
-            margin-top: t-get-vw(8px);
-            max-height: t-get-vw(534px);
-            top: t-get-vw(74px);
+            margin-top: t-get-vw(10px);
+            height: t-get-vw(534px);
+            top: t-get-vw(118px);
             position: sticky;
         }
 

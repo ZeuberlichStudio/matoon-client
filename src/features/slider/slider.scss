@@ -53,6 +53,7 @@
     --touchOffset: 0px;
 
     will-change: transform;
+    touch-action: none;
 
     transform: translateX(
         calc( 

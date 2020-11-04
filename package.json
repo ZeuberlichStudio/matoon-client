@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "develop": "yarn webpack-dev-server --open --config webpack.client --env.NODE_ENV=dev --host 0.0.0.0",
+    "develop": "yarn webpack-dev-server --open --config webpack.client --env.NODE_ENV=dev",
     "build": "yarn webpack --config webpack.client --env.NODE_ENV=production",
     "start": "node server.js"
   },

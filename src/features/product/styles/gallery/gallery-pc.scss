@@ -18,8 +18,13 @@
             min-height: get-vw(432px);
             max-width: get-vw(480px);
             max-height: get-vw(640px);
+
+            position: relative;
             
-            img { border-radius: get-vw(16px); }
+            img { 
+                position: absolute;
+                border-radius: get-vw(16px); 
+            }
         }
 
         &_preview {

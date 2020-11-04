@@ -6,7 +6,9 @@
         img {
             width: 100%;
             height: 100%;
+
             display: block;
+
             object-fit: cover;
             object-position: center;
             box-shadow: 0 0 t-get-vw(10px) rgba($black, .1);
@@ -19,7 +21,10 @@
             max-width: t-get-vw(355px);
             max-height: t-get-vw(490px);
             
-            img { border-radius: t-get-vw(16px); }
+            img { 
+                position: absolute;
+                border-radius: t-get-vw(16px); 
+            }
         }
 
         &_preview {

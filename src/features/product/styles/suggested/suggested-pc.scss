@@ -3,7 +3,7 @@
         width: get-vw(282px);
         height: get-vw(784px);
         max-height: 100%;
-        padding: get-vw(12px) get-vw(6px);
+        padding: get-vw(6px);
 
         display: flex;
         flex-direction: column;
@@ -14,6 +14,7 @@
         h3 { 
             width: calc( 100% - #{ get-vw(6px * 2) } );
             height: get-vw(48px);
+            margin-top: get-vw(6px);
             margin-left: get-vw(6px);
 
             @include proxima-bold(get-vw(22px), get-vw(48px));
@@ -25,10 +26,10 @@
     }
 
     #suggested_slider {
-        
         flex: 1 1;
+        height: auto;
+        margin-top: get-vw(6px);
 
-        margin-top: get-vw(12px);
         --slideWidth: #{get-vw(258px)};
         --slideGap: #{get-vw(12px)};
 

@@ -7,9 +7,9 @@
     position: relative;
     display: block;
     border-radius: get-vw(8px);
-    border: get-vw(2px) solid black;
+    border: get-vw(2px) solid $black;
     background-color: white;
-    color: black;
+    color: $black;
     cursor: pointer;
 
     span{ 
@@ -24,7 +24,7 @@
     }
 
     &.active{
-        background-color: black;
+        background-color: $black;
         color: white;
     }
 }
@@ -58,7 +58,7 @@
     }
 }
 
-@mixin button-picture( $color, $image, $active_image: false, $size: 'small', $active-color: $color ) {
+@mixin button-picture( $color, $image, $active_image: false, $size: 'small', $active-color: $color,  $hover: false ) {
     span {
         mask-image: url($image);
         @if $size == 'small' {
@@ -77,9 +77,11 @@
         }
     }
 
-    &:hover {
-        span {
-           background-color: $active-color; 
+    @if $hover == true {
+        &:hover {
+            span {
+               background-color: $active-color; 
+            }
         }
     }
 }
@@ -92,8 +94,8 @@
     display: block;
     border-radius: get-vw(16px);
     background-color: white;
-    box-shadow: 0 0 get-vw(10px) rgba(black, .1);
-    color: black;
+    box-shadow: 0 0 get-vw(10px) rgba($black, .1);
+    color: $black;
     cursor: pointer;
 
     span{ 
@@ -108,7 +110,7 @@
     }
 
     &.active{
-        background-color: black;
+        background-color: $black;
         color: white;
     }
 }
@@ -116,8 +118,8 @@
 @mixin checkbox-filter{
     @include button-small;
     overflow: hidden;
-    color: var(--colorData, black);
-    border-color: var(--colorData, black);
+    color: var(--colorData, $black);
+    border-color: var(--colorData, $black);
 
     input{
         width: 0; height: 0;
@@ -134,7 +136,7 @@
         left: get-vw(10px);
         position: absolute;
         mask-image: url('assets/images/icon_plus.svg');
-        background-color: var(--colorData, black);
+        background-color: var(--colorData, $black);
         transition: left 0.3s;
         content: '';
     }
@@ -164,7 +166,7 @@
     }
 
     &.active {
-        background-color: var(--colorData, black);
+        background-color: var(--colorData, $black);
 
         span{
             padding-right: get-vw(28px);
