@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+    search: null,
     sort: 'meta.orders,-1',
     filter: {
         color: [],
@@ -9,7 +10,7 @@ const initialState = {
         sex: [],
         minPrice: null,
         maxPrice: null,
-        minStock: null
+        minStock: null,
     },
     category: null
 }
@@ -26,11 +27,14 @@ export const querySlice = createSlice({
         },
         categoryChanged: (state, action) => {
             state.category = action.payload;
+        },
+        setSearch: (state, { payload }) => {
+            state.search = payload;
         }
     }
 });
 
-export const { filterChanged, sortingChanged, categoryChanged } = querySlice.actions;
+export const { filterChanged, sortingChanged, categoryChanged, setSearch } = querySlice.actions;
 
 export default querySlice.reducer;
 

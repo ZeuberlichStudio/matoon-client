@@ -24,6 +24,12 @@ module.exports = [
         componentName: 'CategoryPage'
     },
     {
+        path: '/catalog/search=:search',
+        exact: false,
+        moduleName: `pages/search/index`,
+        componentName: 'SearchPage'
+    },
+    {
         path: '/catalog/product=:slug',
         exact: false,
         moduleName: `pages/product/index`,
@@ -31,10 +37,11 @@ module.exports = [
     },
 
     //DEVELOPMENT PAGE
-    // {
-    //     path: '/dev',
-    //     exact: false,
-    //     moduleName: `pages/dev`,
-    //     componentName: 'DevPage'
-    // }
+    process.env.ENV !== 'dev' &&
+    {
+        path: '/dev',
+        exact: false,
+        moduleName: `pages/dev`,
+        componentName: 'DevPage'
+    }
 ]

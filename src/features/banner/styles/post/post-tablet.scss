@@ -1,0 +1,25 @@
+@media screen and (min-width: 768px) and (max-width: 1023.5px) {
+    .banner-post {
+        max-width: t-get-vw(520px);
+        height: 100%;
+        max-height: t-get-vw(218px);
+
+        display: grid;
+        grid-template-rows: repeat( 2, max-content ) 1fr;
+        align-items: center;
+
+        h3 { @include proxima-bold( t-get-vw(38px) ); }
+
+        p {
+            margin-top: t-get-vw(8px);
+            @include proxima-regular( t-get-vw(14px), t-get-vw(16px) );
+        }
+
+        a {
+            @include t-button-big;
+            width: t-get-vw(202px);
+            margin-top: t-get-vw(16px);
+            justify-self: center;
+        }
+    }
+}

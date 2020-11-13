@@ -18,19 +18,19 @@
 
     .product-page_product-wrapper {
         &::before {
-            width: calc(100% - #{ t-get-vw(12px * 2) });
-            height: t-get-vw(12px);
-            margin-left: t-get-vw(12px);
-            margin-bottom: t-get-vw(-16px);
-            top: t-get-vw(60px);
+            width: calc(100%);
+            height: t-get-vw(40px);
+            margin-left: t-get-vw(0px);
+            margin-bottom: t-get-vw(-40px);
+            top: t-get-vw(0px);
 
             display: block;
             position: sticky;
 
             background-color: white;
-            border-radius: t-get-vw(28px);
+            border-radius: t-get-vw(22px);
             z-index: 2;
-            //content: '';
+            content: '';
         }
     }
 
@@ -40,7 +40,7 @@
         .product-header {
             grid-area: header;
 
-            top: t-get-vw(68px);
+            top: t-get-vw(12px);
             position: sticky;
             z-index: 3;
         }

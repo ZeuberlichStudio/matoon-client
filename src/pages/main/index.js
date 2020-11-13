@@ -1,36 +1,44 @@
 import React from 'react';
 
-import CategoryBanner from 'features/category-banner/banner';
+import Banner from 'features/banner';
 import Feed from 'features/feed';
 
 const { API_URL } = process.env;
+const tempApiEndpoint = 'categories/обложки-на-документы';
 
 export default function MainPage() {
 
+    const [bannerPosts, setBannerPosts] = React.useState([]);
     const [status, setStatus] = React.useState('idle');
     const [error, setError] = React.useState(null);
-    const [cat, setCat] = React.useState(null);
 
-    React.useEffect(() => {
-        if ( status === 'idle' ) {
-            setStatus('loading');
+    function fetchBannerPosts() {
+        setStatus('loading');
 
-            fetch(`${API_URL}categories/аксессуары`)
-            .then( data => data.json())
-            .then( result => {
-                setCat(result[0]);
+        fetch(API_URL + tempApiEndpoint)
+            .then( data =>  data.json() )
+            .then( cat => {
+                setBannerPosts(cat[0].posts);
                 setStatus('succeeded');
             })
             .catch( err => {
-                setError(err);
                 setStatus('failed');
+                setError(err);
             });
-        }
+    }
+
+    React.useEffect(() => {
+        fetchBannerPosts();
     }, []);
+
+    const bannerData = {
+        pageTitle: 'Matoon Store', 
+        bannerPosts
+    };
 
     return (
         <main id="title-page" className="title-page">
-            <CategoryBanner {...{cat}}/>
+            { bannerPosts[0] && <Banner {...bannerData}/> }
             <Feed/>
         </main>
     );

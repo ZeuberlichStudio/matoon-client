@@ -1,0 +1,7 @@
+@import 'assets/scss/index.scss';
+
+@import './search/search-pc.scss';
+@import './search/search-tablet.scss';
+@import './search/search-mobile.scss';
+
+button { cursor: pointer; }

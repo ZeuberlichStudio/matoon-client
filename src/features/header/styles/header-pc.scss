@@ -12,13 +12,11 @@
         grid-template-columns: repeat(3, max-content) 1fr repeat(4, max-content);
         grid-template-areas: 'logo cats search . info favs cart account';
         grid-column-gap: get-vw(8px);
-        align-items: center;
 
         background-color: rgba( white, .95 );
 
         border-radius: get-vw(18px);
 
-        & > div,
         & > button {
             box-shadow: 0 0 get-vw(10px) rgba( $black, .1 );
         }
@@ -67,29 +65,11 @@
 
         &_search {
             grid-area: search;
-            width: get-vw(358px);
-            height: get-vw(42px);
-            padding: 0 get-vw(14px);
-            background-color: #E9E9E9;
-            border-radius: get-vw(12px);
+            position: relative;
 
-            span {
-                display: flex;
-                align-items: center;
-                @include proxima-semibold( get-vw(18px), get-vw(42px) );
-            }
-
-            span::before {
-                width: get-vw(24px);
-                height: get-vw(42px);
-                margin-left: get-vw(-6px);
-                margin-right: get-vw(6px);
-
-                display: inline-block;
-                mask-image: url('assets/images/icon_search.svg');
-                mask-size: 100% auto;
-                background-color: rgba( $black, 1);
-                content: '';
+            .search {
+                margin-left: get-vw(-8px);
+                margin-top: get-vw(-8px);
             }
         }
 

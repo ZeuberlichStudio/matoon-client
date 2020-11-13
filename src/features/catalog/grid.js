@@ -1,17 +1,20 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectTarget } from 'app/device';
 import ProductItemMobile from 'features/product-item/mobile';
 import { ProductItemMini, ProductItemFull } from 'features/product-item/product-item';
 
-export default function ProductGrid({ catSlug, view = 'mini' }) {
+const {
+    API_URL
+} = process.env;
+
+export default function ProductGrid({ catSlug, search, view = 'mini' }) {
+
+    const locationParams = useParams();
 
     const targetDevice = useSelector(selectTarget);
     const apiQueryParamsState = useSelector(state => state.query );
-
-    const {
-        API_URL
-    } = process.env;
 
     const [status, setStatus] = React.useState('idle');
     const [error, setError] = React.useState(null);
@@ -21,6 +24,7 @@ export default function ProductGrid({ catSlug, view = 'mini' }) {
         const params = {
             //change after showcase!!!
             //cat: catSlug,
+            search: locationParams.search,
             cat: '',
             sort: apiQueryParamsState.sort
         };
@@ -39,6 +43,8 @@ export default function ProductGrid({ catSlug, view = 'mini' }) {
     }
 
     React.useEffect(() => {
+        console.log(apiQueryParamsState);
+
         fetch(API_URL + `products?${buildApiQuery()}`)
             .then( data => data.json() )
             .then( result => {
@@ -65,6 +71,9 @@ export default function ProductGrid({ catSlug, view = 'mini' }) {
     return (
         <div className={`product-grid product-grid-${view}`}>
             { products && products.map(renderProduct) }
+            { 
+                (!products[0] && status === 'succeeded') && 'Nothing found'
+            }
         </div>
     );
 }

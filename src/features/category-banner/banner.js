@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import './banner.scss';
 
+import Search from 'features/search';
+
 const { API_URL } = process.env;
 
 export default function CategoryBanner({ cat }) {
@@ -63,7 +65,7 @@ export default function CategoryBanner({ cat }) {
             { /*main page breadcrumbs tweak*/ }
             <ul className="category-banner_breadcrumbs">{ location.pathname !== '/' && cat && renderBreadCrumbs() }</ul>
 
-            { targetDevice !== 'mobile' ? <div className="category-search-placeholder"></div> : null }
+            { targetDevice !== 'mobile' && <Search {...{cat}}/> }
 
             <div className="category-banner_post-images">
                 <div className="images-container" style={{ '--slide': currentPost }}>

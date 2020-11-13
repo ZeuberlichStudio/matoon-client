@@ -8,7 +8,7 @@
         padding-top: get-vw(98px);
 
         display: grid;
-        grid-template-rows: repeat(3, max-content) 1fr max-content;
+        grid-template-rows: repeat(2, max-content) get-vw(48px) 1fr max-content;
         grid-template-columns: 1fr get-vw(1240px);
         grid-column-gap: get-vw(32px);
 

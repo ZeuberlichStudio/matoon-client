@@ -1,15 +1,13 @@
 @import 'assets/scss/index.scss';
 
 #header { 
-    z-index: 20; 
+    z-index: 10; 
     transition: 200ms;
 
     &_logo, button { cursor: pointer; }
 }
 
 #header.focus { background-color: white; }
-
-#header.background { z-index: 5; }
 
 // .app-header_logo,
 // .app-header_categories,

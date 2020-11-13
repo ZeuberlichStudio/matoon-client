@@ -1,0 +1,117 @@
+@media screen and (min-width: 767.5px) and (max-width: 1023.5px) {
+    //min search start 
+
+    .search.mini {
+        max-width: t-get-vw(257px);
+    }
+
+    //min search end
+
+    //search focus start
+
+    .search.focus {
+        max-width: t-get-vw(390px);
+
+        background-color: white;
+        box-shadow: 0 0 t-get-vw(10px) rgba( $black, .1 );
+        z-index: 15;
+    }
+
+    //search focus end
+
+    .search {
+        //
+        width: t-get-vw(390px);
+        //
+        height: max-content;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        border-radius: t-get-vw(18px);
+        transition: .3s;
+        overflow: hidden;
+    }
+
+    .search-field {
+        width: calc( 100% - #{ t-get-vw(8px * 2) } );
+        max-width: t-get-vw(374px);
+        margin: t-get-vw(8px);
+
+        position: relative;
+
+        &::before {
+            width: t-get-vw(18px);
+            height: t-get-vw(18px);
+            top: t-get-vw(7px); left: t-get-vw(7px);
+
+
+            position: absolute;
+            display: block;
+
+            mask-image: url('assets/images/icon_search.svg');
+            background-color: rgba( $black, .8 );
+
+            content: '';
+        }
+
+        input {
+            width: 100%;
+            height: t-get-vw(32px);
+            padding-left: t-get-vw(32px);
+
+            background-color: rgba( $black, .1 );
+            border-radius: t-get-vw(10px);
+
+            @include proxima-bold( t-get-vw(16px), t-get-vw(32px) );
+            color: rgba( $black, .8 );
+        }
+
+        #search-reset {
+            width: t-get-vw(12px);
+            height: t-get-vw(12px);
+            top: t-get-vw(10px); right: t-get-vw(10px);
+
+            position: absolute;
+
+            mask-image: url('assets/images/icon_close.svg');
+            background-color: rgba( $black, .8 );
+            cursor: pointer;
+        }
+    }
+
+    .search-results {
+        width: 100%;
+        padding: t-get-vw(4px);
+
+        display: grid;
+        grid-auto-rows: max-content;
+        grid-row-gap: t-get-vw(8px);
+
+        h3 {
+            padding-left: t-get-vw(8px);
+            padding-bottom: t-get-vw(4px);
+            @include proxima-bold( t-get-vw(16px) );
+        }
+
+        p {
+            padding-left: t-get-vw(8px);
+            padding-right: t-get-vw(8px);
+            padding-bottom: t-get-vw(12px);
+            @include proxima-regular( t-get-vw(14px), t-get-vw(16px) );
+        }
+
+        button {
+            @include proxima-regular( t-get-vw(14px), t-get-vw(16px) );
+            text-decoration: underline;
+        }
+    }
+
+    .search-more {
+        margin: t-get-vw(8px);
+
+        @include t-button-big;
+        width: t-get-vw(200px);
+    }
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import './slider.scss';
 
-export default function Slider({ children, loop = true, time = 300, id }) {
+export default function Slider({ children, loop = true, time = 300, id, slide, buttons = true }) {
 
     const [currentSlide, setCurrentSlide] = React.useState(0);
     const [touchStartX, setTouchStartX] = React.useState(0);
@@ -33,6 +33,10 @@ export default function Slider({ children, loop = true, time = 300, id }) {
         }
     }
 
+    React.useEffect(() => {
+        goToSlide(slide);
+    }, [slide]);
+
     const containerStyle = {
         transition: animating ? `${time}ms` : null
     }
@@ -57,8 +61,8 @@ export default function Slider({ children, loop = true, time = 300, id }) {
 
     return (
         <div id={ id } className="slider" style={{ "--slide": currentSlide }}>
-            <button className="slider_prev" onClick={ () => goToSlide(currentSlide - 1) }/>
-
+            { buttons && <button className="slider_prev" onClick={ () => goToSlide(currentSlide - 1) }/> }
+            
             <div className="slider_slides-wrapper">
                 <div ref={ containerRef } className="slider_slides-container" style={containerStyle} {...listeners}>
                     { 
@@ -87,9 +91,9 @@ export default function Slider({ children, loop = true, time = 300, id }) {
                 </div>
             </div>
 
-            <button className="slider_next" onClick={ () => goToSlide(currentSlide + 1) }/>
+            { buttons && <button className="slider_next" onClick={ () => goToSlide(currentSlide + 1) }/> }
 
-            <Indicator {...{slideCount, currentSlide, goToSlide}}/>
+            { buttons && <Indicator {...{slideCount, currentSlide, goToSlide}}/> }
         </div>
     );
 }

@@ -1,0 +1,71 @@
+@media screen and (min-width: 1024px) {
+    .banner {
+        width: 100vw;
+        height: get-vw(972px);
+        padding: get-vw(98px) get-vw(64px) get-vw(34px) get-vw(64px);
+
+        display: grid;
+        grid-template-areas: 
+        'title slider'
+        'breadcrumbs slider'
+        'search slider'
+        'post slider'
+        'preview slider';
+        grid-template-columns: get-vw(520px) 1fr;
+        grid-template-rows: repeat(2, max-content) get-vw(58px) 1fr max-content;
+        grid-column-gap: get-vw(36px);
+    }
+
+    .banner-title {
+        grid-area: title;
+
+        @include proxima-bold( get-vw(48px) );
+    }
+
+    .breadcrumbs,
+    .banner-search-phrase {
+        grid-area: breadcrumbs;
+    }
+
+    .banner-search-wrapper {
+        grid-area: search;
+        margin-top: get-vw(34px);
+        margin-left: get-vw(-8px);
+    }
+
+    .banner-post {
+        grid-area: post;
+        margin-top: get-vw(76px);
+    }
+
+    .banner-posts-preview {
+        grid-area: preview;
+        margin-bottom: get-vw(38px);
+    }
+
+    #banner-slider {
+        grid-area: slider;
+
+        width: get-vw(1240px);
+        --slideWidth: #{get-vw(1240px)};
+        --slideGap: #{get-vw(0px)};
+
+        .slider_slides-wrapper {
+            border-radius: get-vw(28px);
+        }
+
+        .slide {
+            height: get-vw(840px);
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center;
+
+            border-radius: get-vw(28px);
+        }
+    }
+}

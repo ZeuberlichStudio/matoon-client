@@ -1,11 +1,14 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleHeaderOverlay } from 'app/ui';
 import { createPortal } from 'react-dom';
 import { useLocation, useHistory } from 'react-router-dom';
 
 import './index.scss';
 
-export function Modal({ children: child, closeCallback, ...props }, ref) {
-    
+export function Modal({ children: child, closeCallback, navFocus, ...props }, ref) {
+    const dispatch = useDispatch();
+
     const location = useLocation();
     const contentRef = React.useRef();
 
@@ -14,6 +17,7 @@ export function Modal({ children: child, closeCallback, ...props }, ref) {
 
     function close() {        
         setVisible(false);
+        navFocus && dispatch(toggleHeaderOverlay(false));
 
         setTimeout(() => {
             if ( closeCallback ) {
@@ -45,6 +49,12 @@ export function Modal({ children: child, closeCallback, ...props }, ref) {
             document.body.ariaHidden = null;
         };
     }, []);
+
+    const headerOverlay = useSelector( state => state.ui.headerOverlay );
+
+    React.useEffect(() => {
+        if ( navFocus && visible && !headerOverlay ) dispatch(toggleHeaderOverlay(true));
+    }, [visible, headerOverlay]);
 
     const containerStyles = props.containerStyles || {
         initial: {

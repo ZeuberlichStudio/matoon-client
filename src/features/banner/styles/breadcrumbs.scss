@@ -1,0 +1,30 @@
+@import 'assets/scss/index.scss';
+
+//This one is very different from rest of the file structure, 
+//i've decided to simplify at least something to make it feel 
+//a little bit more 'human'
+
+.breadcrumbs {
+    color: rgba( $black, .4 );
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@media screen and (min-width: 1025px) {
+    .breadcrumbs {
+        @include proxima-semibold( get-vw(18px) );
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023.5px) {
+    .breadcrumbs {
+        @include proxima-semibold( t-get-vw(16px) );
+    }
+}
+
+@media screen and (max-width: 767.5px) {
+    .breadcrumbs {
+        @include proxima-semibold( m-get-vw(14px) );
+    }
+}

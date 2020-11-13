@@ -1,16 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleHeaderOverlay, toggleSearch } from 'app/ui';
 import './index.scss';
+
+import Search from 'features/search';
 
 import LogoPh from 'assets/images/logo_ph.svg';
 
 export default function Header({ toggleMenu, focus }) {
 
+    const dispatch = useDispatch();
+
     const targetDevice = useSelector( state => state.device.target );
+    const {
+        headerOverlay,
+        search
+    } = useSelector( state => state.ui );
+
+    function focusCallback() {
+        dispatch(toggleHeaderOverlay(!headerOverlay));
+    }
 
     return (
-        <header id="header" className={`app-header ${ focus ? `focus ${ focus }` : '' }`}>
+        <header id="header" className={`app-header`} style={{ zIndex: headerOverlay ? 20 : 10 }}>
             <div className="app-header_logo">
                 <Link to="/"><img src={ LogoPh } alt=""/></Link>
             </div>
@@ -19,7 +32,15 @@ export default function Header({ toggleMenu, focus }) {
                 <span>Каталог</span>
             </button>
 
-            <div className="app-header_search"><span>Поиск</span></div>
+                { 
+                    targetDevice === 'mobile' ?  
+                    <button className="app-header_search" onClick={ () => dispatch(toggleSearch(!search)) }>
+                        <span></span>
+                    </button> :
+                    <div className="app-header_search">
+                        <Search {...{ mini: true, focusCallback }}/>
+                    </div>
+                }
 
             <button className="app-header_info"><span>О нас</span></button>
 

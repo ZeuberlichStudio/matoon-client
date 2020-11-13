@@ -1,0 +1,93 @@
+@media screen and (min-width: 767.5px) and (max-width: 1023.5px) {
+    .search-item {
+        width: 100%;
+        max-width: t-get-vw(390px);
+        height: max-content;
+        padding: t-get-vw(4px);
+
+        display: grid;
+        grid-template-areas: 
+        'image name'
+        'image sku'
+        'image colors'
+        'image price';
+        grid-template-columns: t-get-vw(100px) 1fr max-content;
+        grid-template-rows: 1fr;
+        grid-auto-rows: max-content;
+        grid-column-gap: t-get-vw(8px);
+
+        background-color: white;
+        border-radius: t-get-vw(14px);
+
+        &_thumbnail {
+            grid-area: image;
+            height: t-get-vw(132px);
+
+            img {
+                width: 100%;
+                height: t-get-vw(132px);
+                object-fit: cover;
+                object-position: center;
+
+                border-radius: t-get-vw(10px);
+                box-shadow: 0 0 t-get-vw(10px) rgba( $black, .1 );
+            }
+        }
+
+        &_name {
+            grid-area: name;
+
+            @include proxima-bold( t-get-vw(16px), t-get-vw(18px) );
+        }
+
+        &_sku {
+            grid-area: sku;
+
+            margin-top: t-get-vw(2px);
+            @include proxima-bold( t-get-vw(14px), t-get-vw(18px) );
+            opacity: .4;
+        }
+
+        &_colors {
+            grid-area: colors;
+
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: t-get-vw(30px);
+            grid-template-rows: max-content t-get-vw(30px);
+            grid-gap: t-get-vw(4px) t-get-vw(8px);
+
+            span { @include proxima-bold( t-get-vw(16px), t-get-vw(18px) ); }
+
+            li { 
+                grid-row: 2/3; 
+                border-radius: t-get-vw(10px);
+            }
+        }
+
+        &_price {
+            grid-area: price;
+
+            margin-top: t-get-vw(4px);
+            @include proxima-semibold( t-get-vw(18px), t-get-vw(20px) );
+            opacity: .6;
+        }
+    }
+
+    .search-item:hover {
+        background-color: rgba( $black, .05 );
+    }
+
+    .search-item:not(:last-child)::after {
+        height: t-get-vw(1px);
+        left: t-get-vw(10px);
+        right: t-get-vw(10px);
+        bottom: t-get-vw(-4.5px);
+
+        position: absolute;
+
+        background-color: rgba( $black, .05 );
+
+        content: '';
+    }
+}

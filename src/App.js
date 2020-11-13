@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import loadable from '@loadable/component';
 import routesConfig from 'app/routes';
 
-import { listenToResize, setPlatform } from './app/device';
+import { listenToResize, setPlatform } from 'app/device';
+import { toggleMenu, toggleSearch } from 'app/ui';
 
 import './style.scss';
 
@@ -21,6 +22,7 @@ const {
     MainPage,
     PostPage,
     CategoryPage,
+    SearchPage,
     ProductPage,
     DevPage,
     NotFoundPage
@@ -29,6 +31,7 @@ const {
 import NewModal from 'features/new-modal';
 import Header from 'features/header';
 import Categories from 'features/categories';
+import Search from 'features/search';
 
 function App() {
     const listener = useSelector( state => state.device.listener );
@@ -44,9 +47,10 @@ function App() {
         }
     }, [listener]);
 
-    const [navFocus, setNavFocus] = React.useState(false);
+    //ui state and side effects
 
-    const [menu, setMenu] = React.useState(false);
+    const uiState = useSelector( state => state.ui );
+
     const modalRef = React.useRef();
 
     const menuContentStyles = {
@@ -58,30 +62,35 @@ function App() {
       }
     }
     
-    function toggleMenu() {
-      if ( !menu ) { 
-        setMenu(true);
+    function toggleMenuCallback() {
+      if ( !uiState.menu ) { 
+        dispatch(toggleMenu(true));
       } else {
         modalRef.current.style.backgroundColor = 'rgba(0,0,0,0)';
         modalRef.current.children[0].style.transform = 'translateX(-100%)';
-        setTimeout(() => setMenu(false), 200);
+        setTimeout(() => dispatch(toggleMenu(false)), 200);
       }
     }
 
-    React.useEffect(() => {
-      if ( menu ) setNavFocus('menu');
-      else if ( background ) setNavFocus('background');
-      else setNavFocus(null);
-    }, [menu, background]);
+    function toggleSearchCallback() {
+        if ( !uiState.search ) { 
+          dispatch(toggleSearch(true));
+        } else {
+        //modalRef.current.style.backgroundColor = 'rgba(0,0,0,0)';
+        //modalRef.current.children[0].style.transform = 'translateX(-100%)';
+          setTimeout(() => dispatch(toggleSearch(false)), 200);
+        }
+    }
 
     return (
         <React.Fragment>
-            <Header {...{toggleMenu, focus: navFocus}}/>
+            <Header {...{toggleMenu: toggleMenuCallback}}/>
 
             <Switch location={ background || location }>
                 <Route exact={ true } path="/" component={ MainPage }/>
                 <Route path="/feed/post=:slug" component={ PostPage }/>
                 <Route path="/catalog/category=:slug" component={ CategoryPage }/>
+                <Route path="/catalog/search=:search" component={ SearchPage }/>
                 <Route path="/catalog/product=:slug" component={ ProductPage }/>
                 <Route path="/dev" component={ DevPage }/>
                 <Route path="*" component={ NotFoundPage }/>
@@ -103,11 +112,18 @@ function App() {
                 </Switch>
             }
             { 
-                menu && 
-                <NewModal ref={modalRef} contentStyles={menuContentStyles} closeCallback={toggleMenu}> 
+                uiState.menu && 
+                <NewModal ref={modalRef} contentStyles={menuContentStyles} closeCallback={toggleMenuCallback} navFocus={ true }> 
                     <Categories/>
                 </NewModal>
             }
+            {
+                uiState.search &&
+                <NewModal {...{ ref: modalRef, navFocus: true, closeCallback: toggleSearchCallback }}>
+                    <div id="search-wrapper" className="search-wrapper"><Search/></div>
+                </NewModal>
+            }
+            <div className={`${ uiState.overlay ? 'visible' : '' }`} id="overlay"/>
         </React.Fragment>
     );
 };
