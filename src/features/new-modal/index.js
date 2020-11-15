@@ -1,60 +1,53 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { toggleHeaderOverlay } from 'app/ui';
 import { createPortal } from 'react-dom';
 import { useLocation, useHistory } from 'react-router-dom';
 
 import './index.scss';
 
-export function Modal({ children: child, closeCallback, navFocus, ...props }, ref) {
-    const dispatch = useDispatch();
-
-    const location = useLocation();
-    const contentRef = React.useRef();
-
-    const history = useHistory();
+export function Modal({ 
+    children: child, 
+    closeCallback, 
+    navFocus,
+    transitionLength = 200, 
+    ...props 
+}, ref) {
     const [visible, setVisible] = React.useState(false);
 
-    function close() {        
-        setVisible(false);
-        navFocus && dispatch(toggleHeaderOverlay(false));
+    const location = useLocation();
+    const history = useHistory();
+    const contentRef = React.useRef();
 
-        setTimeout(() => {
-            if ( closeCallback ) {
-                closeCallback();
-            } else {
-                const { backgroundLocation } = location.state && location.state;
-                history.push( backgroundLocation );
-            }
-        }, 200);
+    function outerClickHandler(e) {
+        if ( !contentRef.current ) console.log('content ref is not defined!');
+        else {
+            const closest = e.target.closest(`#${contentRef.current.id}`);
+            ( !closest || closest === e.target ) && close();
+        }
     }
 
-    React.useEffect(() => {
+    function init() {
         setVisible(true);
-
-        function outerClickHandler(e) {
-            if ( !contentRef.current ) return console.log('content ref is not defined!');
-
-            const closest = e.target.closest(`#${contentRef.current.id}`);
-            if ( !closest || closest === e.target ) close();
-        }
-
         ref.current.addEventListener('click', outerClickHandler);
         document.body.style.overflowY = 'hidden';
         document.body.ariaHidden = 'true';
+    }
 
-        return function cleanUp() {
-            ref.current.removeEventListener('click', outerClickHandler);
-            document.body.style.overflowY = null;
-            document.body.ariaHidden = null;
-        };
-    }, []);
+    function close() {        
+        setVisible(false);
+        setTimeout(() => {
+            const { state } = location;
 
-    const headerOverlay = useSelector( state => state.ui.headerOverlay );
+            if ( closeCallback ) closeCallback();
+            else if ( state && state.backgroundLocation ) {
+                history.push( state.backgroundLocation );
+            }
+        }, transitionLength);
+        ref.current.removeEventListener('click', outerClickHandler);
+        document.body.style.overflowY = '';
+        document.body.ariaHidden = '';
+    };
 
-    React.useEffect(() => {
-        if ( navFocus && visible && !headerOverlay ) dispatch(toggleHeaderOverlay(true));
-    }, [visible, headerOverlay]);
+    React.useEffect(() => { init(); }, []);
 
     const containerStyles = props.containerStyles || {
         initial: {
@@ -75,23 +68,25 @@ export function Modal({ children: child, closeCallback, navFocus, ...props }, re
         }
     };
 
-    React.useEffect(() => {
-        visible && close();
-    }, [location]);
-
     return createPortal (
         <div ref={ ref } style={ containerStyles[visible ? 'final' : 'initial'] } id="modal">
             <div style={ contentStyles[visible ? 'final' : 'initial'] } id="modal-content">
-                { React.cloneElement( child, { ref: contentRef, closeModal: close, closeButton: <CloseButton {...{ closeModal: close }}/> } ) }
+                { 
+                    React.cloneElement( child, { 
+                        ref: contentRef, 
+                        closeModal: close, 
+                        closeButton: <CloseButton {...{close}}/> 
+                    }) 
+                }
             </div>
         </div>,
         document.body
     );
 }
 
-function CloseButton({ closeModal }) {
+function CloseButton({ close }) {
     return (
-        <button onClick={ closeModal } id="modal-close">
+        <button onClick={ close } id="modal-close">
             <span></span>
         </button>
     );

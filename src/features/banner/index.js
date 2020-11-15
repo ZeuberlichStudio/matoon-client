@@ -22,7 +22,7 @@ function Banner({ pageTitle = 'Matoon Store', ancestors, bannerPosts: posts }) {
 
     React.useEffect(() => {
         const nextPost = currentPost + 1 < 3 ? currentPost + 1 : 0;
-        const interval = setInterval(() => setCurrentPost(nextPost), 2000 );
+        const interval = setInterval(() => setCurrentPost(nextPost), 5000 );
 
         return function cleanUp() {
             clearInterval(interval);
@@ -32,7 +32,7 @@ function Banner({ pageTitle = 'Matoon Store', ancestors, bannerPosts: posts }) {
     const params = useParams();
     const targetDevice = useSelector( state => state.device.target );
 
-    return(
+    return (
         <div className="banner" id="banner">
             <div className="banner-title">{ pageTitle }</div>
             { params.search && <span className="banner-search-phrase">{ decodeURI(params.search) }</span>  }

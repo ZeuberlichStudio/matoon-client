@@ -75,7 +75,6 @@ function Search({ mini, focusCallback, cat }) {
                 setOpen(false);
                 setString('');
                 dispatch(toggleOverlay(false));
-                focusCallback && focusCallback();
             }
         }
 

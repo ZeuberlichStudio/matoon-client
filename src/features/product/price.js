@@ -2,9 +2,10 @@ import React from 'react';
 
 import './styles/price.scss';
 
-export default function Price({ stock, price }) {
+export default function Price({ stock }) {
 
     const [qty, setQty] = React.useState(1);
+    const [price, setPrice] = React.useState({});
 
     function changeHandler(e) {
         const { value } = e.target;
@@ -17,6 +18,40 @@ export default function Price({ stock, price }) {
         else setQty( value ? value : 1 );
     }
 
+    const prices = [
+        {
+            minQty: 0, 
+            maxQty: 199,
+            amount: 900
+        },
+        {
+            minQty: 200, 
+            maxQty: 499,
+            amount: 750
+        },
+        {
+            minQty: 500, 
+            amount: 600
+        }
+    ];
+
+    function findPrice() {
+        const price = prices.find( ({ minQty, maxQty }) => {
+            if ( maxQty ) {
+                return qty >= minQty && qty <= maxQty;
+            } else {
+                return true;
+            }
+        });
+
+        setPrice(price);
+    }
+
+    React.useEffect(() => {
+        if ( qty > price.minQty && qty < price.maxQty ) return;
+        else findPrice();
+    }, [qty]);
+
     return (
         <div className="product-price">
             <div className="product-price_qty">
@@ -24,11 +59,11 @@ export default function Price({ stock, price }) {
             </div>
 
             <div className="product-price_total">
-                <span>{ `${ price * qty }₽` }</span>
+                <span>{ `${ price.amount * qty }₽` }</span>
             </div>
 
             <div className="product-price_single">
-                <span>{ `${ price }₽/шт` }</span>
+                <span>{ `${ price.amount }₽/шт` }</span>
             </div>
         </div>
     );

@@ -60,6 +60,8 @@ export function ProductPage({ closeButton }, ref) {
 
     //Destructuring data
     const {
+        _id: id,
+        slug,
         name,
         variants,
         attributes,
@@ -85,7 +87,7 @@ export function ProductPage({ closeButton }, ref) {
 
                 <div className="product-page_product-wrapper">
                     <div className="product-page_product">
-                        <Product.Header {...{ name, closeButton }}/>
+                        <Product.Header {...{ name, closeButton, slug, id }}/>
                         <Product.Gallery images={ variants[variant].images }/>
 
                         <div className="product-options-wrapper">

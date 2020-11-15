@@ -3,26 +3,32 @@ import { isBoolean } from 'lodash';
 
 const initialState = {
     overlay: false,
-    HeaderOverlay: false,
+    headerOverlay: false,
     menu: false,
-    search: false
+    search: false,
+    newModalAllowed: true
 }
 
 const uiSlice = createSlice({
     name: 'ui',
     initialState,
     reducers: {
-        toggleOverlay: ( state, action ) =>  {
-            state.overlay = isBoolean(action.payload) ? action.payload : state.overlay;
+        toggleOverlay: ( state, {payload} ) =>  {
+            state.overlay = isBoolean(payload) ? payload : state.overlay;
         },
-        toggleHeaderOverlay: ( state, action ) => {
-            state.headerOverlay = isBoolean(action.payload) ? action.payload : state.headerOverlay;
+        toggleMenu: ( state, {payload} ) => {
+            state.menu = isBoolean(payload) ? payload : state.menu;
+            state.headerOverlay = payload;
         },
-        toggleMenu: ( state, action ) => {
-            state.menu = isBoolean(action.payload) ? action.payload : state.menu;
+        toggleHeaderLayer: ( state, {payload} ) => {
+            state.headerOverlay = payload;
         },
-        toggleSearch: ( state, action ) => {
-            state.search = isBoolean(action.payload) ? action.payload : state.search;
+        toggleSearch: ( state, {payload} ) => {
+            state.search = isBoolean(payload) ? payload : state.search;
+            state.headerOverlay = payload;
+        },
+        setModalAllowed: ( state, {payload} ) => {
+            state.newModalAllowed = payload;
         }
     }
 })
@@ -30,7 +36,8 @@ const uiSlice = createSlice({
 export default uiSlice.reducer;
 export const {
     toggleOverlay,
-    toggleHeaderOverlay,
     toggleMenu,
-    toggleSearch
+    toggleSearch,
+    toggleHeaderLayer,
+    setModalAllowed
 } = uiSlice.actions;

@@ -1,4 +1,5 @@
 import ProductGallery from './gallery';
+import ProductShare from './share';
 import ProductHeader from './header';
 import ProductOptions from './options';
 import ProductPrice from './price';
@@ -8,6 +9,7 @@ import ProductSuggested from './suggested';
 
 const Product = {
     Gallery: ProductGallery,
+    Share: ProductShare,
     Header: ProductHeader,
     Options: ProductOptions,
     Price: ProductPrice,
@@ -20,6 +22,7 @@ export default Product;
 
 export {
     ProductGallery,
+    ProductShare,
     ProductHeader,
     ProductOptions,
     ProductPrice,

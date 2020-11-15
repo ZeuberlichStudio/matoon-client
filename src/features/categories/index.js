@@ -6,7 +6,7 @@ import './styles/categories.scss';
 
 const { API_URL } = process.env;
 
-export function Categories({ closeButton, modalRef }, ref) {
+export function Categories({ closeModal, closeButton, modalRef }, ref) {
     const [cats, setCats] = React.useState([]);
     const [status, setStatus] = React.useState('idle');
     const [error, setError] = React.useState(null);
@@ -73,7 +73,7 @@ export function Categories({ closeButton, modalRef }, ref) {
                             } 
                             dimension={ catDimension } 
                             goBack={ (targetDevice === 'mobile' && catDimension > 0) && goBack }
-                            {...{selection, select, closeButton: targetDevice === 'mobile' && closeButton}}
+                            {...{selection, select, closeButton: targetDevice === 'mobile' && closeButton, closeModal}}
                         />
                     );
                 })

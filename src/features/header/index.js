@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleHeaderOverlay, toggleSearch } from 'app/ui';
+import { toggleHeaderLayer, toggleSearch, toggleMenu } from 'app/ui';
 import './index.scss';
 
 import Search from 'features/search';
@@ -11,19 +11,19 @@ import LogoPh from 'assets/images/logo_ph.svg';
 export default function Header({ toggleMenu, focus }) {
 
     const dispatch = useDispatch();
-
     const targetDevice = useSelector( state => state.device.target );
     const {
         headerOverlay,
         search
     } = useSelector( state => state.ui );
+    const ref = React.useRef();
 
     function focusCallback() {
-        dispatch(toggleHeaderOverlay(!headerOverlay));
+        dispatch(toggleHeaderLayer(true));
     }
 
     return (
-        <header id="header" className={`app-header`} style={{ zIndex: headerOverlay ? 20 : 10 }}>
+        <header ref={ref} id="header" className={`app-header`} style={{ zIndex: headerOverlay ? 20 : 10 }}>
             <div className="app-header_logo">
                 <Link to="/"><img src={ LogoPh } alt=""/></Link>
             </div>

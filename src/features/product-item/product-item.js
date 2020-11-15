@@ -3,7 +3,14 @@ import { Link, useRouteMatch, useLocation } from 'react-router-dom';
 
 import { Tabs, Tab } from 'features/tabs/tabs';
 import { ResizableText, ButtonsBlock } from 'features/resizable-containers/containers';
-import { ProductGallery, ProductOptions, ProductDetails, ProductPrice, ProductAddToCart } from 'features/product';
+import { 
+    ProductGallery, 
+    ProductShare,
+    ProductOptions, 
+    ProductDetails, 
+    ProductPrice, 
+    ProductAddToCart 
+} from 'features/product';
 
 import './product-item.scss';
 
@@ -45,7 +52,7 @@ export function ProductItemSuggested({data, i}) {
 export function ProductItemMini({data, i}) {
 
     const {
-        id,
+        _id: id,
         slug,
         variants,
         name,
@@ -62,21 +69,32 @@ export function ProductItemMini({data, i}) {
         state: { backgroundLocation }
     }
 
+    const onSale = false;
+    const salePrice = 590;
+    const discount = '-' + parseInt((price - salePrice) / price * 100) + '%' ;
+
     return (
         <div className={`product-item product-item-${ i } product-item-mini`} key={ i }>
+            <div className="product-item-mini_discount">
+                <span>{ discount }</span>
+            </div>
+
             <div className="product-item-mini_image">
                 <img src={ API_URL + image } alt={ name }/>
             </div>
 
-            <div className="product-item-mini_share">
-                <div className="product-item-mini_share_vk"></div>
-                <div className="product-item-mini_share_fb"></div>
-                <div className="product-item-mini_share_fav"></div>
-            </div>
+            <ProductShare {...{ slug, id }}/>
 
             <div className="product-item-mini_info">
                 <div className="product-item-mini_info_name-and-price">
-                    <span>{ price + 'Р' }</span>
+                    {
+                        onSale ?
+                        <span>
+                            <span className='discount-price'>{ salePrice + '₽' }</span>
+                            <span className="old-price">{`Было ${price} ₽`}</span>
+                        </span> :
+                        <span>{ price + '₽' }</span>
+                    }
                     <h2>{ name }</h2>
                 </div>
                 <div className="product-item-mini_info_desc">{ shortDescription }</div>
@@ -92,7 +110,8 @@ export function ProductItemMini({data, i}) {
 export function ProductItemFull({data, i}) {
 
     const {
-        id,
+        _id: id,
+        slug,
         variants,
         name,
         sku,
@@ -146,11 +165,7 @@ export function ProductItemFull({data, i}) {
 
             <ProductAddToCart />
 
-            <div className="product-share">
-                <div className="product-share_vk"></div>
-                <div className="product-share_fb"></div>
-                <div className="product-share_fav"></div>
-            </div>
+            <ProductShare {...{ slug, id }}/>
         </div>
     );
 }

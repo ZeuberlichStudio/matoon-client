@@ -1,0 +1,67 @@
+@import 'assets/scss/index.scss';
+
+.product-share {
+    width: max-content;
+
+    display: grid;
+    grid-auto-flow: column;
+    
+    background-color: white;
+
+    &_vk,
+    &_fb,
+    &_fav {
+        background-color: rgba($black, .25);
+        cursor: pointer;
+    }
+
+    &_vk { mask-image: url('assets/images/icon_vk.svg'); }
+    &_fb { mask-image: url('assets/images/icon_fb.svg'); }
+    &_fav { mask-image: url('assets/images/icon_fav.svg'); }
+
+    &_fav:hover{
+        background-color: rgba( #F8512A, .6 );
+    }
+    &_fav.marked {
+        background-color: #F8512A;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .product-share {
+        width: get-vw(20px * 3 + 8px * 2);
+        height: get-vw(34px);
+        padding: 0 get-vw(8px);
+
+        grid-auto-columns: get-vw(20px);
+        
+        box-shadow: 0 0 get-vw(10px) rgba($black, .1);
+        border-radius: get-vw(10px);
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023.5px) {
+    .product-share {
+        width: t-get-vw(20px * 3 + 6px * 2);
+        height: t-get-vw(28px);
+        padding: 0 t-get-vw(6px);
+
+        grid-auto-columns: t-get-vw(20px);
+            
+        box-shadow: 0 0 t-get-vw(10px) rgba($black, .1);
+        border-radius: t-get-vw(8px);
+    }
+}
+
+@media screen and (max-width: 767.5px) {
+    .product-share {
+        width: m-get-vw(18px * 3 + 6px * 2);
+        height: m-get-vw(26px);
+        padding: 0 m-get-vw(6px);
+
+        grid-auto-columns: m-get-vw(18px);
+            
+        box-shadow: 0 0 m-get-vw(10px) rgba($black, .1);
+        border-radius: m-get-vw(8px);
+    }
+}

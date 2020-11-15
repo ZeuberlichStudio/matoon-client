@@ -34,7 +34,7 @@ export default function Slider({ children, loop = true, time = 300, id, slide, b
     }
 
     React.useEffect(() => {
-        goToSlide(slide);
+        if ( slide ) goToSlide(slide);
     }, [slide]);
 
     const containerStyle = {

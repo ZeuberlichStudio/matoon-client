@@ -10,7 +10,8 @@ export default function CategoriesBlock({
     selection, 
     select, 
     goBack, 
-    closeButton
+    closeButton,
+    closeModal
 }) {
 
     return (
@@ -33,14 +34,16 @@ export default function CategoriesBlock({
                                 <span>{ cat.name }</span>
                             </li> :
                             <li className={i === selection[dimension + 1] ? 'active' : ''}>
-                                <Link to={`/catalog/category=${ cat.slug }`}><span>{ cat.name }</span></Link>
+                                <Link to={`/catalog/category=${ cat.slug }`} onClick={ closeModal }>
+                                    <span>{ cat.name }</span>
+                                </Link>
                             </li>
                         ) 
                     }
                 </ul>
                     
                 <div className="categories-block_link">
-                    <Link to={`/catalog/category=${ slug || "all" }`}>
+                    <Link to={`/catalog/category=${ slug || "all" }`} onClick={ closeModal }>
                         <span>{ dimension > 0 ? "Все товары в категории" : "Все товары в каталоге" }</span>
                     </Link>
                 </div>

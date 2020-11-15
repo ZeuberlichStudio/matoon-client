@@ -17,31 +17,7 @@
             @include proxima-bold(get-vw(22px));
         }
 
-        &_share {
-            width: max-content;
-            height: get-vw(34px);
-            padding: 0 get-vw(8px);
-            margin: get-vw(7px);
-
-            display: grid;
-            grid-auto-flow: column;
-            grid-auto-columns: get-vw(20px);
-            
-            background-color: white;
-            box-shadow: 0 0 get-vw(10px) rgba($black, .1);
-            border-radius: get-vw(10px);
-        
-            &_vk,
-            &_fb,
-            &_fav {
-                background-color: rgba($black, .25);
-                cursor: pointer;
-            }
-        
-            &_vk { mask-image: url('assets/images/icon_vk.svg'); }
-            &_fb { mask-image: url('assets/images/icon_fb.svg'); }
-            &_fav { mask-image: url('assets/images/icon_fav.svg'); }
-        }
+        .product-share { margin: get-vw(7px); }
 
         #modal-close {
             margin-top: get-vw(7px);

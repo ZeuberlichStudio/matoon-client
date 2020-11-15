@@ -84,7 +84,7 @@ function App() {
 
     return (
         <React.Fragment>
-            <Header {...{toggleMenu: toggleMenuCallback, toggleSearch: toggleSearchCallback}}/>
+            <Header {...{toggleMenu: toggleMenuCallback}}/>
 
             <Switch location={ background || location }>
                 <Route exact={ true } path="/" component={ MainPage }/>
