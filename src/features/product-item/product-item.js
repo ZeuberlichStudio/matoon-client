@@ -121,7 +121,9 @@ export function ProductItemFull({data, i}) {
         description,
         specs,
         attributes,
-        price,
+        prices,
+        onSale,
+        salePrices,
         meta
     } = data;
 
@@ -164,7 +166,7 @@ export function ProductItemFull({data, i}) {
 
             <ProductDetails {...{ description, specs, sku, stock: meta.stock }}/>
 
-            <ProductPrice {...{prices}}/>
+            <ProductPrice prices={ !onSale ? prices : salePrices }/>
 
             <ProductAddToCart />
 
