@@ -2,7 +2,7 @@ import React from 'react';
 
 import './styles/price.scss';
 
-export default function Price({ stock }) {
+export default function Price({ stock, prices, salePrices }) {
 
     const [qty, setQty] = React.useState(1);
     const [price, setPrice] = React.useState({});
@@ -17,23 +17,6 @@ export default function Price({ stock }) {
         }
         else setQty( value ? value : 1 );
     }
-
-    const prices = [
-        {
-            minQty: 0, 
-            maxQty: 199,
-            amount: 900
-        },
-        {
-            minQty: 200, 
-            maxQty: 499,
-            amount: 750
-        },
-        {
-            minQty: 500, 
-            amount: 600
-        }
-    ];
 
     function findPrice() {
         const price = prices.find( ({ minQty, maxQty }) => {

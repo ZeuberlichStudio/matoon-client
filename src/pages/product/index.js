@@ -69,7 +69,9 @@ export function ProductPage({ closeButton }, ref) {
         specs,
         sku,
         meta,
-        price,
+        prices,
+        onSale,
+        salePrices
     } = item;
 
 
@@ -100,11 +102,11 @@ export function ProductPage({ closeButton }, ref) {
                         {
                             targetDevice === 'mobile' ?
                             <div className="product-purchase-wrapper">
-                                <Product.Price price={ price }/>
+                                <Product.Price prices={ !onSale ? prices : salePrices }/>
                                 <Product.AddToCart/>
                             </div> :
                             <>
-                                <Product.Price price={ price }/>
+                                <Product.Price prices={ !onSale ? prices : salePrices }/>
                                 <Product.AddToCart/>
                             </>                            
                         }

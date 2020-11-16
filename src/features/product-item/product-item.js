@@ -57,7 +57,9 @@ export function ProductItemMini({data, i}) {
         variants,
         name,
         shortDescription,
-        price
+        price,
+        salePrice,
+        onSale
     } = data;
 
     const image = variants[0].images[0];
@@ -69,15 +71,16 @@ export function ProductItemMini({data, i}) {
         state: { backgroundLocation }
     }
 
-    const onSale = false;
-    const salePrice = 590;
     const discount = '-' + parseInt((price - salePrice) / price * 100) + '%' ;
 
     return (
         <div className={`product-item product-item-${ i } product-item-mini`} key={ i }>
-            <div className="product-item-mini_discount">
-                <span>{ discount }</span>
-            </div>
+            {
+                onSale &&
+                <div className="product-item-mini_discount">
+                    <span>{ discount }</span>
+                </div>
+            }
 
             <div className="product-item-mini_image">
                 <img src={ API_URL + image } alt={ name }/>
@@ -161,7 +164,7 @@ export function ProductItemFull({data, i}) {
 
             <ProductDetails {...{ description, specs, sku, stock: meta.stock }}/>
 
-            <ProductPrice {...{price}}/>
+            <ProductPrice {...{prices}}/>
 
             <ProductAddToCart />
 
