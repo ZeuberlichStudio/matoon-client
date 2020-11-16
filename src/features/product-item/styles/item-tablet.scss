@@ -124,6 +124,34 @@
         transform: translate3d(0,0,0);
         overflow: hidden;
 
+        &_discount {
+            width: 100%;
+            height: 100%;
+            left: 0; top: 0;
+
+            position: absolute;
+
+            border-radius: t-get-vw(22px);
+            border: t-get-vw(2px) solid #FF6666;
+            z-index: 2;
+            pointer-events: none;
+
+            span {
+                width: t-get-vw(60px);
+                height: t-get-vw(32px);
+                margin-left: t-get-vw(-2px);
+                margin-top: t-get-vw(-2px);
+
+                display: block;
+
+                @include proxima-bold( t-get-vw(16px), t-get-vw(32px) );
+                text-align: center;
+                background-color: #FF6666;
+                color: white;
+                border-radius: t-get-vw(22px) 0 t-get-vw(28px) 0;
+            }
+        }
+
         &_image {
             left: 0; top: 0;
             width: 100%;
@@ -156,6 +184,19 @@
                     float: right;
                     color: rgba($black, .5);
                 }
+
+                
+                .discount-price { 
+                    position: relative;
+                    color: #FF6666;
+                }
+
+                .old-price {
+                    width: max-content;
+                    right: 0; bottom: t-get-vw(-10px);
+                    position: absolute;
+                    @include proxima-bold(t-get-vw(12px));
+                }
             }
         
             &_desc {
@@ -175,6 +216,12 @@
                 overflow: hidden;
                 transition: max-height 0.3s;
             }
+
+            .old-price { 
+                opacity: 0; 
+                transition: 0.3s;
+            }
+
             /*folded state end*/
 
             //animation
@@ -215,6 +262,8 @@
                     height: auto;
                     overflow: unset;
                 }
+
+                .old-price { opacity: 1; }
             }
         }
         /*unfolded state end*/
