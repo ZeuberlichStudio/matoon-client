@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleHeaderLayer, toggleSearch, toggleMenu } from 'app/ui';
+import { toggleHeaderLayer, toggleSearch } from 'app/ui';
 import './index.scss';
 
 import Search from 'features/search';
 
 import LogoPh from 'assets/images/logo_ph.svg';
 
-export default function Header({ toggleMenu, focus }) {
+function Header({ toggleMenu, toggleFavourite }) {
 
     const dispatch = useDispatch();
     const targetDevice = useSelector( state => state.device.target );
@@ -44,7 +44,7 @@ export default function Header({ toggleMenu, focus }) {
 
             <button className="app-header_info"><span>О нас</span></button>
 
-            <button className="app-header_favourite"><span></span></button>
+            <button onClick={ toggleFavourite } className="app-header_favourite"><span></span></button>
             <button className="app-header_cart"><span></span></button>
             <button className="app-header_account"><span></span></button>
 
@@ -52,3 +52,5 @@ export default function Header({ toggleMenu, focus }) {
         </header>
     );
 }
+
+export default Header;

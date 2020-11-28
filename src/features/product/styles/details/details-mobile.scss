@@ -15,7 +15,7 @@
         p{ @include proxima-regular( m-get-vw(14px), m-get-vw(16px) ); }
 
         ul {
-            max-width: m-get-vw(254px);
+            max-width: 100%;
 
             display: grid;
             grid-template-columns: 1fr;

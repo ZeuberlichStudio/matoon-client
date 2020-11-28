@@ -1,0 +1,103 @@
+@media screen and (min-width: 768px) and (max-width: 1023.5px) {
+    .favourite-list-item {
+        width: t-get-vw(270px);
+        height: t-get-vw(180px);
+
+        display: grid;
+        grid-template-areas: 
+        'image name name'
+        'image sku sku'
+        'image price price'
+        'more more share';
+        grid-template-columns: max-content 1fr  max-content;
+        grid-template-rows: max-content 1fr repeat(2, max-content);
+        grid-column-gap: t-get-vw(8px);
+
+        &_image {
+            grid-area: image;
+
+            width: t-get-vw(102px);
+            height: t-get-vw(136px);
+
+            background-color: rgba( $black, .1 );
+            border-radius: t-get-vw(10px);
+            box-shadow: 0 0 t-get-vw(10px) rgba( $black, .1 );
+
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+        }
+
+        h2 {
+            grid-area: name;
+            height: t-get-vw(40px);
+            @include proxima-bold( t-get-vw(16px), t-get-vw(18px) );
+        }
+
+        &_sku {
+            grid-area: sku;
+            @include proxima-bold( t-get-vw(16px), t-get-vw(20px) );
+            opacity: .4;
+        }
+
+        &_price {
+            grid-area: price;
+            @include proxima-semibold( t-get-vw(16px), t-get-vw(20px) );
+            opacity: .6;
+        }
+
+        &_more {
+            grid-area: more;
+
+            margin-top: t-get-vw(8px);
+            @include t-button-medium;
+            width: 100%;
+        }
+
+        .product-share {
+            grid-area: share;
+            margin-top: t-get-vw(8px);
+            margin-right: t-get-vw(4px);
+            align-self: center;
+        }
+    }
+
+    //separators and hover
+
+    .favourite-list-item {
+        margin: t-get-vw(8px) 0;
+        position: relative;
+        z-index: 1;
+
+        &:not(:first-child)::before {
+            left: t-get-vw(8px); 
+            right: t-get-vw(8px);
+            top: t-get-vw(-8px);
+            height: t-get-vw(1px);
+
+            position: absolute;
+
+            background-color: rgba( $black, .1 );
+            content: '';
+        }
+
+        &:hover::after {
+            left: t-get-vw(-4px);
+            right: t-get-vw(-4px);
+            top: t-get-vw(-4px);
+            bottom: t-get-vw(-4px);
+
+            position: absolute;
+
+            background-color: rgba( $black, .1 );
+            border-radius: t-get-vw(14px);
+            z-index: -1;
+            content: ''; 
+        }
+    }
+}

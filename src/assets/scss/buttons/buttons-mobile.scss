@@ -30,6 +30,7 @@
 
 @mixin m-button-picture( $color, $image, $active_image: false, $size: 'small', $active_color: $color, $hover: false ) {
     span {
+        padding: 0;
         mask-image: url($image);
         
         @if $size == 'small' {
@@ -37,6 +38,9 @@
         }
         @else if $size == 'big' {
             mask-size: m-get-vw(16px);
+        }
+        @else {
+            mask-size: $size;
         }
 
         background-color: $color;
@@ -58,7 +62,7 @@
     }
 }
 
-@mixin m-button-medium ($has-shadow: false){
+@mixin m-button-medium ($has-shadow: true){
     width: max-content;
     min-width: m-get-vw(36px);
     height: m-get-vw(36px);

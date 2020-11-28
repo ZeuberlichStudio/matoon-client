@@ -5,7 +5,7 @@ import loadable from '@loadable/component';
 import routesConfig from 'app/routes';
 
 import { listenToResize, setPlatform } from 'app/device';
-import { toggleMenu, toggleSearch } from 'app/ui';
+import { toggleMenu, toggleSearch, toggleFavourite } from 'app/ui';
 
 import './style.scss';
 
@@ -32,6 +32,7 @@ import NewModal from 'features/new-modal';
 import Header from 'features/header';
 import Categories from 'features/categories';
 import Search from 'features/search';
+import Favourite from 'features/favourite';
 
 function App() {
     const listener = useSelector( state => state.device.listener );
@@ -76,15 +77,32 @@ function App() {
         if ( !uiState.search ) { 
           dispatch(toggleSearch(true));
         } else {
-        //modalRef.current.style.backgroundColor = 'rgba(0,0,0,0)';
-        //modalRef.current.children[0].style.transform = 'translateX(-100%)';
           setTimeout(() => dispatch(toggleSearch(false)), 200);
+        }
+    }
+
+    const favouriteContentStyles = {
+        initial: {
+          transform: 'translateX(100%)'
+        },
+        final: {
+            transform: 'translateX(0)'
+        }
+      }
+
+    function toggleFavouriteCallback() {
+        if ( !uiState.favourite ) {
+            dispatch(toggleFavourite(true));
+        } else {
+            modalRef.current.style.backgroundColor = 'rgba(0,0,0,0)';
+            modalRef.current.children[0].style.transform = 'translateX(100%)';
+            setTimeout(() => dispatch(toggleFavourite(false)), 200);
         }
     }
 
     return (
         <React.Fragment>
-            <Header {...{toggleMenu: toggleMenuCallback, toggleSearch: toggleSearchCallback}}/>
+            <Header {...{toggleMenu: toggleMenuCallback, toggleSearch: toggleSearchCallback, toggleFavourite: toggleFavouriteCallback}}/>
 
             <Switch location={ background || location }>
                 <Route exact={ true } path="/" component={ MainPage }/>
@@ -121,6 +139,19 @@ function App() {
                 uiState.search &&
                 <NewModal {...{ ref: modalRef, navFocus: true, closeCallback: toggleSearchCallback }}>
                     <div id="search-wrapper" className="search-wrapper"><Search/></div>
+                </NewModal>
+            }
+            {
+                uiState.favourite &&
+                <NewModal 
+                    {...{ 
+                        ref: modalRef, 
+                        navFocus: true, 
+                        closeCallback: toggleFavouriteCallback, 
+                        contentStyles: favouriteContentStyles 
+                    }}
+                >
+                    <Favourite/>
                 </NewModal>
             }
             <div className={`${ uiState.overlay ? 'visible' : '' }`} id="overlay"/>

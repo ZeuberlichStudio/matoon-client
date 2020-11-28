@@ -1,7 +1,6 @@
 @media screen and (min-width: 768px) and (max-width: 1023px) {
     .product-details {
         width: 100%;
-        max-width: t-get-vw(334px);
 
         &_sku, &_stock {
             @include proxima-bold( t-get-vw(12px) );

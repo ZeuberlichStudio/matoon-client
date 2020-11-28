@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Product from 'features/product';
 import './product-item.scss';
-import { valuesIn } from 'lodash';
+import { ProductShare as Share } from 'features/product';
 
 const { API_URL } = process.env;
 
@@ -79,11 +79,7 @@ export default function ProductItemMobile({data, i}) {
                 <Link to={ itemLink }><span>Подробнее</span></Link>
             </div>
 
-            <div className="product-item-mobile_share">
-                <div className="product-item-mobile_share_vk"></div>
-                <div className="product-item-mobile_share_fb"></div>
-                <div className="product-item-mobile_share_fav"></div>
-            </div>
+            <Share {...{slug}}/>
         </div>
     );
 }

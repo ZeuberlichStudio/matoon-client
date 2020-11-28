@@ -18,6 +18,7 @@
             border-radius: t-get-vw(8px);
 
             input { 
+                width: 100%;
                 @include proxima-semibold( t-get-vw(14px), t-get-vw(28px) ); 
                 
                 ::placeholder { color: rgba( $black, .25 ); }

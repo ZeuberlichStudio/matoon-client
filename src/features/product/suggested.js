@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import './styles/suggested.scss';
 import Slider from 'features/slider/slider';
 import Scrollable from 'features/containers/scrollable';
-import { ProductItemSuggested as SuggestedItem } from 'features/product-item/product-item';
+import { ProductItemSuggested as SuggestedItem } from 'features/product-item';
 
 export default function Suggested() {
 
@@ -20,7 +20,7 @@ export default function Suggested() {
         fetch(API_URL + `products`)
         .then( data => data.json() )
         .then( result => {
-            setData(result);
+            setData(result.rows);
             setStatus('succeeded');
         })
         .catch( err => {

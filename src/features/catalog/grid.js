@@ -1,9 +1,12 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectTarget } from 'app/device';
-import ProductItemMobile from 'features/product-item/mobile';
-import { ProductItemMini, ProductItemFull } from 'features/product-item/product-item';
+import { 
+    ProductItemMini as ItemMini, 
+    ProductItemFull as ItemFull
+} from 'features/product-item';
+import ItemMobile from 'features/product-item/mobile';
+import GridLoader from './grid-loader';
+import { entries } from 'lodash';
 
 const {
     API_URL
@@ -11,69 +14,135 @@ const {
 
 export default function ProductGrid({ catSlug, search, view = 'mini' }) {
 
-    const locationParams = useParams();
-
-    const targetDevice = useSelector(selectTarget);
-    const apiQueryParamsState = useSelector(state => state.query );
-
     const [status, setStatus] = React.useState('idle');
     const [error, setError] = React.useState(null);
     const [products, setProducts] = React.useState([]);
+    const [totalCount, setTotalCount] = React.useState(null);
 
-    function buildApiQuery() {
+    const queryState = useSelector( state => state.query );
+
+    const limit = 20;
+    const [offset, setOffset] = React.useState(0);
+    const [final, setFinal] = React.useState(false);
+
+    function buildQuery() {
+        const {
+            sort,
+            filter
+        } = queryState;
+
         const params = {
-            //change after showcase!!!
-            //cat: catSlug,
-            search: locationParams.search,
-            cat: '',
-            sort: apiQueryParamsState.sort
-        };
+            sort,
+            limit,
+            offset
+        }
 
-        for ( const [key, value] of Object.entries(apiQueryParamsState.filter) ) {
-            if ( value ) params[key] = value;
+        for ( const [field, value] of Object.entries(filter) ) {
+            if ( value ) params[field] = value;
         }
 
         let query = '';
 
-        for ( const [key, value] of Object.entries(params) ) {
-            if ( value ) query += `&${key}=${value}`;
+        for ( const [param, value] of Object.entries(params) ) {
+            if ( 
+                value !== null && 
+                value !== 'undefined' 
+            ) query +=`&${param}=${value}`;
         }
 
         return query;
     }
 
-    React.useEffect(() => {
-        console.log(apiQueryParamsState);
+    function fetchProducts() {
+        setStatus('loading');
 
-        fetch(API_URL + `products?${buildApiQuery()}`)
+        const endpoint = API_URL + `products?${buildQuery()}`;
+
+        console.log(endpoint);
+
+        fetch(endpoint)
             .then( data => data.json() )
             .then( result => {
-                setProducts(result);
                 setStatus('succeeded');
+                setTotalCount(result.totalMatches);
+                setProducts(products.concat(result.rows));
             })
             .catch( err => {
-                setError(err);
                 setStatus('failed');
+                setError(err);
             });
-    }, [apiQueryParamsState]);
+    }
 
-    const renderProduct = (item, i) => {
-        if ( targetDevice === 'mobile' ) return <ProductItemMobile data={item} i={i} key={item._id}/>;
-        else if( view === 'mini' ) return <ProductItemMini data={item} i={i} key={item._id}/>;
-        else if( view === 'full' ) return (
-            <div key={i} className="product-item-wrapper">
-                <ProductItemFull data={item} i={i} key={item._id}/>
-            </div> 
-        );
-        else return console.log('error occurred when trying to render a product');
+    React.useEffect(() => {
+        if ( status === 'idle' ) fetchProducts();
+    }, [status]);
+
+    React.useEffect(() => {
+        if ( status !== 'succeeded' ) return;
+        setOffset(offset + limit);
+        if ( products.length >= totalCount ) setFinal(true);
+    }, [status]);
+
+    React.useEffect(() => {
+        setOffset(0);
+        setProducts([]);
+        setError(null);
+        setStatus('idle')
+    }, [queryState]);
+
+    const beaconRef = React.useRef();
+
+    React.useEffect(() => {
+        if ( final ) return;
+
+        const observer = new IntersectionObserver( entries => {
+            if ( 
+                entries[0].intersectionRatio <= 0 || 
+                status === 'loading'
+            ) return;
+            fetchProducts();
+        });
+
+        observer.observe(beaconRef.current);
+
+        return () => observer.disconnect();
+    }, [ status, final, offset, products ]);
+
+    const targetDevice = useSelector( state => state.device.target );
+
+    function renderProduct( item, i ) {
+        if ( targetDevice === 'mobile' ) {
+            return <ItemMobile data={item} i={i} key={item._id}/>;
+        } else if ( view === 'mini' ) {
+            return <ItemMini data={item} i={i} key={item._id}/>;
+        } else if ( view === 'full' ) {
+            return (
+                <div key={i} className="product-item-wrapper">
+                    <ItemFull data={item} i={i} key={item._id}/>
+                </div> 
+            );
+        }
     }
 
     return (
         <div className={`product-grid product-grid-${view}`}>
-            { products && products.map(renderProduct) }
-            { 
-                (!products[0] && status === 'succeeded') && 'Nothing found'
+            {
+                products[0] && 
+                products.map(renderProduct)
             }
+            {
+                status === 'loading' &&
+                <GridLoader view={ targetDevice === 'mobile' ? 'mobile' : view }/>
+            }
+            {
+               ( status === 'succeeded' && !products[0] ) && 
+               <span>По Вашему запросу ничего не найдено</span>
+            }
+            {
+                ( status === 'succeeded' && final ) &&
+                <span>Похоже, это всё</span>
+            }
+            <div ref={beaconRef} id="beacon"></div>
         </div>
     );
 }

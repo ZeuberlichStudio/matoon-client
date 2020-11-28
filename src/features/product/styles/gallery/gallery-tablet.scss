@@ -20,10 +20,13 @@
             min-height: t-get-vw(315px);
             max-width: t-get-vw(355px);
             max-height: t-get-vw(490px);
+
+            background-color: rgba($black, .1);
+            border-radius: t-get-vw(16px); 
+            overflow: hidden;
             
             img { 
                 position: absolute;
-                border-radius: t-get-vw(16px); 
             }
         }
 

@@ -52,7 +52,7 @@
         'info info'
         'link share';
         grid-auto-rows: max-content;
-        grid-gap: m-get-vw(12px);
+        grid-gap: m-get-vw(8px);
 
         align-content: flex-end;
 
@@ -101,38 +101,14 @@
 
         &_link {
             grid-area: link;
-            width: m-get-vw(222px);
+            width: m-get-vw(250px);
 
             a { 
-                @include m-button-big(true); 
+                @include m-button-medium(true); 
                 width: 100%;
             }
         }
 
-        &_share {
-            align-self: center;
-            grid-area: share;
-            height: m-get-vw(34px);
-            padding: 0 m-get-vw(8px);
-
-            display: flex;
-            justify-content: space-between;
-
-            border-radius: m-get-vw(8px);
-            background-color: white;
-            box-shadow: 0 0 m-get-vw(10px) rgba($black, .1);
-            
-            &_vk,
-            &_fb,
-            &_fav {
-                width: m-get-vw(20px);
-                background-color: rgba($black, .25);
-                cursor: pointer;
-            }
-        
-            &_vk { mask-image: url('assets/images/icon_vk.svg'); }
-            &_fb { mask-image: url('assets/images/icon_fb.svg'); }
-            &_fav { mask-image: url('assets/images/icon_fav.svg'); }
-        }
+        .product-share { align-self: center; }
     }
 }

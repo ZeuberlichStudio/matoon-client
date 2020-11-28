@@ -1,0 +1,74 @@
+@media screen and (min-width: 1024px) {
+    .favourite-product {
+        width: get-vw(996px);
+        height: 100%;
+        padding: get-vw(12px);
+
+        display: grid;
+        grid-template-areas: 
+        'header header'
+        'gallery options'
+        'gallery details'
+        'gallery price'
+        'gallery add2cart';
+        grid-template-columns: get-vw(480px) 1fr;
+        grid-auto-rows: max-content;
+        grid-template-rows: repeat(4, max-content) 1fr;
+        grid-column-gap: get-vw(12px);
+
+        background-color: white;
+        border-radius: get-vw(28px);
+
+        .product-header {
+            grid-area: header;
+            top: 0;
+            position: sticky;
+            z-index: 2;
+
+            &_close {
+                @include button-small;
+                @include button-picture( rgba($black, .5), 'assets/images/icon_cross.svg' );
+                width: get-vw(34px);
+                height: get-vw(34px);
+                margin-top: get-vw(7px);
+                margin-right: get-vw(7px);
+            
+                border: none;
+                background-color: white;
+                box-shadow: 0 0 get-vw(10px) rgba( $black, .1 );
+            }
+        }
+
+        .product-gallery {
+            grid-area: gallery;
+
+            height: get-vw(680px);
+            margin-top: get-vw(12px);
+        }
+
+        .product-options-wrapper {
+            grid-area: options;
+
+            height: max-content;
+            margin-top: get-vw(24px);
+
+            h3 { @include proxima-bold( get-vw(22px) ); }
+            .product-options { margin-top: get-vw(12px); }
+        }
+
+        .product-details {
+            grid-area: details;
+            margin-top: get-vw(12px);
+        }
+
+        .product-price {
+            grid-area: price;
+            margin-top: get-vw(28px);
+        }
+
+        .product-add-to-cart {
+            grid-area: add2cart;
+            margin-top: get-vw(12px);
+        }
+    }
+}

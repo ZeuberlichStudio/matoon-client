@@ -1,16 +1,13 @@
 @media screen and ( max-width: 767px ) {
     #modal-close {
-        margin-top: m-get-vw(8px);
-        margin-right: m-get-vw(8px);
-    
         @include m-button-small;
-        @include m-button-picture( rgba($black, .5), 'assets/images/icon_cross.svg' );
+        @include m-button-picture( rgba($black, .5), 'assets/images/icon_cross.svg', $size: 100% );
         min-width: unset;
-        width: m-get-vw(26px);
-        height: m-get-vw(26px);
+        width: m-get-vw(12px);
+        height: m-get-vw(12px);
     
         border: none;
-        background-color: white;
-        box-shadow: 0 0 m-get-vw(10px) rgba( $black, .1 );
+        background-color: none;
+        box-shadow: none;
     }
 }

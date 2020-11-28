@@ -3,13 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addItem, removeItem } from 'features/favourite/favSlice';
 import './styles/share.scss'
 
-function ProductShare({ id, slug }) {
+function ProductShare({ slug }) {
 
-    const marked = useSelector( state => state.favourite ).includes(id);
+    const marked = useSelector( state => state.favourite ).includes(slug);
     const dispatch = useDispatch();
 
-    const favAdd = () => dispatch(addItem(id));;
-    const favRemove = () => dispatch(removeItem(id));;
+    const favAdd = () => dispatch(addItem(slug));;
+    const favRemove = () => dispatch(removeItem(slug));;
 
     return (
         <div className="product-share">

@@ -6,6 +6,7 @@ const initialState = {
     headerOverlay: false,
     menu: false,
     search: false,
+    favourite: false,
     newModalAllowed: true
 }
 
@@ -27,6 +28,10 @@ const uiSlice = createSlice({
             state.search = isBoolean(payload) ? payload : state.search;
             state.headerOverlay = payload;
         },
+        toggleFavourite: ( state, {payload} ) => {
+            state.favourite = isBoolean(payload) ? payload : state.search;
+            state.headerOverlay = payload;
+        },
         setModalAllowed: ( state, {payload} ) => {
             state.newModalAllowed = payload;
         }
@@ -38,6 +43,7 @@ export const {
     toggleOverlay,
     toggleMenu,
     toggleSearch,
+    toggleFavourite,
     toggleHeaderLayer,
     setModalAllowed
 } = uiSlice.actions;

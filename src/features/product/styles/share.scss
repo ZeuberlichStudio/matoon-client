@@ -19,9 +19,6 @@
     &_fb { mask-image: url('assets/images/icon_fb.svg'); }
     &_fav { mask-image: url('assets/images/icon_fav.svg'); }
 
-    &_fav:hover{
-        background-color: rgba( #F8512A, .6 );
-    }
     &_fav.marked {
         background-color: #F8512A;
     }
@@ -37,6 +34,10 @@
         
         box-shadow: 0 0 get-vw(10px) rgba($black, .1);
         border-radius: get-vw(10px);
+
+        &_fav:hover{
+            background-color: rgba( #F8512A, .6 );
+        }
     }
 }
 
@@ -50,6 +51,10 @@
             
         box-shadow: 0 0 t-get-vw(10px) rgba($black, .1);
         border-radius: t-get-vw(8px);
+
+        &_fav:hover{
+            background-color: rgba( #F8512A, .6 );
+        }
     }
 }
 

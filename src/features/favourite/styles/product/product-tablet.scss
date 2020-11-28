@@ -1,0 +1,90 @@
+@media screen and (min-width: 768px) and (max-width: 1023.5px) {
+    .favourite-product {
+        width: t-get-vw(512px);
+        padding: t-get-vw(8px);
+
+        background-color: rgba( white, .95 );
+        border-radius: t-get-vw(18px);
+
+        .product-header {
+            top: 0;
+            position: sticky;
+            z-index: 2;
+
+            &_close {
+                @include t-button-small;
+                @include t-button-picture( rgba($black, .5), 'assets/images/icon_cross.svg', $size: 'small' );
+                min-width: unset;
+                width: t-get-vw(28px);
+                height: t-get-vw(28px);
+                margin-top: t-get-vw(6px);
+                margin-right: t-get-vw(6px);
+            
+                border: none;
+                background-color: white;
+                @include shadow;
+            }
+        }
+
+        .product-gallery {
+            margin-top: t-get-vw(8px);
+
+            --scrollableGap: #{t-get-vw(6px)};
+            --scrollablePadding: #{t-get-vw(6px)};
+
+            img {
+                width: t-get-vw(268px);
+                height: t-get-vw(368px);
+
+                border-radius: t-get-vw(6px);
+            }
+        }
+
+        .product-options-wrapper {
+            height: max-content;
+            margin-top: t-get-vw(18px);
+    
+            h3 { @include proxima-bold( t-get-vw(18px) ); }
+            .product-options { margin-top: t-get-vw(8px); }
+        }
+    
+        .product-details {
+            margin-top: t-get-vw(8px);
+        }
+    
+        .product-buy {
+            margin-top: t-get-vw(34px);
+            bottom: 0;
+
+            position: sticky;
+            display: flex;
+            z-index: 2;
+    
+            .product-price {
+                padding: t-get-vw(6px);
+    
+                background-color: white;
+                border-radius: t-get-vw(10px);
+                @include shadow;
+            }
+    
+            .product-add-to-cart {
+                width: t-get-vw(156px);
+                margin-left: t-get-vw(4px);
+            }
+    
+            &::before {
+                left: t-get-vw(-6px);
+                right: t-get-vw(-6px);
+                top: t-get-vw(-6px);
+                bottom: t-get-vw(-6px);
+                position: absolute;
+    
+                background-color: rgba( white, .95 );
+                border-radius: t-get-vw(16px);
+                @include shadow;
+                content: '';
+            }
+        }
+    }
+}

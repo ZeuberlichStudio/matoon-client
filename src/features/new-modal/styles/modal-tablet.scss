@@ -1,15 +1,13 @@
 @media screen and ( min-width: 768px ) and ( max-width: 1023px ) {
     #modal-close {
-        margin-top: t-get-vw(6px);
-        margin-right: t-get-vw(6px);
-    
         @include t-button-small;
-        @include t-button-picture( rgba($black, .5), 'assets/images/icon_cross.svg' );
+        @include t-button-picture( rgba($black, .5), 'assets/images/icon_cross.svg', $size: 'small' );
+        min-width: unset;
         width: t-get-vw(28px);
         height: t-get-vw(28px);
     
         border: none;
         background-color: white;
-        box-shadow: 0 0 t-get-vw(10px) rgba( $black, .1 );
+        @include shadow;
     }
 }

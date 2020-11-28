@@ -20,10 +20,13 @@
             max-height: get-vw(640px);
 
             position: relative;
+
+            background-color: rgba($black, .1);
+            border-radius: get-vw(16px); 
+            overflow: hidden;
             
             img { 
                 position: absolute;
-                border-radius: get-vw(16px); 
             }
         }
 
@@ -46,6 +49,7 @@
 
                 border-radius: get-vw(16px);
                 background-color: rgba($black, .1);
+                overflow: hidden;
                 transition: 0.3s;
                 cursor: pointer;
 

@@ -1,0 +1,101 @@
+@media screen and (min-width: 1025px) {
+    .favourite-list-item {
+        width: get-vw(398px);
+        height: get-vw(136px);
+
+        display: grid;
+        grid-template-areas: 
+        'image name name'
+        'image sku sku'
+        'image price price'
+        'image more share';
+        grid-template-columns: max-content 1fr  max-content;
+        grid-template-rows: max-content repeat(2, 1fr) max-content;
+        grid-column-gap: get-vw(10px);
+
+        &_image {
+            grid-area: image;
+
+            width: get-vw(102px);
+            height: get-vw(136px);
+
+            background-color: rgba( $black, .1 );
+            border-radius: get-vw(16px);
+            box-shadow: 0 0 get-vw(10px) rgba( $black, .1 );
+
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+        }
+
+        h2 {
+            grid-area: name;
+            height: get-vw(40px);
+            @include proxima-bold( get-vw(18px), get-vw(20px) );
+        }
+
+        &_sku {
+            grid-area: sku;
+            @include proxima-bold(get-vw(16px));
+            opacity: .4;
+        }
+
+        &_price {
+            grid-area: price;
+            @include proxima-semibold(get-vw(18px));
+            opacity: .6;
+        }
+
+        &_more {
+            grid-area: more;
+
+            @include button-medium;
+            width: 100%;
+        }
+
+        .product-share {
+            grid-area: share;
+            align-self: center;
+            margin-right: get-vw(4px);
+        }
+    }
+
+    //separators and hover
+
+    .favourite-list-item {
+        margin: get-vw(8px) 0;
+        position: relative;
+        z-index: 1;
+
+        &:not(:first-child)::before {
+            left: get-vw(12px); 
+            right: get-vw(12px);
+            top: get-vw(-8px);
+            height: get-vw(1px);
+
+            position: absolute;
+
+            background-color: rgba( $black, .1 );
+            content: '';
+        }
+
+        &:hover::after {
+            left: get-vw(-6px);
+            right: get-vw(-6px);
+            top: get-vw(-6px);
+            bottom: get-vw(-6px);
+
+            position: absolute;
+
+            background-color: rgba( $black, .1 );
+            border-radius: get-vw(22px);
+            z-index: -1;
+            content: ''; 
+        }
+    }
+}

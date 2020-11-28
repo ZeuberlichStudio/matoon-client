@@ -1,0 +1,71 @@
+@media screen and (min-width: 1024px) {
+    .favourite-list {
+        width: get-vw(422px);
+        height: 100%;
+        padding: get-vw(12px);
+
+        background-color: rgba( white, .95 );
+        border-radius: get-vw(28px);
+
+        &_items {
+            padding-bottom: get-vw(6px);
+    
+            display: flex;
+            flex-direction: column;
+        }
+    
+        &_header,
+        &_more {
+            height: get-vw(48px);
+            width: 100%;
+    
+            position: sticky;
+    
+            background-color: white;
+            border-radius: get-vw(16px);
+            @include shadow;
+            @include proxima-bold( get-vw(18px), get-vw(48px) );
+            text-align: center;
+            z-index: 2;
+        }
+    
+        &_header { 
+            top: 0; 
+    
+            #modal-close {
+                right: get-vw(7px);
+                top: get-vw(7px);
+                position: absolute;
+            }
+        }
+    
+        &_more {
+            bottom: 0;
+    
+            &::before {
+                left: get-vw(-6px);
+                right: get-vw(-6px);
+                top: get-vw(-6px);
+                bottom: get-vw(-6px);
+    
+                position: absolute;
+    
+                background-color: rgba( white, .8 );
+                border-radius: get-vw(22px);
+                @include shadow;
+                content: '';
+                z-index: -1;
+            }
+        }
+    }
+
+    .favourite-list-empty {
+        padding: get-vw(12px) get-vw(4px);
+
+        br.pc-hide { display: none; }
+
+        h3 { @include proxima-bold( get-vw(16px), get-vw(20px) ); }
+        p, button { @include proxima-regular( get-vw(16px), get-vw(20px) ); }
+        button { text-decoration: underline; }
+    }
+}

@@ -14,9 +14,12 @@
 
         &_selected {
             flex-grow: 1;
-            height: m-get-vw(356px);
-            
-            img { border-radius: m-get-vw(16px); }
+            height: m-get-vw(278px);
+            max-height: m-get-vw(360px);
+
+            background-color: rgba($black, .1);
+            border-radius: m-get-vw(16px); 
+            overflow: hidden;
         }
 
         &_preview {

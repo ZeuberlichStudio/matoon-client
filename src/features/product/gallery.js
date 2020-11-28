@@ -21,11 +21,11 @@ export default function ProductGallery({ images }) {
     return (
         <div className="product-gallery">
             <div className="product-gallery_selected">
-                <img src={API_URL + images[currentImage]} alt=""/>
+                <img src={ images && ( API_URL + images[currentImage] ) } alt=""/>
             </div>
 
             <div className="product-gallery_preview">
-                { images.map(renderImagePreview) }
+                { images && images.map(renderImagePreview) }
             </div>
         </div>
     );

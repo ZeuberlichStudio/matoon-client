@@ -1,0 +1,70 @@
+@media screen and (max-width: 767.5px) {
+    .favourite-list {
+        width: m-get-vw(294px);
+        height: 100%;
+        padding: m-get-vw(14px);
+
+        background-color: rgba( white, .95 );
+        border-radius: m-get-vw(26px);
+    }
+
+    .favourite-list_items {
+        padding-bottom: m-get-vw(4px);
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .favourite-list_header,
+    .favourite-list_more {
+        height: m-get-vw(42px);
+        width: 100%;
+
+        position: sticky;
+
+        background-color: white;
+        border-radius: m-get-vw(12px);
+        @include shadow;
+        @include proxima-bold( m-get-vw(16px), m-get-vw(42px) );
+        text-align: center;
+        z-index: 5;
+    }
+
+    .favourite-list_header { 
+        top: m-get-vw(14px); 
+
+        #modal-close {
+            right: m-get-vw(15px);
+            top: m-get-vw(15px);
+            position: absolute;
+        }
+    }
+
+    .favourite-list_more {
+        bottom: m-get-vw(14px);
+
+        &::before {
+            left: m-get-vw(-7px);
+            right: m-get-vw(-7px);
+            top: m-get-vw(-7px);
+            bottom: m-get-vw(-7px);
+
+            position: absolute;
+
+            background-color: rgba( white, .8 );
+            border-radius: m-get-vw(18px);
+            @include shadow;
+            content: '';
+            z-index: -1;
+        }
+    }
+
+    .favourite-list-empty {
+        padding: m-get-vw(14px) m-get-vw(4px);
+
+        h3 { @include proxima-bold( m-get-vw(14px), m-get-vw(16px) ); }
+        p, button { @include proxima-regular( m-get-vw(14px), m-get-vw(16px) ); }
+        p { margin-top: m-get-vw(8px); }
+        button { text-decoration: underline; }
+    }
+}

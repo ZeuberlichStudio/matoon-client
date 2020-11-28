@@ -26,11 +26,11 @@ function AttributeBlock({ attr, options, shown, config, setConfig }) {
             {
                 targetDevice === 'desktop' ?
                 <ButtonsGroup shown={ shown }>
-                    { options.map( (option, i) => <Option {...{attr, option, i, config, setConfig}}/> ) }
+                    { options.map( (option, i) => <Option key={i} {...{attr, option, i, config, setConfig}}/> ) }
                 </ButtonsGroup>
                 :
                 <Scrollable>
-                    { options.map( (option, i) => <Option {...{attr, option, i, config, setConfig}}/> ) }
+                    { options.map( (option, i) => <Option key={i} {...{attr, option, i, config, setConfig}}/> ) }
                 </Scrollable>
             }
         </div>
