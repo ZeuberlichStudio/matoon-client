@@ -1,30 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleHeaderLayer, toggleSearch, setModalElement, animateModalElement } from 'app/ui';
-import { toggleUI } from 'features/modal-ui';
+import { toggleHeaderLayer, toggleSearch } from 'app/ui';
+import './index.scss';
 
 import Search from 'features/search';
 
 import LogoPh from 'assets/images/logo_ph.svg';
-import './index.scss';
 
-function Header({ toggleMenu }) {
+function Header({ toggleMenu, toggleFavourite }) {
 
     const dispatch = useDispatch();
     const targetDevice = useSelector( state => state.device.target );
     const {
         headerOverlay,
-        search,
-        modalElement
-    } = useSelector( ({ui}) => ui );
+        search
+    } = useSelector( state => state.ui );
     const ref = React.useRef();
 
     function focusCallback() {
         dispatch(toggleHeaderLayer(true));
     }
-
-    const toggleUIClickHandler = (payload) => toggleUI( dispatch, setModalElement, modalElement, payload );
 
     return (
         <header ref={ref} id="header" className={`app-header`} style={{ zIndex: headerOverlay ? 20 : 10 }}>
@@ -32,7 +28,7 @@ function Header({ toggleMenu }) {
                 <Link to="/"><img src={ LogoPh } alt=""/></Link>
             </div>
 
-            <button onClick={ () => toggleUIClickHandler('menu') } className="app-header_categories">
+            <button onClick={ toggleMenu } className="app-header_categories">
                 <span>Каталог</span>
             </button>
 
@@ -48,7 +44,7 @@ function Header({ toggleMenu }) {
 
             <button className="app-header_info"><span>О нас</span></button>
 
-            <button onClick={ () => toggleUIClickHandler('favourite') } className="app-header_favourite"><span></span></button>
+            <button onClick={ toggleFavourite } className="app-header_favourite"><span></span></button>
             <button className="app-header_cart"><span></span></button>
             <button className="app-header_account"><span></span></button>
 

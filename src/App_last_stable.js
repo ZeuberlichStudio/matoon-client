@@ -30,10 +30,9 @@ const {
 
 import NewModal from 'features/new-modal';
 import Header from 'features/header';
-// import Categories from 'features/categories';
-// import Search from 'features/search';
-// import Favourite from 'features/favourite';
-import ModalUI from 'features/modal-ui';
+import Categories from 'features/categories';
+import Search from 'features/search';
+import Favourite from 'features/favourite';
 
 function App() {
     const listener = useSelector( state => state.device.listener );
@@ -51,7 +50,7 @@ function App() {
 
     //ui state and side effects
 
-    const uiState = useSelector( ({ui}) => ui );
+    const uiState = useSelector( state => state.ui );
 
     const modalRef = React.useRef();
 
@@ -130,8 +129,31 @@ function App() {
                     </Route>
                 </Switch>
             }
-
-            { uiState.modalElement && <ModalUI/> }
+            { 
+                uiState.menu && 
+                <NewModal ref={modalRef} contentStyles={menuContentStyles} closeCallback={toggleMenuCallback} navFocus={ true }> 
+                    <Categories/>
+                </NewModal>
+            }
+            {
+                uiState.search &&
+                <NewModal {...{ ref: modalRef, navFocus: true, closeCallback: toggleSearchCallback }}>
+                    <div id="search-wrapper" className="search-wrapper"><Search/></div>
+                </NewModal>
+            }
+            {
+                uiState.favourite &&
+                <NewModal 
+                    {...{ 
+                        ref: modalRef, 
+                        navFocus: true, 
+                        closeCallback: toggleFavouriteCallback, 
+                        contentStyles: favouriteContentStyles 
+                    }}
+                >
+                    <Favourite/>
+                </NewModal>
+            }
             <div className={`${ uiState.overlay ? 'visible' : '' }`} id="overlay"/>
         </React.Fragment>
     );

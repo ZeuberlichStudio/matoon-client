@@ -3,6 +3,7 @@ import React from 'react';
 export default function Checkbox({
     active = false,
     name, 
+    slug,
     attr, 
     value, 
     addFilter, 
@@ -15,8 +16,7 @@ export default function Checkbox({
     //React.useEffect(() => { fresh && setActive(false) }, [fresh]);
 
     function onChangeHandler(e) {
-        //setActive(e.target.checked);
-        !active ? addFilter(attr, name) : removeFilter(attr, name); 
+        !active ? addFilter(attr, slug) : removeFilter(attr, slug); 
     }
 
     return (
@@ -29,7 +29,7 @@ export default function Checkbox({
                 checked={active}
                 onChange={ onChangeHandler } 
                 data-attr={attr} 
-                data-value={value}
+                data-value={slug}
                 type="checkbox"
             />
         </label>

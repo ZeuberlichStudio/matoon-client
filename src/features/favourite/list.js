@@ -1,8 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleMenu, toggleFavourite, toggleOverlay, toggleSearch } from 'app/ui';
+import { setModalElement, toggleOverlay, toggleSearch } from 'app/ui';
 import ListItem from './list-item';
 import './styles/list.scss';
+import { toggleUI } from 'features/modal-ui';
 
 const { API_URL } = process.env;
 
@@ -30,7 +31,6 @@ function FavouriteList({ closeButton, setProduct, setColumn }) {
             .then( result => {
                 setStatus('succeeded');
                 setData(result);
-                console.log(result);
             })
             .catch( err => {
                 setStatus('failed');
@@ -45,7 +45,6 @@ function FavouriteList({ closeButton, setProduct, setColumn }) {
                 <span>Избранные товары</span>
                 { closeButton }
             </div>
-            { console.log(status) }
             { 
                 itemSlugs[0] ?
                 data[0] ?
@@ -66,14 +65,9 @@ function FavouriteList({ closeButton, setProduct, setColumn }) {
 
 function FavouriteListEmpty() {
     const dispatch = useDispatch();
-    const uiState = useSelector( state => state.ui );
+    const modalElement = useSelector( ({ui}) => ui.modalElement );
 
-    function menuRedirect() {
-        dispatch(toggleFavourite(false));
-        dispatch(toggleMenu(true));
-        !uiState.search && dispatch(toggleOverlay(false));
-        uiState.search && dispatch(toggleSearch(false));
-    }
+    const menuRedirect = () => toggleUI( dispatch, setModalElement, modalElement, 'menu' );
 
     return (
         <div className="favourite-list-empty">

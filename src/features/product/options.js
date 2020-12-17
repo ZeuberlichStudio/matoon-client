@@ -8,9 +8,10 @@ import './styles/options.scss';
 export default function ProductOptions({ attributes, shown, config, setConfig }) {
     return (
         <div className="product-options">
+            { console.log(attributes) }
             { 
-                Object.entries( attributes ).map( ([title, options], i) =>
-                    options.length > 1 && <AttributeBlock key={ i } {...{attr: title, options, shown, config, setConfig}}/>
+                Object.entries( attributes ).map( ([key, options], i) =>
+                    options.length > 1 && <AttributeBlock key={ i } {...{attr: key, options, shown, config, setConfig}}/>
                 ) 
             }
         </div>
@@ -47,9 +48,9 @@ function Option({ attr, option, i, currentOption, config, setConfig }) {
 
     return (
         <button 
-            className={ `product-option ${ config[attrSingular] === option.name ? 'active' : '' }` } 
+            className={ `product-option ${ config[attrSingular] === option.slug ? 'active' : '' }` } 
             style={ style }
-            onClick={ () => setConfig({...config, [attrSingular]: option.name }) }
+            onClick={ () => setConfig({...config, [attrSingular]: option.slug }) }
         >
             <span>{ option.name }</span>
         </button>

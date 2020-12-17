@@ -120,7 +120,7 @@ export default function Filters({ catSlug, closeButton, closeModal }) {
     }
 
     const renderCheckbox = (filter, attr, key) => 
-    <Checkbox active={selectedFilters[attr].includes(filter.name)} key={key} {...filter} attr={attr} fresh={fresh} addFilter={addFilter} removeFilter={removeFilter}/>;
+    <Checkbox active={selectedFilters[attr].includes(filter.slug)} key={key} {...filter} attr={attr} fresh={fresh} addFilter={addFilter} removeFilter={removeFilter}/>;
 
     const renderField = (name, attr) => 
     <Field key={name} name={name} attr={attr} fresh={fresh} setFilter={setFilter}/>;

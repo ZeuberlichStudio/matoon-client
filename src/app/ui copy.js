@@ -2,11 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import { isBoolean } from 'lodash';
 
 const initialState = {
-    modalElement: null,
-    modalElementAnimating: false,
     overlay: false,
     headerOverlay: false,
+    menu: false,
     search: false,
+    favourite: false,
     newModalAllowed: true
 }
 
@@ -14,14 +14,12 @@ const uiSlice = createSlice({
     name: 'ui',
     initialState,
     reducers: {
-        setModalElement: ( state, {payload} ) => {
-            state.modalElement = payload;
-        },
-        animateModalElement: ( state, {payload} ) => {
-            state.modalElementAnimating = isBoolean(payload) ? payload : state.modalElementAnimating;
-        },
         toggleOverlay: ( state, {payload} ) =>  {
             state.overlay = isBoolean(payload) ? payload : state.overlay;
+        },
+        toggleMenu: ( state, {payload} ) => {
+            state.menu = isBoolean(payload) ? payload : state.menu;
+            state.headerOverlay = payload;
         },
         toggleHeaderLayer: ( state, {payload} ) => {
             state.headerOverlay = payload;
@@ -29,15 +27,23 @@ const uiSlice = createSlice({
         toggleSearch: ( state, {payload} ) => {
             state.search = isBoolean(payload) ? payload : state.search;
             state.headerOverlay = payload;
+        },
+        toggleFavourite: ( state, {payload} ) => {
+            state.favourite = isBoolean(payload) ? payload : state.search;
+            state.headerOverlay = payload;
+        },
+        setModalAllowed: ( state, {payload} ) => {
+            state.newModalAllowed = payload;
         }
     }
 })
 
 export default uiSlice.reducer;
 export const {
-    setModalElement,
-    animateModalElement,
     toggleOverlay,
+    toggleMenu,
     toggleSearch,
+    toggleFavourite,
     toggleHeaderLayer,
+    setModalAllowed
 } = uiSlice.actions;
