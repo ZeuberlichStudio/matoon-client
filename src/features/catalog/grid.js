@@ -6,7 +6,7 @@ import {
 } from 'features/product-item';
 import ItemMobile from 'features/product-item/mobile';
 import GridLoader from './grid-loader';
-import { entries } from 'lodash';
+import { SpinningLoader as Loader } from 'features/loader';
 
 const {
     API_URL
@@ -63,7 +63,7 @@ export default function ProductGrid({ catSlug, search, view = 'mini' }) {
         fetch(endpoint)
             .then( data => data.json() )
             .then( result => {
-                setStatus('succeeded');
+                setStatus('success');
                 setTotalCount(result.totalMatches);
                 setProducts(products.concat(result.rows));
             })
@@ -78,7 +78,7 @@ export default function ProductGrid({ catSlug, search, view = 'mini' }) {
     }, [status]);
 
     React.useEffect(() => {
-        if ( status !== 'succeeded' ) return;
+        if ( status !== 'success' ) return;
         setOffset(offset + limit);
         if ( products.length >= totalCount ) setFinal(true);
     }, [status]);
@@ -132,14 +132,16 @@ export default function ProductGrid({ catSlug, search, view = 'mini' }) {
             }
             {
                 status === 'loading' &&
-                <GridLoader view={ targetDevice === 'mobile' ? 'mobile' : view }/>
+                <div className="loading">
+                    <Loader/>
+                </div>
             }
             {
-               ( status === 'succeeded' && !products[0] ) && 
+               ( status === 'success' && !products[0] ) && 
                <span>По Вашему запросу ничего не найдено</span>
             }
             {
-                ( status === 'succeeded' && final ) &&
+                ( status === 'success' && final ) &&
                 <span>Похоже, это всё</span>
             }
             <div ref={beaconRef} id="beacon"></div>

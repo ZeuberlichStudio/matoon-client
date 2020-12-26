@@ -5,6 +5,7 @@
         min-height: m-get-vw(42px);
 
         display: flex;
+        align-items: center;
 
         background-color: white;
         border-radius: m-get-vw(12px);
@@ -18,5 +19,6 @@
         }
 
         .product-share { margin: m-get-vw(8px); }
+        #modal-close{ margin: m-get-vw(14px); }
     }
 }

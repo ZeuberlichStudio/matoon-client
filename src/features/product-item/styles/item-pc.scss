@@ -38,10 +38,11 @@
         
             &_name-and-price {
                 h2, span { @include proxima-bold(get-vw(16px), get-vw(22px)); }
-        
+                
                 span {
                     float: right;
                     color: rgba($black, .5);
+                    font-family: 'Roboto';
                 }
             }
         
@@ -183,11 +184,13 @@
                 span {
                     float: right;
                     color: rgba($black, .5);
+                    font-family: 'Roboto';
                 }
 
                 .discount-price { 
                     position: relative;
                     color: #FF6666;
+                    font-family: 'Roboto';
                 }
 
                 .old-price {
@@ -195,6 +198,7 @@
                     right: 0; bottom: get-vw(-12px);
                     position: absolute;
                     @include proxima-bold(get-vw(14px));
+                    font-family: 'Roboto';
                 }
             }
         

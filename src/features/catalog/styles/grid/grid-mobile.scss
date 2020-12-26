@@ -8,5 +8,11 @@
         grid-auto-rows: max-content;
         justify-content: center;
         grid-row-gap: m-get-vw(16px);
+        
+        .loading {
+            grid-column: span 1; 
+            height: 100vw;
+            position: relative;
+        }
     }
 }

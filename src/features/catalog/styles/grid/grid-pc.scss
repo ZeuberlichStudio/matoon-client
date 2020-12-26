@@ -13,5 +13,16 @@
 
         &-mini { grid-template-columns: repeat(4, 1fr); }
         &-full { grid-template-columns: repeat(2, 1fr); }
+
+        &-mini .loading {
+            grid-column: span 4; 
+            height: get-vw(300px);
+            position: relative;
+        }
+        &-full .loading {
+            grid-column: span 2; 
+            height: get-vw(440px);
+            position: relative;
+        }
     }
 }

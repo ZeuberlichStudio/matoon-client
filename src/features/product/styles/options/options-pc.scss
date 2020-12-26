@@ -4,7 +4,7 @@
         max-width: get-vw(465px);
     }
 
-    .product-options_attribute-block {
+    .product-options_attr-set {
         width: 100%;
         padding: get-vw(4px) 0;
         position: relative;
@@ -23,7 +23,7 @@
         }
     }
 
-    .product-option {
+    .attr {
         @include button-small;
         color: var( --colorData, $black );
         border-color: var( --colorData, $black );

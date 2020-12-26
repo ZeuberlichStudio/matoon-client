@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleOverlay, toggleMenu, toggleSearch } from 'app/ui';
+import { toggleMenu } from 'app/ui';
+import { setModalElement, toggleOverlay, toggleSearch } from 'app/ui';
+import { toggleUI } from 'features/modal-ui';
+
 import SearchItem from './search-item';
 import './styles/search.scss';
 
@@ -82,14 +85,17 @@ function Search({ mini, focusCallback, cat }) {
         return () => window.removeEventListener( 'click', escapeHandler );
     }, [focus, uiState.search]);
 
-    function menuRedirect() {
-        dispatch(toggleMenu(true));
-        setFocus(false);
-        setOpen(false);
-        setString('');
-        !uiState.search && dispatch(toggleOverlay(false));
-        uiState.search && dispatch(toggleSearch(false));
-    }
+    // function menuRedirect() {
+    //     dispatch(toggleMenu(true));
+    //     setFocus(false);
+    //     setOpen(false);
+    //     setString('');
+    //     !uiState.search && dispatch(toggleOverlay(false));
+    //     uiState.search && dispatch(toggleSearch(false));
+    // }
+    const modalElement = useSelector( ({ui}) => ui.modalElement );
+    const menuRedirect = () => toggleUI( dispatch, setModalElement, modalElement, 'menu' );
+
 
     function close() {
         setFocus(false);

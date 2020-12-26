@@ -3,16 +3,33 @@
     .product-options {
         width: max-content;
         max-width: t-t-get-vw(340px);
+
+        display: grid;
+        grid-auto-rows: max-content;
+        grid-row-gap: t-get-vw(12px);
     }
 
-    .product-options_attribute-block {
+    .product-options_attr-set {
         width: 100%;
 
         --scrollablePadding: #{ t-get-vw(6px) };
         --scrollableGap: #{ t-get-vw(6px) };
+
+        &:not(:last-child)::after {
+            height: t-get-vw(1.5px);
+            left: t-get-vw(20px);
+            right: t-get-vw(20px);
+            bottom: t-get-vw(-6.75px);
+
+            position: absolute;
+
+            background-color: rgba( $black, .05 );
+
+            content: '';
+        }
     }
 
-    .product-option {
+    .attr {
         @include t-button-small;
         color: var( --colorData, $black );
         border-color: var( --colorData, $black );

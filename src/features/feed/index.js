@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import FeedPost from './post';
+import { SpinningLoader as Loader } from 'features/loader';
 import './styles/feed.scss';
 
 const { API_URL } = process.env;
@@ -20,7 +21,7 @@ export default function Feed() {
             .then( data => data.json() )
             .then( posts => {
                 setPosts(posts);
-                setStatus('succeeded');
+                setStatus('success');
             })
             .catch( err => {
                 setError(err);
@@ -59,12 +60,13 @@ export default function Feed() {
         <div id="feed" className="feed">
             <div className="feed-grid">
                 { 
-                    status === 'succeeded' &&
+                    status === 'success' ?
                     arrangePosts(posts, targetDevice === 'mobile' ? 2 : targetDevice === 'tablet' ? 3 : 4 ).map((column, i) => 
                         <div className="feed-grid_column">
                             { column.map((post, i) => <FeedPost {...{ ...post, i, key: i }}/> ) }
                         </div> 
-                    ) 
+                    )  :
+                    <Loader/>
                 }
             </div>
         </div>

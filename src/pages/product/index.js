@@ -18,7 +18,8 @@ export function ProductPage({ closeButton }, ref) {
 
     React.useEffect(() => {
         if ( status === 'idle' ) {
-            fetch(`${ API_URL }products/slug=${ slugParam }`)
+            // fetch(`${ API_URL }products/slug=${ slugParam }`)
+            fetch(`${ API_URL }products/slug=098W`)
                 .then( data => data.json() )
                 .then( data => {
                     setItem( data[0] );
@@ -28,52 +29,24 @@ export function ProductPage({ closeButton }, ref) {
         }
     }, []);
 
-    //User interaction logic
-    const [variant, setVariant] = React.useState(0);
-    const [config, setConfig] = React.useState({ color: 'black' });
-    
-    function findVariant() {
-        const variant =
-        variants.findIndex(item => {
-            let found = false;
-
-            for ( const [option, value] of Object.entries(config) ) {
-                if ( item[option] !== value ) {
-                    found = false;
-                    continue;
-                }
-                
-                found = true;
-            }
-
-            return found;
-        })
-        
-        setVariant( variant );
-    }
-
-    React.useEffect(() => {
-        if ( status === 'succeeded' ) findVariant();
-    }, [status, config])
-
     const targetDevice = useSelector( state => state.device.target );
 
-    //Destructuring data
+    const [currVar, setCurrVar] = React.useState(0);
+
     const {
         _id: id,
+        categories,
         slug,
         name,
+        images,
         variants,
         attributes,
-        description,
+        attributeMap: attrMap,
+        materials,
+        desc,
         specs,
-        sku,
-        meta,
         prices,
-        onSale,
-        salePrices
     } = item;
-
 
     return(
         <main ref={ ref } id="product-page" className="product-page">
@@ -83,30 +56,30 @@ export function ProductPage({ closeButton }, ref) {
                {
                     targetDevice !== 'mobile' &&
                     <div className="product-page_suggested-wrapper">
-                        <Product.Suggested/>
+                        <Product.Suggested {...{materials, cat: categories[0], exclude: slug}}/>
                     </div>
                 }
 
                 <div className="product-page_product-wrapper">
                     <div className="product-page_product">
                         <Product.Header {...{ name, closeButton, slug, id }}/>
-                        <Product.Gallery images={ variants[variant].images }/>
+                        <Product.Gallery images={ variants[currVar].images.concat(images) }/>
 
                         <div className="product-options-wrapper">
                             <h3>Конфигурация товара</h3>
-                            <Product.Options attributes={ attributes } shown={ 3 } {...{ config, setConfig }}/>
+                            <Product.Options {...{ show: 3, vars: variants, setCurrVar, attrMap }}/>
                         </div>
 
-                        <Product.Details {...{ description, specs, sku, stock: meta.stock }}/>
-                        { targetDevice === 'mobile' && <Product.Suggested/> }
+                        <Product.Details {...{ desc, specs, sku: variants[currVar].sku, stock: variants[currVar].stock }}/>
+                        {/* { targetDevice === 'mobile' && <Product.Suggested/> } */}
                         {
                             targetDevice === 'mobile' ?
                             <div className="product-purchase-wrapper">
-                                <Product.Price prices={ !onSale ? prices : salePrices }/>
+                                <Product.Price {...{prices}}/>
                                 <Product.AddToCart/>
                             </div> :
                             <>
-                                <Product.Price prices={ !onSale ? prices : salePrices }/>
+                                <Product.Price {...{prices}}/>
                                 <Product.AddToCart/>
                             </>                            
                         }

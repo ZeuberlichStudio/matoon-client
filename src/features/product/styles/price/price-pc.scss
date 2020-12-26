@@ -24,11 +24,15 @@
             }
         }
 
-        &_total { @include proxima-bold( get-vw(26px) ); }
+        &_total { 
+            @include proxima-bold( get-vw(26px) ); 
+            font-family: 'Roboto';
+        }
 
         &_single { 
             @include proxima-semibold( get-vw(18px) ); 
             color: rgba( $black, .2 );
+            font-family: 'Roboto';
         }
     }
 }

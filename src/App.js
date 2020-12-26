@@ -3,7 +3,7 @@ import { Route, Switch, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import loadable from '@loadable/component';
 import routesConfig from 'app/routes';
-
+import { SpinningLoader as Loader } from 'features/loader';
 import { listenToResize, setPlatform } from 'app/device';
 import { toggleMenu, toggleSearch, toggleFavourite } from 'app/ui';
 
@@ -12,7 +12,7 @@ import './style.scss';
 const routes = routesConfig.reduce( (acc, next) => {
 
     acc[next.componentName] = loadable( () => import(`./${next.moduleName}.js`), {
-        fallback: <span>loading...</span>
+        fallback: <Loader fixed={true}/>
     });
 
     return acc;

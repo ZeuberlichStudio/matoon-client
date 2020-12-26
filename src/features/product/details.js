@@ -4,7 +4,7 @@ import { Tabs, Tab } from 'features/tabs/tabs';
 
 import './styles/details.scss';
 
-export default function ProductDetails({ description, specs, sku, stock }) {
+export default function ProductDetails({ desc, specs, sku, stock }) {
 
     const renderSpec = (spec, i) => {
         const [specName, specValue] = spec;
@@ -24,10 +24,10 @@ export default function ProductDetails({ description, specs, sku, stock }) {
 
             <Tabs className="product-details_more">
                 <Tab title="Описание">
-                    <p>{ description }</p>
+                    <p>{ desc }</p>
                 </Tab>
                 <Tab title="Характеристики">
-                    <ul>{ Object.entries(specs).map( renderSpec ) }</ul>
+                    <ul>{ specs.map( renderSpec ) }</ul>
                 </Tab>
             </Tabs>
         </div>

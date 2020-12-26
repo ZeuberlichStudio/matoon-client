@@ -51,6 +51,7 @@
         'options options'
         'info info'
         'link share';
+        grid-template-rows: 1fr;
         grid-auto-rows: max-content;
         grid-gap: m-get-vw(8px);
 
@@ -88,6 +89,7 @@
                 span {
                     float: right;
                     color: rgba($black, .5);
+                    font-family: 'Roboto';
                 }
             }
 

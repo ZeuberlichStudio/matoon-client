@@ -16,16 +16,19 @@ function FavouriteProduct({ data, status, config, setConfig, variant, buttonCall
 
     const targetDevice = useSelector( state => state.device.target );
 
+    const [currVar, setCurrVar] = React.useState(0);
+
     const {
-        name,
+        _id: id,
         slug,
+        name,
+        images,
         variants,
         attributes,
-        sku,
-        meta,
-        description,
+        attributeMap: attrMap,
+        desc,
         specs,
-        prices
+        prices,
     } = data;
 
     const closeButton = <CloseButton callback={ buttonCallback }/>;
@@ -35,22 +38,22 @@ function FavouriteProduct({ data, status, config, setConfig, variant, buttonCall
             <Header {...{ name, slug, closeButton }}/>
             {
                 targetDevice !== 'tablet' ?
-                <Gallery images={ variants && variants[variant].images }/> :
-                <TabletGallery images={ variants && variants[variant].images }/>
+                <Gallery images={variants[currVar].images.concat(images)}/> :
+                <TabletGallery images={variants[currVar].images.concat(images)}/>
             }
             <div className="product-options-wrapper">
                 <h3> Конфигурация товара </h3>
-                <Options {...{ attributes: attributes || [], config, setConfig, variant }}/>
+                <Options {...{ show: 3, vars: variants, setCurrVar, attrMap }}/>
             </div>
-            <Details {...{ description, specs, sku, stock: meta.stock }}/>
+            <Details {...{ desc, specs, sku: variants[currVar].sku, stock: variants[currVar].stock }}/>
             {
                 targetDevice === 'desktop' ?
                 <>
-                    <Price {...{ prices, stock: meta.stock }}/>
+                    <Price {...{prices}}/>
                     <AddToCart/>
                 </> :
                 <div className="product-buy">
-                    <Price {...{ prices, stock: meta.stock }}/>
+                    <Price {...{prices}}/>
                     <AddToCart/>
                 </div>
             }
@@ -58,13 +61,16 @@ function FavouriteProduct({ data, status, config, setConfig, variant, buttonCall
     );
 }
 
-const { API_URL } = process.env;
+const { CDN_URL } = process.env;
 
 function TabletGallery({images}) {
+
+    const formFullPath = path => CDN_URL = path;
+
     return (
         <div className="product-gallery">
             <Scrollable>
-                { images && images.map( ( image, i ) =>  <img src={API_URL + image} alt="" key={i}/> ) }
+                { images && images.map( ( image, i ) =>  <img src={formFullPath(image)} alt="" key={i}/> ) }
             </Scrollable>
         </div>
     );
@@ -78,4 +84,4 @@ function CloseButton({callback}) {
     );
 }
 
-export default withConfig(FavouriteProduct);
+export default FavouriteProduct;

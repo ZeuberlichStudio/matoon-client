@@ -15,31 +15,31 @@ import {
 import './product-item.scss';
 
 const { API_URL } = process.env;
+const { CDN_URL } = process.env;
+const formFullPath = path => CDN_URL + path;
 
 export function ProductItemSuggested({data, i}) {
     const {
         id,
         slug,
-        variants,
+        images,
         name,
-        shortDescription,
-        price
+        desc,
+        prices
     } = data;
-
-    const image = variants[0].images[0];
 
     return (
         <div className={`product-item-suggested`} key={ i }>
             <div className="product-item-suggested_image">
-                <img src={ API_URL + image } alt={ name }/>
+                <img src={formFullPath(images[0])} alt={ name }/>
             </div>
 
             <div className="product-item-suggested_info">
                 <div className="product-item-suggested_info_name-and-price">
-                    <span>{ price + 'Р' }</span>
+                    <span>{ prices[0].amount + 'Р' }</span>
                     <h2>{ name }</h2>
                 </div>
-                <div className="product-item-suggested_info_desc">{ shortDescription }</div>
+                <div className="product-item-suggested_info_desc">{desc}</div>
             </div>
 
             <div className="product-item-suggested_link">
@@ -54,15 +54,13 @@ export function ProductItemMini({data, i}) {
     const {
         _id: id,
         slug,
-        variants,
+        images,
         name,
-        shortDescription,
-        price,
-        salePrice,
+        desc,
+        prices,
+        salePrices,
         onSale
     } = data;
-
-    const image = variants[0].images[0];
 
     const backgroundLocation = useLocation();
 
@@ -71,36 +69,37 @@ export function ProductItemMini({data, i}) {
         state: { backgroundLocation }
     }
 
-    const discount = '-' + parseInt((price - salePrice) / price * 100) + '%' ;
+    const formFullPath = path => CDN_URL + path;
+    const discount = (price, salePrice) => '-' + parseInt((price - salePrice) / price * 100) + '%' ;
+
+    // const saleMarker = (
+    //     <span>
+    //         <span className='discount-price'>{ salePrices[0].amount + '₽' }</span>
+    //         <span className="old-price">{`Было ${prices[0].amount} ₽`}</span>
+    //     </span>
+    // );
 
     return (
         <div className={`product-item product-item-${ i } product-item-mini`} key={ i }>
             {
                 onSale &&
                 <div className="product-item-mini_discount">
-                    <span>{ discount }</span>
+                    <span>{ discount(0, 0) }</span>
                 </div>
             }
 
             <div className="product-item-mini_image">
-                <img src={ API_URL + image } alt={ name }/>
+                <img src={formFullPath(images[0])} alt={name}/>
             </div>
 
             <ProductShare {...{ slug, id }}/>
 
             <div className="product-item-mini_info">
-                <div className="product-item-mini_info_name-and-price">
-                    {
-                        onSale ?
-                        <span>
-                            <span className='discount-price'>{ salePrice + '₽' }</span>
-                            <span className="old-price">{`Было ${price} ₽`}</span>
-                        </span> :
-                        <span>{ price + '₽' }</span>
-                    }
-                    <h2>{ name }</h2>
+                <div className="product-item-mini_info_name-and-price">                        
+                    <span>{ prices[0].amount + '₽' }</span>
+                    <h2>{name}</h2>
                 </div>
-                <div className="product-item-mini_info_desc">{ shortDescription }</div>
+                <div className="product-item-mini_info_desc">{desc}</div>
             </div>
 
             <div className="product-item-mini_link">
@@ -112,61 +111,32 @@ export function ProductItemMini({data, i}) {
 
 export function ProductItemFull({data, i}) {
 
+    const [currVar, setCurrVar] = React.useState(0);
+
     const {
         _id: id,
         slug,
-        variants,
         name,
-        sku,
-        description,
-        specs,
+        images,
+        variants,
         attributes,
+        attributeMap: attrMap,
+        desc,
+        specs,
         prices,
-        onSale,
-        salePrices,
-        meta
     } = data;
-
-    //User interaction logic
-    const [variant, setVariant] = React.useState(0);
-    const [config, setConfig] = React.useState({ color: 'black' });
-    
-    function findVariant() {
-        const variant =
-        variants.findIndex(item => {
-            let found = false;
-
-            for ( const [option, value] of Object.entries(config) ) {
-                if ( item[option] !== value ) {
-                    found = false;
-                    continue;
-                }
-                
-                found = true;
-            }
-
-            return found;
-        })
-
-        setVariant( variant );
-    }
-
-    React.useEffect(() => {
-        findVariant();
-    }, [config])
-
 
     return (
         <div className={`product-item product-item-${ i } product-item-full`}>
-            <ProductGallery images={ variants[variant].images }/>
+            <ProductGallery images={variants[currVar].images.concat(images)}/>
 
-            <h2 className="product-name">{ name }</h2>
+            <h2 className="product-name">{name}</h2>
 
-            <ProductOptions {...{attributes, config, setConfig}}/>
+            <ProductOptions {...{ show: 3, vars: variants, setCurrVar, attrMap }}/>
 
-            <ProductDetails {...{ description, specs, sku, stock: meta.stock }}/>
+            <ProductDetails {...{ desc, specs, sku: variants[currVar].sku, stock: variants[currVar].stock }}/>
 
-            <ProductPrice prices={ !onSale ? prices : salePrices }/>
+            <ProductPrice prices={prices}/>
 
             <ProductAddToCart />
 

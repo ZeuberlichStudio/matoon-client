@@ -1,0 +1,51 @@
+@import 'assets/scss/index.scss';
+
+.loader-container {
+    width: max-content;
+    height: max-content;
+    position: absolute;
+    left: 0; right: 0;
+    top: 0; bottom: 0;
+    margin: auto;
+}
+
+.spinning-loader {
+    border-radius: 50%;
+    border: solid rgba( $black, .1 );
+    border-left-color: rgba( $black, .6 );
+    animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate{
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .spinning-loader {
+        width: var(--loaderWidth, #{get-vw(100px)});
+        height: var(--loaderWidth, #{get-vw(100px)});
+        border-width: var(--loaderBorder, #{get-vw(8px)});
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023.5px) {
+    .spinning-loader {
+        width: var(--loaderWidth, #{t-get-vw(80px)});
+        height: var(--loaderHeight, #{t-get-vw(80px)});
+        border-width: var(--loaderBorder, #{t-get-vw(6px)});
+    }
+}
+
+@media screen and (max-width: 767.5px) {
+    .spinning-loader {
+        width: var(--loaderWidth, #{m-get-vw(50px)});
+        height: var(--loaderHeight, #{m-get-vw(50px)});
+        border-width: var(--loaderBorder, #{m-get-vw(4px)});
+    }
+}

@@ -38,7 +38,7 @@ export default function MainPage() {
 
     return (
         <main id="title-page" className="title-page">
-            { bannerPosts[0] && <Banner {...bannerData}/> }
+            { <Banner {...bannerData}/> }
             <Feed/>
         </main>
     );

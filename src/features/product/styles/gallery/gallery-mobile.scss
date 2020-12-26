@@ -1,6 +1,6 @@
 @media screen and (max-width: 767px) {
     .product-gallery {
-        height: max-content;
+        height: 100%;
         display: flex;
 
         img {
@@ -13,9 +13,8 @@
         }
 
         &_selected {
-            flex-grow: 1;
-            height: m-get-vw(278px);
-            max-height: m-get-vw(360px);
+            width: 100%;
+            height: m-get-vw(360px);
 
             background-color: rgba($black, .1);
             border-radius: m-get-vw(16px); 

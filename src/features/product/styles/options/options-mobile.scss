@@ -2,16 +2,33 @@
     .product-options {
         width: max-content;
         max-width: m-get-vw(315px);
+
+        display: grid;
+        grid-auto-rows: max-content;
+        grid-row-gap: m-get-vw(12px);
     }
 
-    .product-options_attribute-block {
+    .product-options_attr-set {
         width: 100%;
 
         --scrollablePadding: #{ m-get-vw(6px) };
         --scrollableGap: #{ m-get-vw(6px) };
+
+        &:not(:last-child)::after {
+            height: m-get-vw(1.5px);
+            left: m-get-vw(20px);
+            right: m-get-vw(20px);
+            bottom: m-get-vw(-6.75px);
+
+            position: absolute;
+
+            background-color: rgba( $black, .05 );
+
+            content: '';
+        }
     }
 
-    .product-option {
+    .attr {
         @include m-button-small;
         color: var( --colorData, $black );
         border-color: var( --colorData, $black );

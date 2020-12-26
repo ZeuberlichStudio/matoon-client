@@ -40,6 +40,7 @@
                 span {
                     float: right;
                     color: rgba($black, .5);
+                    font-family: 'Roboto';
                 }
             }
         
@@ -183,12 +184,14 @@
                 span {
                     float: right;
                     color: rgba($black, .5);
+                    font-family: 'Roboto';
                 }
 
                 
                 .discount-price { 
                     position: relative;
                     color: #FF6666;
+                    font-family: 'Roboto';
                 }
 
                 .old-price {
@@ -196,6 +199,7 @@
                     right: 0; bottom: t-get-vw(-10px);
                     position: absolute;
                     @include proxima-bold(t-get-vw(12px));
+                    font-family: 'Roboto';
                 }
             }
         
