@@ -23,10 +23,10 @@ function Search({ mini, focusCallback, cat }) {
     const limit = 3;
 
     function fetchResult() {
-        fetch( API_URL + `products?search=${ string }&sort=name,1&limit=${ limit }&cat=${ cat ? 'cat' : '' }` )
+        fetch( API_URL + `products?search=${string.replace(' ', '%20')}&sort=name,1&limit=${ limit }&cat=${ cat ? 'cat' : '' }` )
             .then(data => data.json())
             .then(results => {
-                setResuts(results);
+                setResuts(results.rows || []);
                 setStatus('succeeded');
             })
             .catch(err => {
@@ -38,7 +38,7 @@ function Search({ mini, focusCallback, cat }) {
     const [open, setOpen] = React.useState(false);
 
     React.useEffect(() => {
-        if ( string && string.length > 1 ) {
+        if ( string && string.length > 2 ) {
             fetchResult();
             setOpen(true);
         } else {
