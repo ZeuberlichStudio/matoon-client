@@ -24,19 +24,19 @@ function FavouriteList({ closeButton, setProduct, setColumn }) {
         if ( !itemSlugs[0] ) {
             setData([]);
         } else {
-        const endpoint = `${API_URL}products/slug=${generateQuery()}`;
+            const endpoint = `${API_URL}products/slug=${generateQuery()}`;
 
-        fetch(endpoint)
-            .then( data =>  data.json() )
-            .then( result => {
-                setStatus('succeeded');
-                setData(result);
-                console.log(result);
-            })
-            .catch( err => {
-                setStatus('failed');
-                setError(err);
-            });
+            fetch(endpoint)
+                .then( data =>  data.json() )
+                .then( result => {
+                    setStatus('succeeded');
+                    setData(result);
+                    console.log(result);
+                })
+                .catch( err => {
+                    setStatus('failed');
+                    setError(err);
+                });
         }
     }, [itemSlugs]);
 

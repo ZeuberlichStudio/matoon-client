@@ -1,0 +1,161 @@
+@import 'assets/scss/index.scss';
+
+@media screen and (min-width: 1024px) {
+    .cart {
+        height: 100vh;
+        padding: get-vw(98px) get-vw(16px);
+
+    }
+
+    .cart-wrapper {
+        width: get-vw(422px);
+        height: 100%;
+
+        border: get-vw(1px) solid rgba( $black, .1 );
+        border-radius: get-vw(28px);
+
+        .slider {
+            --slideWidth: #{get-vw(420px)};
+            &_slides-wrapper { 
+                border-radius: get-vw(28px);
+            }
+        }
+    }
+
+    .cart-block {
+        width: get-vw(420px);
+        height: 100%;
+        padding: get-vw(12px);
+
+        display: grid;
+        grid-template-rows: max-content 1fr max-content;
+
+        background-color: white;
+        border-radius: get-vw(28px);
+
+        overflow: hidden scroll;
+        @include hide-scrollbar;
+
+        // &_content {
+        //     height: 100%;
+        // }
+
+        //headers
+        h3 { 
+            padding-left: get-vw(12px);
+            @include proxima-bold(get-vw(18px)); 
+        }
+        
+        //fields
+        label {
+            margin-top: get-vw(4px);
+            display: block;
+
+            span { padding-left: get-vw(12px); }
+            @include proxima-regular(get-vw(16px), get-vw(32px));
+        }
+        
+        input {
+            width: 100%;
+            height: get-vw(34px);
+            padding: 0 get-vw(12px);
+
+            @include proxima-bold(get-vw(16px));
+            color: rgba($black, .4);
+            &::placeholder { color: rgba($black, .25); }
+
+            background-color: rgba($black, .1);
+            border-radius: get-vw(8px);
+        }
+    }
+
+    .cart-header {
+        width: 100%;
+        height: get-vw(48px);
+
+        position: sticky;
+        top: 0;
+
+        @include proxima-bold(get-vw(18px), get-vw(48px));
+        text-align: center;
+
+        background-color: white;
+        border-radius: get-vw(16px);
+        box-shadow: 0 0 get-vw(10px) rgba($black, .1);
+
+        z-index: 2;
+
+        &_back {
+            @include button-small;
+            @include button-picture( rgba($black, .5), 'assets/images/icon_arrow.svg' );
+            width: get-vw(34px);
+            height: get-vw(34px);
+
+            position: absolute;
+            left: get-vw(8px);
+            top: get-vw(8px);
+        
+            border: none;
+            background-color: white;
+            box-shadow: 0 0 get-vw(10px) rgba( $black, .1 );
+        }
+
+        #modal-close {
+            position: absolute;
+            right: get-vw(8px);
+            top: get-vw(8px);
+        }
+    }
+
+    .cart-controls {
+        width: 100%;
+        height: max-content;
+        padding: get-vw(12px);
+
+        position: sticky;
+        bottom: 0;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        @include proxima-bold(get-vw(18px), get-vw(48px));
+        text-align: center;
+
+        background-color: white;
+        border-radius: get-vw(16px);
+        box-shadow: 0 0 get-vw(10px) rgba($black, .1);
+
+        z-index: 2;
+
+        &_cost {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+
+            li {
+                height: get-vw(24px);
+                display: flex;
+                align-items: center;
+
+                span:first-child { @include proxima-bold(get-vw(16px)); }
+
+                span:last-child { 
+                    @include proxima-regular(get-vw(16px)); 
+                    font-family: 'Roboto';
+                }
+
+                hr { 
+                    flex-grow: 1;
+                    margin: 0 get-vw(12px);
+                    border-top: get-vw(1px) dashed rgba($black, .5); 
+                }
+            }
+        }
+
+        &_next {
+            margin: get-vw(18px) 0;
+            @include button-medium;
+        }
+    }
+}

@@ -1,0 +1,123 @@
+@import 'assets/scss/index.scss';
+
+@media screen and (min-width: 1024px) {
+    .cart-customer {
+        //headers
+        h3 { 
+            padding-left: get-vw(12px);
+            @include proxima-bold(get-vw(18px)); 
+        }
+
+        //fields
+        label {
+            span { padding-left: get-vw(12px); }
+            @include proxima-regular(get-vw(16px), get-vw(32px));
+        }
+
+        input {
+            width: 100%;
+            height: get-vw(34px);
+            padding: 0 get-vw(12px);
+
+            @include proxima-bold(get-vw(16px));
+            color: rgba($black, .4);
+            &::placeholder { color: rgba($black, .25); }
+
+            background-color: rgba($black, .1);
+            border-radius: get-vw(8px);
+        }
+    }
+
+    .cart-customer_main-info {
+        margin-top: get-vw(32px);
+
+        display: grid;
+        grid-column-gap: get-vw(8px);
+        
+        h3 { grid-column: span 2; }
+        & > :last-child { grid-column: span 2; }
+    }
+
+    //methods section
+
+    .cart-customer_contact-method {
+        margin-top: get-vw(32px);
+
+        &_methods {
+            display: grid;
+            grid-auto-rows: max-content;
+            grid-row-gap: get-vw(12px);
+
+            & > :not(:first-child)::before {
+                width: get-vw(280px);
+                height: get-vw(1.5px);
+    
+                position: absolute;
+                left: 0; right: 0;
+                top: get-vw(-18px);
+                margin: auto;
+    
+                background-color: rgba($black, .1);
+                content: '';
+            }
+        }
+    }
+
+    //method
+
+    .contact-method-group {
+        margin: get-vw(12px) 0;
+
+        position: relative;
+        z-index: 1;
+
+        h4 { 
+            padding-left: get-vw(12px); 
+            @include proxima-semibold(get-vw(16px), get-vw(26px)); 
+        }
+
+        &_options {
+            margin: get-vw(4px) 0;
+
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: max-content;
+            grid-column-gap: get-vw(8px);
+        }
+    }
+
+    .contact-method-group.active {
+        &::after {
+            left: get-vw(-6px);
+            right: get-vw(-6px);
+            top: get-vw(-6px);
+            bottom: get-vw(-6px);
+
+            position: absolute;
+
+            background-color: rgba( $black, .1 );
+            border-radius: get-vw(16px);
+            z-index: -1;
+            content: ''; 
+        }
+    }
+
+    //method option
+
+    .contact-method-option {
+        width: max-content;
+        height: get-vw(34px);
+        padding: 0 get-vw(12px);
+
+        @include proxima-semibold(get-vw(16px), get-vw(30px));
+
+        color: var(--colorData, $black);
+        border: get-vw(2px) solid var(--colorData, $black);
+        border-radius: get-vw(8px);
+    
+        &.active { 
+            color: white;
+            background-color: var(--colorData, $black); 
+        }
+    }
+}

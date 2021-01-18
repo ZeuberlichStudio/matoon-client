@@ -18,8 +18,7 @@ export function ProductPage({ closeButton }, ref) {
 
     React.useEffect(() => {
         if ( status === 'idle' ) {
-            // fetch(`${ API_URL }products/slug=${ slugParam }`)
-            fetch(`${ API_URL }products/slug=098W`)
+            fetch(`${ API_URL }products/slug=${ slugParam }`)
                 .then( data => data.json() )
                 .then( data => {
                     setItem( data[0] );
@@ -39,7 +38,7 @@ export function ProductPage({ closeButton }, ref) {
         slug,
         name,
         images,
-        variants,
+        variations,
         attributes,
         attributeMap: attrMap,
         materials,
@@ -63,14 +62,14 @@ export function ProductPage({ closeButton }, ref) {
                 <div className="product-page_product-wrapper">
                     <div className="product-page_product">
                         <Product.Header {...{ name, closeButton, slug, id }}/>
-                        <Product.Gallery images={ variants[currVar].images.concat(images) }/>
+                        <Product.Gallery images={ variations[currVar].images.concat(images) }/>
 
                         <div className="product-options-wrapper">
                             <h3>Конфигурация товара</h3>
-                            <Product.Options {...{ show: 3, vars: variants, setCurrVar, attrMap }}/>
+                            <Product.Options {...{ show: 3, vars: variations, setCurrVar, attrMap }}/>
                         </div>
 
-                        <Product.Details {...{ desc, specs, sku: variants[currVar].sku, stock: variants[currVar].stock }}/>
+                        <Product.Details {...{ desc, specs, sku: variations[currVar].sku, stock: variations[currVar].stock }}/>
                         {/* { targetDevice === 'mobile' && <Product.Suggested/> } */}
                         {
                             targetDevice === 'mobile' ?

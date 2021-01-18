@@ -1,0 +1,93 @@
+@import 'assets/scss/index.scss';
+
+@media screen and (min-width: 1024px) {
+    .cart-options {
+        h4 { 
+            padding-left: get-vw(12px); 
+            @include proxima-semibold(get-vw(16px), get-vw(26px)); 
+        }
+
+        &_list {
+            display: grid;
+            grid-auto-rows: max-content;
+            grid-row-gap: get-vw(12px);
+    
+            & > :not(:first-child)::before {
+                width: get-vw(280px);
+                height: get-vw(1.5px);
+    
+                position: absolute;
+                left: 0; right: 0;
+                top: get-vw(-18px);
+                margin: auto;
+    
+                background-color: rgba($black, .1);
+                content: '';
+            }
+        }
+    }
+
+    .cart-options-group {
+        margin: get-vw(12px) 0;
+
+        position: relative;
+        z-index: 1;
+
+        h4 { 
+            padding-left: get-vw(12px); 
+            @include proxima-semibold(get-vw(16px), get-vw(26px)); 
+        }
+
+        &_options {
+            margin: get-vw(4px) 0;
+
+            display: flex;
+            flex-wrap: wrap;
+
+            & > * {
+                margin: get-vw(4px);
+            }
+        }
+
+        &_option-details {
+            & > span { 
+                padding: 0 get-vw(12px);
+                margin: get-vw(8px) 0;
+                display: block;
+                @include proxima-semibold(get-vw(16px), get-vw(18px)); 
+                color: rgba( $black, .4 );
+            }
+        }
+
+        &.active::after {
+            left: get-vw(-6px);
+            right: get-vw(-6px);
+            top: get-vw(-6px);
+            bottom: get-vw(-6px);
+
+            position: absolute;
+
+            background-color: rgba( $black, .1 );
+            border-radius: get-vw(16px);
+            z-index: -1;
+            content: ''; 
+        }
+    }
+
+    .cart-option {
+        width: max-content;
+        height: get-vw(34px);
+        padding: 0 get-vw(14px);
+
+        @include proxima-semibold(get-vw(16px), get-vw(30px));
+
+        color: var(--colorData, $black);
+        border: get-vw(2px) solid var(--colorData, $black);
+        border-radius: get-vw(8px);
+
+        &.active { 
+            color: white;
+            background-color: var(--colorData, $black); 
+        }
+    }
+}

@@ -49,8 +49,7 @@ function Header({ toggleMenu }) {
             <button className="app-header_info"><span>О нас</span></button>
 
             <button onClick={ () => toggleUIClickHandler('favourite') } className="app-header_favourite"><span></span></button>
-            <button className="app-header_cart"><span></span></button>
-            <button className="app-header_account"><span></span></button>
+            <button onClick={ () => toggleUIClickHandler('cart') } className="app-header_cart"><span></span></button>
 
             { targetDevice === 'mobile' && <button className="app-header_more"><span></span></button> }
         </header>

@@ -13,4 +13,8 @@ const SpinningLoader = ({fixed}) => (
     </div>
 );
 
-export {SpinningLoader};
+function withLoader(jsx, Loader, status) {
+    return status !== 'success' ? <Loader/> : jsx
+};
+
+export {SpinningLoader, withLoader};

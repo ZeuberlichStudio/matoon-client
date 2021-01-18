@@ -1,0 +1,15 @@
+@import '../mixins.scss';
+
+@media screen and (min-width: 1024px) {
+    .cart-delivery_methods {
+        @include methods-list;
+    }
+
+    .delivery-methods-group {
+        @include methods-group;
+    }
+
+    .delivery-method-option {
+        @include method-option;
+    }
+}

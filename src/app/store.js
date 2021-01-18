@@ -5,6 +5,7 @@ import productsReducer from 'features/catalog/productsSlice';
 import queryReducer from 'features/catalog/querySlice';
 import filtersReducer from 'features/filters/filtersSlice';
 import favReducer from 'features/favourite/favSlice';
+import cartReducer from 'features/cart/slice';
 
 export default configureStore({
     reducer: {
@@ -13,6 +14,7 @@ export default configureStore({
         products: productsReducer,
         query: queryReducer,
         filters: filtersReducer,
-        favourite: favReducer
+        favourite: favReducer,
+        cart: cartReducer
     }
 });

@@ -1,0 +1,131 @@
+@import 'assets/scss/index.scss';
+
+@media screen and (min-width: 1024px) {
+    .cart-list {
+        width: 100%;
+        min-height: 100%;
+        display: grid;
+        grid-auto-rows: max-content;
+        grid-row-gap: get-vw(34px);
+
+        z-index: 1;
+    }
+
+    .cart-item {
+        width: 100%;
+        padding: get-vw(4px);
+        display: grid;
+        grid-template: repeat(3, max-content) 1fr / max-content 1fr;
+        grid-template-areas: 
+        'thumbnail name'
+        'thumbnail sku'
+        'thumbnail config'
+        'thumbnail price';
+        grid-gap: get-vw(8px);
+
+        color: $black;
+
+        &_thumbnail {
+            grid-area: thumbnail;
+            width: get-vw(120px);
+            height: get-vw(152px);
+
+            object-fit: cover;
+            object-position: center;
+
+            border-radius: get-vw(12px);
+            box-shadow: 0px 0px get-vw(10px) rgba($black, .1);
+        }
+
+        &_name {
+            grid-area: name;
+            @include proxima-bold(get-vw(18px), get-vw(20px));
+        }
+
+        &_sku {
+            grid-area: sku;
+            @include proxima-bold(get-vw(16px));
+            opacity: .5;
+        }
+
+        &_config {
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: max-content;
+            grid-column-gap: get-vw(8px);
+
+            div {
+                width: max-content;
+                height: get-vw(28px);
+                padding: 0 get-vw(12px);
+
+                @include proxima-semibold(get-vw(16px), get-vw(28px));
+
+                border-radius: get-vw(8px);
+                background-color: var(--colorData, $black);
+                color: white;
+            }
+        }
+
+        &_price {
+            align-self: flex-end;
+            display: flex;
+            justify-content: space-between;
+
+            &_qty {
+                width: get-vw(108px);
+                height: get-vw(32px);
+                position: relative;
+                
+                background-color: rgba($black, .05);
+                border-radius: get-vw(12px);
+
+                input {
+                    padding-left: get-vw(10px);
+                    @include proxima-regular(get-vw(18px), get-vw(32px));
+                    color: $black;
+                }
+
+                &_remove {
+                    width: get-vw(32px);
+                    height: get-vw(32px);
+                    top: 0;
+                    right: 0;
+                    position: absolute;
+
+                    //
+                    background-color: rgba($black, .6);
+                    mask-image: url('assets/images/icon_trash.svg');
+                    mask-size: get-vw(22px);
+                    mask-position: center;
+                    mask-repeat: no-repeat;
+                    //
+                }
+            }
+
+            &_sum {
+                padding-right: get-vw(12px);
+                @include proxima-semibold(get-vw(18px), get-vw(32px));
+                font-family: 'Roboto';
+            }
+        }
+    }
+
+    .cart-item:hover {
+        position: relative;
+
+        &:hover::after {
+            left: get-vw(-6px);
+            right: get-vw(-6px);
+            top: get-vw(-6px);
+            bottom: get-vw(-6px);
+
+            position: absolute;
+
+            background-color: rgba( $black, .1 );
+            border-radius: get-vw(22px);
+            z-index: -1;
+            content: ''; 
+        }
+    }
+}

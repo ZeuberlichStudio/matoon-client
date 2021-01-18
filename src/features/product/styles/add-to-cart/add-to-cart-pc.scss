@@ -11,4 +11,10 @@
             color: white;
         }
     }
+
+    .product-add-to-cart.added {
+        button {
+            background-color: $salad;
+        }
+    }
 }

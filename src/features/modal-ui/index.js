@@ -4,6 +4,7 @@ import Modal from 'features/new-modal';
 import { setModalElement, animateModalElement } from 'app/ui';
 import Menu from 'features/categories';
 import Favourite from 'features/favourite';
+import Cart from 'features/cart';
 
 function ModalUI() {
 
@@ -13,7 +14,7 @@ function ModalUI() {
 
     const animation = 
         modalElement === 'menu' ? 'slideFromLeft' :
-        modalElement === 'favourite' ? 'slideFromRight' :
+        modalElement === ('favourite' || 'cart') ? 'slideFromRight' :
         'scale';
 
     return (
@@ -24,6 +25,7 @@ function ModalUI() {
             { 
                 modalElement === 'menu' ? <Menu/> : 
                 modalElement === 'favourite' ? <Favourite/> : 
+                modalElement === 'cart' ? <Cart/> : 
                 <div></div> 
             }
         </Modal>
@@ -42,18 +44,6 @@ function toggleUI( dispatch, actionSet, modalElement, payload ) {
 
         default:
             dispatch(actionSet(payload));
-            // trying to animate before changing content
-            // if ( actionAnimate && timeout ) {
-            //     function animatedToggle() {
-            //         dispatch(actionSet(payload));
-            //         dispatch(actionAnimate(false));
-            //     }
-
-            //     dispatch(actionAnimate(true));
-            //     setTimeout( animatedToggle, 200 );
-            // } else {
-            //     dispatch(actionSet(payload));
-            // }
             break;
     }
 }

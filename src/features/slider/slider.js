@@ -34,7 +34,7 @@ export default function Slider({ children, loop = true, time = 300, id, slide, b
     }
 
     React.useEffect(() => {
-        if ( slide ) goToSlide(slide);
+        if ( typeof(slide) === 'number' ) goToSlide(slide);
     }, [slide]);
 
     const containerStyle = {

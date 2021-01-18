@@ -1,45 +1,21 @@
+import { toInteger } from 'lodash';
 import React from 'react';
 
 import './styles/price.scss';
 
-export default function Price({ stock, prices, salePrices }) {
-
-    const [qty, setQty] = React.useState(1);
-    const [currPrice, setCurrPrice] = React.useState(0);
-
-    // function changeHandler(e) {
-    //     const { value } = e.target;
-
-    //     if ( !value ) setQty( 1 );
-    //     else if ( value <= 0  ) {
-    //         e.target.value = 1;
-    //         return setQty( 1 );
-    //     }
-    //     else setQty( value ? value : 1 );
-    // }
-
-    // function findPrice() {
-    //     const price = prices.find( ({ minQty, maxQty }) => {
-    //         if ( maxQty ) {
-    //             return qty >= minQty && qty <= maxQty;
-    //         } else {
-    //             return true;
-    //         }
-    //     });
-
-    //     setPrice(price);
-    // }
-
+export default function Price({ qty, setQty, prices, stock }) {
     function changeHandler(e) {
-        const { value } = e.target;
+        const { value, valueAsNumber } = e.target;
 
         if ( value <= 0  ) {
             e.target.value = 1;
             return setQty( 1 );
         }
 
-        setQty(value);
+        setQty(valueAsNumber);
     }
+
+    const [currPrice, setCurrPrice] = React.useState(0);
 
     function findPrice() {
         const currPrice = prices.findIndex((price, i) => {

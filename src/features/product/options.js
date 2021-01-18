@@ -33,7 +33,9 @@ function Variants({
 
     React.useEffect(() => {
         if ( !attrMap ) return;
-        selectColorConfig('red');
+        const firstColor = Object.entries(attrMap)[0][0];
+        console.log(firstColor);
+        selectColorConfig(firstColor);
     }, []);
 
     function selectColorConfig( slug ) {

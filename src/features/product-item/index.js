@@ -112,13 +112,14 @@ export function ProductItemMini({data, i}) {
 export function ProductItemFull({data, i}) {
 
     const [currVar, setCurrVar] = React.useState(0);
+    const [qty, setQty] = React.useState(1);
 
     const {
         _id: id,
         slug,
         name,
         images,
-        variants,
+        variations,
         attributes,
         attributeMap: attrMap,
         desc,
@@ -128,17 +129,17 @@ export function ProductItemFull({data, i}) {
 
     return (
         <div className={`product-item product-item-${ i } product-item-full`}>
-            <ProductGallery images={variants[currVar].images.concat(images)}/>
+            <ProductGallery images={variations[currVar].images.concat(images)}/>
 
             <h2 className="product-name">{name}</h2>
 
-            <ProductOptions {...{ show: 3, vars: variants, setCurrVar, attrMap }}/>
+            <ProductOptions {...{ show: 3, vars: variations, setCurrVar, attrMap }}/>
 
-            <ProductDetails {...{ desc, specs, sku: variants[currVar].sku, stock: variants[currVar].stock }}/>
+            <ProductDetails {...{ desc, specs, sku: variations[currVar].sku, stock: variations[currVar].stock }}/>
 
-            <ProductPrice prices={prices}/>
+            <ProductPrice {...{ qty, setQty, prices }}/>
 
-            <ProductAddToCart />
+            <ProductAddToCart {...{ varId: variations[currVar]._id, qty }}/>
 
             <ProductShare {...{ slug, id }}/>
         </div>
