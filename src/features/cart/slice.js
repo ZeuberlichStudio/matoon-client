@@ -1,36 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { isInteger } from 'lodash';
 
 const initialState = {
-    items: [
-        {
-            _id: '5fe8b806e39f4b41c019f33d',
-            qty: 100
-        },
-        {
-            _id: '5fe3c9b3f61d8110c4e9a9ff',
-            qty: 10
-        }
-    ],
+    items: [],
     customer: {
+        name: "",
+        phone: "",
+        mail: ""
+    },
+    contactMethod: {
         name: null,
-        phone: null,
-        mail: null
+        value: null
     },
-    contactBy: {
-        option: null,
-        details: null
+    shippingMethod: {
+        name: null,
+        value: null
     },
-    shipping: {
-        option: null,
-        details: null
-    },
-    payment: {
-        method: null,
-        details: null
-    },
-    coupon: null
-
+    paymentMethod: {
+        name: null,
+        value: null
+    }
 };
 
 const cartSlice = createSlice({
@@ -55,19 +43,94 @@ const cartSlice = createSlice({
                 itemToUpdate.qty !== payload.updateObj.qty || 
                 itemToUpdate.price !== payload.updateObj.price 
             ) {
-                Object.assign(itemToUpdate, payload.updateObj);
+                Object.assign(itemToUpdate, { 
+                    price: payload.updateObj.price, 
+                    qty: payload.updateObj.qty
+                });
             }
         },
+        clearOrderInfo: state => ({...initialState, items: state.items}),
         updateCustomerInfo: (state, {payload}) => { state.customer = {...state.customer, ...payload} },
-        updateContactOption: (state, {payload}) => { state.contactBy = {...state.contactBy, ...payload} },
-        updateShipping: (state, {payload}) => {
-            if ( 
-                typeof(payload.option) !== 'undefined' &&
-                typeof(payload.details) !== 'undefined' 
-            ) state.shipping = payload;
-        } 
+        updateContactMethod: (state, {payload}) => { state.contactMethod = {...state.contactMethod, ...payload} },
+        updateShippingMethod: (state, {payload}) => { state.shippingMethod = {...state.shippingMethod, ...payload} },
+        updatePaymentMethod: (state, {payload}) => { state.paymentMethod = {...state.paymentMethod, ...payload} }
     }
 });
+
+const selectItems = state => state.cart.items;
+
+const selectCustomerInfo = state => {
+    const {customer} = state.cart,
+    customerInfo = {...customer, valid: true};
+
+    //validating customer info
+    if ( !customer.name || !customer.phone || !customer.mail ) {
+        customerInfo.valid = false;
+        return customerInfo;
+    }
+    
+    const phoneRe = /^\+7\s[(]\d{3}[)]\s\d{3}-\d{2}-\d{2}$/;
+    const mailRe = /\S+@\S+\.\S+/;
+    
+    if ( !phoneRe.test(customer.phone) || !mailRe.test(customer.mail) ) {
+        customerInfo.valid = false;
+        return customerInfo;
+    }
+
+    return customerInfo;
+};
+
+const selectTotal = state => {
+    let total = 0;
+    for (const item of state.cart.items) {
+        total = total + item.price * item.qty;
+    }
+    return total;
+}
+
+const selectContactMethod = state => {
+    let valid;
+
+    if ( !state.cart.contactMethod.value ) {
+        valid = false;
+    } else {
+        valid = true;
+    }
+
+    return {...state.cart.contactMethod, valid};
+}
+
+const selectShippingMethod = state => {
+    let valid;
+
+    if ( !state.cart.shippingMethod.value ) {
+        valid = false;
+    } else {
+        valid = true;
+    }
+
+    return {...state.cart.shippingMethod, valid};
+}
+
+const selectPaymentMethod = state => {
+    const {paymentMethod} = state.cart;
+
+    if ( !paymentMethod.name ) {
+        return {...paymentMethod, valid: false};
+    }
+
+    if ( /^выставление сч[её]та$/.test(paymentMethod.name) ) {
+        if (
+            !paymentMethod.value.companyName ||
+            !paymentMethod.value.companyAddress ||
+            !/\d{10}/.test(paymentMethod.value.companyAccountNumber)
+        ) {
+            return {...paymentMethod, valid: false};
+        }
+    }
+
+    return {...paymentMethod, valid: true};
+}
 
 export default cartSlice.reducer;
 export const {
@@ -75,7 +138,18 @@ export const {
     removeItemByIndex,
     removeItemById,
     updateItem,
+    clearOrderInfo,
     updateCustomerInfo,
-    updateContactOption,
-    updateShipping
+    updateContactMethod,
+    updateShippingMethod,
+    updatePaymentMethod
 } = cartSlice.actions;
+
+export {
+    selectItems,
+    selectTotal,
+    selectCustomerInfo,
+    selectContactMethod,
+    selectShippingMethod,
+    selectPaymentMethod
+};

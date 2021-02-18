@@ -1,0 +1,13 @@
+@media screen and (min-width: 768px) and (max-width: 1023.5px) {
+    .cart-empty {
+        padding: t-get-vw(12px) t-get-vw(4px);
+
+        h3 { 
+            padding: 0 0;
+            @include proxima-bold( t-get-vw(14px), t-get-vw(16px) ); 
+        }
+        p, button { @include proxima-regular( t-get-vw(14px), t-get-vw(16px) ); }
+        p { margin-top: t-get-vw(8px); }
+        button { text-decoration: underline; }
+    }
+}

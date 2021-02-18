@@ -3,16 +3,11 @@ import './styles/options/pc.scss';
 
 function OptionsList({
     title,
-    groups,
-    optionCallback,
-    handleDetails
+    groups
 }) {
 
     const [currGroup, setCurrGroup] = React.useState(null);
-
-    function selectGroup(idx) {
-        setCurrGroup(idx);
-    }
+    const selectGroup = (i) => setCurrGroup(i);
 
     return (
         <div className="cart-options">
@@ -25,7 +20,7 @@ function OptionsList({
                             key={i} 
                             active={currGroup === i} 
                             selectGroup={() => selectGroup(i)}
-                            {...{...group, optionCallback}}
+                            {...group}
                         />
                     ))
                 }
@@ -37,27 +32,15 @@ function OptionsList({
 export function OptionsGroup({
     title,
     options,
-    defaultOption,
     selectGroup,
     globalDetailsComponent,
-    optionCallback,
-    handleDetails,
+    optionsCallback,
     active
 }) {
-
     const [currOption, setCurrOption] = React.useState(null);
 
-    React.useEffect(() => defaultOption && setCurrOption(0), []);
-
-    function selectOption(idx) {
-        selectGroup();
-        setCurrOption(idx);
-        optionCallback(options[idx].name);
-    }
-
-    React.useEffect(() => {
-        if (!active && !defaultOption) setCurrOption(null);
-    }, [active]);
+    React.useEffect(() => { selectGroup && currOption != null && selectGroup() }, [currOption]);
+    React.useEffect(() => () => { active && setCurrOption(null) }, [active]);
 
     return (
         <div className={`cart-options-group ${active ? 'active' : ''}`}>
@@ -67,10 +50,10 @@ export function OptionsGroup({
                 { 
                     options?.map((option, i) => (
                         <Option 
-                            key={i} 
+                            key={option.name} 
                             active={currOption === i}
-                            onClick={() => selectOption(i)} 
-                            {...option}
+                            selectOption={() => setCurrOption(i)}
+                            {...{...option, optionsCallback}}
                         />
                     )) 
                 }
@@ -86,16 +69,36 @@ export function OptionsGroup({
 export const Option = ({
     name,
     colorData,
+    payload,
     active,
-    onClick
-}) => (
-    <button 
-        style={{ '--colorData': colorData || null }} 
-        className={`cart-option ${active ? 'active' : ''}`}
-        onClick={onClick}
-    >
-        <span>{name}</span>
-    </button>
-)
+    default: isDefault,
+    selectOption,
+    optionsCallback,
+    dependancy
+}) => {
+
+    function optionHandler() {
+        selectOption();
+        optionsCallback && optionsCallback(payload);
+    }
+
+    React.useEffect(() => { isDefault && optionHandler() }, [isDefault]);
+
+    React.useEffect(() => { 
+        active && 
+        dependancy && 
+        optionsCallback(payload) 
+    }, [dependancy]);
+
+    return (
+        <button 
+            style={{ '--colorData': colorData || null }} 
+            className={`cart-option ${active ? 'active' : ''}`}
+            onClick={optionHandler}
+        >
+            <span>{name}</span>
+        </button>
+    )
+}
 
 export default OptionsList;

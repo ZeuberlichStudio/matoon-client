@@ -1,7 +1,14 @@
 import React from 'react';
 import './slider.scss';
 
-export default function Slider({ children, loop = true, time = 300, id, slide, buttons = true }) {
+export default function Slider({ 
+    children, 
+    loop = true, 
+    time = 300, 
+    id, 
+    slide, 
+    controls = true 
+}) {
 
     const [currentSlide, setCurrentSlide] = React.useState(0);
     const [touchStartX, setTouchStartX] = React.useState(0);
@@ -61,7 +68,7 @@ export default function Slider({ children, loop = true, time = 300, id, slide, b
 
     return (
         <div id={ id } className="slider" style={{ "--slide": currentSlide }}>
-            { buttons && <button className="slider_prev" onClick={ () => goToSlide(currentSlide - 1) }/> }
+            { controls && <button className="slider_prev" onClick={ () => goToSlide(currentSlide - 1) }/> }
             
             <div className="slider_slides-wrapper">
                 <div ref={ containerRef } className="slider_slides-container" style={containerStyle} {...listeners}>
@@ -91,9 +98,9 @@ export default function Slider({ children, loop = true, time = 300, id, slide, b
                 </div>
             </div>
 
-            { buttons && <button className="slider_next" onClick={ () => goToSlide(currentSlide + 1) }/> }
+            { controls && <button className="slider_next" onClick={ () => goToSlide(currentSlide + 1) }/> }
 
-            { buttons && <Indicator {...{slideCount, currentSlide, goToSlide}}/> }
+            <Indicator {...{slideCount, currentSlide, goToSlide: controls && goToSlide}}/>
         </div>
     );
 }
@@ -112,7 +119,12 @@ function Indicator({ slideCount, currentSlide, goToSlide }) {
         const dots = [];
 
         for ( let i = 0; i < slideCount; i++ ) {
-            dots.push(<span onClick={ () => goToSlide(i) } className={`dot ${ i === currentSlide ? 'active' : '' }`}/>);
+            dots.push(
+                <span 
+                    onClick={ () => goToSlide && goToSlide(i) } 
+                    className={`dot ${ i === currentSlide ? 'active' : '' }`}
+                />
+            );
         }
 
         return dots;

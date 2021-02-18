@@ -1,11 +1,13 @@
 @media screen and (min-width: 1024px) {
     .product-grid {
-        grid-area: grid;
-
         width: 100%;
         padding: 
         get-vw(20px) get-vw(40px) 
         get-vw(40px) get-vw(40px);
+    }
+
+    .product-grid_items {
+        grid-area: grid;
 
         display: grid;
         grid-auto-rows: max-content;
@@ -24,5 +26,16 @@
             height: get-vw(440px);
             position: relative;
         }
+    }
+
+    .product-grid_empty {
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @include proxima-semibold(get-vw(24px));
     }
 }

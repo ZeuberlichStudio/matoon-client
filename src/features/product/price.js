@@ -3,30 +3,30 @@ import React from 'react';
 
 import './styles/price.scss';
 
-export default function Price({ qty, setQty, prices, stock }) {
+export default function Price({ 
+    qty, 
+    setQty, 
+    prices, 
+    stock,
+    currPrice,
+    setCurrPrice
+}) {
     function changeHandler(e) {
-        const { value, valueAsNumber } = e.target;
-
-        if ( value <= 0  ) {
-            e.target.value = 1;
-            return setQty( 1 );
-        }
-
-        setQty(valueAsNumber);
+        const { value } = e.target;
+        setQty(value);
     }
 
-    const [currPrice, setCurrPrice] = React.useState(0);
-
     function findPrice() {
-        const currPrice = prices.findIndex((price, i) => {
+        const priceIdx = prices.findIndex((price, i) => {
             if ( prices[i] ) {
                 return price.minQty <= qty && prices[i + 1]?.minQty > qty;
             } else {
                 return prices[i].minQty <= qty;
             }
         });
-        console.log(currPrice)
-        currPrice >= 0 && setCurrPrice(currPrice);
+    
+        priceIdx >= 0 && setCurrPrice(priceIdx);
+        console.log(priceIdx)
     }
 
     React.useEffect(() => {

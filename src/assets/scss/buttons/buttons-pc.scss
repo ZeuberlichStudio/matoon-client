@@ -178,3 +178,20 @@
         }
     }
 }
+
+@mixin button-with-color-data {
+    width: max-content;
+    height: get-vw(34px);
+    padding: 0 get-vw(12px);
+
+    @include proxima-semibold(get-vw(16px), get-vw(30px));
+
+    color: var(--colorData, $black);
+    border: get-vw(2px) solid var(--colorData, $black);
+    border-radius: get-vw(8px);
+    
+    &.active { 
+        color: white;
+        background-color: var(--colorData, $black); 
+    }
+}

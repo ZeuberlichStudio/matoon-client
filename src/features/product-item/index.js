@@ -21,7 +21,7 @@ const formFullPath = path => CDN_URL + path;
 export function ProductItemSuggested({data, i}) {
     const {
         id,
-        slug,
+        sku,
         images,
         name,
         desc,
@@ -53,7 +53,6 @@ export function ProductItemMini({data, i}) {
 
     const {
         _id: id,
-        slug,
         images,
         name,
         desc,
@@ -65,7 +64,7 @@ export function ProductItemMini({data, i}) {
     const backgroundLocation = useLocation();
 
     const itemLink = {
-        pathname: `/catalog/product=${slug}`,
+        pathname: `/catalog/product=${id}`,
         state: { backgroundLocation }
     }
 
@@ -92,7 +91,7 @@ export function ProductItemMini({data, i}) {
                 <img src={formFullPath(images[0])} alt={name}/>
             </div>
 
-            <ProductShare {...{ slug, id }}/>
+            <ProductShare {...{ id }}/>
 
             <div className="product-item-mini_info">
                 <div className="product-item-mini_info_name-and-price">                        
@@ -113,10 +112,11 @@ export function ProductItemFull({data, i}) {
 
     const [currVar, setCurrVar] = React.useState(0);
     const [qty, setQty] = React.useState(1);
+    const [currPrice, setCurrPrice] = React.useState(0);
 
     const {
         _id: id,
-        slug,
+        sku,
         name,
         images,
         variations,
@@ -137,11 +137,16 @@ export function ProductItemFull({data, i}) {
 
             <ProductDetails {...{ desc, specs, sku: variations[currVar].sku, stock: variations[currVar].stock }}/>
 
-            <ProductPrice {...{ qty, setQty, prices }}/>
+            <ProductPrice {...{ qty, setQty, prices, currPrice, setCurrPrice }}/>
 
-            <ProductAddToCart {...{ varId: variations[currVar]._id, qty }}/>
+            <ProductAddToCart 
+                varId={variations[currVar]._id} 
+                sku={variations[currVar].sku} 
+                qty={qty}
+                price={prices[currPrice].amount} 
+            />
 
-            <ProductShare {...{ slug, id }}/>
+            <ProductShare {...{ id }}/>
         </div>
     );
 }

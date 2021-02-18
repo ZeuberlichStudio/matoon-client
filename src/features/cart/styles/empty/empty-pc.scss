@@ -1,0 +1,28 @@
+@media screen and (min-width: 1024px) {
+    .cart-empty {
+        width: get-vw(420px);
+        height: max-content;
+
+        display: grid;
+        grid-template-rows: max-content 1fr;
+        grid-template-columns: 100%;
+
+        background-color: white;
+        border-radius: get-vw(28px);
+
+        &_content {
+            margin: get-vw(12px) get-vw(24px);
+            height: 100%;
+            overflow: hidden;
+
+            br.pc-hide { display: none; }
+
+            h3 { 
+                padding: 0 0;
+                @include proxima-bold( get-vw(16px), get-vw(20px) ); 
+            }
+            p, button { @include proxima-regular( get-vw(16px), get-vw(20px) ); }
+            button { text-decoration: underline; }
+        }
+    }
+}

@@ -10,7 +10,7 @@ const { API_URL } = process.env;
 export function ProductPage({ closeButton }, ref) {
 
     //Fetching data
-    const { slug: slugParam } = useParams();
+    const { id: idParam } = useParams();
 
     const [item, setItem] = React.useState({});
     const [status, setStatus] = React.useState('idle');
@@ -18,7 +18,7 @@ export function ProductPage({ closeButton }, ref) {
 
     React.useEffect(() => {
         if ( status === 'idle' ) {
-            fetch(`${ API_URL }products/slug=${ slugParam }`)
+            fetch(`${ API_URL }products/_id=${ idParam }`)
                 .then( data => data.json() )
                 .then( data => {
                     setItem( data[0] );

@@ -1,66 +1,65 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import OptionsList, { OptionsGroup } from './options';
-import { updateShipping } from './slice';
+import { selectShippingMethod, updateShippingMethod } from './slice';
 import './styles/delivery/pc.scss';
 
 function Delivery() {
-
-    const shippingStore = useSelector(state => state.cart.shipping)
     const dispatch = useDispatch();
+    const shippingMethod = useSelector(selectShippingMethod);
 
-    function handleOption(option) {
-        dispatch(updateShipping({option, details: '' }));
-    }
-
-    function handleDetails(details) {
-        dispatch(updateShipping({...shippingStore, details }));
-    }
-
-    React.useEffect(() => console.log(shippingStore), [shippingStore]);
-
-    const optionsGroups = [
+    const shippingMethdosGroups = [
         {
             title: 'Варианты для г. Москва',
+            optionsCallback: payload => dispatch(updateShippingMethod(payload)),
             options: [
                 {
                     name: 'Самовывоз',
-                    detailsComponent: <PickupDeliveryDetails {...{shippingStore, handleDetails}}/>
+                    payload: { name: 'Самовывоз' },
+                    detailsComponent: <PickupOptions/>
                 },
                 {
                     name: 'Курьер Matoon',
-                    detailsComponent: <CourierDeliveryDetails {...{shippingStore, handleDetails}}/>
+                    payload: { name: 'Курьер Matoon', value: '' },
+                    detailsComponent: <ShippingAddressForm/>
                 }
             ]
         },
         {
             title: 'Курьерские службы',
-            globalDetailsComponent: <CourierDeliveryDetails {...{shippingStore, handleDetails}}/>,
+            optionsCallback: payload => dispatch(updateShippingMethod(payload)),
+            globalDetailsComponent: <ShippingAddressForm/>,
             options: [
                 {
                     name: 'СДЭК',
+                    payload: { name: 'СДЭК', value: '' },
                     colorData: '#4FA33D'
                 },
                 {
                     name: 'Деловые Линии',
+                    payload: { name: 'Деловые Линии', value: '' },
                     colorData: '#FCAF17'
                 },
                 {
                     name: 'Байкал Сервис',
+                    payload: { name: 'Байкал Сервис', value: '' },
                     colorData: '#0086CB'
                 },
                 {
                     name: 'ПЭК',
+                    payload: { name: 'ПЭК', value: '' },
                     colorData: '#242265'
                 }
             ]
         },
         {
             title: 'Другое',
+            optionsCallback: payload => dispatch(updateShippingMethod(payload)),
             options: [
                 {
                     name: 'Предложить способ',
-                    detailsComponent: <CustomDeliveryDetails/>
+                    payload: { name: 'Предложенный способ', value: '' },
+                    detailsComponent: <CustomShippingForm/>
                 }
             ]
         }
@@ -68,33 +67,53 @@ function Delivery() {
 
     return (
         <div className="cart-delivery">
-            <OptionsList
-                title="Выберите удобный способ:"
-                groups={optionsGroups}
-                optionCallback={handleOption}
-            />
+            <div className="cart-delivery_delivery-method">
+                <OptionsList
+                    title="Выберите удобный способ:"
+                    groups={shippingMethdosGroups}
+                />
+            </div>
         </div>
     );
 }
 
-const CourierDeliveryDetails = ({shippingStore, handleDetails}) => (
-    <>
-        <label htmlFor="">
-            <span>Желаемый адрес доставки</span>
-            <input 
-                name="deliver-to" 
-                placeholder="Например, г.Москва, ул. Солянка, д.2"
-                type="text"
-                onChange={e => handleDetails(e.target.value)} 
-                value={shippingStore.details || ''}
-            />
-        </label>
-        <p>Рассчитанная стоимость доставки будет отправлена через выбранный Вами метод связи</p>
-    </>
-);
+function ShippingAddressForm() {
+    const shippingMethod = useSelector(selectShippingMethod);
+    const dispatch = useDispatch();
 
+    return (
+        <>
+            <label>
+                <span>Желаемый адрес доставки</span>
+                <input 
+                    value={shippingMethod.value || ''}
+                    onChange={e => dispatch(updateShippingMethod({ value: e.target.value }))} 
+                    type="text"
+                    placeholder="Например, г.Москва, ул. Солянка, д.2"
+                />
+            </label>
+            <span>Рассчитанная стоимость доставки будет отправлена через выбранный Вами метод связи</span>
+        </>
+    );
+}
 
-function PickupDeliveryDetails() {
+function CustomShippingForm() {
+    const shippingMethod = useSelector(selectShippingMethod);
+    const dispatch = useDispatch();
+    
+    return (
+        <textarea 
+            value={shippingMethod.value || ''}
+            onChange={e => dispatch(updateShippingMethod({ value: e.target.value }))} 
+            type="text"
+            placeholder="Опишите желаемый способ получения"
+        ></textarea>
+    );
+}
+
+function PickupOptions() {
+    const dispatch = useDispatch();
+    const shippingMethod = useSelector(selectShippingMethod);
 
     const PickupPointDetails = ({ address, mapUrl }) => (
         <>
@@ -103,32 +122,25 @@ function PickupDeliveryDetails() {
         </>
     );
 
-    const pickupPoints = [
-        {
-            name: 'м. Севастопольская',
-            detailsComponent: <PickupPointDetails address="Большая Юшуньская ул., 1а, Москва, 117303" mapUrl=""/>
-        },
-        {
-            name: 'м. Международная',
-            detailsComponent: <PickupPointDetails address="Большая Юшуньская ул., 1а, Москва, 117303" mapUrl=""/>
-        }
-    ]; 
+    const pickupPointsGroupConfig = {
+        title: "Где вам будет удобнее забрать заказ?",
+        optionsCallback: payload => dispatch(updateShippingMethod(payload)),
+        options: [
+            {
+                name: 'м. Севастопольская',
+                payload: { value: 'м. Севастопольская' },
+                detailsComponent: <PickupPointDetails address="Большая Юшуньская ул., 1а, Москва, 117303" mapUrl=""/>,
+                default: true
+            },
+            {
+                name: 'м. Международная',
+                payload: { value: 'м. Международная' },
+                detailsComponent: <PickupPointDetails address="Большая Юшуньская ул., 1а, Москва, 117303" mapUrl=""/>
+            }
+        ]
+    }; 
 
-    const selectGroup = () => {};
-
-    return (
-        <OptionsGroup 
-            title="Где вам будет удобнее забрать заказ?"
-            options={pickupPoints} 
-            defaultOption="0"
-            active={false} 
-            {...{selectGroup}}
-        />
-    );
+    return <OptionsGroup {...pickupPointsGroupConfig}/>;
 }
-
-const CustomDeliveryDetails = () => (
-    <textarea name="" placeholder="Опишите желаемый способ получения"></textarea>
-);
 
 export default Delivery;

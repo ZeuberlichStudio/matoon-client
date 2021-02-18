@@ -1,9 +1,9 @@
 @import '../mixins.scss';
 
 @media screen and (min-width: 1024px) {
-    .cart-delivery { padding: get-vw(6px); }
+    .cart-payment { padding: get-vw(6px); }
 
-    .cart-delivery_delivery-method {
+    .cart-payment_payment-method {
         margin-top: get-vw(32px);
     }
 }

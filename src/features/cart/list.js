@@ -22,7 +22,6 @@ function List() {
         const ids = itemsStore.reduce((acc, next) => {
             return `${acc ? acc + ',' : acc}${next._id}`;
         }, '');
-        console.log(ids);
 
         function mergeStoreAndData(data) {
             return data.map( item => 
@@ -102,6 +101,11 @@ function CartItem({
         dispatch(storeUpdateItem({_id, updateObj}));
     }, [qty, price]);
 
+    function handleQtyBlur(e) {
+        const {value} = e.target;
+        if ( !value || value <= 0 ) { e.target.value = 1; qtyFieldHandler(e); }
+    }
+
     return (
         <div className="cart-item">
             <img src={CDN_URL + images[0]} alt="" className="cart-item_thumbnail"/>
@@ -113,7 +117,7 @@ function CartItem({
             </div>
             <div className="cart-item_price">
                 <div className="cart-item_price_qty">
-                    <input type="text" value={qty ||  0} onChange={qtyFieldHandler}/>
+                    <input type="text" value={qty} onChange={qtyFieldHandler} onBlur={handleQtyBlur}/>
                     <button className="cart-item_price_qty_remove" onClick={removeItem}/>
                 </div>
                 <div className="cart-item_price_sum">

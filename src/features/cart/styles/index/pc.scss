@@ -4,7 +4,12 @@
     .cart {
         height: 100vh;
         padding: get-vw(98px) get-vw(16px);
+        display: flex;
+        justify-content: flex-end;
+    }
 
+    .cart.empty {
+        height: max-content;
     }
 
     .cart-wrapper {
@@ -16,30 +21,16 @@
 
         .slider {
             --slideWidth: #{get-vw(420px)};
+            
             &_slides-wrapper { 
                 border-radius: get-vw(28px);
             }
+
+            &_slides-container { 
+                grid-template-rows: 100%;
+            }
         }
-    }
-
-    .cart-block {
-        width: get-vw(420px);
-        height: 100%;
-        padding: get-vw(12px);
-
-        display: grid;
-        grid-template-rows: max-content 1fr max-content;
-
-        background-color: white;
-        border-radius: get-vw(28px);
-
-        overflow: hidden scroll;
-        @include hide-scrollbar;
-
-        // &_content {
-        //     height: 100%;
-        // }
-
+        
         //headers
         h3 { 
             padding-left: get-vw(12px);
@@ -66,15 +57,48 @@
 
             background-color: rgba($black, .1);
             border-radius: get-vw(8px);
+
+            &.invalid { background-color: red; }
+        }
+    }
+
+    .cart-block {
+        width: get-vw(420px);
+        height: 100%;
+
+        display: grid;
+        grid-template-rows: max-content 1fr max-content;
+        grid-template-columns: 100%;
+
+        background-color: white;
+        border-radius: get-vw(28px);
+
+        &_content {
+            margin: 0 get-vw(12px);
+            height: 100%;
+            overflow: hidden;
+        }
+
+        textarea {
+            width: 100%;
+            height: get-vw(124px);
+            padding: get-vw(12px);
+
+            @include proxima-bold(get-vw(16px));
+            color: rgba($black, .4);
+            &::placeholder { color: rgba($black, .25); }
+
+            background-color: rgba($black, .1);
+            border-radius: get-vw(8px);
+
+            resize: none; 
         }
     }
 
     .cart-header {
-        width: 100%;
+        margin: get-vw(12px);
+        margin-bottom: 0;
         height: get-vw(48px);
-
-        position: sticky;
-        top: 0;
 
         @include proxima-bold(get-vw(18px), get-vw(48px));
         text-align: center;
@@ -108,12 +132,10 @@
     }
 
     .cart-controls {
-        width: 100%;
+        margin: get-vw(12px);
+        margin-top: 0;
         height: max-content;
         padding: get-vw(12px);
-
-        position: sticky;
-        bottom: 0;
 
         display: flex;
         flex-direction: column;
@@ -156,6 +178,9 @@
         &_next {
             margin: get-vw(18px) 0;
             @include button-medium;
+            color: $black;
+
+            &.invalid { color: rgba( $black, .25 ); } 
         }
     }
 }

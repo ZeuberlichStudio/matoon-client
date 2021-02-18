@@ -1,85 +1,115 @@
 import React from 'react';
-import OptionsList, { OptionsGroup } from './options';
+import { useDispatch, useSelector } from 'react-redux';
+import OptionsList from './options';
+import { selectPaymentMethod, updatePaymentMethod } from './slice';
+import './styles/payment/pc.scss';
 
 function Payment() {
+    const dispatch = useDispatch();
 
-    const optionsGroups = [
+    const paymentMethodsGroups = [
         {
             title: 'Физическое лицо',
+            optionsCallback: payload => dispatch(updatePaymentMethod(payload)),
             options: [
                 {
-                    name: 'Наличными'
+                    name: 'Наличными',
+                    payload: { name: 'Наличными', value: '' }
                 },
                 {
-                    name: 'Перевод на карту'
+                    name: 'Перевод на карту',
+                    payload: { name: 'Перевод на карту', value: '' }
                 },
                 {
-                    name: 'Сервисы экспресс-переводов'
+                    name: 'Сервисы экспресс-переводов',
+                    payload: { name: 'Сервисы экспресс-переводов', value: '' }
                 }
             ]
         },
         {
             title: 'Юридическое лицо',
+            optionsCallback: payload => dispatch(updatePaymentMethod(payload)),
             options: [
                 {
-                    name: 'Безналичный расчет',
-                    detailsComponent: <BillPaymentDetails/>
-                },
-                {
                     name: 'Выставление счёта',
-                    detailsComponent: <BillPaymentDetails/>
+                    payload: { 
+                        name: 'Выставление счёта', 
+                        value: { 
+                            companyName: '', 
+                            companyAddress: '', 
+                            companyAccountNumber: '' 
+                        } 
+                    },
+                    detailsComponent: <InvoiceForm/>
                 }
             ]
         }
     ]
 
     return (
-        <div className="cart-delivery">
-            <OptionsList
-                title="Выберите удобный способ:"
-                groups={optionsGroups}
-            />
+        <div className="cart-payment">
+            <div className="cart-payment_payment-method">
+                <OptionsList
+                    title="Выберите удобный способ:"
+                    groups={paymentMethodsGroups}
+                />
+            </div>
         </div>
     );
 }
 
-const BillPaymentDetails = () => (
-    <>
-        <span>
-            Укажите ваши реквизиты, мы выставим<br/>
-            вам счёт после формирования заказа 
-        </span>
+function InvoiceForm() {
+    const dispatch = useDispatch();
+    const paymentMethod = useSelector(selectPaymentMethod);
 
-        <label>
-            <span>Полное наименование организации</span>
-            <input 
-                type="text"
-                name=""
-                placeholder="Например: ООО “ЭЙ БИ СИ”"
-                value={''}
-            />
-        </label>
+    function handleField(e) {
+        const { name, value } = e.target;
 
-        <label>
-            <span>Юридический адрес организации</span>
-            <input 
-                type="text"
-                name=""
-                placeholder="Например: Большая Юшуньская ул., 1а, Москва"
-                value={''}
-            />
-        </label>
+        dispatch(updatePaymentMethod({ value: {...paymentMethod.value, [name]: value } }));
+    }
 
-        <label>
-            <span>ИНН/КПП организации</span>
-            <input 
-                type="text"
-                name=""
-                placeholder="123456789"
-                value={''}
-            />
-        </label>
-    </>
-);
+    return (
+        <>
+            <span>
+                Укажите ваши реквизиты, мы выставим<br/>
+                вам счёт после формирования заказа 
+            </span>
+
+            <label>
+                <span>Полное наименование организации</span>
+                <input 
+                    value={paymentMethod.value?.companyName || ''}
+                    onChange={handleField}
+                    type="text"
+                    name="companyName"
+                    placeholder="Например: ООО “ЭЙ БИ СИ”"
+                />
+            </label>
+
+            <label>
+                <span>Юридический адрес организации</span>
+                <input 
+                    value={paymentMethod.value?.companyAddress || ''}
+                    onChange={handleField}
+                    type="text"
+                    name="companyAddress"
+                    placeholder="Например: Большая Юшуньская ул., 1а, Москва"
+                />
+            </label>
+
+            <label>
+                <span>ИНН организации</span>
+                <input 
+                    value={paymentMethod.value?.companyAccountNumber || ''}
+                    onChange={handleField}
+                    type="tel"
+                    maxLength="10"
+                    name="companyAccountNumber"
+                    placeholder="0123456789"
+                />
+            </label>
+        </>
+    );
+}
 
 export default Payment;

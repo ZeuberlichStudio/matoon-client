@@ -110,7 +110,7 @@ function App() {
                 <Route path="/feed/post=:slug" component={ PostPage }/>
                 <Route path="/catalog/category=:slug" component={ CategoryPage }/>
                 <Route path="/catalog/search=:search" component={ SearchPage }/>
-                <Route path="/catalog/product=:slug" component={ ProductPage }/>
+                <Route path="/catalog/product=:id" component={ ProductPage }/>
                 <Route path="/dev" component={ DevPage }/>
                 <Route path="*" component={ NotFoundPage }/>
             </Switch>

@@ -1,0 +1,27 @@
+@mixin scrollbar {
+    &::-webkit-scrollbar {
+        width: get-vw(6px);
+        height: max-content;
+    }
+
+    &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 get-vw(3px) get-vw(3px) rgba( $black, .1 );
+        border-right: solid get-vw(3px) transparent;
+        margin-top: get-vw(0px);
+        margin-bottom: get-vw(0px);
+        border-radius: get-vw(10px);
+        
+    }
+
+    
+    &::-webkit-scrollbar-thumb {
+        box-shadow: inset 0 0 get-vw(3px) get-vw(3px) rgba( $black, .4 );
+        border-right: solid get-vw(3px) transparent;
+        border-radius: get-vw(10px);
+    }
+
+    & {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+}

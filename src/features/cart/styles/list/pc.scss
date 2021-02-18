@@ -3,7 +3,8 @@
 @media screen and (min-width: 1024px) {
     .cart-list {
         width: 100%;
-        min-height: 100%;
+        padding: get-vw(6px);
+        
         display: grid;
         grid-auto-rows: max-content;
         grid-row-gap: get-vw(34px);

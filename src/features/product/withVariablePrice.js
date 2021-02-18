@@ -9,10 +9,6 @@ function withVariablePrice(Component) {
             const { value } = e.target;
     
             if ( value > stock ) return;
-            else if ( value <= 0  ) {
-                e.target.value = 1;
-                return setQty(1);
-            }
     
             setQty(value);
         }

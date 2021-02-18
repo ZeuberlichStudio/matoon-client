@@ -6,20 +6,25 @@ import { setModalElement } from 'app/ui';
 import './styles/add-to-cart.scss';
 
 export default function ProductAddToCart({ 
-    varId, 
+    varId,
+    sku,
+    price,
     qty
 }) {
 
     const dispatch = useDispatch();
     const isAdded = useSelector(state => state.cart.items).findIndex(item => item._id === varId) > -1;
-
-    React.useEffect(() => console.log(isAdded), [isAdded]);
+    
+    function test() {
+        dispatch(addItem({ _id: varId, sku, price, qty }));
+        console.log({ _id: varId, sku, price, qty });
+    }
 
     return (
         <div className={`product-add-to-cart ${isAdded ? 'added' : ''}`}>
             {
                 !isAdded ?
-                <button onClick={ () => dispatch(addItem({ _id: varId, qty })) }>
+                <button onClick={test}>
                     <span>Добавить в корзину</span>
                 </button> :
                 <button onClick={ () => dispatch(setModalElement('menu')) }>

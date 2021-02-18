@@ -10,21 +10,21 @@ const { API_URL } = process.env;
 function FavouriteList({ closeButton, setProduct, setColumn }) {
 
     const dispatch = useDispatch();
-    const itemSlugs = useSelector( ({ favourite }) => favourite );
+    const items = useSelector( ({ favourite }) => favourite );
     const [data, setData] = React.useState([]);
     const [status, setStatus] = React.useState('idle');
     const [error, setError] = React.useState(null);
 
     function generateQuery() {
-        const query = itemSlugs.reduce( (acc, next) => `${acc},${next}` );
+        const query = items.reduce( (acc, next) => `${acc},${next}` );
         return query;
     }
 
     React.useEffect(() => {
-        if ( !itemSlugs[0] ) {
+        if ( !items[0] ) {
             setData([]);
         } else {
-            const endpoint = `${API_URL}products/slug=${generateQuery()}`;
+            const endpoint = `${API_URL}products/ids=${generateQuery()}`;
 
             fetch(endpoint)
                 .then( data =>  data.json() )
@@ -38,7 +38,7 @@ function FavouriteList({ closeButton, setProduct, setColumn }) {
                     setError(err);
                 });
         }
-    }, [itemSlugs]);
+    }, [items]);
 
     return(
         <div className="favourite-list">
@@ -47,7 +47,7 @@ function FavouriteList({ closeButton, setProduct, setColumn }) {
                 { closeButton }
             </div>
             { 
-                itemSlugs[0] ?
+                items[0] ?
                 data[0] ?
                 <>
                     <div className="favourite-list_items">                    

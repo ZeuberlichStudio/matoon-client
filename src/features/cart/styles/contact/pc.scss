@@ -1,0 +1,46 @@
+@import 'assets/scss/index.scss';
+
+@media screen and (min-width: 1024px) {
+    .cart-contact {
+        padding: get-vw(6px);
+
+        //headers
+        h3 { 
+            padding-left: get-vw(12px);
+            @include proxima-bold(get-vw(18px)); 
+        }
+
+        //fields
+        label {
+            span { padding-left: get-vw(12px); }
+            @include proxima-regular(get-vw(16px), get-vw(32px));
+        }
+
+        input {
+            width: 100%;
+            height: get-vw(34px);
+            padding: 0 get-vw(12px);
+
+            @include proxima-bold(get-vw(16px));
+            color: rgba($black, .4);
+            &::placeholder { color: rgba($black, .25); }
+
+            background-color: rgba($black, .1);
+            border-radius: get-vw(8px);
+        }
+    }
+
+    .cart-contact_customer-form {
+        margin-top: get-vw(32px);
+
+        display: grid;
+        grid-column-gap: get-vw(8px);
+        
+        h3 { grid-column: span 2; }
+        & > :last-child { grid-column: span 2; }
+    }
+
+    .cart-contact_contact-method {
+        margin-top: get-vw(32px);
+    }
+}

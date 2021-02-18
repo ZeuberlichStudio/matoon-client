@@ -74,11 +74,11 @@ export default function ProductGrid({ catSlug, search, view = 'mini' }) {
     }
 
     React.useEffect(() => {
-        if ( status === 'idle' ) fetchProducts();
+        if ( status == 'idle' ) fetchProducts();
     }, [status]);
 
     React.useEffect(() => {
-        if ( status !== 'success' ) return;
+        if ( status != 'success' ) return;
         setOffset(offset + limit);
         if ( products.length >= totalCount ) setFinal(true);
     }, [status]);
@@ -125,24 +125,24 @@ export default function ProductGrid({ catSlug, search, view = 'mini' }) {
     }
 
     return (
-        <div className={`product-grid product-grid-${view}`}>
+        <div className="product-grid">
+            <div className={`product-grid_items product-grid_items-${view}`}>
+                {
+                    products[0] && 
+                    products.map(renderProduct)
+                }
+                {
+                    status === 'loading' &&
+                    <div className="loading">
+                        <Loader/>
+                    </div>
+                }
+            </div>
             {
-                products[0] && 
-                products.map(renderProduct)
-            }
-            {
-                status === 'loading' &&
-                <div className="loading">
-                    <Loader/>
+                ( status === 'success' && !products[0] ) &&
+                <div className="product-grid_empty">
+                    <span>К сожалению, по вашему запросу ничего не найдено.</span>
                 </div>
-            }
-            {
-               ( status === 'success' && !products[0] ) && 
-               <span>По Вашему запросу ничего не найдено</span>
-            }
-            {
-                ( status === 'success' && final ) &&
-                <span>Похоже, это всё</span>
             }
             <div ref={beaconRef} id="beacon"></div>
         </div>
