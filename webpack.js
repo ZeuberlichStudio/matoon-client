@@ -29,9 +29,7 @@ module.exports = env => {
         return envKeys;
     }
 
-    //config object start
     return {
-        //ENVIRONMENTAL OPTIONS AND TOOLS
         mode: isDevelopment ? 'development' : 'production',
         devtool: isDevelopment ? 'cheap-module-source-map' : 'hidden-source-map',
         devServer: {
@@ -45,7 +43,6 @@ module.exports = env => {
             open: false
         },
 
-        //INPUT AND OUTPUT
         target: 'web',
         entry: path.join(__dirname, 'src/client.js'),
         output: {
@@ -55,9 +52,9 @@ module.exports = env => {
             publicPath: '/static/'
         },
 
-        //RESOLVE
         resolve: {
             alias: {
+                "~": path.join(__dirname, 'src/'),
                 assets: path.join(__dirname, 'src/assets'),
                 app: path.join(__dirname, 'src/app'),
                 features: path.join(__dirname, 'src/features'),
@@ -66,7 +63,6 @@ module.exports = env => {
             mainFiles: ['index']
         },
         
-        //PLUGINS
         plugins: [
             !isDevelopment && new MiniCssExtractPlugin({
                 filename: isDevelopment ? 'css/[name].css' : 'css/[name].[contenthash].css',
@@ -86,18 +82,13 @@ module.exports = env => {
             new webpack.DefinePlugin(generateEnvKeys())
         ].filter(Boolean),
 
-        //MODULE
         module: {
             rules: [
                 {
                     test: /\.js?$/,
-                    loader: 'babel-loader',
-                    options: {
-                        presets: [ '@babel/preset-env', '@babel/preset-react' ],
-                        plugins: [ '@loadable/babel-plugin' ]
-                    }
+                    enforce: "pre",
+                    use: ["babel-loader"]
                 },
-                //
                 {
                     test: /\.s[ac]ss$/i,
                     use: [
@@ -106,7 +97,6 @@ module.exports = env => {
                             loader: MiniCssExtractPlugin.loader,
                             options: { publicPath: '../' }
                         },
-                        // 'style-loader',
                         'css-loader',
                         {
                             loader: 'postcss-loader',
@@ -117,18 +107,23 @@ module.exports = env => {
                             options: {
                                 implementation: require('sass'),
                                 sourceMap: true,
-                                sassOptions: { includePaths: [ 'src/assets' ] }
+                                additionalData: `
+                                    @import 'assets/scss/variables.scss';
+                                    @import 'assets/scss/functions.scss';
+                                    @import 'assets/scss/typography.scss';
+                                `,
+                                sassOptions: { 
+                                    includePaths: [ 'src/assets' ]
+                                }
                             }
                         }
                     ]
                 },
-                //
                 {
                     test: /\.(jpg|png|svg)$/,
                     loader: 'file-loader',
                     options: { outputPath: './images' }
                 },
-                //
                 {
                     test: /\.(ttf|eot|woff|woff2)$/,
                     loader: 'file-loader',
@@ -136,6 +131,5 @@ module.exports = env => {
                 }
             ]
         }
-        //config object end
     }
 }

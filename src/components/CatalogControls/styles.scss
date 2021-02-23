@@ -1,0 +1,113 @@
+.catalog_controls {
+    width: 100%;
+    
+    position: sticky;
+    top: 0;
+
+    display: flex;
+    justify-content: space-between;
+
+    &--sorting,
+    &--display,
+    &--filters {        
+        display: grid;
+        grid-auto-flow: column;
+
+        background-color: rgba($blue, .1);
+    }
+
+    &--display .button,
+    &--filters .button {
+        &::before {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0; left: 0;
+
+            background-color: $blue;
+            content: '';
+        }
+
+        &:hover::before {
+            background-color: white;
+        }
+    }
+}
+
+@media #{$pcQueries} {
+    .catalog_controls {
+        width: get-vw(1464px);
+
+        &--sorting,
+        &--display {
+            padding: get-vw(12px);
+            border-radius: get-vw(28px);
+            column-gap: get-vw(12px);
+        }
+
+        &--filters { display: none; }
+
+        &--display .button {
+            &::before { mask-size: 50%; }
+            &:nth-child(1)::before { mask-image: url('assets/images/icon-grid.svg'); }
+            &:nth-child(2)::before { mask-image: url('assets/images/icon-list.svg'); }
+        }
+    }
+}
+
+@media #{$tabletQueries} {
+    .catalog_controls {
+        width: t-get-vw(516px);
+
+        &--sorting_wrapper {
+            width: t-get-vw(382px);
+            border-radius: t-get-vw(22px);
+        }
+
+        &--sorting,
+        &--display {
+            padding: t-get-vw(10px);
+            border-radius: t-get-vw(22px);
+            column-gap: t-get-vw(10px);
+        }
+
+        &--filters { display: none; }
+        
+        &--display .button {
+            &::before { mask-size: 50%; }
+            &:nth-child(1)::before { mask-image: url('assets/images/icon-grid.svg'); }
+            &:nth-child(2)::before { mask-image: url('assets/images/icon-list.svg'); }
+        }
+    }
+}
+
+@media #{$mobileQueries} {
+    .catalog_controls {
+        width: m-get-vw(343px);
+
+        &--sorting_wrapper {
+            width: m-get-vw(275px);
+            border-radius: m-get-vw(20px);
+        }
+
+        &--sorting,
+        &--filters {
+            padding: m-get-vw(8px);
+            border-radius: m-get-vw(20px);
+            column-gap: m-get-vw(8px);
+        }
+
+        &--display { display: none; }
+
+        &--filters .button {
+            &::before {
+                mask-image: url('assets/images/icon-filters.svg');
+                mask-size: 45%;
+            }
+
+            &:hover::before {
+                background-color: white;
+            }
+        }
+    }  
+}

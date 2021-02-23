@@ -1,11 +1,27 @@
-@import 'assets/scss/variables';
-@import 'assets/scss/functions';
-@import 'assets/scss/fonts';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500;700&display=swap');
+
+@font-face {
+    font-family: "Proxima Nova";
+    font-weight: 700;
+    src: url('assets/fonts/proxima-b.woff') format('woff');
+}
+
+@font-face {
+    font-family: "Proxima Nova";
+    font-weight: 600;
+    src: url('assets/fonts/proxima-sb.woff') format('woff');
+}
+
+@font-face {
+    font-family: "Proxima Nova";
+    font-weight: 400;
+    src: url('assets/fonts/proxima-r.woff') format('woff');
+}
 
 body { 
     width: 100vw;
     background-color: white; 
-    color: $black;
+    color: $blue;
     overflow-x: hidden;
     position: relative;
 
@@ -48,5 +64,5 @@ a {
     z-index: 10;
     transition: .3s;
 
-    &.visible { background-color: rgba( $black, .95 ); }
+    &.visible { background-color: rgba( $blue, .95 ); }
 }

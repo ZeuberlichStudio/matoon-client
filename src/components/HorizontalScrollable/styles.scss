@@ -1,0 +1,12 @@
+.horizontal_scrollable {
+    overflow-x: scroll;
+
+    &--content {
+        width: max-content;
+        padding: var(--padding, .8vw);
+
+        display: grid;
+        grid-auto-flow: column;
+        column-gap: var(--padding, .8vw);
+    }
+}

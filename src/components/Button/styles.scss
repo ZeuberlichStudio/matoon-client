@@ -1,0 +1,74 @@
+@import 'assets/scss/mixins/shadows.scss';
+
+.button {
+    width: max-content;
+
+    position: relative;
+
+    @include shadow;
+    cursor: pointer;
+    transition-property: background-color color;
+    transition: .1s;
+
+    &.light,
+    &.dark.active,
+    &.dark:hover {
+        background-color: white;        
+        color: $blue;
+    }
+
+    &.dark,
+    &.light.active,
+    &.light:hover {
+        background-color: $blue;        
+        color:white;
+    }
+}
+
+@media screen and #{$pcScreen} {
+    .button.big {
+        height: get-vw(48px);
+        padding: 0 get-vw(24px);
+        border-radius: get-vw(16px);
+        @include proxima-semibold(get-vw(18px), get-vw(48px));
+    }
+
+    .button.medium {
+        height: get-vw(36px);
+        padding: 0 get-vw(18px);
+        border-radius: get-vw(12px);
+        @include proxima-semibold(get-vw(14px), get-vw(36px));
+    }
+}
+
+@media screen and #{$tabletScreen} {
+    .button.big {
+        height: t-get-vw(40px);
+        padding: 0 t-get-vw(20px);
+        border-radius: t-get-vw(12px);
+        @include proxima-semibold(t-get-vw(18px), t-get-vw(40px));
+    }
+
+    .button.medium {
+        height: t-get-vw(36px);
+        padding: 0 t-get-vw(18px);
+        border-radius: t-get-vw(10px);
+        @include proxima-semibold(t-get-vw(14px), t-get-vw(36px));
+    }
+}
+
+@media screen and #{$mobileScreen} {
+    .button.big {
+        height: m-get-vw(42px);
+        padding: 0 m-get-vw(21px);
+        border-radius: m-get-vw(12px);
+        @include proxima-semibold(m-get-vw(18px), m-get-vw(42px));
+    }
+
+    .button.medium {
+        height: m-get-vw(36px);
+        padding: 0 m-get-vw(18px);
+        border-radius: m-get-vw(10px);
+        @include proxima-semibold(m-get-vw(14px), m-get-vw(36px));
+    }
+}

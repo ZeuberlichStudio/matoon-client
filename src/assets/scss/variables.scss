@@ -1,2 +1,9 @@
-$black: #26292D;
-$salad: #1fc600;
+$pcScreen: '(min-width: 1024px)';
+$tabletScreen: '(min-width: 768px) and (max-width: 1023.75px)';
+$mobileScreen: '(max-width: 767.75px)';
+
+$pcQueries: 'screen and (min-width: 1024px)';
+$tabletQueries: 'screen and (min-width: 768px) and (max-width: 1023.75px)';
+$mobileQueries: 'screen and (max-width: 767.75px)';
+
+$blue: #26292D;
