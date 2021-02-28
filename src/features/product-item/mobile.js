@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import Product from 'features/product';
+import Product from '~/features/product';
 import './product-item.scss';
-import { ProductShare as Share } from 'features/product';
+import { ProductShare as Share } from '~/features/product';
 
 const 
     { API_URL } = process.env,

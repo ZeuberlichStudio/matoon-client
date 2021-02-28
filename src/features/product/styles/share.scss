@@ -1,4 +1,4 @@
-@import 'assets/scss/index.scss';
+@import '~/assets/scss/index.scss';
 
 .product-share {
     width: max-content;
@@ -15,9 +15,9 @@
         cursor: pointer;
     }
 
-    &_vk { mask-image: url('assets/images/icon_vk.svg'); }
-    &_fb { mask-image: url('assets/images/icon_fb.svg'); }
-    &_fav { mask-image: url('assets/images/icon_fav.svg'); }
+    &_vk { mask-image: url('~/assets/images/icon_vk.svg'); }
+    &_fb { mask-image: url('~/assets/images/icon_fb.svg'); }
+    &_fav { mask-image: url('~/assets/images/icon_fav.svg'); }
 
     &_fav.marked {
         background-color: #F8512A;

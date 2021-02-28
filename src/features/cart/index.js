@@ -11,9 +11,9 @@ import {
     clearOrderInfo 
 } from './slice';
 
-import Slider from 'features/slider/slider';
-import Scrollable from 'features/scrollable';
-import { SpinningLoader as Loader} from 'features/loader';
+import Slider from '~/features/slider/slider';
+import Scrollable from '~/features/scrollable';
+import { SpinningLoader as Loader} from '~/features/loader';
 
 import Header from './header';
 import Controls from './controls';

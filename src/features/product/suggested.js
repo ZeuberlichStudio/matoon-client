@@ -2,10 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import './styles/suggested.scss';
-import Slider from 'features/slider/slider';
-import Scrollable from 'features/containers/scrollable';
-import { ProductItemSuggested as SuggestedItem } from 'features/product-item';
-import { SpinningLoader as Loader } from 'features/loader';
+import Slider from '~/features/slider/slider';
+import Scrollable from '~/features/containers/scrollable';
+import { ProductItemSuggested as SuggestedItem } from '~/features/product-item';
+import { SpinningLoader as Loader } from '~/features/loader';
 
 export default function Suggested({ cat, materials, exclude }) {
 

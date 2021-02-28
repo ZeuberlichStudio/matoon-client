@@ -2,13 +2,13 @@ module.exports = [
     {
         path: '/',
         exact: true,
-        moduleName: 'pages/main/index',
+        moduleName: '~/pages/MainPage',
         componentName: 'MainPage'
     },
     {
         path: '*',
         exact: true,
-        moduleName: 'pages/404',
+        moduleName: '~/pages/404',
         componentName: 'NotFoundPage'
     },
     {
@@ -34,14 +34,5 @@ module.exports = [
         exact: false,
         moduleName: `pages/product/index`,
         componentName: 'ProductPage'
-    },
-
-    //DEVELOPMENT PAGE
-    process.env.ENV !== 'dev' &&
-    {
-        path: '/dev',
-        exact: false,
-        moduleName: `pages/dev`,
-        componentName: 'DevPage'
     }
 ]

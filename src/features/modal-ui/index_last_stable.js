@@ -1,9 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Modal from 'features/new-modal';
-import { setModalElement, animateModalElement } from 'app/ui';
-import Menu from 'features/categories';
-import Favourite from 'features/favourite';
+import Modal from '~/features/new-modal';
+import { setModalElement, animateModalElement } from '~/app/ui';
+import Menu from '~/features/categories';
+import Favourite from '~/features/favourite';
 
 function ModalUI() {
 

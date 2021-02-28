@@ -2,38 +2,22 @@ import React from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import loadable from '@loadable/component';
-import routesConfig from 'app/routes';
-import { SpinningLoader as Loader } from 'features/loader';
-import { listenToResize, setPlatform } from 'app/device';
-import { toggleMenu, toggleSearch, toggleFavourite } from 'app/ui';
+import routesConfig from '~/app/routes';
+import { SpinningLoader as Loader } from '~/features/loader';
+import { listenToResize, setPlatform } from '~/app/device';
+import { toggleMenu, toggleSearch, toggleFavourite } from '~/app/ui';
 
 import './style.scss';
 
-const routes = routesConfig.reduce( (acc, next) => {
+import NewModal from '~/features/new-modal';
+import Header from '~/features/header';
+import ModalUI from '~/features/modal-ui';
 
-    acc[next.componentName] = loadable( () => import(`./${next.moduleName}.js`), {
-        fallback: <Loader fixed={true}/>
-    });
-
-    return acc;
-}, {});
-
-const {
-    MainPage,
-    PostPage,
-    CategoryPage,
-    SearchPage,
-    ProductPage,
-    DevPage,
-    NotFoundPage
-} = routes;
-
-import NewModal from 'features/new-modal';
-import Header from 'features/header';
-// import Categories from 'features/categories';
-// import Search from 'features/search';
-// import Favourite from 'features/favourite';
-import ModalUI from 'features/modal-ui';
+import MainPage from '~/pages/MainPage';
+import PostPage from '~/pages/PostPage/Index.js';
+import CategoryPage from '~/pages/CategoryPage';
+import ProductPage from '~/pages/ProductPage';
+import NotFoundPage from '~/pages/404';
 
 function App() {
     const listener = useSelector( state => state.device.listener );
@@ -109,9 +93,7 @@ function App() {
                 <Route exact={ true } path="/" component={ MainPage }/>
                 <Route path="/feed/post=:slug" component={ PostPage }/>
                 <Route path="/catalog/category=:slug" component={ CategoryPage }/>
-                <Route path="/catalog/search=:search" component={ SearchPage }/>
-                <Route path="/catalog/product=:id" component={ ProductPage }/>
-                <Route path="/dev" component={ DevPage }/>
+                <Route path="/catalog/product=:slug" component={ ProductPage }/>
                 <Route path="*" component={ NotFoundPage }/>
             </Switch>
             { 

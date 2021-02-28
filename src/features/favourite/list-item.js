@@ -1,5 +1,5 @@
 import React from 'react';
-import { ProductShare } from 'features/product';
+import { ProductShare } from '~/features/product';
 import './styles/list-item.scss';
 
 const { API_URL } = process.env;

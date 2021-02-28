@@ -26,14 +26,15 @@ export default function CategoriesBlock({
                 <ul>
                     { 
                         cats.map( (cat, i) => 
-                            cat.children ?
+                            cat.subcats ?
                             <li 
+                                key={i}
                                 className={i === selection[dimension + 1] ? 'active' : ''} 
-                                onMouseEnter={ () => select( dimension + 1, i ) }
+                                onMouseEnter={ () => select(dimension + 1, i) }
                             >
                                 <span>{ cat.name }</span>
                             </li> :
-                            <li className={i === selection[dimension + 1] ? 'active' : ''}>
+                            <li className={i === selection[dimension + 1] ? 'active' : ''} key={i}>
                                 <Link to={`/catalog/category=${ cat.slug }`} onClick={ closeModal }>
                                     <span>{ cat.name }</span>
                                 </Link>

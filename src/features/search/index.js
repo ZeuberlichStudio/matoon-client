@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleMenu } from 'app/ui';
-import { setModalElement, toggleOverlay, toggleSearch } from 'app/ui';
-import { toggleUI } from 'features/modal-ui';
+import { toggleMenu } from '~/app/ui';
+import { setModalElement, toggleOverlay, toggleSearch } from '~/app/ui';
+import { toggleUI } from '~/features/modal-ui';
 
 import SearchItem from './search-item';
 import './styles/search.scss';

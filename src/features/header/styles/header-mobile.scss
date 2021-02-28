@@ -49,7 +49,7 @@
                 margin-right: m-get-vw(7px);
 
                 display: inline-block;
-                mask-image: url('assets/images/icon_menu.svg');
+                mask-image: url('~/assets/images/icon_menu.svg');
                 mask-size: 100% auto;
                 background-color: rgba( $black, 1);
                 content: '';
@@ -83,7 +83,7 @@
             grid-area: search;
             @include m-button-picture( 
                 $black, 
-                'assets/images/icon_search.svg', 
+                '~/assets/images/icon_search.svg', 
                 $size: 'big',
             );
         }
@@ -92,7 +92,7 @@
             grid-area: favs; 
             @include m-button-picture( 
                 rgba( $black, .4 ), 
-                'assets/images/icon_fav.svg', 
+                '~/assets/images/icon_fav.svg', 
                 $size: 'big',
                 $active_color: #F8512A,
                 $hover: true
@@ -102,7 +102,7 @@
             grid-area: cart; 
             @include m-button-picture( 
                 rgba( $black, .4 ), 
-                'assets/images/icon_cart.svg', 
+                '~/assets/images/icon_cart.svg', 
                 $size: 'big',
                 $active_color: #4A8BF7,
                 $hover: true
@@ -121,7 +121,7 @@
                 height: m-get-vw(32px);
                 display: block;
 
-                mask-image: url('assets/images/icon_more-dots.svg');
+                mask-image: url('~/assets/images/icon_more-dots.svg');
                 mask-position: center;
                 mask-size: m-get-vw(24px);
                 background-color: rgba( $black, .4 );

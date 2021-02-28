@@ -13,7 +13,7 @@
 
             &_close {
                 @include t-button-small;
-                @include t-button-picture( rgba($black, .5), 'assets/images/icon_cross.svg', $size: 'small' );
+                @include t-button-picture( rgba($black, .5), '~/assets/images/icon_cross.svg', $size: 'small' );
                 min-width: unset;
                 width: t-get-vw(28px);
                 height: t-get-vw(28px);

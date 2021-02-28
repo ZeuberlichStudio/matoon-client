@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Tabs, Tab } from 'features/tabs/tabs';
+import { Tabs, Tab } from '~/features/tabs/tabs';
 
 import './styles/details.scss';
 

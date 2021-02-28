@@ -2,9 +2,11 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 import { useDispatch } from 'react-redux';
 import { useLocation, useHistory } from 'react-router-dom';
-import { toggleHeaderLayer } from 'app/ui';
+import { toggleHeaderLayer } from '~/app/ui';
 
 import './index.scss';
+
+import {useLogRequestStatus} from '~/debug/logRequestStatus';
 
 export function Modal({ 
     children: child, 
@@ -21,6 +23,8 @@ export function Modal({
     const history = useHistory();
     const dispatch = useDispatch();
     const contentRef = React.useRef();
+
+    useLogRequestStatus(ref.current);
 
     function close() {    
         setVisible(false);
@@ -59,7 +63,7 @@ export function Modal({
 
     React.useEffect( () => {
         ref.current.addEventListener('click', outerClickHandler);
-        return () => { ref.current.removeEventListener('click', outerClickHandler) };
+        return () => { ref.current && ref.current.removeEventListener('click', outerClickHandler) };
     }, [closeCallback]);
 
     React.useEffect(init, []);

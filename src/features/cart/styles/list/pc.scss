@@ -1,4 +1,4 @@
-@import 'assets/scss/index.scss';
+@import '~/assets/scss/index.scss';
 
 @media screen and (min-width: 1024px) {
     .cart-list {
@@ -96,7 +96,7 @@
 
                     //
                     background-color: rgba($black, .6);
-                    mask-image: url('assets/images/icon_trash.svg');
+                    mask-image: url('~/assets/images/icon_trash.svg');
                     mask-size: get-vw(22px);
                     mask-position: center;
                     mask-repeat: no-repeat;

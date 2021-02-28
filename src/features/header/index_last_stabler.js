@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleHeaderLayer, toggleSearch } from 'app/ui';
+import { toggleHeaderLayer, toggleSearch } from '~/app/ui';
 import './index.scss';
 
-import Search from 'features/search';
+import Search from '~/features/search';
 
-import LogoPh from 'assets/images/logo_ph.svg';
+import LogoPh from '~/assets/images/logo_ph.svg';
 
 function Header({ toggleMenu, toggleFavourite }) {
 

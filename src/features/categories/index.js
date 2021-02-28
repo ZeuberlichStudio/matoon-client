@@ -1,28 +1,29 @@
 import React from 'react';
+import apiCall from '~/common/api-call';
 import { useSelector } from 'react-redux';
 import CategoriesBlock from './block';
 
 import './styles/categories.scss';
 
-const { API_URL } = process.env;
-
 export function Categories({ closeModal, closeButton, modalRef }, ref) {
     const [cats, setCats] = React.useState([]);
     const [status, setStatus] = React.useState('idle');
-    const [error, setError] = React.useState(null);
 
-    React.useEffect(() => {
-        fetch(`${ API_URL }categories/tree`)
-            .then( data => data.json() )
-            .then( cats => {
-                setCats(cats);
-                setStatus('succeeded');
+    function fetchCatTree() {
+        setStatus('pending');
+
+        apiCall('cats/tree')
+            .then(res => {
+                setStatus('success');
+                setCats(res.data);
             })
-            .catch( err => {
-                setError(err);
+            .catch(err => {
                 setStatus('failed');
+                console.log(err)
             });
-    }, []);
+    }
+
+    React.useEffect(fetchCatTree, []);
 
     const targetDevice = useSelector( state => state.device.target );
 
@@ -52,23 +53,20 @@ export function Categories({ closeModal, closeButton, modalRef }, ref) {
             {
                 selection.map((catIndex, catDimension) => { 
                     return (
-                        <CategoriesBlock 
+                        <CategoriesBlock key={catDimension}
                             title={ 
                                 catDimension === 0 ? 'Категории' : 
-                                catDimension === 1 ? cats[catIndex].name : 
-                                catDimension === 2 ? cats[selection[1]].children[catIndex].name :
+                                catDimension === 1 ? cats[catIndex].name :
                                 ''
                             }
                             slug={
                                 catDimension === 0 ? null : 
-                                catDimension === 1 ? cats[catIndex].slug : 
-                                catDimension === 2 ? cats[selection[1]].children[catIndex].slug :
+                                catDimension === 1 ? cats[catIndex].slug :
                                 ''
                             }
                             cats={ 
                                 catDimension === 0 ? cats : 
-                                catDimension === 1 ? cats[catIndex].children : 
-                                catDimension === 2 ? cats[selection[1]].children[catIndex].children : 
+                                catDimension === 1 ? cats[catIndex].subcats :
                                 null 
                             } 
                             dimension={ catDimension } 

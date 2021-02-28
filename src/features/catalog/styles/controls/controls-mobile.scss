@@ -70,7 +70,7 @@
             button { @include m-button-medium(true); }
 
             button {
-                @include m-button-picture($black, 'assets/images/mobile-icon_filters.svg', 'assets/images/mobile-icon_filters.svg', 'big');
+                @include m-button-picture($black, '~/assets/images/mobile-icon_filters.svg', '~/assets/images/mobile-icon_filters.svg', 'big');
             }
         }
     }

@@ -1,9 +1,9 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setModalElement, toggleOverlay, toggleSearch } from 'app/ui';
+import { setModalElement, toggleOverlay, toggleSearch } from '~/app/ui';
 import ListItem from './list-item';
 import './styles/list.scss';
-import { toggleUI } from 'features/modal-ui';
+import { toggleUI } from '~/features/modal-ui';
 
 const { API_URL } = process.env;
 

@@ -1,4 +1,4 @@
-@import 'assets/scss/index.scss';
+@import '~/assets/scss/index.scss';
 
 @media screen and (min-width: 1024px) {
     .cart {
@@ -111,7 +111,7 @@
 
         &_back {
             @include button-small;
-            @include button-picture( rgba($black, .5), 'assets/images/icon_arrow.svg' );
+            @include button-picture( rgba($black, .5), '~/assets/images/icon_arrow.svg' );
             width: get-vw(34px);
             height: get-vw(34px);
 

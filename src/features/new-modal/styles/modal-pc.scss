@@ -1,7 +1,7 @@
 @media screen and ( min-width: 1024px ) {
     #modal-close {
         @include button-small;
-        @include button-picture( rgba($black, .5), 'assets/images/icon_cross.svg' );
+        @include button-picture( rgba($black, .5), '~/assets/images/icon_cross.svg' );
         width: get-vw(34px);
         height: get-vw(34px);
     

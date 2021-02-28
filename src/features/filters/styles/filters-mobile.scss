@@ -103,7 +103,7 @@
     
                 button {
                     @include m-button-small;
-                    @include m-button-picture (#B7B9BA, 'assets/images/icon_more.svg', 'assets/images/icon_less.svg');
+                    @include m-button-picture (#B7B9BA, '~/assets/images/icon_more.svg', '~/assets/images/icon_less.svg');
                     margin: m-get-vw(4px);
                     border: none;
                     background-color: #E9EAEA;

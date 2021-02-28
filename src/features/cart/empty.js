@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setModalElement } from 'app/ui';
-import { toggleUI } from 'features/modal-ui';
+import { setModalElement } from '~/app/ui';
+import { toggleUI } from '~/features/modal-ui';
 
 import Header from './header';
 

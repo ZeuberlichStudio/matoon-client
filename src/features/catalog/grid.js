@@ -1,16 +1,13 @@
 import React from 'react';
+import apiCall from '~/common/api-call';
 import { useSelector } from 'react-redux';
 import { 
     ProductItemMini as ItemMini, 
     ProductItemFull as ItemFull
-} from 'features/product-item';
-import ItemMobile from 'features/product-item/mobile';
-import GridLoader from './grid-loader';
-import { SpinningLoader as Loader } from 'features/loader';
+} from '~/features/product-item';
+import ItemMobile from '~/features/product-item/mobile';
+import { SpinningLoader as Loader } from '~/features/loader';
 
-const {
-    API_URL
-} = process.env;
 
 export default function ProductGrid({ catSlug, search, view = 'mini' }) {
 
@@ -55,17 +52,11 @@ export default function ProductGrid({ catSlug, search, view = 'mini' }) {
 
     function fetchProducts() {
         setStatus('loading');
-
-        const endpoint = API_URL + `products?${buildQuery()}`;
-
-        console.log(endpoint);
-
-        fetch(endpoint)
-            .then( data => data.json() )
-            .then( result => {
+        apiCall(`products?${buildQuery()}`)
+            .then(res => {
+                console.log();
                 setStatus('success');
-                setTotalCount(result.totalMatches);
-                setProducts(products.concat(result.rows));
+                setProducts(products.concat(res.data));
             })
             .catch( err => {
                 setStatus('failed');

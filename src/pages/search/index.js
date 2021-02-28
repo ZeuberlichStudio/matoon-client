@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, useRouteMatch, useParams } from 'react-router-dom';
-import Banner from 'features/banner';
-import Catalog from 'features/catalog/catalog';
+import Banner from '~/features/banner';
+import Catalog from '~/features/catalog/catalog';
 import { useDispatch } from 'react-redux';
-import { setSearch } from 'features/catalog/querySlice';
+import { setSearch } from '~/features/catalog/querySlice';
 
 const { API_URL } = process.env;
 const tempApiEndpoint = 'categories/обложки-на-документы';

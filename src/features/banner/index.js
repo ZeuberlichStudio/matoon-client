@@ -7,8 +7,8 @@ import './styles/banner.scss';
 import Breadcrumbs from './breadcrumbs';
 import BannerPost from './post';
 import BannerPostPreview from './preview';
-import Slider from 'features/slider/slider';
-import Search from 'features/search';
+import Slider from '~/features/slider/slider';
+import Search from '~/features/search';
 
 const { API_URL } = process.env;
 

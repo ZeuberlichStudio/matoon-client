@@ -52,7 +52,7 @@
             position: absolute;
             display: block;
 
-            mask-image: url('assets/images/icon_search.svg');
+            mask-image: url('~/assets/images/icon_search.svg');
             background-color: rgba( $black, .8 );
 
             content: '';
@@ -81,7 +81,7 @@
 
             position: absolute;
 
-            mask-image: url('assets/images/icon_close.svg');
+            mask-image: url('~/assets/images/icon_close.svg');
             background-color: rgba( $black, .8 );
             cursor: pointer;
         }

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link, useRouteMatch, useLocation } from 'react-router-dom';
 
-import { Tabs, Tab } from 'features/tabs/tabs';
-import { ResizableText, ButtonsBlock } from 'features/resizable-containers/containers';
+import Image from '~/components/Image';
+import { Tabs, Tab } from '~/features/tabs/tabs';
+import { ResizableText, ButtonsBlock } from '~/features/resizable-containers/containers';
 import { 
     ProductGallery, 
     ProductShare,
@@ -10,13 +11,9 @@ import {
     ProductDetails, 
     ProductPrice, 
     ProductAddToCart 
-} from 'features/product';
+} from '~/features/product';
 
 import './product-item.scss';
-
-const { API_URL } = process.env;
-const { CDN_URL } = process.env;
-const formFullPath = path => CDN_URL + path;
 
 export function ProductItemSuggested({data, i}) {
     const {
@@ -56,9 +53,7 @@ export function ProductItemMini({data, i}) {
         images,
         name,
         desc,
-        prices,
-        salePrices,
-        onSale
+        maxPrice
     } = data;
 
     const backgroundLocation = useLocation();
@@ -68,8 +63,7 @@ export function ProductItemMini({data, i}) {
         state: { backgroundLocation }
     }
 
-    const formFullPath = path => CDN_URL + path;
-    const discount = (price, salePrice) => '-' + parseInt((price - salePrice) / price * 100) + '%' ;
+    // const discount = (price, salePrice) => '-' + parseInt((price - salePrice) / price * 100) + '%' ;
 
     // const saleMarker = (
     //     <span>
@@ -80,22 +74,16 @@ export function ProductItemMini({data, i}) {
 
     return (
         <div className={`product-item product-item-${ i } product-item-mini`} key={ i }>
-            {
-                onSale &&
-                <div className="product-item-mini_discount">
-                    <span>{ discount(0, 0) }</span>
-                </div>
-            }
 
             <div className="product-item-mini_image">
-                <img src={formFullPath(images[0])} alt={name}/>
+                <Image src={images[0]?.path || ''} alt={name}/>
             </div>
 
             <ProductShare {...{ id }}/>
 
             <div className="product-item-mini_info">
                 <div className="product-item-mini_info_name-and-price">                        
-                    <span>{ prices[0].amount + '₽' }</span>
+                    <span>до {maxPrice}₽</span>
                     <h2>{name}</h2>
                 </div>
                 <div className="product-item-mini_info_desc">{desc}</div>
@@ -119,9 +107,7 @@ export function ProductItemFull({data, i}) {
         sku,
         name,
         images,
-        variations,
-        attributes,
-        attributeMap: attrMap,
+        variants,
         desc,
         specs,
         prices,
@@ -129,19 +115,19 @@ export function ProductItemFull({data, i}) {
 
     return (
         <div className={`product-item product-item-${ i } product-item-full`}>
-            <ProductGallery images={variations[currVar].images.concat(images)}/>
+            <ProductGallery images={variants[currVar].images.concat(images)}/>
 
             <h2 className="product-name">{name}</h2>
 
-            <ProductOptions {...{ show: 3, vars: variations, setCurrVar, attrMap }}/>
+            <ProductOptions {...{ show: 3, variants, setCurrVar }}/>
 
-            <ProductDetails {...{ desc, specs, sku: variations[currVar].sku, stock: variations[currVar].stock }}/>
+            <ProductDetails {...{ desc, specs, sku, stock: variants[currVar]?.stock }}/>
 
-            <ProductPrice {...{ qty, setQty, prices, currPrice, setCurrPrice }}/>
+            <ProductPrice {...{ qty, setQty, prices, currPrice, setCurrPrice, stock: variants[currVar]?.stock }}/>
 
             <ProductAddToCart 
-                varId={variations[currVar]._id} 
-                sku={variations[currVar].sku} 
+                varId={variants[currVar]._id} 
+                sku={''} 
                 qty={qty}
                 price={prices[currPrice].amount} 
             />

@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectTarget } from 'app/device';
+import { selectTarget } from '~/app/device';
 
-import Modal from 'features/new-modal';
+import Modal from '~/features/new-modal';
 import Controls from './controls';
 import ProductGrid from './grid';
-import Filters from 'features/filters/filters';
+import Filters from '~/features/filters/filters';
 
 import './catalog.scss';
 
@@ -45,15 +45,10 @@ export default function Catalog({ catSlug }) {
         toggleFilters: setFilters
     }
 
-    const gridProps = {
-        catSlug,
-        view: gridView
-    }
-
     return (
         <div id="catalog" className="catalog">
             <Controls className={`product-grid_controls`} {...controlsProps}/>
-            <ProductGrid {...gridProps}/>
+            <ProductGrid catSlug={catSlug} view={gridView}/>
             { 
                 !isMobile && <Filters catSlug={catSlug}/>
             }

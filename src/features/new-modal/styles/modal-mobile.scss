@@ -1,7 +1,7 @@
 @media screen and ( max-width: 767px ) {
     #modal-close {
         @include m-button-small;
-        @include m-button-picture( rgba($black, .5), 'assets/images/icon_cross.svg', $size: 100% );
+        @include m-button-picture( rgba($black, .5), '~/assets/images/icon_cross.svg', $size: 100% );
         min-width: unset;
         width: m-get-vw(12px);
         height: m-get-vw(12px);

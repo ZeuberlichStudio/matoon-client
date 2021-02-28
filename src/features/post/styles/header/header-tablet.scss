@@ -37,8 +37,8 @@
                 cursor: pointer;
             }
         
-            &_vk { mask-image: url('assets/images/icon_vk.svg'); }
-            &_fb { mask-image: url('assets/images/icon_fb.svg'); }
+            &_vk { mask-image: url('~/assets/images/icon_vk.svg'); }
+            &_fb { mask-image: url('~/assets/images/icon_fb.svg'); }
         }
 
         #modal-close {

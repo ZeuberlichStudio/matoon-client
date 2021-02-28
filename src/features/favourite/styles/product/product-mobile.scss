@@ -21,7 +21,7 @@
                 @include m-button-small;
                 @include m-button-picture(
                     $color: rgba( $black, .4 ),
-                    $image: 'assets/images/icon_arrow.svg',
+                    $image: '~/assets/images/icon_arrow.svg',
                     $size: m-get-vw(12px)
                 );
 

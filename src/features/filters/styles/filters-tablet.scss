@@ -83,7 +83,7 @@
     
                 button {
                     @include t-button-small;
-                    @include t-button-picture (#B7B9BA, 'assets/images/icon_more.svg', 'assets/images/icon_less.svg');
+                    @include t-button-picture (#B7B9BA, '~/assets/images/icon_more.svg', '~/assets/images/icon_less.svg');
                     margin: t-get-vw(3px);
                     border: none;
                     background-color: #E9EAEA;

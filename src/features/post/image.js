@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from '~/components/Image';
 
 import './styles/image.scss';
 
@@ -8,7 +9,7 @@ export default function PostImage({ image, title }) {
 
     return (
         <div className="post-image">
-            <img src={ API_URL + image } alt={ title }/>
+            <Image src={image} alt={ title }/>
         </div>
     );
 }

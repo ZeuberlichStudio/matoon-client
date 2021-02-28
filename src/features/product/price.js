@@ -11,27 +11,38 @@ export default function Price({
     currPrice,
     setCurrPrice
 }) {
-    function changeHandler(e) {
-        const { value } = e.target;
-        setQty(value);
-    }
+    const [computedPrices, setComputedPrices] = React.useState([]);
 
-    function findPrice() {
-        const priceIdx = prices.findIndex((price, i) => {
-            if ( prices[i] ) {
-                return price.minQty <= qty && prices[i + 1]?.minQty > qty;
-            } else {
-                return prices[i].minQty <= qty;
+    function computePrices() {
+        const computedPrices = [];
+
+        prices.forEach((price, index) => {
+            computedPrices[index] = {
+                minQty: price.minQty,
+                maxQty: prices[index + 1]?.minQty - 1 ?? null,
+                amount: price.amount
             }
         });
-    
-        priceIdx >= 0 && setCurrPrice(priceIdx);
-        console.log(priceIdx)
+
+        return computedPrices;
     }
 
-    React.useEffect(() => {
-        findPrice();
-    }, [qty]);
+    React.useEffect(() => setComputedPrices(computePrices()), [prices]);
+
+    function changeHandler(e) {    
+        const {value} = e.target;
+        if ( value <= stock ) setQty(value);
+    }
+    
+    function findPrice() {
+        const index = computedPrices.findIndex(({minQty, maxQty}) => (
+            maxQty ? (qty >= minQty && qty < maxQty) : true
+        ));
+        
+        setCurrPrice(index < 0 ? 0 : index);
+    }
+
+    React.useEffect(() => findPrice(), [qty]);
 
     return (
         <div className="product-price">

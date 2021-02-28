@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectTotal } from './slice';
-import Button from 'features/button';
+import Button from '~/features/button';
 
 function CartControls({ 
     button, 

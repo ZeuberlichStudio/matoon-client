@@ -135,7 +135,7 @@
         margin: auto;
         left: get-vw(10px);
         position: absolute;
-        mask-image: url('assets/images/icon_plus.svg');
+        mask-image: url('~/assets/images/icon_plus.svg');
         background-color: var(--colorData, $black);
         transition: left 0.3s;
         content: '';
@@ -148,7 +148,7 @@
         margin: auto;
         right: get-vw(10px);
         position: absolute;
-        mask-image: url('assets/images/icon_cross.svg');
+        mask-image: url('~/assets/images/icon_cross.svg');
         background-color: white;
         transition: right 0.3s;
         content: '';

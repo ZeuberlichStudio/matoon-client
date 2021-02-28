@@ -15,8 +15,8 @@
         @include button-small;
         @include button-picture( 
             rgba( $black, .2 )!important, 
-            'assets/images/icon_more.svg',
-            'assets/images/icon_less.svg'
+            '~/assets/images/icon_more.svg',
+            '~/assets/images/icon_less.svg'
         );
 
         background-color: rgba( $black, .05 )!important;

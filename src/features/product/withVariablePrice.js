@@ -2,35 +2,42 @@ import React from 'react';
 
 function withVariablePrice(Component) {
     function ItemWithVariablePrice({initQty, prices, stock, ...props}) {
-        //quantity
+        const [computedPrices, setComputedPrices] = React.useState([]);
+
+        function computePrices() {
+            const computedPrices = [];
+
+            prices.forEach((price, index) => {
+                computedPrices[index] = {
+                    minQty: price.minQty,
+                    maxQty: prices[index + 1]?.minQty - 1 ?? null,
+                    amount: price.amount
+                }
+            });
+            console.log(computedPrices);
+            return computedPrices;
+        }
+
+        React.useEffect(() => setComputedPrices(computePrices()), [prices]);
+
         const [qty, setQty] = React.useState(1);
 
-        function qtyFieldHandler(e) {
-            const { value } = e.target;
-    
-            if ( value > stock ) return;
-    
-            setQty(value);
+        function qtyFieldHandler(e) {    
+            if ( e.target.value <= stock ) setQty(value);
         }
 
         React.useEffect(() => setQty(initQty), [initQty]);
     
-        //price
         const [priceIdx, setPriceIdx] = React.useState(0);
     
         function findPrice() {
-            const priceIdx = prices.findIndex((price, i) => {
-                if ( prices[i] ) {
-                    return price.minQty <= qty && prices[i + 1]?.minQty > qty;
-                } else {
-                    return prices[i].minQty <= qty;
-                }
-            });
-        
-            priceIdx >= 0 && setPriceIdx(priceIdx);
+            const priceIdx = computedPrices.findIndex(({minQty, maxQty}) => (
+                maxQty ? (qty >= minQty && qty < maxQty) : true
+            ));
+            
+            setPriceIdx(priceIdx < 0 ? 0 : priceIdx);
         }
     
-        //setting the right price
         React.useEffect(() => findPrice(), [qty]);
 
         return (

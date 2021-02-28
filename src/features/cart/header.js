@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from 'features/button';
+import Button from '~/features/button';
 
 function CartHeader({ title, goBack, closeButton }) {
     return (

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link, useRouteMatch, useLocation } from 'react-router-dom';
 
-import { Tabs, Tab } from 'features/tabs/tabs';
-import { ResizableText, ButtonsBlock } from 'features/resizable-containers/containers';
-import { ProductDetails, ProductPrice } from 'features/product';
+import { Tabs, Tab } from '~/features/tabs/tabs';
+import { ResizableText, ButtonsBlock } from '~/features/resizable-containers/containers';
+import { ProductDetails, ProductPrice } from '~/features/product';
 
 import './product-item.scss';
 

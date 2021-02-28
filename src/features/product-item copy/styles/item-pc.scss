@@ -156,9 +156,9 @@
                 cursor: pointer;
             }
         
-            &_vk { mask-image: url('assets/images/icon_vk.svg'); }
-            &_fb { mask-image: url('assets/images/icon_fb.svg'); }
-            &_fav { mask-image: url('assets/images/icon_fav.svg'); }
+            &_vk { mask-image: url('~/assets/images/icon_vk.svg'); }
+            &_fb { mask-image: url('~/assets/images/icon_fb.svg'); }
+            &_fav { mask-image: url('~/assets/images/icon_fav.svg'); }
         }
 
         &_info {
@@ -372,7 +372,7 @@
 
                     &_resize {
                         @include button-small;
-                        @include button-picture (#B7B9BA, 'assets/images/icon_more.svg', 'assets/images/icon_less.svg');
+                        @include button-picture (#B7B9BA, '~/assets/images/icon_more.svg', '~/assets/images/icon_less.svg');
                         margin: get-vw(4px);
                         border: none;
                         background-color: #E9EAEA;
@@ -448,9 +448,9 @@
                 cursor: pointer;
             }
         
-            &_vk { mask-image: url('assets/images/icon_vk.svg'); }
-            &_fb { mask-image: url('assets/images/icon_fb.svg'); }
-            &_fav { mask-image: url('assets/images/icon_fav.svg'); }
+            &_vk { mask-image: url('~/assets/images/icon_vk.svg'); }
+            &_fb { mask-image: url('~/assets/images/icon_fb.svg'); }
+            &_fav { mask-image: url('~/assets/images/icon_fav.svg'); }
         }
     }
 }

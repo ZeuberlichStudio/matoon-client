@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addItem, removeItem } from 'features/favourite/favSlice';
+import { addItem, removeItem } from '~/features/favourite/favSlice';
 import './styles/share.scss'
 
 function ProductShare({ id }) {

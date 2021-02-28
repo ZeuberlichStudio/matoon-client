@@ -1,10 +1,7 @@
 import React from 'react';
+import Image from '~/components/Image';
 
 import './styles/gallery.scss';
-
-const { API_URL } = process.env;
-// const { CDN_URL } = process.env;
-const CDN_URL = 'https://matoon.imgix.net/';
 
 export default function ProductGallery({ images }) {
 
@@ -18,18 +15,18 @@ export default function ProductGallery({ images }) {
             onClick={ () => setCurrentImage(i) }
             className={currentImage === i ? 'active' : null}
         >
-            <img src={formFullPath(image)} alt=""/>
+            <Image src={image.path}/>
         </button>
     );
 
     return (
         <div className="product-gallery">
             <div className="product-gallery_selected">
-                <img src={ images && ( formFullPath(images[currentImage]) ) } alt=""/>
+                <Image src={images?.[currentImage].path}/>
             </div>
 
             <div className="product-gallery_preview">
-                { images && images.map(renderImagePreview) }
+                { images?.map(renderImagePreview) }
             </div>
         </div>
     );

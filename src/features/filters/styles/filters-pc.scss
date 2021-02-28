@@ -84,7 +84,7 @@
     
                 button {
                     @include button-small;
-                    @include button-picture (#B7B9BA, 'assets/images/icon_more.svg', 'assets/images/icon_less.svg');
+                    @include button-picture (#B7B9BA, '~/assets/images/icon_more.svg', '~/assets/images/icon_less.svg');
                     margin: get-vw(4px);
                     border: none;
                     background-color: #E9EAEA;

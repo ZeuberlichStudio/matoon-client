@@ -6,11 +6,11 @@ import {
     ProductPrice as Price,
     ProductOptions as Options,
     ProductAddToCart as AddToCart
-} from 'features/product';
-import { withConfig, withDataFetch } from 'features/product/hoc';
+} from '~/features/product';
+import { withConfig, withDataFetch } from '~/features/product/hoc';
 import './styles/product.scss';
 import { useSelector } from 'react-redux';
-import Scrollable from 'features/containers/scrollable';
+import Scrollable from '~/features/containers/scrollable';
 
 function FavouriteProduct({ data, status, config, setConfig, variant, buttonCallback }) {
 

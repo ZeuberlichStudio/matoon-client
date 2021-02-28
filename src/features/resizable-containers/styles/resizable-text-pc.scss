@@ -37,7 +37,7 @@
             display: block;
             position: absolute;
 
-            mask-image: url('assets/images/icon_more.svg');
+            mask-image: url('~/assets/images/icon_more.svg');
             background-color: rgba($black, .4);
 
             content: '';
@@ -54,7 +54,7 @@
         }
 
         .resizable-text_toggle::after {
-            mask-image: url('assets/images/icon_less.svg');
+            mask-image: url('~/assets/images/icon_less.svg');
         }
     }
 }

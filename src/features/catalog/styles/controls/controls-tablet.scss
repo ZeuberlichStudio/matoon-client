@@ -82,11 +82,11 @@
             }
 
             button:nth-child(1) {
-                @include t-button-picture($black, 'assets/images/tablet-icon_grid.svg', 'assets/images/tablet-icon_grid.svg', 'big', $active_color: white);
+                @include t-button-picture($black, '~/assets/images/tablet-icon_grid.svg', '~/assets/images/tablet-icon_grid.svg', 'big', $active_color: white);
             }
     
             button:nth-child(2) {
-                @include t-button-picture($black, 'assets/images/tablet-icon_list.svg', 'assets/images/tablet-icon_list.svg', 'big', $active_color: white);
+                @include t-button-picture($black, '~/assets/images/tablet-icon_list.svg', '~/assets/images/tablet-icon_list.svg', 'big', $active_color: white);
             }
         }
     }

@@ -53,7 +53,7 @@
                 margin-right: get-vw(6px);
 
                 display: inline-block;
-                mask-image: url('assets/images/icon_menu.svg');
+                mask-image: url('~/assets/images/icon_menu.svg');
                 mask-size: 100% auto;
                 background-color: rgba( $black, 1);
                 content: '';
@@ -95,7 +95,7 @@
                 margin-right: get-vw(6px);
 
                 display: inline-block;
-                mask-image: url('assets/images/icon_info.svg');
+                mask-image: url('~/assets/images/icon_info.svg');
                 mask-size: 100% auto;
                 background-color: rgba( $black, 1);
                 content: '';
@@ -115,7 +115,7 @@
             grid-area: favs; 
             @include button-picture( 
                 rgba( $black, .4 ), 
-                'assets/images/icon_fav.svg', 
+                '~/assets/images/icon_fav.svg', 
                 $size: 'big',
                 $active_color: #F8512A,
                 $hover: true
@@ -126,7 +126,7 @@
             grid-area: cart; 
             @include button-picture( 
                 rgba( $black, .4 ), 
-                'assets/images/icon_cart.svg', 
+                '~/assets/images/icon_cart.svg', 
                 $size: 'big',
                 $active_color: #4A8BF7,
                 $hover: true
@@ -137,7 +137,7 @@
             grid-area: account; 
             @include button-picture( 
                 rgba( $black, .4 ), 
-                'assets/images/icon_user.svg', 
+                '~/assets/images/icon_user.svg', 
                 $size: 'big',
                 $active_color: #B544F9,
                 $hover: true

@@ -1,4 +1,4 @@
-@import 'assets/scss/index.scss';
+@import '~/assets/scss/index.scss';
 
 .slider {
     width: 100%;
@@ -14,7 +14,7 @@
         position: absolute;
         z-index: 2;
 
-        mask-image: url('assets/images/slider_arrow.svg');
+        mask-image: url('~/assets/images/slider_arrow.svg');
         background-color: var(--uiColor, white)!important;
         cursor: pointer;
     }
@@ -28,7 +28,7 @@
         position: absolute;
         z-index: 2;
         
-        mask-image: url('assets/images/slider_arrow.svg');
+        mask-image: url('~/assets/images/slider_arrow.svg');
         transform: scaleX(-1);
         background-color: var(--uiColor, white)!important;
         cursor: pointer;

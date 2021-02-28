@@ -1,0 +1,101 @@
+@media screen and ( min-width: 1024px ) {
+    .feed-post {
+        width: get-vw(430px);
+        min-height: get-vw(164px);
+        padding: get-vw(10px);
+
+        margin: get-vw(20px);
+
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+
+        box-shadow: 0 0 get-vw(10px) rgba( $black, .1 );
+        border-radius: get-vw(22px);
+        overflow: hidden;
+
+        &_image {
+            width: 100%;
+            height: 100%;
+            left: 0; top: 0;
+            position: absolute;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        &_content {
+            width: 100%;
+            height: max-content;
+            padding: get-vw(12px);
+
+            background-color: rgba( white, .95 );
+            border-radius: get-vw(12px);
+            overflow: hidden;
+            transition: 300ms;
+
+            h2 {
+                @include proxima-bold( get-vw(32px) );
+            }
+
+            p {
+                margin-top: get-vw(8px);
+                @include proxima-regular( get-vw(16px), get-vw(18px) );
+                overflow: hidden;
+                transition: 300ms;
+            }
+        }
+
+        a {
+            margin-top: get-vw(10px);
+            @include button-medium;
+            width: get-vw(226px);
+            background-color: rgba( white, .95 );
+            transition: 300ms;
+        }
+
+        /*folded start*/
+        &_content {
+            transform: translateY(get-vw(50px));
+
+            p { 
+                margin-top: 0px;
+                max-height: 0px;
+                //transform: translateY(100%); 
+            }
+        }
+
+        a {
+            transform: translateY(get-vw(50px));
+        }
+        /*folded end*/
+
+        /*hover start*/
+        &:hover &_content {
+            transform: translateY(0px);
+
+            p { 
+                margin-top: get-vw(8px);
+                max-height: 250px;
+                transform: translateY(0px); 
+            }
+        }
+
+        &:hover a {
+            transform: translateY(0px);
+        }
+        /*hover end*/
+    }
+
+    .feed-post.small {
+        height: get-vw(164px);
+    }
+
+    .feed-post.medium {
+        height: get-vw(368px);
+    }
+
+    .feed-post.big {
+        height: get-vw(572px);
+    }
+}

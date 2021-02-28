@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterChanged } from 'features/catalog/querySlice';
+import { filterChanged } from '~/features/catalog/querySlice';
 
 import Checkbox from './checkbox';
 import Field from './field';
