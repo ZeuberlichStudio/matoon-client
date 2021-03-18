@@ -1,17 +1,30 @@
 @media screen and (max-width: 767.5px) {
 
-    .search-wrapper {
-        width: max-content;
+    #modal_search {
+        height: var(--vh, 100vh);
+        padding: m-get-vw(64px) m-get-vw(40px);
+
+    }
+
+    .search_wrapper {
         height: 100%;
-        max-height: calc( var(--vh, 100vh) - #{ m-get-vw(64px) } );
-        margin-left: m-get-vw(41px);
-        top: m-get-vw(64px);        
+        border-radius: m-get-vw(26px);
 
         overflow: hidden auto;
-        @include hide-scrollbar;
-
-        border-radius: m-get-vw(26px) m-get-vw(26px) 0 0;
     }
+
+    // .search-wrapper {
+    //     width: max-content;
+    //     height: 100%;
+    //     max-height: calc( var(--vh, 100vh) - #{ m-get-vw(64px) } );
+    //     margin-left: m-get-vw(41px);
+    //     top: m-get-vw(64px);        
+
+    //     overflow: hidden auto;
+    //     @include hide-scrollbar;
+
+    //     border-radius: m-get-vw(26px) m-get-vw(26px) 0 0;
+    // }
 
     .search.focus { overflow: visible; }
 
@@ -32,8 +45,8 @@
         &::before {
             width: 100%;
             height: m-get-vw(24px);
+            margin: 0 m-get-vw(1px);
             margin-bottom: m-get-vw(-24px);
-            margin-left: m-get-vw(1px);
             top: 0;
 
             position: sticky;
@@ -48,8 +61,8 @@
         &::after {
             width: 100%;
             height: m-get-vw(24px);
+            margin: 0 m-get-vw(1px);
             margin-top: m-get-vw(-24px);
-            margin-left: m-get-vw(1px);
             bottom: 0;
 
             position: sticky;

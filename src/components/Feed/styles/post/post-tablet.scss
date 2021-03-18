@@ -25,6 +25,7 @@
         }
 
         &_content {
+            width: 100%;
             height: max-content;
             padding: t-get-vw(12px);
 
@@ -37,7 +38,7 @@
                 @include proxima-bold( t-get-vw(18px) );
             }
 
-            p {
+            &_text {
                 margin-top: t-get-vw(6px);
                 @include proxima-regular( t-get-vw(16px), t-get-vw(18px) );
                 overflow: hidden;

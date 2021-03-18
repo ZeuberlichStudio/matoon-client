@@ -1,21 +1,18 @@
 import React from 'react';
+import Image from '~/components/Image';
 import { ProductShare } from '~/features/product';
 import './styles/list-item.scss';
-
-const { API_URL } = process.env;
-const { CDN_URL } = process.env;
 
 function FavouriteListItem({ item, setProduct, setColumn }) {
 
     const { 
+        _id,
         name, 
         slug,
         images,
         sku, 
         prices 
     } = item;
-
-    const formFullPath = path => CDN_URL + path;
 
     function openProduct() {
         setProduct(item);
@@ -25,7 +22,7 @@ function FavouriteListItem({ item, setProduct, setColumn }) {
     return (
         <div className="favourite-list-item">
             <div className="favourite-list-item_image">
-                <img src={formFullPath(images[0])} alt=""/>   
+                <Image src={images[0]?.path}/>   
             </div>
             <h2 className="favourite-list-item_name">{ name }</h2>
             <span className="favourite-list-item_sku">{ `Арт: ${sku}` }</span>
@@ -34,7 +31,7 @@ function FavouriteListItem({ item, setProduct, setColumn }) {
             <button onClick={openProduct} className="favourite-list-item_more">
                 <span>Открыть товар</span>
             </button>
-            <ProductShare {...{slug}}/>
+            <ProductShare {...{_id, slug}}/>
         </div>
     );
 }

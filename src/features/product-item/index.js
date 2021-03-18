@@ -19,16 +19,26 @@ export function ProductItemSuggested({data, i}) {
     const {
         id,
         sku,
+        slug,
         images,
         name,
         desc,
         prices
     } = data;
 
+    const location = useLocation();
+
+    const itemLink = {
+        pathname: `/catalog/product=${slug}`,
+        state: {
+            backgroundLocation: location.state?.backgroundLocation ?? location
+        }
+    }
+
     return (
         <div className={`product-item-suggested`} key={ i }>
             <div className="product-item-suggested_image">
-                <img src={formFullPath(images[0])} alt={ name }/>
+                <Image src={images[0]?.path || ''} alt={name}/>
             </div>
 
             <div className="product-item-suggested_info">
@@ -40,7 +50,7 @@ export function ProductItemSuggested({data, i}) {
             </div>
 
             <div className="product-item-suggested_link">
-                <Link to="/"><span>Подробнее</span></Link>
+                <Link to={itemLink}><span>Подробнее</span></Link>
             </div>
         </div>
     );
@@ -49,7 +59,8 @@ export function ProductItemSuggested({data, i}) {
 export function ProductItemMini({data, i}) {
 
     const {
-        _id: id,
+        _id,
+        slug,
         images,
         name,
         desc,
@@ -59,18 +70,9 @@ export function ProductItemMini({data, i}) {
     const backgroundLocation = useLocation();
 
     const itemLink = {
-        pathname: `/catalog/product=${id}`,
+        pathname: `/catalog/product=${slug}`,
         state: { backgroundLocation }
     }
-
-    // const discount = (price, salePrice) => '-' + parseInt((price - salePrice) / price * 100) + '%' ;
-
-    // const saleMarker = (
-    //     <span>
-    //         <span className='discount-price'>{ salePrices[0].amount + '₽' }</span>
-    //         <span className="old-price">{`Было ${prices[0].amount} ₽`}</span>
-    //     </span>
-    // );
 
     return (
         <div className={`product-item product-item-${ i } product-item-mini`} key={ i }>
@@ -79,7 +81,7 @@ export function ProductItemMini({data, i}) {
                 <Image src={images[0]?.path || ''} alt={name}/>
             </div>
 
-            <ProductShare {...{ id }}/>
+            <ProductShare {...{ _id, slug }}/>
 
             <div className="product-item-mini_info">
                 <div className="product-item-mini_info_name-and-price">                        
@@ -103,8 +105,9 @@ export function ProductItemFull({data, i}) {
     const [currPrice, setCurrPrice] = React.useState(0);
 
     const {
-        _id: id,
+        _id,
         sku,
+        slug,
         name,
         images,
         variants,
@@ -126,13 +129,13 @@ export function ProductItemFull({data, i}) {
             <ProductPrice {...{ qty, setQty, prices, currPrice, setCurrPrice, stock: variants[currVar]?.stock }}/>
 
             <ProductAddToCart 
-                varId={variants[currVar]._id} 
-                sku={''} 
+                _id={_id} 
+                variantId={variants[currVar]._id} 
                 qty={qty}
-                price={prices[currPrice].amount} 
+                priceAmount={prices[currPrice].amount}
             />
 
-            <ProductShare {...{ id }}/>
+            <ProductShare {...{ _id, slug }}/>
         </div>
     );
 }

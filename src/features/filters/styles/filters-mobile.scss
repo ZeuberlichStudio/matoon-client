@@ -8,6 +8,8 @@
         border-radius: m-get-vw(26px) m-get-vw(26px) 0 0;
 
         overflow: hidden scroll;
+        //safari 10 fix
+        -webkit-mask-image: -webkit-radial-gradient(white, black);
 
         .product-filters {
             margin-bottom: m-get-vw(64px);

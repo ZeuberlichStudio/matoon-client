@@ -11,7 +11,7 @@ import BannerPostsPreview from './BannerPostsPreview';
 import Slider from '~/features/slider/slider';
 import Search from '~/features/search';
 
-function Banner({ pageTitle, ancestors, posts }) {
+function Banner({ pageTitle, ancestors, posts, catSlug }) {
 
     const [currentPost, setCurrentPost] = React.useState(0);
 
@@ -36,7 +36,7 @@ function Banner({ pageTitle, ancestors, posts }) {
             <div className="banner-title">{ pageTitle ?? 'Matoon Store' }</div>
             { params.search && <span className="banner-search-phrase">{ decodeURI(params.search) }</span>  }
             { ( ancestors && ancestors[0] ) && <Breadcrumbs {...{ancestors}}/> }
-            { targetDevice !== 'mobile' && <div className="banner-search-wrapper"><Search/></div> }
+            { targetDevice !== 'mobile' && <div className="banner-search-wrapper"><Search catSlug={catSlug}/></div> }
             { 
                 ( posts && posts[0] ) && 
                 <>

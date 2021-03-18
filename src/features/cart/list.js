@@ -1,13 +1,13 @@
-import { forEach } from 'lodash';
 import React from 'react';
+import apiCall from '~/common/api-call';
 import { useSelector, useDispatch } from 'react-redux';
 import { SpinningLoader } from '../loader';
 import withVariablePrice from '../product/withVariablePrice';
-import { removeItemById as storeRemoveItem, updateItem as storeUpdateItem } from './slice';
+import { removeItem, updateItem as storeUpdateItem, selectItem } from './slice';
+import Image from '~/components/Image';
 
 import './styles/list/pc.scss';
 
-const { API_URL } = process.env;
 const { CDN_URL } = process.env;
 
 function List() {
@@ -23,20 +23,10 @@ function List() {
             return `${acc ? acc + ',' : acc}${next._id}`;
         }, '');
 
-        function mergeStoreAndData(data) {
-            return data.map( item => 
-                Object.assign(item, itemsStore.find(storeItem => storeItem._id === item._id))
-            )
-        }
-
-        fetch(API_URL + `products/variations?ids=${ids}`)
-            .then(res => {
-                if (res.ok) return res.json();
-                else throw new Error('Something went wrong');
-            })
-            .then(data => {
+        apiCall(`products?id=${ids}`)
+            .then(result => {
                 setStatus('success');
-                setData(mergeStoreAndData(data));
+                setData(result.data);
             })
             .catch(err => {
                 setStatus('failed');
@@ -44,84 +34,97 @@ function List() {
             });
     }
 
-    React.useEffect(() => fetchData(), []);
+    React.useEffect(fetchData, []);
 
-    const dispatch = useDispatch();
-
-    function removeItem(idx) {
-        const [...newData] = data;
-
-        newData.splice(idx, 1);
-        dispatch(storeRemoveItem(data[idx]._id));
-        setData(newData);
-    }
+    function findItem(_id) { return data.find(item => item._id === _id ); }
 
     return (
         <div className="cart-list">
             { 
                 status === 'success' ?
-                data.map(({stock, prices, qty, ...item}, i) => 
-                    <CartItemWithVariablePrice
-                        key={i} 
-                        initQty={qty} 
-                        removeItem={() => removeItem(i)}
-                        {...{prices, stock, ...item}}
-                    />
-                ) :
+                itemsStore.map((item, i) => <CartItem key={i} {...findItem(item._id)} storeData={item} />) :
                 <SpinningLoader/>
             }
         </div>
     );
 }
 
-const CartItemWithVariablePrice = withVariablePrice(CartItem);
-
 function CartItem({
+    storeData,
     _id,
     images,
     name,
     sku,
-    color,
-    brand,
-    price,
-    qty,
-    qtyFieldHandler,
-    removeItem
+    variants,
+    prices
 }) {
-
     const dispatch = useDispatch();
+    const [currPrice, setCurrPrice] = React.useState(0);
+    const [computedPrices, setComputedPrices] = React.useState([]);
 
-    React.useEffect(() => {
-        const updateObj = {
-            _id,
-            qty,
-            price
-        }
+    const variant = variants?.find(({_id}) => _id === storeData.variantId);
 
-        dispatch(storeUpdateItem({_id, updateObj}));
-    }, [qty, price]);
-
-    function handleQtyBlur(e) {
-        const {value} = e.target;
-        if ( !value || value <= 0 ) { e.target.value = 1; qtyFieldHandler(e); }
+    function updateQty(qty) {
+        dispatch(storeUpdateItem({
+            ...storeData, 
+            qty
+        }));
     }
+
+    function handleInput(e) {    
+        const {value} = e.target;
+        if ( value <= variant.stock ) updateQty(value);
+    }
+
+    function handleBlur(e) { if ( e.target.value <= 0 ) updateQty(1); }
+
+    function remove() {
+        dispatch(removeItem(storeData));
+    }
+
+    function computePrices() {
+        const computedPrices = [];
+
+        prices.forEach((price, index) => {
+            computedPrices[index] = {
+                minQty: price.minQty,
+                maxQty: prices[index + 1]?.minQty - 1 ?? null,
+                amount: price.amount
+            }
+        });
+
+        return computedPrices;
+    }
+
+    React.useEffect(() => prices && setComputedPrices(computePrices()), [prices]);
+    
+    function findPrice() {
+        const index = computedPrices.findIndex(({minQty, maxQty}) => (
+            maxQty ? (storeData.qty >= minQty && storeData.qty < maxQty) : true
+        ));
+        
+        setCurrPrice(index < 0 ? 0 : index);
+    }
+
+    React.useEffect(() => findPrice(), [storeData.qty]);
 
     return (
         <div className="cart-item">
-            <img src={CDN_URL + images[0]} alt="" className="cart-item_thumbnail"/>
+            <Image src={variant?.images[0].path} className="cart-item_thumbnail"/>
             <h2 className="cart-item_name">{name}</h2>
             <span className="cart-item_sku">Арт: {sku}</span>
             <div className="cart-item_config">
-                <div style={{'--colorData': color.value}}>{color.name}</div>
-                <div>{brand.name}</div>
+                <div style={{'--colorData': variant?.attributes.color.code}}>{variant?.attributes.color.name}</div>
+                <div>{variant?.attributes.brand.name}</div>
             </div>
+
             <div className="cart-item_price">
                 <div className="cart-item_price_qty">
-                    <input type="text" value={qty} onChange={qtyFieldHandler} onBlur={handleQtyBlur}/>
-                    <button className="cart-item_price_qty_remove" onClick={removeItem}/>
+                    <input type="text" value={storeData.qty} onChange={handleInput} onBlur={handleBlur}/>
+                    <button className="cart-item_price_qty_remove" onClick={remove}/>
                 </div>
                 <div className="cart-item_price_sum">
-                    <span>{price * qty}₽</span>
+                    <span>{prices?.[currPrice].amount * storeData.qty}₽</span>
                 </div>
             </div>
         </div>

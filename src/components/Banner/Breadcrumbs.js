@@ -12,12 +12,12 @@ function Breadcrumbs({ ancestors }) {
         <ul className="breadcrumbs">
             { 
                 ancestors.map( ( { name, slug }, i, arr ) => 
-                    <>
-                    <li>
-                        <Link to={ catPathname(slug) }>{ name }</Link>
-                    </li>
-                    { arr[i + 1] && <span>&nbsp;/&nbsp;</span> }
-                    </>
+                    <React.Fragment key={i}>
+                        <li>
+                            <Link to={ catPathname(slug) }>{ name }</Link>
+                        </li>
+                        { arr[i + 1] && <span>&nbsp;/&nbsp;</span> }
+                    </React.Fragment>
                 ) 
             }
         </ul>

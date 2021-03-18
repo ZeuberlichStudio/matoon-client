@@ -1,0 +1,46 @@
+@media screen and (min-width: 1024px) {
+    .cart-ticket { 
+        padding: get-vw(42px) 0; 
+
+        display: grid;
+        grid-auto-rows: max-content;
+        grid-row-gap: get-vw(24px);
+        justify-items: center;
+        align-items: center;
+
+        h3, p { padding: 0 get-vw(56px); }
+
+        h1 { @include proxima-bold(get-vw(48px)); }
+
+        p { @include proxima-regular(get-vw(16px), get-vw(18px)); }
+
+        &_copy {
+            width: max-content;    
+            display: block;
+            
+            color: var(--color, $black);
+            border: solid var(--color, $black);
+            background-color: white;
+            
+            width: get-vw(178px);
+            opacity: .25;
+        }
+
+        &_contacts {
+            display: grid;
+            grid-auto-flow: column;
+            grid-column-gap: get-vw(8px);
+            
+            & > a {
+                width: max-content;    
+                display: block;
+                
+                color: var(--color, $black);
+                border: solid var(--color, $black);
+                background-color: white;
+            }
+        }
+
+        &_gratitude { margin: get-vw(42px) 0; }
+    }
+}

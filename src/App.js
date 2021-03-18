@@ -15,7 +15,9 @@ import ModalUI from '~/features/modal-ui';
 
 import MainPage from '~/pages/MainPage';
 import PostPage from '~/pages/PostPage/Index.js';
+import CatalogPage from '~/pages/CatalogPage';
 import CategoryPage from '~/pages/CategoryPage';
+import SearchPage from '~/pages/SearchPage';
 import ProductPage from '~/pages/ProductPage';
 import NotFoundPage from '~/pages/404';
 
@@ -92,8 +94,11 @@ function App() {
             <Switch location={ background || location }>
                 <Route exact={ true } path="/" component={ MainPage }/>
                 <Route path="/feed/post=:slug" component={ PostPage }/>
+                <Route exact={ true } path="/catalog" component={ CatalogPage }/>
+                <Route path="/catalog/category=:slug/search=:search" component={ SearchPage }/>
                 <Route path="/catalog/category=:slug" component={ CategoryPage }/>
                 <Route path="/catalog/product=:slug" component={ ProductPage }/>
+                <Route path="/catalog/search=:search" component={ SearchPage }/>
                 <Route path="*" component={ NotFoundPage }/>
             </Switch>
             { 

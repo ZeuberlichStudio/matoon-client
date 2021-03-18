@@ -1,0 +1,52 @@
+@import '~/assets/scss/index.scss';
+
+.scrollable-container {
+    width: unset;
+    height: 100%;
+    padding-right: get-vw(16px);
+    display: block;
+    position: relative;
+    overflow-y: hidden;
+
+    * {
+        @include hide-scrollbar;
+    }
+}
+
+.scrollable-content {
+    height: 100%;
+    display: block;
+    overflow-y: auto;
+}
+
+.scrollbar {
+    width: max-content;
+    padding: get-vw(24px) 0;
+    position: absolute;
+    // right: get-vw(10px);
+    right: 0;
+    top: 0;
+    bottom: 0
+}
+
+.scrollbar-rail {
+    width: get-vw(4px);
+    height: 100%;
+
+    position: relative;
+
+    background-color: rgb(200,200,200);
+    border-radius: get-vw(8px);
+    transition: opacity .2s;
+}
+
+.scrollbar-thumb {
+    width: 100%;
+    margin: get-vw(24px) 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgb(100,100,100);
+    border-radius: get-vw(8px);
+    transition: opacity .2s;
+}

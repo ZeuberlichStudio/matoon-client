@@ -1,0 +1,95 @@
+.field {
+    display: inline-block;
+
+    &--label {
+        display: block;
+        color: $black;
+    }
+
+    &--input,
+    &--textarea {
+        width: 100%;
+        background: rgba($black, .1);
+        color: $black;
+        resize: none;
+
+        &::placeholder { color: rgba($black, .6); }
+    }
+}
+
+.field.danger {
+    .field--input,
+    .field--textarea { background: rgba(red, .3); }
+}
+
+@media #{$pc-screen} {
+    .field {
+        &--label { 
+            padding-left: get-vw(10px);
+            @include proxima-regular(get-vw(18px)); 
+        }
+
+        &--input {
+            margin-top: get-vw(4px);
+            height: get-vw(34px);
+            padding: 0 get-vw(10px);
+            border-radius: get-vw(8px);
+            @include proxima-semibold(get-vw(18px), get-vw(34px));
+        }
+
+        &--textarea {
+            margin-top: get-vw(4px);
+            padding: 0 get-vw(10px);
+            border-radius: get-vw(8px);
+            @include proxima-semibold(get-vw(18px), get-vw(34px));
+        }
+    }
+}
+
+@media #{$tablet-screen} {
+    .field {
+        &--label { 
+            padding-left: t-get-vw(10px);
+            @include proxima-regular(t-get-vw(16px)); 
+        }
+
+        &--input {
+            margin-top: t-get-vw(4px);
+            height: t-get-vw(32px);
+            padding: 0 t-get-vw(10px);
+            border-radius: t-get-vw(6px);
+            @include proxima-semibold(t-get-vw(16px), t-get-vw(32px));
+        }
+
+        &--textarea {
+            margin-top: t-get-vw(4px);
+            padding: 0 t-get-vw(10px);
+            border-radius: t-get-vw(6px);
+            @include proxima-semibold(t-get-vw(16px), t-get-vw(32px));
+        }
+    }
+}
+
+@media #{$mobile-screen} {
+    .field {
+        &--label { 
+            padding-left: m-get-vw(8px);
+            @include proxima-regular(m-get-vw(16px)); 
+        }
+
+        &--input {
+            margin-top: m-get-vw(4px);
+            height: m-get-vw(28px);
+            padding: 0 m-get-vw(8px);
+            border-radius: m-get-vw(6px);
+            @include proxima-semibold(m-get-vw(16px), m-get-vw(28px));
+        }
+
+        &--textarea {
+            margin-top: m-get-vw(4px);
+            padding: 0 m-get-vw(10px);
+            border-radius: m-get-vw(6px);
+            @include proxima-semibold(m-get-vw(16px), m-get-vw(28px));
+        }
+    }
+}

@@ -44,7 +44,7 @@ export default function CategoriesBlock({
                 </ul>
                     
                 <div className="categories-block_link">
-                    <Link to={`/catalog/category=${ slug || "all" }`} onClick={ closeModal }>
+                    <Link to={`/catalog${ dimension > 0 ? `/category=${slug}` : '' }`} onClick={ closeModal }>
                         <span>{ dimension > 0 ? "Все товары в категории" : "Все товары в каталоге" }</span>
                     </Link>
                 </div>

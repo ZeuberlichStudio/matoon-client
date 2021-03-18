@@ -2,23 +2,29 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     search: null,
+    catSlug: null,
     sort: 'meta.orders,-1',
     filter: {
         color: [],
         brand: [],
         material: [],
-        sex: [],
+        for: [],
         minPrice: null,
         maxPrice: null,
         minStock: null,
-    },
-    category: null
+    }
 }
 
 export const querySlice = createSlice({
     name: 'query',
     initialState: initialState,
     reducers: {
+        changeCategory: (state, action) => {
+            state.catSlug = action.payload;
+        },
+        changeSearch: (state, action) => {
+            state.search = action.payload;
+        },
         filterChanged: (state, action) => {
             state.filter = action.payload;
         },
@@ -28,13 +34,11 @@ export const querySlice = createSlice({
         categoryChanged: (state, action) => {
             state.category = action.payload;
         },
-        setSearch: (state, { payload }) => {
-            state.search = payload;
-        }
+        resetQuery: () => initialState
     }
 });
 
-export const { filterChanged, sortingChanged, categoryChanged, setSearch } = querySlice.actions;
+export const { filterChanged, sortingChanged, changeCategory, changeSearch, resetQuery } = querySlice.actions;
 
 export default querySlice.reducer;
 
@@ -42,4 +46,3 @@ export default querySlice.reducer;
 
 export const selectSorting = state => state.query.sort;
 export const selectFilter = state => state.query.filter;
-export const selectCategory = state => state.query.category;

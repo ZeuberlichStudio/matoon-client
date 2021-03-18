@@ -1,7 +1,8 @@
 @media screen and (min-width: 1024px) {
     .banner {
         width: 100vw;
-        height: get-vw(972px);
+        // height: get-vw(972px);
+        height: max-content;
         padding: get-vw(98px) get-vw(64px) get-vw(34px) get-vw(64px);
 
         display: grid;
@@ -12,7 +13,7 @@
         'post slider'
         'preview slider';
         grid-template-columns: get-vw(520px) 1fr;
-        grid-template-rows: repeat(2, max-content) get-vw(58px) 1fr max-content;
+        grid-template-rows: repeat(3, max-content) 1fr max-content;
         grid-column-gap: get-vw(36px);
     }
 
@@ -31,6 +32,8 @@
         grid-area: search;
         margin-top: get-vw(34px);
         margin-left: get-vw(-8px);
+        height: get-vw(58px);
+        position: relative;
     }
 
     .banner-post {

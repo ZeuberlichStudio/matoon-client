@@ -8,6 +8,12 @@ import './styles/feed.scss';
 
 import {useLogRequestStatus} from '~/debug/logRequestStatus.js';
 
+const gridSizes = {
+    mobile: 2,
+    tablet: 3,
+    desktop: 4
+};
+
 export default function Feed() {
     const [posts, setPosts] = React.useState([]);
     const [status, setStatus] = React.useState('idle');
@@ -15,7 +21,7 @@ export default function Feed() {
     function fetchPosts() {
         setStatus('pending');
 
-        apiCall(`/posts`)
+        apiCall(`/posts?type=feed`)
             .then(res => {
                 setStatus('success');
                 setPosts(res.data);
@@ -30,11 +36,6 @@ export default function Feed() {
     useLogRequestStatus(status);
 
     const targetDevice = useSelector(state => state.device.target);
-    const gridSize = {
-        mobile: 2,
-        tablet: 3,
-        desktop: 4
-    };
 
     function arrangePosts(posts, columns) {
         const arrangedPosts = [];
@@ -66,7 +67,7 @@ export default function Feed() {
             <div className="feed-grid">
                 { 
                     status === 'success' ?
-                    arrangePosts(posts,  gridSize['desktop']).map((column, i) => 
+                    arrangePosts(posts,  gridSizes[targetDevice]).map((column, i) => 
                         <div className="feed-grid_column" key={i}>
                             { column.map((post, i) => <FeedPost {...{...post, image: post.image.path}} i={i} key={i}/> ) }
                         </div> 

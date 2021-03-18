@@ -4,7 +4,8 @@ import Modal from '~/features/new-modal';
 import { setModalElement, animateModalElement } from '~/app/ui';
 import Menu from '~/features/categories';
 import Favourite from '~/features/favourite';
-import Cart from '~/features/cart';
+import Cart from '~/components/Cart/Cart';
+import {ModalSearch} from '~/features/Search';
 
 function ModalUI() {
 
@@ -26,6 +27,7 @@ function ModalUI() {
                 modalElement === 'menu' ? <Menu/> : 
                 modalElement === 'favourite' ? <Favourite/> : 
                 modalElement === 'cart' ? <Cart/> : 
+                modalElement === 'search' ? <ModalSearch/> : 
                 <div></div> 
             }
         </Modal>
@@ -35,7 +37,7 @@ function ModalUI() {
 function toggleUI( dispatch, actionSet, modalElement, payload ) {
     switch (modalElement) {
         case payload:
-            dispatch(actionSet(false));
+            dispatch(actionSet(null));
             break;
 
         case null:

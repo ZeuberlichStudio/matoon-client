@@ -50,3 +50,18 @@ a {
 
     &.visible { background-color: rgba( $black, .95 ); }
 }
+
+::-webkit-scrollbar {
+    width: get-vw(6px);
+    background: rgba( $black, .2);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba( $black, .7 );
+    -webkit-border-radius: 1vw;
+    -webkit-box-shadow: 0px 1px 2px rgba($black, 0.1);
+}
+
+::-webkit-scrollbar-corner {
+    background: $black;
+}

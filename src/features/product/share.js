@@ -3,16 +3,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addItem, removeItem } from '~/features/favourite/favSlice';
 import './styles/share.scss'
 
-function ProductShare({ id }) {
-    const link = `https://matoon.store/catalog/product=${id}`;
-    const marked = useSelector( state => state.favourite ).includes(id);
+function ProductShare({ _id, slug }) {
+    const link = `https://matoon.store/catalog/product=${slug}`;
+    const marked = useSelector( state => state.favourite ).includes(_id);
     const dispatch = useDispatch();
 
-    const favAdd = () => dispatch(addItem(id));
-    const favRemove = () => dispatch(removeItem(id));
+    const favAdd = () => dispatch(addItem(_id));
+    const favRemove = () => dispatch(removeItem(_id));
 
     return (
         <div className="product-share">
+            { console.log() }
             <a 
                 className="product-share_vk" 
                 href={`https://vk.com/share.php?url=${link}`} 

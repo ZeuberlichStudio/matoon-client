@@ -1,4 +1,5 @@
 import React from 'react';
+import apiCall from '~/common/api-call';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterChanged } from '~/features/catalog/querySlice';
 
@@ -7,17 +8,13 @@ import Field from './field';
 
 import './filters.scss';
 
-const {
-    API_URL
-} = process.env;
-
 export default function Filters({ catSlug, closeButton, closeModal }) {
 
     const initialSelectedFilters = {
         color: [],
         brand: [],
         material: [],
-        sex: [],
+        for: [],
         minPrice: null,
         maxPrice: null,
         minStock: null
@@ -32,13 +29,12 @@ export default function Filters({ catSlug, closeButton, closeModal }) {
     const [status, setStatus] = React.useState('idle');
     const [error, setError] = React.useState(null);
     const [availableFilters, setAvailableFilters] = React.useState({});
+    const [count, setCount] = React.useState(0);
 
     function buildApiQuery() {
 
         const params =  {
-            //change after showcase!!!
-            //cat: catSlug,
-            cat: '',
+            catSlug,
             minPrice: apiQueryParamsState.filter.minPrice,
             maxPrice: apiQueryParamsState.filter.maxPrice,
             minStock: apiQueryParamsState.filter.minStock
@@ -59,11 +55,11 @@ export default function Filters({ catSlug, closeButton, closeModal }) {
             return;
         }
 
-        fetch(`${API_URL}products/available-filters?${buildApiQuery()}`)
-            .then( data => data.json() )
-            .then( result => {
-                setAvailableFilters(result);
+        apiCall(`products/filters?${buildApiQuery()}`)
+           .then( result => {
+                setAvailableFilters(result.data);
                 setStatus('succeeded');
+                console.log(result.data);
             })
             .catch( err => {
                 setError(err);
@@ -71,6 +67,8 @@ export default function Filters({ catSlug, closeButton, closeModal }) {
             });
 
     }, [fresh, apiQueryParamsState]);
+
+    React.useEffect(countApplied, [apiQueryParamsState.filter]);
 
     //Methods
     function addFilter(attr, name) {
@@ -106,11 +104,12 @@ export default function Filters({ catSlug, closeButton, closeModal }) {
             count += Array.isArray(value) ? value.length : (value ? 1 : 0);
         }
 
-        return count;
+        setCount(count);
     }
 
     function reset() {
         setSelectedFilters(initialSelectedFilters);
+        setCount(0);
         setFresh(true);
     }
 
@@ -119,8 +118,18 @@ export default function Filters({ catSlug, closeButton, closeModal }) {
         closeModal && closeModal();
     }
 
-    const renderCheckbox = (filter, attr, key) => 
-    <Checkbox active={selectedFilters[attr].includes(filter.slug)} key={key} {...filter} attr={attr} fresh={fresh} addFilter={addFilter} removeFilter={removeFilter}/>;
+    const renderCheckbox = (filter, attr, key) => (
+        <Checkbox 
+            active={selectedFilters[attr].includes(filter._id)}
+            name={filter.name}
+            slug={filter._id}
+            key={key} 
+            attr={attr} 
+            fresh={fresh} 
+            addFilter={addFilter} 
+            removeFilter={removeFilter}
+        />
+    )
 
     const renderField = (name, attr) => 
     <Field key={name} name={name} attr={attr} fresh={fresh} setFilter={setFilter}/>;
@@ -129,11 +138,11 @@ export default function Filters({ catSlug, closeButton, closeModal }) {
         colors,
         brands,
         materials,
-        sex
+        for: sex
     } = availableFilters;
 
     return(
-        <div id="product-filters-wrapper" className="product-filters-wrapper">
+        <div style={{ overflowX: 'hidden', overflowY: 'scroll', '-webkit-overflow-scrolling': 'touch'}} id="product-filters-wrapper" className="product-filters-wrapper">
         <div ref={ containerRef } id="product-filters" className="product-filters">
             <div className="product-filters_header">
                 <h3>Фильтры</h3>
@@ -152,7 +161,7 @@ export default function Filters({ catSlug, closeButton, closeModal }) {
             </ResizableFilterBlock>
 
             <ResizableFilterBlock name={"Пол / возраст"}>
-                { sex && sex.map((filter, i) => renderCheckbox(filter, "sex", i)) }
+                { sex && sex.map((filter, i) => renderCheckbox(filter, "for", i)) }
             </ResizableFilterBlock>
 
             <FilterBlock name={"Цена (за шт)"}>
@@ -164,7 +173,7 @@ export default function Filters({ catSlug, closeButton, closeModal }) {
                 { renderField("От", "minStock") }
             </FilterBlock>
 
-            <Controls apply={apply} reset={reset} count={countApplied()} />
+            <Controls apply={apply} reset={reset} count={count} />
         </div>
         </div>
     );

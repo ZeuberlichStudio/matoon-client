@@ -25,37 +25,33 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState: initialState,
     reducers: {
-        addItem: ( state, { payload } ) => {
-            state.items.push(payload);
-        },
-        removeItemByIndex: ( state, { payload } ) => { state.items.splice( payload, 1 ); },
-        removeItemById: ( state, { payload } ) => {
-            const indexToRemove = state.items.findIndex(item => item._id === payload);
+        addItem( state, { payload } ) { state.items.push(payload); },
+        removeItem(state, {payload}) {
+            const index = state.items.findIndex(({_id, variantId}) => (
+                _id === payload._id,
+                variantId === payload.variantId
+            ));
 
-            state.items.splice( indexToRemove, 1 );
+            state.items.splice(index, 1);
         },
-        updateItem: ( state, { payload } ) => {
-            const itemToUpdate = state.items.find(item => item._id === payload._id); 
+        updateItem( state, { payload } ) {
+            const itemToUpdate = state.items.find(({_id, variantId}) => (
+                _id === payload._id,
+                variantId === payload.variantId
+            )); 
 
             if ( !itemToUpdate ) return state;
-
-            if ( 
-                itemToUpdate.qty !== payload.updateObj.qty || 
-                itemToUpdate.price !== payload.updateObj.price 
-            ) {
-                Object.assign(itemToUpdate, { 
-                    price: payload.updateObj.price, 
-                    qty: payload.updateObj.qty
-                });
-            }
+            else Object.assign(itemToUpdate, payload);
         },
-        clearOrderInfo: state => ({...initialState, items: state.items}),
-        updateCustomerInfo: (state, {payload}) => { state.customer = {...state.customer, ...payload} },
-        updateContactMethod: (state, {payload}) => { state.contactMethod = {...state.contactMethod, ...payload} },
-        updateShippingMethod: (state, {payload}) => { state.shippingMethod = {...state.shippingMethod, ...payload} },
-        updatePaymentMethod: (state, {payload}) => { state.paymentMethod = {...state.paymentMethod, ...payload} }
+        clearOrderInfo(state) { return {...initialState, items: state.items}},
+        updateCustomerInfo(state, {payload}) { state.customer = {...state.customer, ...payload} },
+        updateContactMethod(state, {payload}) { state.contactMethod = {...state.contactMethod, ...payload} },
+        updateShippingMethod(state, {payload}) { state.shippingMethod = {...state.shippingMethod, ...payload} },
+        updatePaymentMethod(state, {payload}) { state.paymentMethod = {...state.paymentMethod, ...payload} }
     }
 });
+
+const selectItem = (state, _id) => state.cart.items.find(item => item._id === _id);
 
 const selectItems = state => state.cart.items;
 
@@ -82,9 +78,12 @@ const selectCustomerInfo = state => {
 
 const selectTotal = state => {
     let total = 0;
+
     for (const item of state.cart.items) {
-        total = total + item.price * item.qty;
+        total += item.priceAmount * item.qty;
     }
+    console.log(total);
+
     return total;
 }
 
@@ -135,8 +134,7 @@ const selectPaymentMethod = state => {
 export default cartSlice.reducer;
 export const {
     addItem,
-    removeItemByIndex,
-    removeItemById,
+    removeItem,
     updateItem,
     clearOrderInfo,
     updateCustomerInfo,
@@ -146,6 +144,7 @@ export const {
 } = cartSlice.actions;
 
 export {
+    selectItem,
     selectItems,
     selectTotal,
     selectCustomerInfo,

@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { loadFromStorage } from '~/common/local-storage';
 
-const initialState = [];
+const initialState = loadFromStorage('favourite') || [];
 
 const favSlice = createSlice({
     name: 'favourite',

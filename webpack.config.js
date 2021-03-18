@@ -89,7 +89,13 @@ module.exports = env => {
                             loader: 'sass-loader',
                             options: {
                                 implementation: require('sass'),
-                                sourceMap: true
+                                sourceMap: true,
+                                additionalData: `
+                                    @import '~/assets/scss/variables.scss';
+                                    @import '~/assets/scss/functions.scss';
+                                    @import '~/assets/scss/typography.scss';
+                                    @import '~/assets/scss/shadows.scss';
+                                `
                             }
                         }
                     ]

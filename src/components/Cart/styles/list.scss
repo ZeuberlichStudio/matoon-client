@@ -1,0 +1,265 @@
+.cart-list {
+    width: 100%;
+    padding: get-vw(6px);
+    
+    display: grid;
+    grid-auto-rows: max-content;
+    grid-row-gap: get-vw(34px);
+
+    z-index: 1;
+}
+
+.cart-item {
+    width: 100%;
+    padding: get-vw(4px);
+    display: grid;
+    grid-template: repeat(2, max-content) 1fr max-content / max-content 1fr;
+    grid-template-areas: 
+    'thumbnail name'
+    'thumbnail sku'
+    'thumbnail config'
+    'thumbnail price';
+    grid-gap: get-vw(8px);
+
+    color: $black;
+
+    &_thumbnail {
+        grid-area: thumbnail;
+        width: get-vw(120px);
+        height: get-vw(152px);
+
+        object-fit: cover;
+        object-position: center;
+
+        border-radius: get-vw(12px);
+        box-shadow: 0px 0px get-vw(10px) rgba($black, .1);
+    }
+
+    &_name {
+        grid-area: name;
+        @include proxima-bold(get-vw(18px), get-vw(20px));
+    }
+
+    &_sku {
+        grid-area: sku;
+        @include proxima-bold(get-vw(16px));
+        opacity: .5;
+    }
+
+    &_config {
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: max-content;
+        grid-column-gap: get-vw(8px);
+
+        div {
+            width: max-content;
+            height: get-vw(28px);
+            padding: 0 get-vw(12px);
+
+            @include proxima-semibold(get-vw(16px), get-vw(28px));
+
+            border-radius: get-vw(8px);
+            background-color: var(--colorData, $black);
+            color: white;
+        }
+    }
+
+    &_price {
+        align-self: flex-end;
+        display: flex;
+        justify-content: space-between;
+
+        &_qty {
+            width: get-vw(108px);
+            height: get-vw(32px);
+            position: relative;
+            
+            background-color: rgba($black, .05);
+            border-radius: get-vw(12px);
+
+            input {
+                padding-left: get-vw(10px);
+                @include proxima-regular(get-vw(18px), get-vw(32px));
+                color: $black;
+            }
+
+            &_remove {
+                width: get-vw(32px);
+                height: get-vw(32px);
+                top: 0;
+                right: 0;
+                position: absolute;
+
+                //
+                background-color: rgba($black, .6);
+                mask-image: url('~/assets/images/icon_trash.svg');
+                mask-size: get-vw(22px);
+                mask-position: center;
+                mask-repeat: no-repeat;
+                //
+            }
+        }
+
+        &_sum {
+            padding-right: get-vw(12px);
+            @include proxima-semibold(get-vw(18px), get-vw(32px));
+            font-family: 'Roboto'!important;
+        }
+    }
+}
+
+.cart-item:hover {
+    position: relative;
+
+    &:hover::after {
+        left: get-vw(-6px);
+        right: get-vw(-6px);
+        top: get-vw(-6px);
+        bottom: get-vw(-6px);
+
+        position: absolute;
+
+        background-color: rgba( $black, .1 );
+        border-radius: get-vw(22px);
+        z-index: -1;
+        content: ''; 
+    }
+}
+
+@media #{$tablet-screen} {
+    .cart-list {
+        width: 100%;
+        padding: t-get-vw(6px);
+        
+        display: grid;
+        grid-auto-rows: max-content;
+        grid-row-gap: t-get-vw(16px);
+    
+        z-index: 1;
+    }
+
+    .cart-item {
+        padding: t-get-vw(4px);
+        grid-gap: t-get-vw(8px);
+
+        &_thumbnail {
+            width: t-get-vw(80px);
+            height: 100%;
+            border-radius: t-get-vw(12px);
+        }
+    
+        &_name {
+            @include proxima-bold(t-get-vw(16px), t-get-vw(16px));
+        }
+    
+        &_sku {
+            @include proxima-bold(t-get-vw(16px));
+        }
+    
+        &_config {
+            grid-column-gap: t-get-vw(8px);
+    
+            div {
+                height: t-get-vw(32px);
+                padding: 0 t-get-vw(12px);
+                @include proxima-semibold(t-get-vw(16px), t-get-vw(28px));
+                border-radius: t-get-vw(8px);
+            }
+        }
+    
+        &_price {
+            &_qty {
+                width: t-get-vw(80px);
+                height: t-get-vw(32px);
+                
+                border-radius: t-get-vw(12px);
+    
+                input {
+                    padding-left: t-get-vw(10px);
+                    @include proxima-regular(t-get-vw(16px), t-get-vw(32px));
+                }
+    
+                &_remove {
+                    width: t-get-vw(32px);
+                    height: t-get-vw(32px);
+                    mask-size: t-get-vw(22px);
+                }
+            }
+    
+            &_sum {
+                padding-right: t-get-vw(12px);
+                @include proxima-semibold(t-get-vw(16px), t-get-vw(32px));
+            }
+        }
+    }
+}
+
+@media #{$mobile-screen} {
+    .cart-list {
+        width: 100%;
+        
+        display: grid;
+        grid-auto-rows: max-content;
+        grid-row-gap: m-get-vw(12px);
+    
+        z-index: 1;
+    }
+
+    .cart-item {
+        height: m-get-vw(138px);
+
+        padding: m-get-vw(4px);
+        grid-gap: m-get-vw(8px);
+
+        &_thumbnail {
+            width: m-get-vw(80px);
+            height: 100%;
+            border-radius: m-get-vw(10px);
+        }
+    
+        &_name {
+            @include proxima-bold(m-get-vw(16px), m-get-vw(16px));
+        }
+    
+        &_sku {
+            @include proxima-bold(m-get-vw(16px));
+        }
+    
+        &_config {
+            grid-column-gap: m-get-vw(8px);
+    
+            div {
+                height: m-get-vw(28px);
+                padding: 0 m-get-vw(8px);
+                @include proxima-semibold(m-get-vw(16px), m-get-vw(28px));
+                border-radius: m-get-vw(6px);
+            }
+        }
+    
+        &_price {
+            &_qty {
+                width: m-get-vw(80px);
+                height: m-get-vw(28px);
+                
+                border-radius: m-get-vw(6px);
+    
+                input {
+                    padding-left: m-get-vw(8px);
+                    @include proxima-regular(m-get-vw(16px), m-get-vw(28px));
+                }
+    
+                &_remove {
+                    width: m-get-vw(28px);
+                    height: m-get-vw(28px);
+                    mask-size: m-get-vw(18px);
+                }
+            }
+    
+            &_sum {
+                padding-right: m-get-vw(8px);
+                @include proxima-semibold(m-get-vw(16px), m-get-vw(28px));
+            }
+        }
+    }
+}

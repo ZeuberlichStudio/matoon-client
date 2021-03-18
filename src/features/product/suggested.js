@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import apiCall from '~/common/api-call';
 
 import './styles/suggested.scss';
 import Slider from '~/features/slider/slider';
@@ -8,14 +9,11 @@ import { ProductItemSuggested as SuggestedItem } from '~/features/product-item';
 import { SpinningLoader as Loader } from '~/features/loader';
 
 export default function Suggested({ cat, materials, exclude }) {
-
-    const { API_URL } = process.env;
-
     const targetDevice = useSelector( state => state.device.target );
 
     const [data, setData] = React.useState([]);
+    const [totalCount, setTotalCount] = React.useState(null);
     const [status, setStatus] = React.useState('idle');
-    const [error, setError] = React.useState(null);
 
     function fetchSuggested() {
         setStatus('loading');
@@ -30,16 +28,16 @@ export default function Suggested({ cat, materials, exclude }) {
             return query;
         }
         
-        fetch(API_URL + `products?${generateQuery()}`)
-        .then(data => data.json())
-        .then(result => {
-            setData(result);
-            setStatus('success');
-        })
-        .catch(err => {
-            setError(err);
-            setStatus('failed');
-        });
+        apiCall(`products?${generateQuery()}`)
+            .then(({headers, data}) => {
+                setData(data);
+                setTotalCount(headers['x-total-count']);
+                setStatus('success');
+            })
+            .catch(err => {
+                console.error(err);
+                setStatus('failed');
+            });
     }
 
     React.useEffect(() => fetchSuggested(), []);
@@ -53,27 +51,42 @@ export default function Suggested({ cat, materials, exclude }) {
                     (
                         targetDevice === 'desktop' ?
                         <Slider id="suggested_slider">
-                            <div className="suggested_group">{ 
-                                data.rows.slice(0,2).map( (item, i) => <SuggestedItem data={ item } i={ i }/> ) }
-                            </div>
-                            <div className="suggested_group">{ 
-                                data.rows.slice(2,4).map( (item, i) => <SuggestedItem data={ item } i={ i }/> ) }
-                            </div>
-                            <div className="suggested_group">{ 
-                                data.rows.slice(4,6).map( (item, i) => <SuggestedItem data={ item } i={ i }/> ) }
-                            </div>
+                            {
+                                totalCount > 0 &&
+                                <div className="suggested_group" key={0}>{ 
+                                    data.slice(0,2).map( (item, i) => <SuggestedItem key={item._id} data={ item } i={ i }/> ) }
+                                </div>
+                            }
+                            {
+                                totalCount > 2 &&
+                                <div className="suggested_group" key={1}>{ 
+                                    data.slice(2,4).map( (item, i) => <SuggestedItem key={item._id} data={ item } i={ i }/> ) }
+                                </div>
+                            }
+                            {
+                                totalCount > 4 ?
+                                <div className="suggested_group" key={2}>{ 
+                                    data.slice(4,6).map( (item, i) => <SuggestedItem key={item._id} data={ item } i={ i }/> ) }
+                                </div> : null
+                            }
                         </Slider> :
                         targetDevice === 'tablet' ?
                         <Slider id="suggested_slider">
-                            <div className="suggested_group">
-                                { data.rows.slice(0,3).map( (item, i) => <SuggestedItem data={ item } i={ i }/> ) }
-                            </div>
-                            <div className="suggested_group">
-                                { data.rows.slice(3,6).map( (item, i) => <SuggestedItem data={ item } i={ i }/> ) }
-                            </div>
+                            {
+                                totalCount > 0 &&
+                                <div className="suggested_group">
+                                    { data.slice(0,3).map( (item, i) => <SuggestedItem data={ item } i={ i }/> ) }
+                                </div>                                
+                            }
+                            {
+                                totalCount > 3 &&
+                                <div className="suggested_group">
+                                    { data.slice(3,6).map( (item, i) => <SuggestedItem data={ item } i={ i }/> ) }
+                                </div>
+                            }
                         </Slider> :
                         <Scrollable>
-                            { data.rows.map( (item, i) => <SuggestedItem data={ item } i={ i }/> ) }
+                            { data.map( (item, i) => <SuggestedItem data={ item } i={ i }/> ) }
                         </Scrollable>
                     ) :
                     <Loader/>

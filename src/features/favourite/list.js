@@ -1,11 +1,11 @@
 import React from 'react';
+import apiCall from '~/common/api-call';
+import { SpinningLoader as Loader } from '~/components/Loader/Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import { setModalElement, toggleOverlay, toggleSearch } from '~/app/ui';
 import ListItem from './list-item';
 import './styles/list.scss';
 import { toggleUI } from '~/features/modal-ui';
-
-const { API_URL } = process.env;
 
 function FavouriteList({ closeButton, setProduct, setColumn }) {
 
@@ -15,30 +15,22 @@ function FavouriteList({ closeButton, setProduct, setColumn }) {
     const [status, setStatus] = React.useState('idle');
     const [error, setError] = React.useState(null);
 
-    function generateQuery() {
-        const query = items.reduce( (acc, next) => `${acc},${next}` );
-        return query;
+    function fetchProducts() {
+        setStatus('pending');
+
+        apiCall(`products?id=${items.reduce( (acc, next) => `${acc},${next}` )}`)
+            .then(result => {
+                setStatus('success');
+                setData(result.data);
+                console.log(result.data);
+            })
+            .catch( err => {
+                setStatus('failed');
+                setError(err);
+            });
     }
 
-    React.useEffect(() => {
-        if ( !items[0] ) {
-            setData([]);
-        } else {
-            const endpoint = `${API_URL}products/ids=${generateQuery()}`;
-
-            fetch(endpoint)
-                .then( data =>  data.json() )
-                .then( result => {
-                    setStatus('succeeded');
-                    setData(result);
-                    console.log(result);
-                })
-                .catch( err => {
-                    setStatus('failed');
-                    setError(err);
-                });
-        }
-    }, [items]);
+    React.useEffect(() => items[0] && fetchProducts(), [items]);
 
     return(
         <div className="favourite-list">
@@ -47,8 +39,8 @@ function FavouriteList({ closeButton, setProduct, setColumn }) {
                 { closeButton }
             </div>
             { 
-                items[0] ?
-                data[0] ?
+                items.length === 0 ? <FavouriteListEmpty /> :
+                status === 'success' ?
                 <>
                     <div className="favourite-list_items">                    
                         { data.map( ( item, i ) => <ListItem key={i} {...{item, setProduct, setColumn}}/> ) }
@@ -56,9 +48,7 @@ function FavouriteList({ closeButton, setProduct, setColumn }) {
                     <button className="favourite-list_more">
                         <span>Открыть полный список</span>
                     </button>
-                </> : 
-                null :
-                <FavouriteListEmpty/>
+                </> : <Loader />
             }
         </div>
     );

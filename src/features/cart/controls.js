@@ -13,7 +13,7 @@ function CartControls({
     return (
         <div className="cart-controls">
             {
-                total &&
+                showTotal &&
                 <ul className="cart-controls_cost">
                     <li>
                         <span>Общая стоимость</span>

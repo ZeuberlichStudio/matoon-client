@@ -1,0 +1,53 @@
+@media screen and (min-width: 1024px) {
+    .cart-empty {
+        width: get-vw(420px);
+        height: max-content;
+
+        display: grid;
+        grid-template-rows: max-content 1fr;
+        grid-template-columns: 100%;
+
+        background-color: white;
+        border-radius: get-vw(28px);
+
+        &_content {
+            margin: get-vw(12px) get-vw(24px);
+            height: 100%;
+            overflow: hidden;
+
+            br.pc-hide { display: none; }
+
+            h3 { 
+                padding: 0 0;
+                @include proxima-bold( get-vw(16px), get-vw(20px) ); 
+            }
+            p, button { @include proxima-regular( get-vw(16px), get-vw(20px) ); }
+            button { text-decoration: underline; }
+        }
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023.5px) {
+    .cart-empty {
+        padding: t-get-vw(12px) t-get-vw(4px);
+
+        h3 { 
+            padding: 0 0;
+            @include proxima-bold( t-get-vw(14px), t-get-vw(16px) ); 
+        }
+        p, button { @include proxima-regular( t-get-vw(14px), t-get-vw(16px) ); }
+        p { margin-top: t-get-vw(8px); }
+        button { text-decoration: underline; }
+    }
+}
+
+@media screen and (max-width: 767.5px) {
+    .cart-empty {
+        padding: m-get-vw(14px) m-get-vw(4px);
+
+        h3 { @include proxima-bold( m-get-vw(14px), m-get-vw(16px) ); }
+        p, button { @include proxima-regular( m-get-vw(14px), m-get-vw(16px) ); }
+        p { margin-top: m-get-vw(8px); }
+        button { text-decoration: underline; }
+    }
+}

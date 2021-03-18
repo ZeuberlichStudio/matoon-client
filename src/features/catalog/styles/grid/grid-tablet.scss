@@ -1,12 +1,14 @@
 @media screen and (min-width: 768px) and (max-width: 1023px) {
     .product-grid {
-        grid-area: grid;
-
         width: 100%;
         padding: 
         t-get-vw(12px) t-get-vw(24px)
         t-get-vw(24px) t-get-vw(24px);
+    }
 
+    .product-grid_items {
+        grid-area: grid;
+        
         display: grid;
         grid-auto-rows: max-content;
         grid-gap: t-get-vw(24px);

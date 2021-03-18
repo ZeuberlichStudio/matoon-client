@@ -1,0 +1,113 @@
+.select {
+    &--options {
+        display: flex;
+        flex-wrap: wrap;
+
+        &--option {
+            position: relative;
+            cursor: pointer;
+    
+            input {
+                position: absolute;
+                top: 0; bottom: 0; left: 0; right: 0;
+                opacity: 0;
+            }
+    
+            span {
+                width: max-content;    
+                display: block;
+                
+                color: var(--color, $black);
+                border: solid var(--color, $black);
+                background-color: white;
+            }
+    
+            input:checked ~ span { 
+                color: white;
+                background-color: var(--color, $black); 
+            }
+        }
+    }
+}
+
+@media #{$pc-screen} {
+    .select {
+        &--label {
+            padding-left: get-vw(8px);
+            @include proxima-semibold(get-vw(18px));
+        }
+    
+        &--options {
+            margin: get-vw(-4px);
+            margin-top: get-vw(4px);
+    
+            &--option {
+                span {
+                    height: get-vw(34px);
+                    padding: 0 get-vw(14px);
+                    margin: get-vw(4px);
+                   
+                    @include proxima-semibold(get-vw(16px), get-vw(32px));
+            
+                    border-width: get-vw(2px);
+                    border-radius: get-vw(8px);
+                }
+            }
+        }
+    }
+}
+
+@media #{$tablet-screen} {
+    .select {
+        &--label {
+            padding-left: t-get-vw(6px);
+            @include proxima-semibold(t-get-vw(16px));
+        }
+    
+        &--options {
+            margin: t-get-vw(-4px);
+            margin-top: t-get-vw(4px);
+    
+            &--option {
+                span {
+                    height: t-get-vw(32px);
+                    padding: 0 t-get-vw(12px);
+                    margin: t-get-vw(4px);
+                   
+                    @include proxima-semibold(t-get-vw(16px), t-get-vw(30px));
+            
+                    border-width: t-get-vw(2px);
+                    border-radius: t-get-vw(8px);
+                }
+            }
+        }
+    }  
+}
+
+
+@media #{$mobile-screen} {
+    .select {
+        &--label {
+            padding-left: m-get-vw(6px);
+            @include proxima-semibold(m-get-vw(16px));
+        }
+    
+        &--options {
+            margin: m-get-vw(-4px);
+            margin-top: m-get-vw(4px);
+    
+            &--option {
+                span {
+                    height: m-get-vw(28px);
+                    padding: 0 m-get-vw(8px);
+                    margin: m-get-vw(4px);
+                   
+                    @include proxima-semibold(m-get-vw(16px), m-get-vw(26px));
+            
+                    border-width: m-get-vw(2px);
+                    border-radius: m-get-vw(6px);
+                }
+            }
+        }
+    }  
+}

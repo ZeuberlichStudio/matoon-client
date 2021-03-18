@@ -1,0 +1,335 @@
+.cart_step_wrapper { height: 100%; }
+
+.cart_step {
+    height: 100%;
+    background: white;
+
+    &--header {
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-areas: 'back title close';
+
+        background: white;
+        @include shadow;
+        z-index: 2;
+
+        &--go_back {
+            grid-area: back;
+
+            border: none;
+            background-color: white;
+            @include shadow;
+            background-image: url('~/assets/images/icon_arrow.svg');
+        }
+
+        &--title { 
+            grid-area: title;
+            text-align: center; 
+        }
+
+        #modal-close { grid-area: close; }
+    }
+
+    &--content {
+        width: 100%;
+        display: grid;
+        grid-auto-rows: max-content;
+        grid-template-columns: 100%;
+
+        &--group {
+            width: 100%;
+            display: grid;
+            grid-auto-rows: max-content;
+
+            &.active { background-color: rgba($black, .1); }
+        }
+    }
+
+    &--footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        background: white;
+        @include shadow;
+        z-index: 2;
+        
+        &--total {
+            width: 100%;
+            display: flex;
+            align-items: center;
+
+            hr { flex-grow: 1; }
+        }
+
+        &--go_forward { 
+            background: white; 
+            @include shadow;
+        }
+    }
+}
+
+@media #{$pc-screen} {
+    .cart_step_wrapper { overflow: hidden!important; }
+
+    .cart_step {
+        width: get-vw(422px);
+        padding: get-vw(12px);
+
+        display: grid;
+        grid-template-rows: max-content 1fr max-content;
+
+        border-radius: get-vw(28px);
+    
+        &--header {
+            height: get-vw(48px);
+            padding: get-vw(7px);
+
+            grid-template-columns: get-vw(34px) 1fr get-vw(34px);
+    
+            border-radius: get-vw(16px);
+    
+            &--go_back {
+                width: get-vw(34px);
+                height: get-vw(34px);
+    
+                background-size: get-vw(18px);
+                border-radius: get-vw(8px);
+            }
+    
+            &--title { @include proxima-bold(get-vw(20px), get-vw(34px)); }
+        }
+
+        &--content {
+            height: 100%;
+            padding: get-vw(16px) 0;
+            grid-row-gap: get-vw(8px);
+
+            overflow: hidden auto;
+
+            &--header {
+                padding-left: get-vw(16px);
+                @include proxima-bold(get-vw(18px));
+            }
+
+            &--group {
+                padding: get-vw(8px);
+                border-radius: get-vw(16px);
+                grid-gap: get-vw(8px);  
+            }
+        }
+
+        &--footer {
+            padding: get-vw(14px);
+            border-radius: get-vw(16px);
+            
+            &--total {
+                height: get-vw(24px);
+                
+                span:first-child { @include proxima-bold(get-vw(18px)); }
+    
+                span:last-child { 
+                    @include proxima-regular(get-vw(18px)); 
+                    font-family: 'Roboto';
+                }
+    
+                hr { 
+                    margin: 0 get-vw(12px);
+                    border-top: get-vw(1px) dashed rgba($black, .5); 
+                }
+            }
+    
+            &--go_forward {
+                margin-top: get-vw(14px);
+    
+                width: get-vw(178px);
+                height: get-vw(48px);
+    
+                @include proxima-semibold(get-vw(20px), get-vw(48px));
+                border-radius: get-vw(16px);
+            }
+        }
+    }
+}
+
+@media #{$tablet-screen} {
+    .cart_step_wrapper { overflow: hidden!important; }
+
+    .cart_step {
+        width: t-get-vw(286px);
+        height: max-content;
+        max-height: 100%;
+        padding: t-get-vw(8px);
+
+        display: grid;
+        grid-template-rows: max-content 1fr max-content;
+
+        border-radius: t-get-vw(18px);
+    
+        &--header {
+            height: t-get-vw(40px);
+            padding: t-get-vw(6px);
+
+            grid-template-columns: t-get-vw(28px) 1fr t-get-vw(28px);
+    
+            border-radius: t-get-vw(10px);
+    
+            &--go_back {
+                width: t-get-vw(28px);
+                height: t-get-vw(28px);
+    
+                background-size: t-get-vw(14px);
+                border-radius: t-get-vw(8px);
+            }
+    
+            &--title { @include proxima-bold(t-get-vw(16px), t-get-vw(28px)); }
+        }
+
+        &--content {
+            padding: t-get-vw(12px) 0;
+            grid-row-gap: t-get-vw(6px);
+
+            overflow: hidden auto;
+
+            &--header {
+                padding-left: t-get-vw(12px);
+                @include proxima-bold(t-get-vw(16px));
+            }
+
+            &--group {
+                padding: t-get-vw(6px);
+                border-radius: t-get-vw(10px);
+                grid-gap: t-get-vw(12px);  
+            }
+        }
+
+        &--footer {
+            padding: t-get-vw(12px);
+            border-radius: t-get-vw(10px);
+            
+            &--total {
+                height: t-get-vw(24px);
+                
+                span:first-child { @include proxima-bold(t-get-vw(16px)); }
+    
+                span:last-child { 
+                    @include proxima-regular(t-get-vw(16px)); 
+                    font-family: 'Roboto';
+                }
+    
+                hr { 
+                    margin: 0 t-get-vw(8px);
+                    border-top: t-get-vw(1.5px) dashed rgba($black, .5); 
+                }
+            }
+    
+            &--go_forward {
+                margin-top: t-get-vw(12px);
+    
+                width: t-get-vw(128px);
+                height: t-get-vw(40px);
+    
+                @include proxima-semibold(t-get-vw(20px), t-get-vw(40px));
+                border-radius: t-get-vw(12px);
+            }
+        }
+    }
+}
+
+@media #{$mobile-screen} {
+    .cart_step_wrapper {
+        align-self: flex-start;
+        height: calc( var(--vh, 100vh) - #{ m-get-vw(64px) } );
+    
+        border-radius: m-get-vw(18px) m-get-vw(18px) 0 0;
+    
+        overflow: hidden scroll;
+        //safari 10 fix
+        -webkit-mask-image: -webkit-radial-gradient(white, black);
+    }
+
+    .cart_step {
+        margin-bottom: m-get-vw(64px);
+
+        width: 100%;
+        height: max-content;
+        padding: m-get-vw(8px);
+        border-radius: m-get-vw(18px);
+    
+        &--header {
+            height: m-get-vw(40px);
+            padding: m-get-vw(6px);
+
+            position: sticky;
+            top: m-get-vw(8px);
+
+            grid-template-columns: m-get-vw(24px) 1fr m-get-vw(24px);
+            align-items: center;
+            justify-items: center;
+    
+            border-radius: m-get-vw(10px);
+    
+            &--go_back {
+                width: m-get-vw(12px);
+                height: m-get-vw(12px);
+    
+                background-size: m-get-vw(12px);
+                box-shadow: none;
+            }
+    
+            &--title { @include proxima-bold(m-get-vw(16px), m-get-vw(28px)); }
+        }
+
+        &--content {
+            padding: m-get-vw(12px) 0;
+            grid-row-gap: m-get-vw(6px);
+
+            &--header {
+                padding-left: m-get-vw(12px);
+                @include proxima-bold(m-get-vw(16px));
+            }
+
+            &--group {
+                padding: m-get-vw(6px);
+                border-radius: m-get-vw(10px);
+                grid-gap: m-get-vw(12px);  
+
+                & > * { grid-column: 1/2!important; }
+            }
+        }
+
+        &--footer {
+            padding: m-get-vw(12px);
+            border-radius: m-get-vw(10px);
+
+            position: sticky;
+            bottom: m-get-vw(8px);
+            
+            &--total {
+                height: m-get-vw(24px);
+                
+                span:first-child { @include proxima-bold(m-get-vw(16px)); }
+    
+                span:last-child { 
+                    @include proxima-regular(m-get-vw(16px)); 
+                    font-family: 'Roboto';
+                }
+    
+                hr { 
+                    margin: 0 m-get-vw(8px);
+                    border-top: m-get-vw(1.5px) dashed rgba($black, .5); 
+                }
+            }
+    
+            &--go_forward {
+                margin-top: m-get-vw(12px);
+    
+                width: m-get-vw(128px);
+                height: m-get-vw(40px);
+    
+                @include proxima-semibold(m-get-vw(20px), m-get-vw(40px));
+                border-radius: m-get-vw(12px);
+            }
+        }
+    }
+}

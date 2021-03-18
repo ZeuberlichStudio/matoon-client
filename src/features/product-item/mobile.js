@@ -13,26 +13,24 @@ export default function ProductItemMobile({data, i}) {
 
     const backgroundLocation = useLocation();
 
-    const itemLink = {
-        pathname: `/catalog/product=${slug}`,
-        state: { backgroundLocation }
-    }
-
     //User interaction logic
     const [currVar, setCurrVar] = React.useState(0);
 
     const {
-        _id: id,
+        _id,
         name,
         slug,
         sku,
         images,
         variants,
-        attributes,
-        attributMap: attrMap,
         desc,
         prices
     } = data;
+
+    const itemLink = {
+        pathname: `/catalog/product=${slug}`,
+        state: { backgroundLocation }
+    }
 
     return (
         <div className={`product-item product-item-${i} product-item-mobile`} key={ i }>
@@ -41,7 +39,7 @@ export default function ProductItemMobile({data, i}) {
             </div>
 
             <div className="product-item-mobile_options">
-                <Product.Options {...{ show: 3, vars: variants, setCurrVar, attrMap }}/>
+                <Product.Options {...{ show: 3, variants, setCurrVar }}/>
             </div>
 
             <div className="product-item-mobile_info">
@@ -49,7 +47,7 @@ export default function ProductItemMobile({data, i}) {
                     <span>{ prices[0].amount + 'P' }</span>
                     <h2>{ name }</h2>
                 </div>
-                <span className="product-item-mobile_info_sku">Арт: { variants[currVar].sku }</span>
+                <span className="product-item-mobile_info_sku">Арт: {sku}</span>
                 <span className="product-item-mobile_info_stock">В наличии: { variants[currVar].stock }шт.</span>
                 <div className="product-item-mobile_info_desc">{ desc }</div>
             </div>
@@ -58,7 +56,7 @@ export default function ProductItemMobile({data, i}) {
                 <Link to={ itemLink }><span>Подробнее</span></Link>
             </div>
 
-            <Share {...{slug}}/>
+            <Share  {...{ _id, slug }}/>
         </div>
     );
 }

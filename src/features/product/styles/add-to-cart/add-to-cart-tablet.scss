@@ -14,4 +14,10 @@
             span { padding: 0 t-get-vw(10px); }
         }
     }
+
+    .product-add-to-cart.added {
+        button {
+            background-color: white;
+            color: $black;        }
+    }
 }

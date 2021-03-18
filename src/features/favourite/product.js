@@ -19,13 +19,12 @@ function FavouriteProduct({ data, status, config, setConfig, variant, buttonCall
     const [currVar, setCurrVar] = React.useState(0);
 
     const {
-        _id: id,
+        _id,
+        sku,
         slug,
         name,
         images,
         variants,
-        attributes,
-        attributeMap: attrMap,
         desc,
         specs,
         prices,
@@ -35,7 +34,7 @@ function FavouriteProduct({ data, status, config, setConfig, variant, buttonCall
 
     return (
         <div className="favourite-product">
-            <Header {...{ name, slug, closeButton }}/>
+            <Header {...{ name, _id, slug, closeButton }}/>
             {
                 targetDevice !== 'tablet' ?
                 <Gallery images={variants[currVar].images.concat(images)}/> :
@@ -43,10 +42,10 @@ function FavouriteProduct({ data, status, config, setConfig, variant, buttonCall
             }
             <div className="product-options-wrapper">
                 <h3> Конфигурация товара </h3>
-                <Options {...{ show: 3, vars: variants, setCurrVar, attrMap }}/>
+                <Options {...{ show: 3, variants, setCurrVar }}/>
             </div>
-            <Details {...{ desc, specs, sku: variants[currVar].sku, stock: variants[currVar].stock }}/>
-            {
+            <Details {...{ desc, specs, sku, stock: variants[currVar].stock }}/>
+            {/* {
                 targetDevice === 'desktop' ?
                 <>
                     <Price {...{prices}}/>
@@ -56,7 +55,7 @@ function FavouriteProduct({ data, status, config, setConfig, variant, buttonCall
                     <Price {...{prices}}/>
                     <AddToCart/>
                 </div>
-            }
+            } */}
         </div>
     );
 }

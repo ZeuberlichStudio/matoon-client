@@ -9,8 +9,8 @@
         position: fixed;
         display: grid;
         grid-template-rows: 100%;
-        grid-template-columns: repeat(3, max-content) 1fr repeat(3, max-content);
-        grid-template-areas: 'logo cats search . favs cart more';
+        grid-template-columns: repeat(3, max-content) 1fr repeat(2, max-content);
+        grid-template-areas: 'logo cats search . favs cart';
         grid-column-gap: m-get-vw(8px);
         align-items: center;
 

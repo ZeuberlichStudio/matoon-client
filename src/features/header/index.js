@@ -29,7 +29,7 @@ function Header({ toggleMenu }) {
     return (
         <header ref={ref} id="header" className={`app-header`} style={{ zIndex: headerOverlay ? 20 : 10 }}>
             <div className="app-header_logo">
-                <Link to="/"><img src={ LogoPh } alt=""/></Link>
+                <Link to="/" onClick={() => toggleUIClickHandler(null)}><img src={ LogoPh } alt=""/></Link>
             </div>
 
             <button onClick={ () => toggleUIClickHandler('menu') } className="app-header_categories">
@@ -38,7 +38,7 @@ function Header({ toggleMenu }) {
 
                 { 
                     targetDevice === 'mobile' ?  
-                    <button className="app-header_search" onClick={ () => dispatch(toggleSearch(!search)) }>
+                    <button className="app-header_search" onClick={ () => toggleUIClickHandler('search') }>
                         <span></span>
                     </button> :
                     <div className="app-header_search">
@@ -50,8 +50,6 @@ function Header({ toggleMenu }) {
 
             <button onClick={ () => toggleUIClickHandler('favourite') } className="app-header_favourite"><span></span></button>
             <button onClick={ () => toggleUIClickHandler('cart') } className="app-header_cart"><span></span></button>
-
-            { targetDevice === 'mobile' && <button className="app-header_more"><span></span></button> }
         </header>
     );
 }

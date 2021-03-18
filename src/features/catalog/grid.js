@@ -23,28 +23,21 @@ export default function ProductGrid({ catSlug, search, view = 'mini' }) {
     const [final, setFinal] = React.useState(false);
 
     function buildQuery() {
-        const {
-            sort,
-            filter
-        } = queryState;
+        console.log(queryState);
 
         const params = {
-            sort,
             limit,
-            offset
-        }
-
-        for ( const [field, value] of Object.entries(filter) ) {
-            if ( value ) params[field] = value;
+            offset,
+            sort: queryState.sort,
+            catSlug: queryState.catSlug,
+            search: queryState.search,
+            ...queryState.filter
         }
 
         let query = '';
 
-        for ( const [param, value] of Object.entries(params) ) {
-            if ( 
-                value !== null && 
-                value !== 'undefined' 
-            ) query +=`&${param}=${value}`;
+        for ( const [key, value] of Object.entries(params) ) {
+            query = value ? (query + `&${key}=${value}`) : query;
         }
 
         return query;
@@ -52,6 +45,7 @@ export default function ProductGrid({ catSlug, search, view = 'mini' }) {
 
     function fetchProducts() {
         setStatus('loading');
+        
         apiCall(`products?${buildQuery()}`)
             .then(res => {
                 console.log();

@@ -5,12 +5,12 @@ import store from '~/app/store';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
-// import App from './App.js';
+import App from './App.js';
 
 render( 
     <Provider store={store}>
         <BrowserRouter>
-            <h1>HIIII</h1>
+            <App />
         </BrowserRouter>
     </Provider>,
     document.getElementById('app') 

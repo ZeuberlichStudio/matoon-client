@@ -6,14 +6,15 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        align-items: center;
 
-        p { 
+        &_text { 
+            flex-grow: 1;
             padding: 0 m-get-vw(8px);
             @include proxima-regular( m-get-vw(12px), m-get-vw(14px) ); 
         }
 
         a, button {
+            align-self: center;
             margin-top: m-get-vw(8px);
             @include m-button-big;
             width: 100%;

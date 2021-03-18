@@ -7,14 +7,14 @@ import Product from '~/features/product';
 import './index.scss';
 
 export function ProductPage({ closeButton }, ref) {
-    const {slug: _id} = useParams();
+    const {slug} = useParams();
     const [item, setItem] = React.useState({});
     const [status, setStatus] = React.useState('idle');
 
     function fetchProduct() {
         setStatus('pending');
 
-        apiCall(`products/${_id}`)
+        apiCall(`products/${slug}?isSlug=true`)
             .then(res => {
                 setItem(res.data);
                 console.log(res.data);
@@ -26,13 +26,16 @@ export function ProductPage({ closeButton }, ref) {
             });
     }
 
-    React.useEffect(fetchProduct, []);
+    React.useEffect(fetchProduct, [slug]);
 
     const targetDevice = useSelector( state => state.device.target );
     const [currVar, setCurrVar] = React.useState(0);
+    const [qty, setQty] = React.useState(1);
+    const [currPrice, setCurrPrice] = React.useState(0);
+
     const {
+        _id,
         cat,
-        slug,
         sku,
         name,
         images,
@@ -48,16 +51,16 @@ export function ProductPage({ closeButton }, ref) {
             {
                 status === 'success' &&
                 <>
-                {/* {
+                {
                     targetDevice !== 'mobile' &&
                     <div className="product-page_suggested-wrapper">
                         <Product.Suggested {...{materials, cat, exclude: _id}}/>
                     </div>
-                } */}
+                }
 
                 <div className="product-page_product-wrapper">
                     <div className="product-page_product">
-                        <Product.Header {...{ name, closeButton, slug, id: _id }}/>
+                        <Product.Header {...{ name, closeButton, slug, _id }}/>
                         <Product.Gallery images={ variants[currVar].images.concat(images) }/>
 
                         <div className="product-options-wrapper">
@@ -66,18 +69,30 @@ export function ProductPage({ closeButton }, ref) {
                         </div>
 
                         <Product.Details {...{ desc, specs, sku, stock: variants[currVar].stock }}/>
-                        {/* { targetDevice === 'mobile' && <Product.Suggested/> } */}
-                        {/* {
+                        { targetDevice === 'mobile' && <Product.Suggested {...{materials, cat, exclude: _id}}/> }
+                        {
                             targetDevice === 'mobile' ?
                             <div className="product-purchase-wrapper">
-                                <Product.Price {...{prices}}/>
-                                <Product.AddToCart/>
+                                <Product.Price {...{ qty, setQty, prices, currPrice, setCurrPrice, stock: variants[currVar]?.stock }}/>
+
+                                <Product.AddToCart 
+                                    _id={_id}
+                                    variantId={variants[currVar]._id}
+                                    qty={qty}
+                                    priceAmount={prices[currPrice].amount}
+                                />
                             </div> :
                             <>
-                                <Product.Price {...{prices}}/>
-                                <Product.AddToCart/>
+                                <Product.Price {...{ qty, setQty, prices, currPrice, setCurrPrice, stock: variants[currVar]?.stock }}/>
+
+                                <Product.AddToCart 
+                                    _id={_id}
+                                    variantId={variants[currVar]._id}
+                                    qty={qty}
+                                    priceAmount={prices[currPrice].amount}
+                                />
                             </>                            
-                        } */}
+                        }
                     </div>
                 </div>
                 </>

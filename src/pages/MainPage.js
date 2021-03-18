@@ -2,21 +2,24 @@ import React from 'react';
 import apiCall from '~/common/api-call.js';
 import Banner from '~/components/Banner/Index.js';
 import Feed from '~/components/Feed/Feed.js';
+import { SpinningLoader as Loader } from '~/components/Loader/Loader';
 
 export default function MainPage() {
 
     const [bannerPosts, setBannerPosts] = React.useState([]);
-    const [status, setStatus] = React.useState('idle');
+    const [bannerPostsStatus, setBannerPostsStatus] = React.useState('idle');
 
     function fetchBannerPosts() {
-        apiCall('posts?type=banner&page=main')
+        setBannerPostsStatus('loading');
+
+        apiCall(`posts?page=main&limit=4&sort=createdAt,-1`)
             .then(res => {
                 setBannerPosts(res.data);
-                setStatus('success');
+                setBannerPostsStatus('success');
             })
             .catch(err => {
                 console.error(err);
-                setStatus('failed');
+                setBannerPostsStatus('failed');
             });
     }
 
@@ -24,8 +27,13 @@ export default function MainPage() {
     
     return (
         <main id="title-page" className="title-page">
-            <Banner posts={bannerPosts}/>
-            <Feed />
+            { 
+                bannerPostsStatus === 'success' ? 
+                <>
+                    <Banner pageTitle="Matoon Store" posts={bannerPosts}/>
+                    <Feed />
+                </> : <Loader fixed={true} />
+            }
         </main>
     );
 }

@@ -13,8 +13,16 @@ export default function Slider({
     const [currentSlide, setCurrentSlide] = React.useState(0);
     const [touchStartX, setTouchStartX] = React.useState(0);
     const [animating, setAnimating] = React.useState(false);
-    const { length: slideCount } = children;
+    // const { length: count } = children.filter(child => child);
+    const [slides, setSlides] = React.useState([]);
+    const [count, setCount] = React.useState(null);
     const containerRef = React.useRef();
+
+    React.useEffect(() => {
+        const validChildren = children.filter(child => child);
+        setSlides(validChildren);
+        setCount(validChildren.length);
+    }, [children]);
 
     function invisibleGoTo(i) {
         setAnimating(false);
@@ -22,9 +30,9 @@ export default function Slider({
     }
     
     function goToSlide(i) {
-        if ( !loop && (i > slideCount - 1 ||  i < 0) ) return;
+        if ( !loop && (i > count - 1 ||  i < 0) ) return;
 
-        if ( i > slideCount - 1 ) {
+        if ( i > count - 1 ) {
             !animating && setAnimating(true);
             setCurrentSlide(i);
             setTimeout( () => invisibleGoTo(0), time );
@@ -32,7 +40,7 @@ export default function Slider({
         else if ( i < 0 ) {
             !animating && setAnimating(true);
             setCurrentSlide(i);
-            setTimeout( () => invisibleGoTo(slideCount - 1), time );
+            setTimeout( () => invisibleGoTo(count - 1), time );
         }
         else {
             !animating && setAnimating(true);
@@ -73,8 +81,8 @@ export default function Slider({
             <div className="slider_slides-wrapper">
                 <div ref={ containerRef } className="slider_slides-container" style={containerStyle} {...listeners}>
                     { 
-                        children.slice(-2).map( (child, i, arr) => {
-                            const number = slideCount - (arr.length - i);
+                        slides.slice(-2).map( (child, i, arr) => {
+                            const number = count - (arr.length - i);
 
                             return <Slide 
                                 key={`clone-${ number }`} 
@@ -86,10 +94,10 @@ export default function Slider({
                         }) 
                     }
 
-                    { children.map( (child, i) => <Slide key={i} i={i}>{ child }</Slide> ) }
+                    { slides.map( (child, i) => <Slide key={i} i={i}>{ child }</Slide> ) }
 
                     { 
-                        children.slice(0, 2).map( (child, i) => 
+                        slides.slice(0, 2).map( (child, i) => 
                             <Slide key={`clone-${i}`} i={i} clone={ true }>
                                 { child }
                             </Slide> 
@@ -100,7 +108,7 @@ export default function Slider({
 
             { controls && <button className="slider_next" onClick={ () => goToSlide(currentSlide + 1) }/> }
 
-            <Indicator {...{slideCount, currentSlide, goToSlide: controls && goToSlide}}/>
+            <Indicator {...{count, currentSlide, goToSlide: controls && goToSlide}}/>
         </div>
     );
 }
@@ -113,12 +121,12 @@ export function Slide({ i, children, clone }) {
     );
 }
 
-function Indicator({ slideCount, currentSlide, goToSlide }) {
+function Indicator({ count, currentSlide, goToSlide }) {
 
     function renderDots() {
         const dots = [];
 
-        for ( let i = 0; i < slideCount; i++ ) {
+        for ( let i = 0; i < count; i++ ) {
             dots.push(
                 <span 
                     onClick={ () => goToSlide && goToSlide(i) } 

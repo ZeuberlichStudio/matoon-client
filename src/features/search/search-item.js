@@ -1,10 +1,7 @@
 import React from 'react';
+import Image from '~/components/Image';
 import { Link, useLocation } from 'react-router-dom';
 import './styles/search-item.scss';
-
-const { API_URL } = process.env;
-const { CDN_URL } = process.env;
-const formFullPath = path => CDN_URL + path;
 
 function SearchItem({ data, close }) {
 
@@ -14,7 +11,6 @@ function SearchItem({ data, close }) {
         images,
         sku,
         variants,
-        attributeMap: attrMap,
         prices
     } = data;
 
@@ -27,10 +23,21 @@ function SearchItem({ data, close }) {
         state: { backgroundLocation }
     };
 
+    const colors = variants
+        .map(({attributes}) => attributes.color)
+        .filter((el, i, arr) => {
+            return arr.findIndex(({_id}) => _id === el._id ) === i;
+        })
+        .sort((curr, next) => {
+            if ( curr.code > next.code ) return 1;
+            else if ( curr.code < next.code ) return -1;
+            else return 0;
+        });
+
     return (
         <Link className="search-item" to={ itemLink } onClick={ close }>
             <div className="search-item_thumbnail">
-                <img src={formFullPath(images[0])} alt={ name }/>
+                <Image src={images[0]?.path}/>
             </div>
 
             <h2 className="search-item_name">{ name }</h2>
@@ -38,7 +45,15 @@ function SearchItem({ data, close }) {
 
             <ul className="search-item_colors">
                 <span>Цвета:</span>
-                { Object.entries(attrMap).map( ([key, {value}]) => <li style={{ backgroundColor: value }}></li> ) }
+                { 
+                    colors.map(color => (
+                        <li style={{ 
+                                backgroundColor: color.code, 
+                                border: color.code.includes('#FFF') && '1px solid black'
+                            }}
+                        ></li>
+                    )) 
+                }
             </ul> 
 
             <span className="search-item_price">{ `${prices[0].amount}Р/шт` }</span>

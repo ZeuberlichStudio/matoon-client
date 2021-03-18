@@ -4,6 +4,8 @@
 @import './banner/banner-tablet.scss';
 @import './banner/banner-mobile.scss';
 
+.banner .slider button { display: none; }
+
 .banner-search-phrase {
     color: rgba( $black, .4 );
 }

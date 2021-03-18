@@ -66,7 +66,10 @@ export function Modal({
         return () => { ref.current && ref.current.removeEventListener('click', outerClickHandler) };
     }, [closeCallback]);
 
-    React.useEffect(init, []);
+    React.useEffect(() => {
+        init();
+        return close;
+    }, []);
 
     const containerAnimation = {
         initial: {

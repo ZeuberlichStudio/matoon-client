@@ -26,7 +26,7 @@ export default function FeedPost({
 
             <div className="feed-post_content">
                 <h2>{name}</h2>
-                <p>{content}</p>
+                <div className="feed-post_content_text" dangerouslySetInnerHTML={{__html: content}}></div>
             </div>
 
             <Link to={postLink}>

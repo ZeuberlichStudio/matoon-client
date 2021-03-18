@@ -1,16 +1,16 @@
 import React from 'react';
+import apiCall from '~/common/api-call';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleMenu } from '~/app/ui';
+// import { toggleMenu } from '~/app/ui';
 import { setModalElement, toggleOverlay, toggleSearch } from '~/app/ui';
+import { selectTarget } from '~/app/device';
 import { toggleUI } from '~/features/modal-ui';
 
 import SearchItem from './search-item';
 import './styles/search.scss';
 
-const { API_URL } = process.env;
-
-function Search({ mini, focusCallback, cat }) {
+function Search({ mini, focusCallback, catSlug }) {
 
     const dispatch = useDispatch();
 
@@ -18,20 +18,20 @@ function Search({ mini, focusCallback, cat }) {
 
     const [results, setResuts] = React.useState([]);
     const [status, setStatus] = React.useState('idle');
-    const [error, setError] = React.useState(null);
 
     const limit = 3;
 
     function fetchResult() {
-        fetch( API_URL + `products?search=${string.replace(' ', '%20')}&sort=name,1&limit=${ limit }&cat=${ cat ? 'cat' : '' }` )
-            .then(data => data.json())
-            .then(results => {
-                setResuts(results.rows || []);
-                setStatus('succeeded');
+        setStatus('pending');
+
+        apiCall(`products?sort=name,1&limit=${limit}&catSlug=${catSlug ?? ''}&search=${string.replace(' ', '%20')}`)
+            .then(result => {
+                setResuts(result.data);
+                setStatus('success');
             })
             .catch(err => {
                 setStatus('failed');
-                setError(err);
+                console.error(err);
             });
     }
 
@@ -53,12 +53,14 @@ function Search({ mini, focusCallback, cat }) {
 
     //focus
 
+    const target = useSelector(selectTarget);
     const [focus, setFocus] = React.useState(false);
     const uiState = useSelector( state => state.ui );
 
     function focusHandler() {
         if (!focus && !uiState.search) {
             setFocus(true);
+            if ( target === 'mobile' ) return;
             dispatch(toggleOverlay(true));
             focusCallback && focusCallback();
         }
@@ -98,18 +100,22 @@ function Search({ mini, focusCallback, cat }) {
 
 
     function close() {
-        setFocus(false);
-        setOpen(false);
-        setString('');
-        !uiState.search && dispatch(toggleOverlay(false));
-        uiState.search && dispatch(toggleSearch(false));
+        if ( target === 'mobile' ) {
+            toggleUI( dispatch, setModalElement, modalElement, 'search' );
+        } else {
+            setFocus(false);
+            setOpen(false);
+            setString('');
+            !uiState.search && dispatch(toggleOverlay(false));
+            uiState.search && dispatch(toggleSearch(false));
+        }
     }
 
     return (
         <div className={`search ${ mini ? 'mini' : '' } ${ focus ? 'focus' : '' }`} onClick={ focusHandler }>
             <div className="search-field">
-                <input placeholder={ cat ? 'Поиск по категории' : 'Поиск' } type="text" value={ string } onChange={ fieldHandler }/>
-                { focus && <button id="search-reset" onClick={ () => setFocus(false) }/> }
+                <input placeholder={ catSlug ? 'Поиск по категории' : 'Поиск' } type="text" value={ string } onChange={ fieldHandler }/>
+                { focus && <button id="search-reset" onClick={close}/> }
             </div>
 
             {
@@ -143,5 +149,13 @@ function SearchMore({ query, close }) {
         </Link>
     );
 }
+
+export const ModalSearch = React.forwardRef((props, ref) => (
+    <div id="modal_search" className="modal_search" ref={ref}>
+        <div className="search_wrapper">
+            <Search />
+        </div>
+    </div>
+));
 
 export default Search;

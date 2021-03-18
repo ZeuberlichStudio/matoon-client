@@ -1,0 +1,131 @@
+.cart-ticket { 
+    display: grid;
+    grid-auto-rows: max-content;
+    justify-items: center;
+    align-items: center;
+
+    &_copy {
+        width: max-content;    
+        display: block;
+        
+        color: var(--color, $black);
+        border: solid var(--color, $black);
+        background-color: white;
+        
+        opacity: .4;
+
+        &.copied {
+            background-color: var(--color, $black);
+            color: white;
+        }
+    }
+
+    &_contacts {
+        display: grid;
+        grid-auto-flow: column;
+        
+        & > a {
+            width: max-content;    
+            display: block;
+            
+            color: var(--color, $black);
+            border: solid var(--color, $black);
+            background-color: white;
+        }
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .cart-ticket { 
+        padding: get-vw(42px) 0;
+        grid-row-gap: get-vw(24px);
+
+        h3, p { padding: 0 get-vw(56px); }
+
+        h1 { @include proxima-bold(get-vw(48px)); }
+
+        p { @include proxima-regular(get-vw(16px), get-vw(18px)); }
+
+        &_copy { width: get-vw(178px); }
+
+        &_contacts { grid-column-gap: get-vw(8px); }
+
+        a, button {
+            height: get-vw(34px);
+            padding: 0 get-vw(14px);
+           
+            @include proxima-semibold(get-vw(16px), get-vw(32px));
+    
+            border-width: get-vw(2px);
+            border-radius: get-vw(8px);
+        }
+
+        &_gratitude { margin: get-vw(42px) 0; }
+    }
+}
+
+@media #{$tablet-screen} {
+    .cart-ticket { 
+        padding: t-get-vw(24px) 0;
+        grid-row-gap: t-get-vw(24px);
+
+        h3, p { padding: 0 t-get-vw(18px); }
+
+        h3 { @include proxima-semibold(t-get-vw(16px)); }
+
+        h1 { @include proxima-bold(t-get-vw(32px)); }
+
+        p { @include proxima-regular(t-get-vw(16px), t-get-vw(18px)); }
+
+        &_copy { 
+            width: t-get-vw(156px); 
+        }
+
+        &_contacts { grid-column-gap: t-get-vw(8px); }
+
+        a, button {
+            height: t-get-vw(32px);
+            padding: 0 t-get-vw(12px);
+           
+            @include proxima-semibold(t-get-vw(16px), t-get-vw(30px));
+    
+            border-width: t-get-vw(2px);
+            border-radius: t-get-vw(8px);
+        }
+
+        &_gratitude { margin: t-get-vw(42px) 0; }
+    }
+}
+
+@media #{$mobile-screen} {
+    .cart-ticket { 
+        padding: m-get-vw(24px) 0;
+        grid-row-gap: m-get-vw(24px);
+
+        h3, p { padding: 0 m-get-vw(18px); }
+
+        h3 { @include proxima-semibold(m-get-vw(16px)); }
+
+        h1 { @include proxima-bold(m-get-vw(32px)); }
+
+        p { @include proxima-regular(m-get-vw(16px), m-get-vw(18px)); }
+
+        &_copy { 
+            width: m-get-vw(156px); 
+        }
+
+        &_contacts { grid-column-gap: m-get-vw(8px); }
+
+        a, button {
+            height: m-get-vw(28px);
+            padding: 0 m-get-vw(8px);
+           
+            @include proxima-semibold(m-get-vw(16px), m-get-vw(26px));
+    
+            border-width: m-get-vw(2px);
+            border-radius: m-get-vw(6px);
+        }
+
+        &_gratitude { margin: m-get-vw(42px) 0; }
+    }
+}

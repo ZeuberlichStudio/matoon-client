@@ -1,0 +1,34 @@
+#cart {
+    display: flex;
+    height: var(--vh, 100vh);
+}
+
+@media #{$pc-screen} {
+    #cart {
+        padding: get-vw(98px) get-vw(16px);
+        justify-content: flex-end;
+    }
+}
+
+@media #{$tablet-screen} {
+    #cart {
+        padding: t-get-vw(70px) t-get-vw(12px);
+        justify-content: flex-end;
+    }
+}
+
+@media #{$mobile-screen} {
+    #cart {
+        display: grid;
+        padding: m-get-vw(64px) m-get-vw(40px);
+        padding-bottom: 0;
+
+        grid-auto-flow: column;
+        grid-template-rows: 100%;
+        grid-auto-columns: m-get-vw(294px);
+        grid-column-gap: m-get-vw(20px);
+
+        transform: translateX(calc( (100vw - #{ m-get-vw(60px) }) * -1 * var(--step, 0)) );
+        transition: .3s;
+    }
+}
