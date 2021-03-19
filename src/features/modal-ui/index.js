@@ -5,7 +5,7 @@ import { setModalElement, animateModalElement } from '~/app/ui';
 import Menu from '~/features/categories';
 import Favourite from '~/features/favourite';
 import Cart from '~/components/Cart/Cart';
-import {ModalSearch} from '~/features/Search';
+import {ModalSearch} from '~/features/search';
 
 function ModalUI() {
 
