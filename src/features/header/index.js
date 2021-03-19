@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleHeaderLayer, toggleSearch, setModalElement, animateModalElement } from '~/app/ui';
 import { toggleUI } from '~/features/modal-ui';
 
-import Search from '~/features/search';
+import Search from '~/features/search/index';
 
 import LogoPh from '~/assets/images/logo_ph.svg';
 import './index.scss';

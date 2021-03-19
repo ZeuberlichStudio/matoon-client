@@ -8,7 +8,7 @@ import Breadcrumbs from './breadcrumbs';
 import BannerPost from './post';
 import BannerPostPreview from './preview';
 import Slider from '~/features/slider/slider';
-import Search from '~/features/search';
+import Search from '~/features/search/index';
 
 const { API_URL } = process.env;
 

@@ -9,7 +9,7 @@ import Breadcrumbs from './Breadcrumbs';
 import BannerPostText from './BannerPostText';
 import BannerPostsPreview from './BannerPostsPreview';
 import Slider from '~/features/slider/slider';
-import Search from '~/features/search';
+import Search from '~/features/search/index';
 
 function Banner({ pageTitle, ancestors, posts, catSlug }) {
 

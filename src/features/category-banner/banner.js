@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import './banner.scss';
 
-import Search from '~/features/search';
+import Search from '~/features/search/index';
 
 const { API_URL } = process.env;
 
