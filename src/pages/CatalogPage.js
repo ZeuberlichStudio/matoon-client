@@ -1,7 +1,7 @@
 import React from 'react';
 import apiCall from '~/common/api-call';
 import {useParams} from 'react-router-dom';
-import Banner from '~/components/Banner';
+import Banner from '~/components/Banner/Index.js';
 import Catalog from '~/features/catalog/catalog';
 import { SpinningLoader as Loader } from '~/components/Loader/Loader'
 
