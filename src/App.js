@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { listenToResize, setPlatform } from '~/app/device';
-import { toggleMenu, toggleSearch, toggleFavourite } from '~/app/ui';
 
 import './style.scss';
 
