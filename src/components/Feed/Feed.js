@@ -6,7 +6,6 @@ import FeedPost from './FeedPost.js';
 
 import './styles/feed.scss';
 
-import {useLogRequestStatus} from '~/debug/logRequestStatus.js';
 
 const gridSizes = {
     mobile: 2,
@@ -33,7 +32,6 @@ export default function Feed() {
     }
 
     React.useEffect(fetchPosts, []);
-    useLogRequestStatus(status);
 
     const targetDevice = useSelector(state => state.device.target);
 

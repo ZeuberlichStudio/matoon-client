@@ -133,7 +133,7 @@
         padding: t-get-vw(6px);
         
         display: grid;
-        grid-auto-rows: max-content;
+        grid-auto-rows: t-get-vw(144px);
         grid-row-gap: t-get-vw(16px);
     
         z-index: 1;
@@ -163,7 +163,7 @@
             div {
                 height: t-get-vw(32px);
                 padding: 0 t-get-vw(12px);
-                @include proxima-semibold(t-get-vw(16px), t-get-vw(28px));
+                @include proxima-semibold(t-get-vw(16px), t-get-vw(32px));
                 border-radius: t-get-vw(8px);
             }
         }
@@ -200,7 +200,7 @@
         width: 100%;
         
         display: grid;
-        grid-auto-rows: max-content;
+        grid-auto-rows: m-get-vw(138px);
         grid-row-gap: m-get-vw(12px);
     
         z-index: 1;

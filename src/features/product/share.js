@@ -13,7 +13,6 @@ function ProductShare({ _id, slug }) {
 
     return (
         <div className="product-share">
-            { console.log() }
             <a 
                 className="product-share_vk" 
                 href={`https://vk.com/share.php?url=${link}`} 

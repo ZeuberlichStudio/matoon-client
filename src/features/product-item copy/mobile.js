@@ -47,7 +47,7 @@ export default function ProductItemMobile({data, i}) {
 
             return found;
         })
-        console.log(variant)
+
         setVariant( variant );
     }
 

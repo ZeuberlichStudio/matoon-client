@@ -17,7 +17,6 @@ export function ProductPage({ closeButton }, ref) {
         apiCall(`products/${slug}?isSlug=true`)
             .then(res => {
                 setItem(res.data);
-                console.log(res.data);
                 setStatus('success');
             })
             .catch(err => {

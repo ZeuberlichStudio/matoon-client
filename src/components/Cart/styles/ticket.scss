@@ -42,7 +42,8 @@
 
         h3, p { padding: 0 get-vw(56px); }
 
-        h1 { @include proxima-bold(get-vw(48px)); }
+        h1 { @include proxima-bold(get-vw(42px)); }
+        h3 { @include proxima-bold(get-vw(18px)); }
 
         p { @include proxima-regular(get-vw(16px), get-vw(18px)); }
 
@@ -81,8 +82,13 @@
             width: t-get-vw(156px); 
         }
 
-        &_contacts { grid-column-gap: t-get-vw(8px); }
+        &_contacts {
+            display: flex;
+            flex-wrap: wrap;
 
+            a { margin: t-get-vw(4px); }
+        }
+        
         a, button {
             height: t-get-vw(32px);
             padding: 0 t-get-vw(12px);

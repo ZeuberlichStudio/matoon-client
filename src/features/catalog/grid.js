@@ -48,7 +48,6 @@ export default function ProductGrid({ catSlug, search, view = 'mini' }) {
         
         apiCall(`products?${buildQuery()}`)
             .then(res => {
-                console.log();
                 setStatus('success');
                 setProducts(products.concat(res.data));
             })

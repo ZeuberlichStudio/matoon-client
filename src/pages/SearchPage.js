@@ -36,7 +36,6 @@ export default function CategoryPage() {
         apiCall(`cats/${slug}?isSlug=true`)
             .then(res => {
                 setCat(res.data);
-                console.log(res.data)
                 setCatStatus('success');
             })
             .catch(err => {

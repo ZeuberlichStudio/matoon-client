@@ -64,7 +64,6 @@ export default function Slider({
         onTouchMove: e => {
             const currentPoint = e.changedTouches[0].clientX;
             containerRef.current.style.setProperty( '--touchOffset', `${ currentPoint - touchStartX }px` );
-            console.log(touchStartX);
         },
         onTouchEnd: e => {
             const currentPoint = e.changedTouches[0].clientX;

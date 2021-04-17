@@ -24,7 +24,7 @@ export default function Suggested({ cat, materials, exclude }) {
             limitQuery = `&limit=6`,
             excQuery = `&exc=${exclude}`,
             query = materialQuery + catQuery + limitQuery + excQuery;
-            console.log(query)
+
             return query;
         }
         

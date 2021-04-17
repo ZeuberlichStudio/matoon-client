@@ -70,7 +70,6 @@ function Cart({ closeButton }, ref) {
 
         apiCall.post('/orders', body)
             .then(result => {
-                console.log(result, result.data);
                 setOrderId(result.data);
                 setPostStatus('success');
             })

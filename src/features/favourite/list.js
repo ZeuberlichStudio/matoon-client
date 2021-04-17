@@ -22,7 +22,6 @@ function FavouriteList({ closeButton, setProduct, setColumn }) {
             .then(result => {
                 setStatus('success');
                 setData(result.data);
-                console.log(result.data);
             })
             .catch( err => {
                 setStatus('failed');

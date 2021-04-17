@@ -59,7 +59,6 @@ function Cart({ closeButton }, ref) {
 
     function placeOrder() {
         setPostStatus('loading');
-        // console.log(JSON.stringify(order));
 
         fetch('http://localhost:3001/orders', {
             method: 'POST',

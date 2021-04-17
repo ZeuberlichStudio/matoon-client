@@ -59,7 +59,6 @@ export default function Filters({ catSlug, closeButton, closeModal }) {
            .then( result => {
                 setAvailableFilters(result.data);
                 setStatus('succeeded');
-                console.log(result.data);
             })
             .catch( err => {
                 setError(err);

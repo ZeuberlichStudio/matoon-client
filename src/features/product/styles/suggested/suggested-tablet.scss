@@ -56,7 +56,7 @@
     .slider_indicator {
         width: max-content;
         left: 0; right: 0;
-        bottom: t-get-vw(-26px);
+        bottom: t-get-vw(-26px)!important;
         margin: auto;
 
         position: absolute;
@@ -64,11 +64,11 @@
         grid-auto-flow: column;
         grid-auto-columns: max-content;
 
-        grid-column-gap: t-get-vw(6px);
+        grid-column-gap: t-get-vw(6px)!important;
 
         .dot {
-            width: t-get-vw(6px);
-            height: t-get-vw(6px);
+            width: t-get-vw(6px)!important;
+            height: t-get-vw(6px)!important;
 
             background-color: var(--uiColor, white)!important;
             border-radius: 50%;

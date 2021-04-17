@@ -14,7 +14,7 @@ function withVariablePrice(Component) {
                     amount: price.amount
                 }
             });
-            console.log(computedPrices);
+
             return computedPrices;
         }
 

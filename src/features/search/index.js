@@ -72,8 +72,6 @@ function Search({ mini, focusCallback, catSlug }) {
             const closest = e.target.closest('.search');
             const isUiRedirect = e.target.id === 'menu-redirect';
 
-            console.log( e.target.id )
-
             if ( !closest && !isUiRedirect ) {
                 setFocus(false);
                 setOpen(false);

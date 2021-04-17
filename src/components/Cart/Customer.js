@@ -8,12 +8,12 @@ const messengerOptions = [
     {
         name: 'Telegram',
         value: 'tg',
-        color: '#71DD7E'
+        color: '#21A0DC'
     },
     {
         name: `What's App`,
         value: 'wapp',
-        color: '#21A0DC'
+        color: '#71DD7E'
     },
     {
         name: 'Viber',
@@ -50,8 +50,8 @@ export default function Customer() {
             }`}>
                 <Select name="customer.contactBy" label="Мессенджеры" options={messengerOptions} />
                 { 
-                    ( contactByValue === 'wapp' || contactByValue === 'tg' || contactByValue === 'viber' ) && 
-                    <p>Через профиль, привязанный к указанному выше телефону</p> 
+                    // ( contactByValue === 'wapp' || contactByValue === 'tg' || contactByValue === 'viber' ) && 
+                    // <p>Через профиль, привязанный к указанному выше телефону</p> 
                 }
             </div>
             <div className={`cart_step--content--group ${contactByValue === 'mail' || contactByValue === 'phone' ? 'active' : ''}`}>

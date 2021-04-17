@@ -82,7 +82,6 @@ const selectTotal = state => {
     for (const item of state.cart.items) {
         total += item.priceAmount * item.qty;
     }
-    console.log(total);
 
     return total;
 }

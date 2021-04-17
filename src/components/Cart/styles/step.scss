@@ -246,6 +246,7 @@
         overflow: hidden scroll;
         //safari 10 fix
         -webkit-mask-image: -webkit-radial-gradient(white, black);
+        mask-image: radial-gradient(white, black);
     }
 
     .cart_step {
