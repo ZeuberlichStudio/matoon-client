@@ -2,7 +2,6 @@ import React from 'react';
 import apiCall from '~/common/api-call';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-// import { toggleMenu } from '~/app/ui';
 import { setModalElement, toggleOverlay, toggleSearch } from '~/app/ui';
 import { selectTarget } from '~/app/device';
 import { toggleUI } from '~/features/modal-ui';
