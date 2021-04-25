@@ -2,6 +2,9 @@
     .product-details {
         width: 100%;
         max-width: get-vw(452px);
+        display: grid;
+        grid-template: max-content 1fr / max-content 1fr;
+        overflow: hidden;
 
         &_sku, &_stock {
             @include proxima-bold( get-vw(16px) );
@@ -10,7 +13,10 @@
 
         &_stock{ margin-left: get-vw(10px); }
 
-        &_more { margin-top: get-vw(20px); }
+        &_more { 
+            grid-column: span 2;
+            margin-top: get-vw(20px); 
+        }
 
         p{ @include proxima-regular( get-vw(16px), get-vw(18px) ); }
 

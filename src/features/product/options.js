@@ -118,7 +118,7 @@ function AttrSet({
 
 const Attr = ({ 
     name, 
-    value: colorData,
+    code: colorData,
     active, 
     selectConfig,
     i

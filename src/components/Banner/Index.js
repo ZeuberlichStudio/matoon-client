@@ -43,7 +43,7 @@ function Banner({ pageTitle, ancestors, posts, catSlug }) {
                 <BannerPostText post={posts[currentPost]} i={currentPost}/>
                 <BannerPostsPreview {...{ changePost, posts, active: currentPost }}/>
                 <Slider id="banner-slider" className="banner-slider" slide={ currentPost } buttons={ false }>
-                    { posts.map(({ image, title }) => <Image src={image.path} alt={ title } className="banner-post-image"/> ) }
+                    { posts.map(({ image, title }) => <Image src={image?.path} alt={ title } className="banner-post-image"/> ) }
                 </Slider>
                 </>
             }

@@ -1,5 +1,6 @@
 import React from 'react';
+import productPlaceholder from '~/assets/images/product-placeholder.jpg';
 
-export default function Image({src = '', alt, ...rest}) {
-    return <img src={src.includes('http') ? src : process.env.CDN_URL + src} alt={alt} {...rest}/>;
+export default function Image({src, placeholder, ...rest}) {
+    return <img src={src || productPlaceholder} {...rest}/>;
 }

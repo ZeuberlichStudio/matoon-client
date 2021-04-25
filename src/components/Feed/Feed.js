@@ -67,7 +67,7 @@ export default function Feed() {
                     status === 'success' ?
                     arrangePosts(posts,  gridSizes[targetDevice]).map((column, i) => 
                         <div className="feed-grid_column" key={i}>
-                            { column.map((post, i) => <FeedPost {...{...post, image: post.image.path}} i={i} key={i}/> ) }
+                            { column.map((post, i) => <FeedPost {...{...post, image: post.image?.path}} i={i} key={i}/> ) }
                         </div> 
                     )  : <Loader/>
                 }

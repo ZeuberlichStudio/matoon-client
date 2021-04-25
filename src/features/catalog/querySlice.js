@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     search: null,
     catSlug: null,
-    sort: 'meta.orders,-1',
+    sort: 'meta.createdAt,-1',
     filter: {
         color: [],
         brand: [],

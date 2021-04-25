@@ -2,6 +2,7 @@
     .tabs {
         display: flex;
         flex-direction: column;
+        overflow: hidden;
     
         &_controls {
             flex: 0 0 auto;
@@ -24,10 +25,11 @@
         }
     
         &_content {
-            flex: 1 0 auto;
+            flex: 1 1 auto;
     
             width: 100%;
             margin-top: get-vw(18px);
+            overflow: auto;
         }
     }
 }

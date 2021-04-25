@@ -13,7 +13,7 @@ export default function BannerPostsPreview({
             { 
                 posts.map(({ image, title }, i) => 
                     <button className={i === active ? 'active' : ''} onClick={() => changePost(i) } key={i}>
-                        <Image src={image.path} alt={title}/>
+                        <Image src={image?.path} alt={title}/>
                     </button>
                 ) 
             }

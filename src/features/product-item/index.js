@@ -15,12 +15,14 @@ import {
 
 import './product-item.scss';
 
+const {STATIC_SOURCE} = process.env;
+
 export function ProductItemSuggested({data, i}) {
     const {
         id,
         sku,
         slug,
-        images,
+        variants,
         name,
         desc,
         prices
@@ -35,10 +37,12 @@ export function ProductItemSuggested({data, i}) {
         }
     }
 
+    const imageSrc = variants[0].images[0]?.path ? `${STATIC_SOURCE}${images[0]?.path}` : '';
+
     return (
         <div className={`product-item-suggested`} key={ i }>
             <div className="product-item-suggested_image">
-                <Image src={images[0]?.path || ''} alt={name}/>
+                <Image src={imageSrc} alt={name}/>
             </div>
 
             <div className="product-item-suggested_info">
@@ -61,7 +65,7 @@ export function ProductItemMini({data, i}) {
     const {
         _id,
         slug,
-        images,
+        variants,
         name,
         desc,
         maxPrice
@@ -74,11 +78,13 @@ export function ProductItemMini({data, i}) {
         state: { backgroundLocation }
     }
 
+    const imageSrc = variants[0].images[0]?.path ? `${STATIC_SOURCE}${variants[0].images[0].path}` : '';
+
     return (
         <div className={`product-item product-item-${ i } product-item-mini`} key={ i }>
 
             <div className="product-item-mini_image">
-                <Image src={images[0]?.path || ''} alt={name}/>
+                <Image src={imageSrc} alt={name}/>
             </div>
 
             <ProductShare {...{ _id, slug }}/>

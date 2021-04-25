@@ -4,7 +4,7 @@
   "description": "",
   "main": "./src/index.js",
   "scripts": {
-    "dev": "yarn webpack serve --env NODE_ENV=dev",
+    "local": "yarn webpack serve --env NODE_ENV=dev",
     "build": "yarn webpack --env NODE_ENV=production"
   },
   "keywords": [],

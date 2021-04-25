@@ -278,7 +278,8 @@
         width: 100%;
         max-width: get-vw(712px);
         height: max-content;
-        min-height: get-vw(516px);
+        // min-height: get-vw(516px);
+        height: get-vw(580px);
         padding: get-vw(12px);
 
         border-radius: get-vw(28px);

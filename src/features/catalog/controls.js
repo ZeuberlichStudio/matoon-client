@@ -28,7 +28,7 @@ export default function GridControls({
                 <h3>Сортировка</h3>
                 <div className={`${className}_sorting_buttons-wrapper`}>
                     <div className={`${className}_sorting_buttons`}>
-                        <SortButton value="meta.orders,-1">Популярные</SortButton>
+                        {/* <SortButton value="meta.orders,-1">Популярные</SortButton> */}
                         <SortButton value="meta.updatedAt,-1">Новые</SortButton>
                         <SortButton value="price,1">Дешевле</SortButton>
                         <SortButton value="price,-1">Дороже</SortButton>
