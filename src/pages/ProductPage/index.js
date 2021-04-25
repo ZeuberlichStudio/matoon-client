@@ -16,8 +16,12 @@ export function ProductPage({ closeButton }, ref) {
 
         apiCall(`products/${slug}?isSlug=true`)
             .then(res => {
-                setItem(res.data);
-                setStatus('success');
+                if ( res.data == null ) {
+                    history.push('/404');
+                } else {
+                    setItem(res.data);
+                    setStatus('success');
+                }
             })
             .catch(err => {
                 setStatus('failed');

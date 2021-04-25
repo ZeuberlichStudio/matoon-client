@@ -16,8 +16,12 @@ export function PostPage({ closeButton }, ref) {
 
         apiCall(`posts/${slug}?isSlug=true`)
             .then(res => {
-                setStatus('success');
-                setPost(res.data);
+                if ( res.data == null ) {
+                    history.push('/404');
+                } else {
+                    setStatus('success');
+                    setPost(res.data);
+                }
             })
             .catch(console.error);
     }

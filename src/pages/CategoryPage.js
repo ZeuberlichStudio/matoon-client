@@ -1,6 +1,6 @@
 import React from 'react';
 import apiCall from '~/common/api-call';
-import {useParams} from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import { changeCategory, resetQuery } from '~/features/catalog/querySlice';
 
@@ -11,6 +11,7 @@ import { SpinningLoader as Loader } from '~/components/Loader/Loader';
 export default function CategoryPage() {
 
     const {slug} = useParams();
+    const history = useHistory();
     const dispatch = useDispatch();
     const [bannerPosts, setBannerPosts] = React.useState([]);
     const [bannerPostsStatus, setBannerPostsStatus] = React.useState('idle');
@@ -22,8 +23,12 @@ export default function CategoryPage() {
 
         apiCall(`cats/${slug}?isSlug=true`)
             .then(res => {
-                setCat(res.data);
-                setCatStatus('success');
+                if ( res.data == null ) {
+                    history.push('/404');
+                } else {
+                    setCat(res.data);
+                    setCatStatus('success');
+                }
             })
             .catch(err => {
                 console.error(err);
