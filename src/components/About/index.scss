@@ -2,6 +2,8 @@
     padding: get-vw(98px) get-vw(306px);
     font-family: 'Proxima Nova';
 
+    .tabs_content { overflow: visible; }
+
     article {
         margin-top: get-vw(48px);
 
@@ -12,20 +14,25 @@
         h1, h2, h3 { margin: get-vw(12px) 0; }
 
         p { 
-            font-size: get-vw(16px); 
-            line-height: get-vw(18px);
+            font-size: get-vw(18px); 
+            line-height: get-vw(20px);
         }
 
-        li:before {
-            width: get-vw(4px);
-            height: get-vw(4px);
-            margin-right: get-vw(6px);
-            display: inline-block;
-
-            border-radius: 50%;
-            background-color: $black;
-            vertical-align: middle;
-            content: '';
+        li{
+            font-size: get-vw(18px); 
+            line-height: get-vw(20px);
+            
+            &:before {
+                width: get-vw(4px);
+                height: get-vw(4px);
+                margin-right: get-vw(6px);
+                display: inline-block;
+    
+                border-radius: 50%;
+                background-color: $black;
+                vertical-align: middle;
+                content: '';
+            }
         }
     }
 }

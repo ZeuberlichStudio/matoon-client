@@ -7,6 +7,9 @@ import { changeCategory, resetQuery } from '~/features/catalog/querySlice';
 import Banner from '~/components/Banner/Index.js';
 import Catalog from '~/features/catalog/catalog';
 import { SpinningLoader as Loader } from '~/components/Loader/Loader';
+import { Helmet } from 'react-helmet';
+
+const { SITE_TITLE } = process.env;
 
 export default function CategoryPage() {
 
@@ -72,6 +75,10 @@ export default function CategoryPage() {
 
     return(
         <main>
+            <Helmet>
+                <title>{`${SITE_TITLE} - ${cat?.name || 'Каталог'}`}</title>
+            </Helmet>
+
             { 
                 catStatus === 'success' && bannerPostsStatus === 'success' ? 
                 <>

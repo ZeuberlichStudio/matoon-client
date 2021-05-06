@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { listenToResize, setPlatform } from '~/app/device';
+import { Helmet } from 'react-helmet';
 
 import './style.scss';
 
@@ -17,6 +18,9 @@ import SearchPage from '~/pages/SearchPage';
 import ProductPage from '~/pages/ProductPage';
 import AboutPage from '~/pages/AboutPage';
 import NotFoundPage from '~/pages/404';
+
+import favIco from '~/assets/images/fav.ico';
+import favSvg from '~/assets/images/fav.svg';
 
 function App() {
     const listener = useSelector( state => state.device.listener );
@@ -68,6 +72,11 @@ function App() {
 
     return (
         <React.Fragment>
+            <Helmet>
+                <link rel="icon" href={favIco} />
+                <link rel="icon" href={favSvg} type="image/svg+xml" />
+            </Helmet>
+
             <Header {...{toggleMenu: toggleMenuCallback, toggleSearch: toggleSearchCallback, toggleFavourite: toggleFavouriteCallback}}/>
 
             <Switch location={ background || location }>

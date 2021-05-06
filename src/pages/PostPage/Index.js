@@ -4,8 +4,11 @@ import { useParams } from 'react-router-dom';
 import { PostHeader, PostContent, PostImage } from '~/features/post';
 import { SpinningLoader as Loader } from '~/components/Loader/Loader';
 import { useSelector } from 'react-redux';
+import { Helmet } from 'react-helmet';
 
 import './index.scss';
+
+const { SITE_TITLE } = process.env;
 
 export function PostPage({ closeButton }, ref) {
     const {slug} = useParams();
@@ -51,6 +54,10 @@ export function PostPage({ closeButton }, ref) {
 
     return (
         <main ref={ ref } id="post-page" className="post-page">
+            <Helmet>
+                <title>{`${SITE_TITLE} - ${name || 'Пост'}`}</title>
+            </Helmet>
+
             {
                 status === 'success' ?
                 <div style={targetDevice == 'mobile' ? mobileScrollableStyle : null} className="post-page_post-wrapper">

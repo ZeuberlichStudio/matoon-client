@@ -48,11 +48,12 @@ function SearchItem({ data, close }) {
             <ul className="search-item_colors">
                 <span>Цвета:</span>
                 { 
-                    colors.map(color => (
+                    colors.map((color, i) => (
                         <li style={{ 
                                 backgroundColor: color.code, 
                                 border: color.code.includes('#FFF') && '1px solid black'
                             }}
+                            key={i}
                         ></li>
                     )) 
                 }

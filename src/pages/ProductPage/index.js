@@ -3,8 +3,11 @@ import apiCall from '~/common/api-call.js';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Product from '~/features/product';
+import { Helmet } from 'react-helmet';
 
 import './index.scss';
+
+const { SITE_TITLE } = process.env;
 
 export function ProductPage({ closeButton }, ref) {
     const {slug} = useParams();
@@ -61,6 +64,10 @@ export function ProductPage({ closeButton }, ref) {
 
     return(
         <main ref={ ref } id="product-page" className="product-page">
+            <Helmet>
+                <title>{`${SITE_TITLE} - ${name || 'Товар'}`}</title>
+            </Helmet>
+
             {
                 status === 'success' &&
                 <>

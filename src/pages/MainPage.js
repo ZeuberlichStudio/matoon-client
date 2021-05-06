@@ -3,6 +3,9 @@ import apiCall from '~/common/api-call.js';
 import Banner from '~/components/Banner/Index.js';
 import Feed from '~/components/Feed/Feed.js';
 import { SpinningLoader as Loader } from '~/components/Loader/Loader';
+import { Helmet } from 'react-helmet';
+
+const { SITE_TITLE } = process.env;
 
 export default function MainPage() {
 
@@ -27,6 +30,9 @@ export default function MainPage() {
     
     return (
         <main id="title-page" className="title-page">
+            <Helmet>
+                <title>{`${SITE_TITLE} - Главная`}</title>
+            </Helmet>
             { 
                 bannerPostsStatus === 'success' ? 
                 <>

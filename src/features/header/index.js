@@ -45,7 +45,7 @@ function Header({ toggleMenu }) {
                     </div>
                 }
 
-            <button className="app-header_info"><span>О нас</span></button>
+            <Link to="/about" className="app-header_info"><span>О нас</span></Link>
 
             <button 
                 onClick={ () => toggleUIClickHandler('favourite') } 

@@ -21,11 +21,12 @@ function Search({ mini, focusCallback, catSlug }) {
     const [focus, setFocus] = React.useState(false);
     const uiState = useSelector( state => state.ui );
     const inputRef = React.useRef();
+    const [searchPagePath, setSearchPagePath] = React.useState('/catalog/search=');
 
     function fetchResult() {
         setStatus('pending');
 
-        apiCall(`products?sort=name,1&limit=${limit}&catSlug=${catSlug ?? ''}&search=${string.replace(' ', '%20')}`)
+        apiCall(`products?sort=name,1&limit=${limit}&catSlug=${catSlug || ''}&search=${string.replace(' ', '%20')}`)
             .then(result => {
                 setResuts(result.data);
                 setStatus('success');
@@ -46,6 +47,10 @@ function Search({ mini, focusCallback, catSlug }) {
             setOpen(false);
         }
     }, [string]);
+
+    React.useEffect(() => {
+        setSearchPagePath(`/catalog/search=${string}${catSlug ? `?catSlug=${catSlug}` : ''}`);
+    }, [string, catSlug]);
 
     function fieldHandler(e) {
         const newString = e.target.value;
@@ -106,7 +111,7 @@ function Search({ mini, focusCallback, catSlug }) {
     function handleEnterKey(e) {
         if ( e.keyCode == 13 ) {
             close();
-            history.push(`/catalog/search=${string}`);
+            history.push(searchPagePath);
         }
     }
 
@@ -143,16 +148,14 @@ function Search({ mini, focusCallback, catSlug }) {
                 )
             }
 
-            { open && results[0] && <SearchMore query={ string } close={ close }/> }
+            { 
+                open && 
+                results[0] && 
+                <Link onClick={ close } to={searchPagePath} className="search-more">
+                    <span>Все результаты поиска</span>
+                </Link>
+            }
         </div>
-    );
-}
-
-function SearchMore({ query, close }) {
-    return (
-        <Link onClick={ close } to={`/catalog/search=${query}`} className="search-more">
-            <span>Все результаты поиска</span>
-        </Link>
     );
 }
 
