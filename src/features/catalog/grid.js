@@ -6,7 +6,7 @@ import {
     ProductItemFull as ItemFull
 } from '~/features/product-item';
 import ItemMobile from '~/features/product-item/mobile';
-import { SpinningLoader as Loader } from '~/features/loader';
+import { SpinningLoader as Loader } from '~/components/Loader/Loader';
 
 
 export default function ProductGrid({ catSlug, search, view = 'mini' }) {

@@ -1,15 +1,12 @@
 @media screen and ( max-width: 767px ) {
     .post-image {
-        max-width: m-get-vw(164px);
-        min-height: m-get-vw(164px);
-
         display: flex;
         flex-direction: column;
 
         img {
-            flex: 1 1;
+            flex: 0 1;
             width: 100%;
-            height: auto;
+            height: 100%;
 
             display: block;
 

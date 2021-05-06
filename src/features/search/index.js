@@ -1,6 +1,6 @@
 import React from 'react';
 import apiCall from '~/common/api-call';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setModalElement, toggleOverlay, toggleSearch } from '~/app/ui';
 import { selectTarget } from '~/app/device';
@@ -11,14 +11,16 @@ import './styles/search.scss';
 
 function Search({ mini, focusCallback, catSlug }) {
 
+    const history = useHistory();
     const dispatch = useDispatch();
-
     const [string, setString] = React.useState('');
-
     const [results, setResuts] = React.useState([]);
     const [status, setStatus] = React.useState('idle');
-
     const limit = 3;
+    const target = useSelector(selectTarget);
+    const [focus, setFocus] = React.useState(false);
+    const uiState = useSelector( state => state.ui );
+    const inputRef = React.useRef();
 
     function fetchResult() {
         setStatus('pending');
@@ -36,25 +38,19 @@ function Search({ mini, focusCallback, catSlug }) {
 
     const [open, setOpen] = React.useState(false);
 
-    React.useEffect(() => {
+    React.useEffect(() => {    
         if ( string && string.length > 2 ) {
             fetchResult();
             setOpen(true);
         } else {
             setOpen(false);
         }
-    }, [string, limit]);
+    }, [string]);
 
     function fieldHandler(e) {
         const newString = e.target.value;
         setString(newString);
     }
-
-    //focus
-
-    const target = useSelector(selectTarget);
-    const [focus, setFocus] = React.useState(false);
-    const uiState = useSelector( state => state.ui );
 
     function focusHandler() {
         if (!focus && !uiState.search) {
@@ -64,6 +60,10 @@ function Search({ mini, focusCallback, catSlug }) {
             focusCallback && focusCallback();
         }
     }
+
+    React.useEffect(() => {
+        if ( !focus ) inputRef.current.blur();
+    }, [focus]);
 
     React.useEffect(() => {
         if ( uiState.search ) return;
@@ -84,17 +84,12 @@ function Search({ mini, focusCallback, catSlug }) {
         return () => window.removeEventListener( 'click', escapeHandler );
     }, [focus, uiState.search]);
 
-    // function menuRedirect() {
-    //     dispatch(toggleMenu(true));
-    //     setFocus(false);
-    //     setOpen(false);
-    //     setString('');
-    //     !uiState.search && dispatch(toggleOverlay(false));
-    //     uiState.search && dispatch(toggleSearch(false));
-    // }
     const modalElement = useSelector( ({ui}) => ui.modalElement );
-    const menuRedirect = () => toggleUI( dispatch, setModalElement, modalElement, 'menu' );
-
+    function menuRedirect() {
+        toggleUI( dispatch, setModalElement, modalElement, 'menu' )
+        setFocus(false);
+        setOpen(false);
+    }
 
     function close() {
         if ( target === 'mobile' ) {
@@ -108,11 +103,25 @@ function Search({ mini, focusCallback, catSlug }) {
         }
     }
 
+    function handleEnterKey(e) {
+        if ( e.keyCode == 13 ) {
+            close();
+            history.push(`/catalog/search=${string}`);
+        }
+    }
+
     return (
         <div className={`search ${ mini ? 'mini' : '' } ${ focus ? 'focus' : '' }`} onClick={ focusHandler }>
             <div className="search-field">
-                <input placeholder={ catSlug ? 'Поиск по категории' : 'Поиск' } type="text" value={ string } onChange={ fieldHandler }/>
-                { focus && <button id="search-reset" onClick={close}/> }
+                <input 
+                    ref={inputRef}
+                    placeholder={ catSlug ? 'Поиск по категории' : 'Поиск' } 
+                    type="text" 
+                    value={ string } 
+                    onChange={ fieldHandler }
+                    onKeyUp={handleEnterKey}
+                />
+                <button id="search-reset" onClick={close}/>
             </div>
 
             {
@@ -147,12 +156,25 @@ function SearchMore({ query, close }) {
     );
 }
 
-export const ModalSearch = React.forwardRef((props, ref) => (
-    <div id="modal_search" className="modal_search" ref={ref}>
-        <div className="search_wrapper">
-            <Search />
+export const ModalSearch = React.forwardRef(function ModalSearch(props, ref) {
+    const targetDevice = useSelector(selectTarget);
+    
+    //fixes scrollability on ios < 14
+    const mobileScrollableStyle = { 
+        overflowX: 'hidden', 
+        overflowY: 'scroll', 
+        '-webkit-overflow-scrolling': 'touch',
+        '-webkit-mask-image': '-webkit-radial-gradient(white, black)',
+        maskImage: 'radial-gradient(white, black)'
+    }
+
+    return (
+        <div id="modal_search" className="modal_search" ref={ref}>
+            <div style={targetDevice == 'mobile' ? mobileScrollableStyle : null} className="search_wrapper">
+                <Search />
+            </div>
         </div>
-    </div>
-));
+    )
+});
 
 export default Search;

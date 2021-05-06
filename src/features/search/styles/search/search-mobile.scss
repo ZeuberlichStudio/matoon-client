@@ -3,7 +3,7 @@
     #modal_search {
         height: var(--vh, 100vh);
         padding: m-get-vw(64px) m-get-vw(40px);
-
+        padding-bottom: 0;
     }
 
     .search_wrapper {
@@ -113,13 +113,14 @@
         }
 
         #search-reset {
-            width: m-get-vw(12px);
-            height: m-get-vw(12px);
-            top: m-get-vw(14px); right: m-get-vw(14px);
+            width: m-get-vw(32px);
+            height: m-get-vw(32px);
+            top: m-get-vw(4px); right: m-get-vw(4px);
 
             position: absolute;
 
             mask-image: url('~/assets/images/icon_close.svg');
+            mask-size: m-get-vw(14px);
             background-color: rgba( $black, .8 );
             cursor: pointer;
         }

@@ -32,7 +32,7 @@ export default function MainPage() {
                 <>
                     <Banner pageTitle="Matoon Store" posts={bannerPosts}/>
                     <Feed />
-                </> : <Loader fixed={true} />
+                </> : <Loader position="fixed" />
             }
         </main>
     );

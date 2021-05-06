@@ -7,13 +7,12 @@ export default function Slider({
     time = 300, 
     id, 
     slide, 
-    controls = true 
+    controls = true
 }) {
 
     const [currentSlide, setCurrentSlide] = React.useState(0);
     const [touchStartX, setTouchStartX] = React.useState(0);
     const [animating, setAnimating] = React.useState(false);
-    // const { length: count } = children.filter(child => child);
     const [slides, setSlides] = React.useState([]);
     const [count, setCount] = React.useState(null);
     const containerRef = React.useRef();
@@ -66,10 +65,13 @@ export default function Slider({
             containerRef.current.style.setProperty( '--touchOffset', `${ currentPoint - touchStartX }px` );
         },
         onTouchEnd: e => {
+            const threshhold = 20;
             const currentPoint = e.changedTouches[0].clientX;
-            const direction = currentPoint - touchStartX > 0 ? -1 : 1;
+            const offset = currentPoint - touchStartX;
+
+            if ( Math.abs(offset) < threshhold ) return;
             containerRef.current.style.setProperty( '--touchOffset', `0px` );
-            goToSlide( currentSlide + direction );
+            goToSlide( currentSlide + ( offset > 0 ? -1 : 1 ) );
         }
     }
 
@@ -78,7 +80,7 @@ export default function Slider({
             { controls && <button className="slider_prev" onClick={ () => goToSlide(currentSlide - 1) }/> }
             
             <div className="slider_slides-wrapper">
-                <div ref={ containerRef } className="slider_slides-container" style={containerStyle} {...listeners}>
+                <div ref={ containerRef } className="slider_slides-container" style={containerStyle}>
                     { 
                         slides.slice(-2).map( (child, i, arr) => {
                             const number = count - (arr.length - i);
@@ -128,6 +130,7 @@ function Indicator({ count, currentSlide, goToSlide }) {
         for ( let i = 0; i < count; i++ ) {
             dots.push(
                 <span 
+                    key={i}
                     onClick={ () => goToSlide && goToSlide(i) } 
                     className={`dot ${ i === currentSlide ? 'active' : '' }`}
                 />

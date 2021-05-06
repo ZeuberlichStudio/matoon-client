@@ -62,7 +62,7 @@ export default function CategoryPage() {
                         pageTitle={slug ? `${cat.name} - поиск` : 'Поиск'} 
                     />
                     <Catalog/>
-                </> : <Loader fixed={true} />
+                </> : <Loader position="fixed" />
             }
         </main>
     );

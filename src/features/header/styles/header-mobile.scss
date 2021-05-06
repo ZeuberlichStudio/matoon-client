@@ -19,14 +19,16 @@
 
         &_logo {
             grid-area: logo;
-            width: m-get-vw(38px);
+            width: m-get-vw(58px);
             height: m-get-vw(32px);
             border-radius: m-get-vw(10px);
             overflow: hidden;
 
             img {
                 width: 100%;
-                height: auto;
+                height: 100%;
+                object-fit: contain;
+                object-position: center;
             }
         }
 
@@ -88,44 +90,54 @@
             );
         }
 
-        &_favourite { 
-            grid-area: favs; 
-            @include m-button-picture( 
-                rgba( $black, .4 ), 
-                '~/assets/images/icon_fav.svg', 
-                $size: 'big',
-                $active_color: #F8512A,
-                $hover: true
-            );
-        }
-        &_cart { 
-            grid-area: cart; 
-            @include m-button-picture( 
-                rgba( $black, .4 ), 
-                '~/assets/images/icon_cart.svg', 
-                $size: 'big',
-                $active_color: #4A8BF7,
-                $hover: true
-            );
-        }
-
-        &_more {
-            grid-area: more;
-            width: m-get-vw(20px);
+        &_favourite,
+        &_cart {
+            width: m-get-vw(32px);
             height: m-get-vw(32px);
-            background-color: #E9E9E9;
             border-radius: m-get-vw(10px);
-
-            span {
-                width: m-get-vw(20px);
-                height: m-get-vw(32px);
+            background-color: rgba($black, .1);
+            box-shadow: 0 0 m-get-vw(10px) rgba($black, .1);
+            
+            span { 
+                width: 100%;
+                height: 100%;
                 display: block;
 
-                mask-image: url('~/assets/images/icon_more-dots.svg');
-                mask-position: center;
-                mask-size: m-get-vw(24px);
-                background-color: rgba( $black, .4 );
+                background-color: rgba($black, .4);
+                mask-size: m-get-vw(16px);
+                transition: .3s;
             }
         }
+
+        &_favourite {
+            grid-area: favs; 
+            span { mask-image: url('~/assets/images/icon_fav.svg'); }
+            &:hover span, &.active span{ background-color: #F8512A; }
+        }
+
+        &_cart {
+            grid-area: cart; 
+            span { mask-image: url('~/assets/images/icon_cart.svg'); }
+            &:hover span, &.active span{ background-color: #4A8BF7; }
+        }
+
+        // &_more {
+        //     grid-area: more;
+        //     width: m-get-vw(20px);
+        //     height: m-get-vw(32px);
+        //     background-color: #E9E9E9;
+        //     border-radius: m-get-vw(10px);
+
+        //     span {
+        //         width: m-get-vw(20px);
+        //         height: m-get-vw(32px);
+        //         display: block;
+
+        //         mask-image: url('~/assets/images/icon_more-dots.svg');
+        //         mask-position: center;
+        //         mask-size: m-get-vw(24px);
+        //         background-color: rgba( $black, .4 );
+        //     }
+        // }
     }
 }

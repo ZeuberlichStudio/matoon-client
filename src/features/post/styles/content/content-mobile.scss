@@ -1,7 +1,6 @@
 @media screen and ( max-width: 767px ) {
     .post-content {
         width: 100%;
-        max-width: m-get-vw(142px);
 
         display: flex;
         flex-direction: column;
@@ -14,10 +13,10 @@
         }
 
         a, button {
+            width: m-get-vw(142px)!important;
             align-self: center;
             margin-top: m-get-vw(8px);
             @include m-button-big;
-            width: 100%;
         }
     }
 }

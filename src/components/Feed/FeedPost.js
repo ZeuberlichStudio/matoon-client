@@ -4,6 +4,8 @@ import Image from '~/components/Image.js';
 
 import './styles/post.scss';
 
+const {STATIC_SOURCE} = process.env;
+
 export default function FeedPost({
     i,
     slug,
@@ -14,7 +16,7 @@ export default function FeedPost({
 }) {
 
     const backgroundLocation = useLocation();
-
+    const imageSrc = image ? `${STATIC_SOURCE}${image}` : ''
     const postLink = {
         pathname: `/feed/post=${ slug }`,
         state: { backgroundLocation }
@@ -22,11 +24,11 @@ export default function FeedPost({
 
     return (
         <div className={`feed-post feed-post-${size} feed-post-${i}`}>
-            <Image src={image} alt={name} className="feed-post_image" />
+            <Image src={imageSrc} alt={name} className="feed-post_image" />
 
             <div className="feed-post_content">
                 <h2>{name}</h2>
-                <div className="feed-post_content_text" dangerouslySetInnerHTML={{__html: content}}></div>
+                { content && <p>{content}</p> }
             </div>
 
             <Link to={postLink}>

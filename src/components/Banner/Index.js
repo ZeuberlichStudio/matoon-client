@@ -11,6 +11,8 @@ import BannerPostsPreview from './BannerPostsPreview';
 import Slider from '~/features/slider/slider';
 import Search from '~/features/search/index';
 
+const {STATIC_SOURCE} = process.env;
+
 function Banner({ pageTitle, ancestors, posts, catSlug }) {
 
     const [currentPost, setCurrentPost] = React.useState(0);
@@ -30,12 +32,13 @@ function Banner({ pageTitle, ancestors, posts, catSlug }) {
 
     const params = useParams();
     const targetDevice = useSelector( state => state.device.target );
+    const getImageSrc = (path) => path ? `${STATIC_SOURCE}${path}` : '';
 
     return (
         <div className="banner" id="banner">
             <div className="banner-title">{ pageTitle ?? 'Matoon Store' }</div>
             { params.search && <span className="banner-search-phrase">{ decodeURI(params.search) }</span>  }
-            { ( ancestors && ancestors[0] ) && <Breadcrumbs {...{ancestors}}/> }
+            { <Breadcrumbs {...{ancestors}}/> }
             { targetDevice !== 'mobile' && <div className="banner-search-wrapper"><Search catSlug={catSlug}/></div> }
             { 
                 ( posts && posts[0] ) && 
@@ -43,7 +46,7 @@ function Banner({ pageTitle, ancestors, posts, catSlug }) {
                 <BannerPostText post={posts[currentPost]} i={currentPost}/>
                 <BannerPostsPreview {...{ changePost, posts, active: currentPost }}/>
                 <Slider id="banner-slider" className="banner-slider" slide={ currentPost } buttons={ false }>
-                    { posts.map(({ image, title }) => <Image src={image?.path} alt={ title } className="banner-post-image"/> ) }
+                    { posts.map(({ image, title }) => <Image src={getImageSrc(image?.path)} alt={ title } className="banner-post-image"/> ) }
                 </Slider>
                 </>
             }

@@ -3,33 +3,28 @@ import React from 'react';
 export default function Checkbox({
     active = false,
     name, 
-    slug,
+    _id,
     attr, 
-    value, 
+    code, 
     addFilter, 
     removeFilter, 
     fresh
 }) {
-
-    //const [active, setActive] = React.useState(active);
-
-    //React.useEffect(() => { fresh && setActive(false) }, [fresh]);
-
     function onChangeHandler(e) {
-        !active ? addFilter(attr, slug) : removeFilter(attr, slug); 
+        !active ? addFilter(attr, _id) : removeFilter(attr, _id); 
     }
 
     return (
         <label 
-            style={ value && {["--colorData"]: value.includes('(255,255,255)'||'#fff') ? '#D2D3D4' : value} }
-            className={`product-grid_filters_filter checkbox-filter ${ active ? 'active' : null }`}
+            style={code && {["--colorData"]: code}}
+            className={`product-grid_filters_filter checkbox-filter ${active ? 'active' : ''}`}
         >
             <span>{ name }</span>
             <input 
                 checked={active}
                 onChange={ onChangeHandler } 
                 data-attr={attr} 
-                data-value={slug}
+                data-value={_id}
                 type="checkbox"
             />
         </label>

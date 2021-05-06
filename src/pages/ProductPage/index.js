@@ -17,7 +17,8 @@ export function ProductPage({ closeButton }, ref) {
         apiCall(`products/${slug}?isSlug=true`)
             .then(res => {
                 if ( res.data == null ) {
-                    history.push('/404');
+                    //TODO поменять на 404
+                    history.push('/');
                 } else {
                     setItem(res.data);
                     setStatus('success');
@@ -49,6 +50,15 @@ export function ProductPage({ closeButton }, ref) {
         prices,
     } = item;
 
+    //fixes scrollability on ios < 14
+    const mobileScrollableStyle = { 
+        overflowX: 'hidden', 
+        overflowY: 'scroll', 
+        '-webkit-overflow-scrolling': 'touch',
+        '-webkit-mask-image': '-webkit-radial-gradient(white, black)',
+        maskImage: 'radial-gradient(white, black)'
+    }
+
     return(
         <main ref={ ref } id="product-page" className="product-page">
             {
@@ -61,7 +71,7 @@ export function ProductPage({ closeButton }, ref) {
                     </div>
                 }
 
-                <div className="product-page_product-wrapper">
+                <div style={targetDevice == 'mobile' ? mobileScrollableStyle : null} className="product-page_product-wrapper">
                     <div className="product-page_product">
                         <Product.Header {...{ name, closeButton, slug, _id }}/>
                         <Product.Gallery images={ variants[currVar].images.concat(images) }/>

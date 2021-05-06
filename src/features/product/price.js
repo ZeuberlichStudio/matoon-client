@@ -33,6 +33,11 @@ export default function Price({
         const {value} = e.target;
         if ( value <= stock ) setQty(value);
     }
+
+    function blurHandler(e) {    
+        const {value} = e.target;
+        if ( !value || value < 0 ) setQty(1);
+    }
     
     function findPrice() {
         const index = computedPrices.findIndex(({minQty, maxQty}) => (
@@ -49,6 +54,7 @@ export default function Price({
             <div className="product-price_qty">
                 <input 
                     onChange={ changeHandler } 
+                    onBlur={ blurHandler }
                     min="1" max={ stock } 
                     value={qty}
                     placeholder="кол-во (шт)" 

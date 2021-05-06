@@ -1,6 +1,9 @@
 @media screen and (min-width: 768px) and (max-width: 1023px) {
     .product-details {
         width: 100%;
+        display: grid;
+        grid-template: max-content 1fr / max-content 1fr;
+        overflow: hidden;
 
         &_sku, &_stock {
             @include proxima-bold( t-get-vw(12px) );
@@ -9,7 +12,10 @@
 
         &_stock{ margin-left: t-get-vw(10px); }
 
-        &_more { margin-top: t-get-vw(16px); }
+        &_more { 
+            grid-column: span 2;
+            margin-top: t-get-vw(16px); 
+        }
 
         p{ @include proxima-regular( t-get-vw(14px), t-get-vw(16px) ); }
 

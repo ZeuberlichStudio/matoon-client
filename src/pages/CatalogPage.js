@@ -36,7 +36,7 @@ export default function CategoryPage() {
                         pageTitle={'Каталог'} 
                     />
                     <Catalog/>
-                </> : <Loader fixed={true} />
+                </> : <Loader position="fixed" />
             }
         </main>
     );

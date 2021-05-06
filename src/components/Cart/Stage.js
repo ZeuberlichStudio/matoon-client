@@ -17,9 +17,17 @@ export default function step({
     submit
 }) {
     const total = useSelector(selectTotal);
+    const targetDevice = useSelector( state => state.device.target );
+    const mobileScrollableStyle = { 
+        overflowX: 'hidden', 
+        overflowY: 'scroll', 
+        '-webkit-overflow-scrolling': 'touch',
+        '-webkit-mask-image': '-webkit-radial-gradient(white, black)',
+        maskImage: 'radial-gradient(white, black)'
+    }
 
     return (
-        <div style={{ overflowX: 'hidden', overflowY: 'scroll', '-webkit-overflow-scrolling': 'touch'}} className="cart_step_wrapper">
+        <div style={targetDevice == 'mobile' ? mobileScrollableStyle : null} className="cart_step_wrapper">
         <div className="cart_step">
             <div className="cart_step--header">
                 { index > 0 && index < totalSteps - 1 && <button onClick={goBack} className="cart_step--header--go_back"/> }

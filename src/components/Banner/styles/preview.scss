@@ -68,7 +68,8 @@
 
 @media screen and (max-width: 767.5px) {
     .banner-posts-preview {
-        grid-template: m-get-vw(44px) / repeat( 4, m-get-vw(44px) );
+        grid-template-rows: m-get-vw(44px);
+        grid-auto-columns: m-get-vw(44px);
 
         button {
             width: m-get-vw(36px);

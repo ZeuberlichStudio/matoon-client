@@ -15,7 +15,6 @@ export default function Catalog({ catSlug }) {
     const isMobile = useSelector(selectTarget) === 'mobile';
 
     const [filters, setFilters] = React.useState(false);
-    const modalRef = React.useRef();
 
     const filtersContentStyles = {
       initial: {
@@ -27,13 +26,7 @@ export default function Catalog({ catSlug }) {
     }
     
     function toggleFilters() {
-      if ( !filters ) { 
-        setFilters(true);
-      } else {
-        modalRef.current.style.backgroundColor = 'rgba(0,0,0,0)';
-        modalRef.current.children[0].style.transform = 'translateY(100%)';
-        setTimeout(() => setFilters(false), 200);
-      }
+      setFilters(!filters);
     }
 
     const [gridView, setGridView] = React.useState('mini');
@@ -54,7 +47,7 @@ export default function Catalog({ catSlug }) {
             }
             { 
                 (isMobile && filters ) && 
-                <Modal ref={modalRef} contentStyles={filtersContentStyles} closeCallback={ toggleFilters }>
+                <Modal contentStyles={filtersContentStyles} closeCallback={ toggleFilters }>
                     <Filters catSlug={catSlug}/>
                 </Modal> 
             }

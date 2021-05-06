@@ -23,7 +23,7 @@ export default function ProductItemMobile({data, i}) {
         sku,
         images,
         variants,
-        desc,
+        shortDesc,
         prices
     } = data;
 
@@ -49,7 +49,7 @@ export default function ProductItemMobile({data, i}) {
                 </div>
                 <span className="product-item-mobile_info_sku">Арт: {sku}</span>
                 <span className="product-item-mobile_info_stock">В наличии: { variants[currVar].stock }шт.</span>
-                <div className="product-item-mobile_info_desc">{ desc }</div>
+                { shortDesc && <div className="product-item-mobile_info_desc">{ shortDesc }</div> }
             </div>
 
             <div className="product-item-mobile_link">

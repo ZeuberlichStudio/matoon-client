@@ -1,9 +1,9 @@
 @media screen and (max-width: 767px) {
     .product-filters-wrapper {
-        align-self: flex-start;
-        height: calc( var(--vh, 100vh) - #{ m-get-vw(64px) } );
+        align-self: flex-start;        
         margin: 0 m-get-vw(16px);
         margin-top: m-get-vw(64px);
+        height: calc( var(--vh, 100vh) - #{ m-get-vw(64px) } );
 
         border-radius: m-get-vw(26px) m-get-vw(26px) 0 0;
 
@@ -18,7 +18,6 @@
 
     .product-filters {
         width: 100%;
-        min-height: 100%;
         height: max-content;
         padding: m-get-vw(14px);
         background-color: white;
@@ -90,27 +89,29 @@
             }
         }
     
-        &_block {
-            margin-top: m-get-vw(32px);
-            padding: 0 m-get-vw(7px);
-    
-            h3 { 
-                padding: 0 m-get-vw(4px);
-                @include proxima-bold(m-get-vw(18px), m-get-vw(24px));
-            }
-    
-            div {
-                display: flex;
-                flex-wrap: wrap;
-    
-                button {
-                    @include m-button-small;
-                    @include m-button-picture (#B7B9BA, '~/assets/images/icon_more.svg', '~/assets/images/icon_less.svg');
-                    margin: m-get-vw(4px);
-                    border: none;
-                    background-color: #E9EAEA;
-                    
-                    &.active { background-color: #E9EAEA; }
+        &_content {
+            .filters_group {
+                margin-top: m-get-vw(32px);
+                padding: 0 m-get-vw(7px);
+        
+                h3 { 
+                    padding: 0 m-get-vw(4px);
+                    @include proxima-bold(m-get-vw(18px), m-get-vw(24px));
+                }
+        
+                div {
+                    display: flex;
+                    flex-wrap: wrap;
+        
+                    button {
+                        @include m-button-small;
+                        @include m-button-picture (#B7B9BA, '~/assets/images/icon_more.svg', '~/assets/images/icon_less.svg');
+                        margin: m-get-vw(4px);
+                        border: none;
+                        background-color: #E9EAEA;
+                        
+                        &.active { background-color: #E9EAEA; }
+                    }
                 }
             }
         }
@@ -145,6 +146,7 @@
         bottom: m-get-vw(14px);
 
         margin-top: m-get-vw(32px);
+        margin-bottom: m-get-vw(7px);
         padding: m-get-vw(7px);
 
         position: sticky;

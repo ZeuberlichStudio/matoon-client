@@ -7,6 +7,8 @@
     }
 
     .product-page_product-wrapper {
+        height: 100%;
+
         &::before {
             width: calc(100% - #{ m-get-vw(12px * 2) });
             height: m-get-vw(12px);
@@ -24,8 +26,15 @@
         }
     }
 
+    #modal #product-page {
+        height: var(--vh, 100vh);
+        padding: 0 m-get-vw(16px);
+        overflow: hidden;
+    }
+
     #modal .product-page_product {
-      .product-header { top: m-get-vw(12px); }
+        margin: m-get-vw(76px) 0;
+        .product-header { top: m-get-vw(12px); }
     }
 
     .product-page_product {
@@ -49,7 +58,7 @@
         }
 
         .product-header {
-            top: m-get-vw(64px);
+            top: m-get-vw(12px);
 
             position: sticky;
 

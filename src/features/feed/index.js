@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import FeedPost from './post';
-import { SpinningLoader as Loader } from '~/features/loader';
+import { SpinningLoader as Loader } from '~/components/Loader/Loader';
 import './styles/feed.scss';
 
 const { API_URL } = process.env;

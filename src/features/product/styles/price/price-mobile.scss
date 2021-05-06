@@ -19,7 +19,7 @@
 
             input { 
                 width: 100%;
-                @include proxima-semibold( m-get-vw(14px), m-get-vw(28px) ); 
+                @include proxima-semibold( m-get-vw(16px), m-get-vw(28px) ); 
                 
                 ::placeholder { color: rgba( $black, .25 ); }
             }

@@ -44,9 +44,9 @@ function FavouriteList({ closeButton, setProduct, setColumn }) {
                     <div className="favourite-list_items">                    
                         { data.map( ( item, i ) => <ListItem key={i} {...{item, setProduct, setColumn}}/> ) }
                     </div>
-                    <button className="favourite-list_more">
+                    {/* <button className="favourite-list_more">
                         <span>Открыть полный список</span>
-                    </button>
+                    </button> */}
                 </> : <Loader />
             }
         </div>

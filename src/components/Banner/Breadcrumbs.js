@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './styles/breadcrumbs.scss';
 
-function Breadcrumbs({ ancestors }) {
+function Breadcrumbs({ ancestors = [] }) {
 
     function catPathname(slug) {
         return '/catalog/category=' + slug;

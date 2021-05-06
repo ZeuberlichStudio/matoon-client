@@ -7,6 +7,8 @@ import Image from '~/components/Image';
 
 import './styles/list.scss';
 
+const {STATIC_SOURCE} = process.env;
+
 function List() {
 
     const itemsStore = useSelector(state => state.cart);
@@ -105,9 +107,11 @@ function CartItem({
 
     React.useEffect(() => findPrice(), [storeData.qty]);
 
+    const imageSrc = variant?.images[0]?.path ? `${STATIC_SOURCE}${variant?.images[0]?.path}` : '';
+
     return (
         <div className="cart-item">
-            <Image src={variant?.images[0].path} className="cart-item_thumbnail"/>
+            <Image src={imageSrc} className="cart-item_thumbnail"/>
             <h2 className="cart-item_name">{name}</h2>
             <span className="cart-item_sku">Арт: {sku}</span>
             <div className="cart-item_config">

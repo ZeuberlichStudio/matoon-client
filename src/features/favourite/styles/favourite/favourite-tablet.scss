@@ -1,7 +1,7 @@
 @media screen and (min-width: 768px) and (max-width: 1023.5px) {
     .favourite {
-        padding: t-get-vw(12px);
-        padding-top: t-get-vw(70px);
+        padding: t-get-vw(70px) t-get-vw(12px);
+        padding-bottom: 0;
         height: var(--vh, 100vh);
 
         display: grid;
@@ -16,12 +16,14 @@
         grid-area: list;
         height: max-content;
         max-height: 100%;
+        overflow: hidden auto;
+        @include hide-scrollbar;
+        border-radius: t-get-vw(18px) t-get-vw(18px) 0 0;
 
         .favourite-list {
+            margin-bottom: t-get-vw(12px);
             height: max-content;
             max-height: 100%;
-            overflow: hidden auto;
-            @include hide-scrollbar;
         }
     }
 
@@ -29,12 +31,14 @@
         grid-area: product;
         height: max-content;
         max-height: 100%;
+        overflow: hidden auto;
+        @include hide-scrollbar;
+        border-radius: t-get-vw(18px) t-get-vw(18px) 0 0;
 
         .favourite-product {
+            margin-bottom: t-get-vw(12px);
             height: max-content;
             max-height: 100%;
-            overflow: hidden auto;
-            @include hide-scrollbar;
         }
     }
 }

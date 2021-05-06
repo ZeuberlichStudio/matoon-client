@@ -279,6 +279,7 @@
         max-width: t-get-vw(516px);
         height: max-content;
         min-height: t-get-vw(385px);
+        max-height: t-get-vw(486px);
         padding: t-get-vw(10px);
 
         border-radius: t-get-vw(22px);
@@ -307,6 +308,7 @@
         .product-details { 
             margin-top: t-get-vw(6px);
             grid-area: details; 
+            overflow: hidden;
         }
         .product-price { 
             margin-top: t-get-vw(10px);

@@ -9,9 +9,10 @@
         'title'
         'breadcrumbs'
         'slider'
-        'post';
+        'post'
+        'preview';
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(2, max-content) m-get-vw(245px + 16px) max-content;
+        grid-template-rows: repeat(2, max-content) m-get-vw(245px + 16px) m-get-vw(184px) max-content;
     }
 
     .banner-title {
@@ -32,9 +33,8 @@
     }
 
     .banner-posts-preview {
-        right: m-get-vw(24px);
-        bottom: m-get-vw(12px);
-        position: absolute;
+        grid-area: preview;
+        justify-self: flex-end;    
     }
 
     #banner-slider {
@@ -47,6 +47,7 @@
         --slideGap: #{m-get-vw(32px)};
 
         .slide {
+            width: var(--slideWidth)!important;
             height: m-get-vw(245px);
         }
 

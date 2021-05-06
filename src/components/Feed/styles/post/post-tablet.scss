@@ -38,7 +38,7 @@
                 @include proxima-bold( t-get-vw(18px) );
             }
 
-            &_text {
+            p {
                 margin-top: t-get-vw(6px);
                 @include proxima-regular( t-get-vw(16px), t-get-vw(18px) );
                 overflow: hidden;

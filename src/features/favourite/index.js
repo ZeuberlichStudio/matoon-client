@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Product from './product';
 import List from './list';
+import { selectTarget } from '~/app/device';
 
 import './styles/favourite.scss';
 
@@ -19,12 +20,21 @@ function Favourite({ closeButton }, ref) {
         else setProduct(null);
     };
 
+    //fixes scrollability on ios < 14
+    const mobileScrollableStyle = { 
+        overflowX: 'hidden', 
+        overflowY: 'scroll', 
+        '-webkit-overflow-scrolling': 'touch',
+        '-webkit-mask-image': '-webkit-radial-gradient(white, black)',
+        maskImage: 'radial-gradient(white, black)'
+    }
+
     return (
         <div ref={ref} id="favourite" className="favourite" style={{ '--column': column }}>
-            <div className="favourite-product-wrapper">
+            <div style={targetDevice == 'mobile' ? mobileScrollableStyle : null} className="favourite-product-wrapper">
                 { product && <Product data={product} status='succeeded' buttonCallback={goBack}/> }
             </div>
-            <div className="favourite-list-wrapper">
+            <div style={targetDevice == 'mobile' ? mobileScrollableStyle : null} className="favourite-list-wrapper">
                 <List {...{ closeButton, setProduct, setColumn }}/>
             </div>
         </div>

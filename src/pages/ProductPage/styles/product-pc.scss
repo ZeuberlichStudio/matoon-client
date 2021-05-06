@@ -2,7 +2,7 @@
     #product-page {
         width: 100vw;
         min-height: var(--vh, 100vh);
-        padding: 8.64vh get-vw(306px);
+        padding: get-vw(94px) get-vw(306px);
 
         display: flex;
         justify-content: space-between;
@@ -12,8 +12,7 @@
 }
 
     .product-page_suggested-wrapper {
-        height: calc( 100vh - 8.64vh * 2 );
-        max-height: get-vw(784px);
+        height: get-vw(784px);
         margin-top: get-vw(-4px);
         top: 0;
 

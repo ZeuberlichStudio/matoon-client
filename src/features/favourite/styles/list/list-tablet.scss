@@ -3,6 +3,7 @@
         width: t-get-vw(286px);
         height: 100%;
         padding: t-get-vw(8px);
+        padding-bottom: 0;
 
         background-color: rgba( white, .95 );
         border-radius: t-get-vw(18px);
@@ -31,7 +32,7 @@
     }
 
     .favourite-list_header { 
-        top: t-get-vw(0px); 
+        top: t-get-vw(8px); 
         will-change: transform;
 
         #modal-close {
@@ -42,7 +43,7 @@
     }
 
     .favourite-list_more {
-        bottom: 0;
+        bottom: t-get-vw(8px); 
 
         &::before {
             left: t-get-vw(-4px);

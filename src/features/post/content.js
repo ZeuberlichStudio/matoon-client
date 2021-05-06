@@ -25,7 +25,7 @@ export default function PostContent({ content, link }) {
 
     return (
         <div className="post-content">
-            <div className="post-content_text" dangerouslySetInnerHTML={{__html: content}}></div>
+            <p className="post-content_text">{content}</p>
             <a href={link}>
                 <span>Перейти</span>
             </a>

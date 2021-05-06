@@ -51,6 +51,11 @@ a {
     &.visible { background-color: rgba( $black, .95 ); }
 }
 
+main {
+    width: 100vw;
+    min-height: 100vh;
+}
+
 ::-webkit-scrollbar {
     width: get-vw(6px);
     background: rgba( $black, .2);

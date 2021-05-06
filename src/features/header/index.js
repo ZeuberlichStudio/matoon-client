@@ -6,7 +6,7 @@ import { toggleUI } from '~/features/modal-ui';
 
 import Search from '~/features/search/index';
 
-import LogoPh from '~/assets/images/logo_ph.svg';
+import logo from '~/assets/images/logo.svg';
 import './index.scss';
 
 function Header({ toggleMenu }) {
@@ -15,9 +15,8 @@ function Header({ toggleMenu }) {
     const targetDevice = useSelector( state => state.device.target );
     const {
         headerOverlay,
-        search,
         modalElement
-    } = useSelector( ({ui}) => ui );
+    } = useSelector(({ui}) => ui);
     const ref = React.useRef();
 
     function focusCallback() {
@@ -29,7 +28,7 @@ function Header({ toggleMenu }) {
     return (
         <header ref={ref} id="header" className={`app-header`} style={{ zIndex: headerOverlay ? 20 : 10 }}>
             <div className="app-header_logo">
-                <Link to="/" onClick={() => toggleUIClickHandler(null)}><img src={ LogoPh } alt=""/></Link>
+                <Link to="/" onClick={() => toggleUIClickHandler(null)}><img src={logo}/></Link>
             </div>
 
             <button onClick={ () => toggleUIClickHandler('menu') } className="app-header_categories">
@@ -48,8 +47,19 @@ function Header({ toggleMenu }) {
 
             <button className="app-header_info"><span>О нас</span></button>
 
-            <button onClick={ () => toggleUIClickHandler('favourite') } className="app-header_favourite"><span></span></button>
-            <button onClick={ () => toggleUIClickHandler('cart') } className="app-header_cart"><span></span></button>
+            <button 
+                onClick={ () => toggleUIClickHandler('favourite') } 
+                className={`app-header_favourite ${modalElement == 'favourite' ? 'active' : ''}`}
+            >
+                <span/>
+            </button>
+
+            <button 
+                onClick={ () => toggleUIClickHandler('cart') } 
+                className={`app-header_cart ${modalElement == 'cart' ? 'active' : ''}`}
+            >
+                <span/>
+            </button>
         </header>
     );
 }

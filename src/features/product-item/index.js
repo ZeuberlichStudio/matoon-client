@@ -1,9 +1,6 @@
 import React from 'react';
-import { Link, useRouteMatch, useLocation } from 'react-router-dom';
-
+import { Link, useLocation } from 'react-router-dom';
 import Image from '~/components/Image';
-import { Tabs, Tab } from '~/features/tabs/tabs';
-import { ResizableText, ButtonsBlock } from '~/features/resizable-containers/containers';
 import { 
     ProductGallery, 
     ProductShare,
@@ -19,12 +16,10 @@ const {STATIC_SOURCE} = process.env;
 
 export function ProductItemSuggested({data, i}) {
     const {
-        id,
-        sku,
         slug,
         variants,
         name,
-        desc,
+        shortDesc,
         prices
     } = data;
 
@@ -37,7 +32,7 @@ export function ProductItemSuggested({data, i}) {
         }
     }
 
-    const imageSrc = variants[0].images[0]?.path ? `${STATIC_SOURCE}${images[0]?.path}` : '';
+    const imageSrc = variants[0].images[0]?.path ? `${STATIC_SOURCE}${variants[0].images[0]?.path}` : '';
 
     return (
         <div className={`product-item-suggested`} key={ i }>
@@ -50,7 +45,7 @@ export function ProductItemSuggested({data, i}) {
                     <span>{ prices[0].amount + 'Р' }</span>
                     <h2>{ name }</h2>
                 </div>
-                <div className="product-item-suggested_info_desc">{desc}</div>
+                { shortDesc && <div className="product-item-suggested_info_desc">{shortDesc}</div> }
             </div>
 
             <div className="product-item-suggested_link">
@@ -67,7 +62,7 @@ export function ProductItemMini({data, i}) {
         slug,
         variants,
         name,
-        desc,
+        shortDesc,
         maxPrice
     } = data;
 
@@ -94,7 +89,7 @@ export function ProductItemMini({data, i}) {
                     <span>до {maxPrice}₽</span>
                     <h2>{name}</h2>
                 </div>
-                <div className="product-item-mini_info_desc">{desc}</div>
+                { shortDesc && <div className="product-item-mini_info_desc">{shortDesc}</div> }
             </div>
 
             <div className="product-item-mini_link">

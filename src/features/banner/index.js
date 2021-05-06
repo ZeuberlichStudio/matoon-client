@@ -20,14 +20,14 @@ function Banner({ pageTitle = 'Matoon Store', ancestors, bannerPosts: posts }) {
         setCurrentPost(i);
     }
 
-    React.useEffect(() => {
-        const nextPost = currentPost + 1 < 3 ? currentPost + 1 : 0;
-        const interval = setInterval(() => setCurrentPost(nextPost), 5000 );
+    // React.useEffect(() => {
+    //     const nextPost = currentPost + 1 < 3 ? currentPost + 1 : 0;
+    //     const interval = setInterval(() => setCurrentPost(nextPost), 5000 );
 
-        return function cleanUp() {
-            clearInterval(interval);
-        }
-    }, [currentPost]);
+    //     return function cleanUp() {
+    //         clearInterval(interval);
+    //     }
+    // }, [currentPost]);
 
     const params = useParams();
     const targetDevice = useSelector( state => state.device.target );

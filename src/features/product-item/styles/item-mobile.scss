@@ -66,8 +66,8 @@
         &_options { grid-area: options; }
 
         &_info {
-            height: 100%;
             grid-area: info;
+            overflow: hidden;
 
             &_sku,
             &_stock {
@@ -93,13 +93,11 @@
             }
 
             &_desc {
-                flex: 1 1 auto; 
+                display: block;
                 margin-top: m-get-vw(10px);
                 @include proxima-regular(m-get-vw(14px), m-get-vw(16px));
                 overflow: hidden;
             }
-
-            overflow: hidden;
         }
 
         &_link {

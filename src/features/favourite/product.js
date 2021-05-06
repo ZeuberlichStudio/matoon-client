@@ -7,16 +7,17 @@ import {
     ProductOptions as Options,
     ProductAddToCart as AddToCart
 } from '~/features/product';
-import { withConfig, withDataFetch } from '~/features/product/hoc';
 import './styles/product.scss';
 import { useSelector } from 'react-redux';
 import Scrollable from '~/features/containers/scrollable';
+import Image from '~/components/Image'; 
 
-function FavouriteProduct({ data, status, config, setConfig, variant, buttonCallback }) {
+function FavouriteProduct({ data, buttonCallback }) {
 
     const targetDevice = useSelector( state => state.device.target );
-
     const [currVar, setCurrVar] = React.useState(0);
+    const [qty, setQty] = React.useState(1);
+    const [currPrice, setCurrPrice] = React.useState(0);
 
     const {
         _id,
@@ -30,46 +31,59 @@ function FavouriteProduct({ data, status, config, setConfig, variant, buttonCall
         prices,
     } = data;
 
+    React.useEffect(() => { console.log(variants) }, [variants]);
+
     const closeButton = <CloseButton callback={ buttonCallback }/>;
 
     return (
-        <div className="favourite-product">
+        <div key={_id} className="favourite-product">
             <Header {...{ name, _id, slug, closeButton }}/>
             {
                 targetDevice !== 'tablet' ?
-                <Gallery images={variants[currVar].images.concat(images)}/> :
-                <TabletGallery images={variants[currVar].images.concat(images)}/>
+                <Gallery images={variants[currVar]?.images.concat(images)}/> :
+                <TabletGallery images={variants[currVar]?.images.concat(images)}/>
             }
             <div className="product-options-wrapper">
                 <h3> Конфигурация товара </h3>
                 <Options {...{ show: 3, variants, setCurrVar }}/>
             </div>
             <Details {...{ desc, specs, sku, stock: variants[currVar].stock }}/>
-            {/* {
-                targetDevice === 'desktop' ?
+            {
+                targetDevice !== 'desktop' ?
+                <div className="product-purchase-wrapper">
+                    <Price {...{ qty, setQty, prices, currPrice, setCurrPrice, stock: variants[currVar]?.stock }}/>
+                    <AddToCart 
+                        _id={_id}
+                        variantId={variants[currVar]._id}
+                        qty={qty}
+                        priceAmount={prices[currPrice].amount}
+                    />
+                </div> :
                 <>
-                    <Price {...{prices}}/>
-                    <AddToCart/>
-                </> :
-                <div className="product-buy">
-                    <Price {...{prices}}/>
-                    <AddToCart/>
-                </div>
-            } */}
+                    <Price {...{ qty, setQty, prices, currPrice, setCurrPrice, stock: variants[currVar]?.stock }}/>
+                    <AddToCart 
+                        _id={_id}
+                        variantId={variants[currVar]._id}
+                        qty={qty}
+                        priceAmount={prices[currPrice].amount}
+                    />
+                </>                            
+            }
         </div>
     );
 }
 
-const { CDN_URL } = process.env;
+const { STATIC_SOURCE } = process.env;
 
 function TabletGallery({images}) {
-
-    const formFullPath = path => CDN_URL = path;
-
     return (
         <div className="product-gallery">
             <Scrollable>
-                { images && images.map( ( image, i ) =>  <img src={formFullPath(image)} alt="" key={i}/> ) }
+                { 
+                    images?.length > 0 ? 
+                    images.map( ( image, i ) =>  <Image key={i} src={`${STATIC_SOURCE}${image.path}`}/> ) :
+                    <Image /> 
+                }
             </Scrollable>
         </div>
     );

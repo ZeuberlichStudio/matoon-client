@@ -13,7 +13,7 @@ import {
 
 import Slider from '~/features/slider/slider';
 import Scrollable from '~/features/scrollable';
-import { SpinningLoader as Loader} from '~/features/loader';
+import { SpinningLoader as Loader} from '~/components/Loader/Loader';
 
 import Header from './header';
 import Controls from './controls';

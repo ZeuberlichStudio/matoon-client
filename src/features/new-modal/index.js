@@ -1,8 +1,9 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useHistory } from 'react-router-dom';
 import { toggleHeaderLayer } from '~/app/ui';
+import { selectTarget } from '~/app/device';
 
 import './index.scss';
 
@@ -22,6 +23,7 @@ export function Modal({
     const history = useHistory();
     const dispatch = useDispatch();
     const contentRef = React.useRef();
+    const targetDevice = useSelector(selectTarget);
 
     function close() {    
         setVisible(false);
@@ -59,9 +61,10 @@ export function Modal({
     }
 
     React.useEffect( () => {
+        if ( !ref ) return;
         ref.current.addEventListener('click', outerClickHandler);
         return () => { ref.current && ref.current.removeEventListener('click', outerClickHandler) };
-    }, [closeCallback]);
+    }, [closeCallback, ref]);
 
     React.useEffect(() => {
         init();
@@ -124,8 +127,8 @@ export function Modal({
     // }, [hide]);
 
     return createPortal (
-        <div ref={ ref } style={ containerAnimation[visible ? 'final' : 'initial'] } id="modal">
-            <div style={ contentAnimation[animation || 'scale'][visible ? 'final' : 'initial'] } id="modal-content">
+        <div ref={ ref } id="modal">
+            <div id="modal-content">
                 { 
                     React.cloneElement( child, { 
                         ref: contentRef, 

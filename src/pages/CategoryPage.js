@@ -24,7 +24,8 @@ export default function CategoryPage() {
         apiCall(`cats/${slug}?isSlug=true`)
             .then(res => {
                 if ( res.data == null ) {
-                    history.push('/404');
+                    //TODO поменять на 404
+                    history.push('/');
                 } else {
                     setCat(res.data);
                     setCatStatus('success');
@@ -81,7 +82,7 @@ export default function CategoryPage() {
                         catSlug={slug}
                     />
                     <Catalog catSlug={slug ?? ''}/>
-                </> : <Loader fixed={true} />
+                </> : <Loader position="fixed" />
             }
         </main>
     );

@@ -1,12 +1,19 @@
 import React from 'react';
 import './loader.scss';
 
-const SpinningLoader = ({fixed}) => (
+const getPositionStyle = (position) => ({
+    position,
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    margin: 'auto'
+});
+
+const SpinningLoader = ({position}) => (
     <div 
         className="loader-container"
-        style={{
-            position: fixed ? 'fixed' : null
-        }}
+        style={ position ? getPositionStyle(position) : null }
     >
         <div className="spinning-loader">
         </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import apiCall from '~/common/api-call';
 import { useSelector, useDispatch } from 'react-redux';
-import { SpinningLoader } from '../loader';
+import { SpinningLoader } from '~/components/Loader/Loader';
 import withVariablePrice from '../product/withVariablePrice';
 import { removeItem, updateItem as storeUpdateItem, selectItem } from './slice';
 import Image from '~/components/Image';
@@ -110,7 +110,7 @@ function CartItem({
 
     return (
         <div className="cart-item">
-            <Image src={variant?.images[0].path} className="cart-item_thumbnail"/>
+            <Image src={variant.images[0]?.path} className="cart-item_thumbnail"/>
             <h2 className="cart-item_name">{name}</h2>
             <span className="cart-item_sku">Арт: {sku}</span>
             <div className="cart-item_config">

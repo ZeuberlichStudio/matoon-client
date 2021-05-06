@@ -2,13 +2,14 @@ import React from 'react';
 import apiCall from '~/common/api-call';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterChanged } from '~/features/catalog/querySlice';
+import { selectTarget } from '~/app/device';
 
 import Checkbox from './checkbox';
 import Field from './field';
 
 import './filters.scss';
 
-export default function Filters({ catSlug, closeButton, closeModal }) {
+export default function Filters({ catSlug, closeButton, closeModal}) {
 
     const initialSelectedFilters = {
         color: [],
@@ -30,6 +31,7 @@ export default function Filters({ catSlug, closeButton, closeModal }) {
     const [error, setError] = React.useState(null);
     const [availableFilters, setAvailableFilters] = React.useState({});
     const [count, setCount] = React.useState(0);
+    const targetDevice = useSelector(selectTarget);
 
     function buildApiQuery() {
 
@@ -119,9 +121,8 @@ export default function Filters({ catSlug, closeButton, closeModal }) {
 
     const renderCheckbox = (filter, attr, key) => (
         <Checkbox 
+            {...filter}
             active={selectedFilters[attr].includes(filter._id)}
-            name={filter.name}
-            slug={filter._id}
             key={key} 
             attr={attr} 
             fresh={fresh} 
@@ -140,37 +141,63 @@ export default function Filters({ catSlug, closeButton, closeModal }) {
         for: sex
     } = availableFilters;
 
+    //fixes scrollability on ios < 14
+    const mobileScrollableStyle = { 
+        overflowX: 'hidden', 
+        overflowY: 'scroll', 
+        '-webkit-overflow-scrolling': 'touch'
+    }
+
     return(
-        <div style={{ overflowX: 'hidden', overflowY: 'scroll', '-webkit-overflow-scrolling': 'touch'}} id="product-filters-wrapper" className="product-filters-wrapper">
+        <div 
+            style={targetDevice == 'mobile' ? mobileScrollableStyle : null} 
+            id="product-filters-wrapper" 
+            className="product-filters-wrapper"
+        >
         <div ref={ containerRef } id="product-filters" className="product-filters">
             <div className="product-filters_header">
                 <h3>Фильтры</h3>
                 { closeButton && closeButton }
             </div>
-            <ResizableFilterBlock name={"Цвет"}>
-                { colors && colors.map((filter, i) => renderCheckbox(filter, "color", i)) }
-            </ResizableFilterBlock>
+            
+            <div className="product-filters_content">
+                {
+                    colors?.length > 0 &&
+                    <ResizableFiltersGroup name={"Цвет"}>
+                        { colors && colors.map((filter, i) => renderCheckbox(filter, "color", i)) }
+                    </ResizableFiltersGroup>
+                }
 
-            <ResizableFilterBlock name={"Логотип на товаре / бренд"}>
-                { brands && brands.map((filter, i) => renderCheckbox(filter, "brand", i)) }
-            </ResizableFilterBlock>
+                {
+                    brands?.length > 0 &&
+                    <ResizableFiltersGroup name={"Логотип на товаре / бренд"}>
+                        { brands.map((filter, i) => renderCheckbox(filter, "brand", i)) }
+                    </ResizableFiltersGroup>
+                }
 
-            <ResizableFilterBlock name={"Материалы"}>
-                { materials && materials.map((filter, i) => renderCheckbox(filter, "material", i)) }
-            </ResizableFilterBlock>
+                {
+                    materials?.length > 0 &&
+                    <ResizableFiltersGroup name={"Материалы"}>
+                        { materials.map((filter, i) => renderCheckbox(filter, "material", i)) }
+                    </ResizableFiltersGroup>
+                }
 
-            <ResizableFilterBlock name={"Пол / возраст"}>
-                { sex && sex.map((filter, i) => renderCheckbox(filter, "for", i)) }
-            </ResizableFilterBlock>
+                {
+                    sex?.length > 0 &&
+                    <ResizableFiltersGroup name={"Пол / возраст"}>
+                        { sex.map((filter, i) => renderCheckbox(filter, "for", i)) }
+                    </ResizableFiltersGroup>
+                }
 
-            <FilterBlock name={"Цена (за шт)"}>
-                { renderField("От", "minPrice") }
-                { renderField("До", "maxPrice") }
-            </FilterBlock>
+                <FiltersGroup name={"Цена (за шт)"}>
+                    { renderField("От", "minPrice") }
+                    { renderField("До", "maxPrice") }
+                </FiltersGroup>
 
-            <FilterBlock name={"Наличие (шт)"}>
-                { renderField("От", "minStock") }
-            </FilterBlock>
+                <FiltersGroup name={"Наличие (шт)"}>
+                    { renderField("От", "minStock") }
+                </FiltersGroup>
+            </div>
 
             <Controls apply={apply} reset={reset} count={count} />
         </div>
@@ -178,16 +205,16 @@ export default function Filters({ catSlug, closeButton, closeModal }) {
     );
 }
 
-function FilterBlock({name, children}) {
+function FiltersGroup({name, children}) {
     return(
-        <div className="product-filters_block">
+        <div className="filters_group">
             <h3>{ name }</h3>
             <div>{ children } </div>
         </div>
     );
 }
 
-function ResizableFilterBlock({name, children}) {
+function ResizableFiltersGroup({name, children}) {
 
     const [resizable, setResizable] = React.useState(false);
     const [active, setActive] = React.useState(false);
@@ -215,7 +242,7 @@ function ResizableFilterBlock({name, children}) {
     }
 
     return(
-        <div className="product-filters_block product-filters_block-resizable">
+        <div className="filters_group">
             <h3>{ name }</h3>
             <div ref={containerRef}>
                 { children && renderChildren() } 

@@ -3,6 +3,8 @@ import Image from '~/components/Image';
 import { ProductShare } from '~/features/product';
 import './styles/list-item.scss';
 
+const {STATIC_SOURCE} = process.env;
+
 function FavouriteListItem({ item, setProduct, setColumn }) {
 
     const { 
@@ -19,10 +21,12 @@ function FavouriteListItem({ item, setProduct, setColumn }) {
         setColumn(1);
     }
 
+    const imageSrc = images[0]?.path ? `${STATIC_SOURCE}${images[0]?.path}` : '';
+
     return (
         <div className="favourite-list-item">
             <div className="favourite-list-item_image">
-                <Image src={images[0]?.path}/>   
+                <Image src={imageSrc}/>   
             </div>
             <h2 className="favourite-list-item_name">{ name }</h2>
             <span className="favourite-list-item_sku">{ `Арт: ${sku}` }</span>

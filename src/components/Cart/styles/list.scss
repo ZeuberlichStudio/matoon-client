@@ -130,6 +130,7 @@
 @media #{$tablet-screen} {
     .cart-list {
         width: 100%;
+        min-height: t-get-vw(100px);
         padding: t-get-vw(6px);
         
         display: grid;

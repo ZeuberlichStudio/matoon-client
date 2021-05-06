@@ -3,6 +3,8 @@ import Image from '~/components/Image';
 import { Link, useLocation } from 'react-router-dom';
 import './styles/search-item.scss';
 
+const {STATIC_SOURCE} = process.env;
+
 function SearchItem({ data, close }) {
 
     const {
@@ -14,7 +16,7 @@ function SearchItem({ data, close }) {
         prices
     } = data;
 
-    const thumbnail = variants[0].images[0];
+    const imageSrc = variants[0].images[0]?.path ? `${STATIC_SOURCE}${variants[0].images[0]?.path}` : '';
 
     const backgroundLocation = useLocation();
 
@@ -37,7 +39,7 @@ function SearchItem({ data, close }) {
     return (
         <Link className="search-item" to={ itemLink } onClick={ close }>
             <div className="search-item_thumbnail">
-                <Image src={images[0]?.path}/>
+                <Image src={imageSrc}/>
             </div>
 
             <h2 className="search-item_name">{ name }</h2>

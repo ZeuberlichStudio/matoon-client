@@ -3,6 +3,7 @@ import apiCall from '~/common/api-call.js';
 import { useParams } from 'react-router-dom';
 import { PostHeader, PostContent, PostImage } from '~/features/post';
 import { SpinningLoader as Loader } from '~/components/Loader/Loader';
+import { useSelector } from 'react-redux';
 
 import './index.scss';
 
@@ -10,6 +11,16 @@ export function PostPage({ closeButton }, ref) {
     const {slug} = useParams();
     const [post, setPost] = React.useState({});
     const [status, setStatus] = React.useState('idle');
+    const targetDevice = useSelector( state => state.device.target );
+
+    //fixes scrollability on ios < 14
+    const mobileScrollableStyle = { 
+        overflowX: 'hidden', 
+        overflowY: 'scroll', 
+        '-webkit-overflow-scrolling': 'touch',
+        '-webkit-mask-image': '-webkit-radial-gradient(white, black)',
+        maskImage: 'radial-gradient(white, black)'
+    }
 
     function fetchPost() {
         setStatus('pending');
@@ -17,7 +28,8 @@ export function PostPage({ closeButton }, ref) {
         apiCall(`posts/${slug}?isSlug=true`)
             .then(res => {
                 if ( res.data == null ) {
-                    history.push('/404');
+                    //TODO поменять на 404
+                    history.push('/');
                 } else {
                     setStatus('success');
                     setPost(res.data);
@@ -41,7 +53,7 @@ export function PostPage({ closeButton }, ref) {
         <main ref={ ref } id="post-page" className="post-page">
             {
                 status === 'success' ?
-                <div className="post-page_post-wrapper">
+                <div style={targetDevice == 'mobile' ? mobileScrollableStyle : null} className="post-page_post-wrapper">
                     <div className="post-page_post">
                         <PostImage {...{ image: image?.path, title: name }}/>
                         <PostHeader {...{ title: name, slug, closeButton }}/>

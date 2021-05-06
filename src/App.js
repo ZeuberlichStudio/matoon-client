@@ -15,6 +15,7 @@ import CatalogPage from '~/pages/CatalogPage';
 import CategoryPage from '~/pages/CategoryPage';
 import SearchPage from '~/pages/SearchPage';
 import ProductPage from '~/pages/ProductPage';
+import AboutPage from '~/pages/AboutPage';
 import NotFoundPage from '~/pages/404';
 
 function App() {
@@ -36,15 +37,6 @@ function App() {
     const uiState = useSelector( ({ui}) => ui );
 
     const modalRef = React.useRef();
-
-    const menuContentStyles = {
-      initial: {
-        transform: 'translateX(-100%)'
-      },
-      final: {
-          transform: 'translateX(0)'
-      }
-    }
     
     function toggleMenuCallback() {
       if ( !uiState.menu ) { 
@@ -64,15 +56,6 @@ function App() {
         }
     }
 
-    const favouriteContentStyles = {
-        initial: {
-          transform: 'translateX(100%)'
-        },
-        final: {
-            transform: 'translateX(0)'
-        }
-      }
-
     function toggleFavouriteCallback() {
         if ( !uiState.favourite ) {
             dispatch(toggleFavourite(true));
@@ -89,6 +72,7 @@ function App() {
 
             <Switch location={ background || location }>
                 <Route exact={ true } path="/" component={ MainPage }/>
+                <Route path="/about" component={ AboutPage }/>
                 <Route path="/feed/post=:slug" component={ PostPage }/>
                 <Route exact={ true } path="/catalog" component={ CatalogPage }/>
                 <Route path="/catalog/category=:slug/search=:search" component={ SearchPage }/>
