@@ -52,7 +52,8 @@ const initialState = {
             valid: false,
             validate(value) {
                 const { method } = this.payment;
-                return method.value === 'bill' ? !!value : true;
+                const re = /^(\d{10}|\d{12})$/;
+                return method.value === 'bill' ? re.test(value) : true;
             }
         },
         companyName:  {
@@ -130,7 +131,7 @@ export function selectShippingStepCompletion(state) {
 }
 
 export function selectPaymentStepCompletion(state) {
-    const { method, inn, companyName, companyAddress} = state.orderForm.shipping;
+    const { method, inn, companyName, companyAddress} = state.orderForm.payment;
 
     if ( !method.value ) return false;
     else if ( method.value === 'bill' && (!inn.valid || !companyName.valid || !companyAddress.valid) ) return false;

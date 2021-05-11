@@ -1,11 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeFieldValue, validateFieldValue, selectFieldValue, selectFieldValidation } from '~/store/order-form';
-import InputMask from "react-input-mask";
 
 import './styles/field.scss';
 
-export default function Field({ name, label, placeholder, textarea, style, mask }) {
+export default function Field({ name, label, placeholder, textarea, style }) {
     const dispatch = useDispatch();
     const value = useSelector(state => selectFieldValue(state, name));
     const valid = useSelector(state => selectFieldValidation(state, name));
@@ -30,10 +29,7 @@ export default function Field({ name, label, placeholder, textarea, style, mask 
                     className="field--textarea"
                     placeholder={placeholder}
                 ></textarea> :
-                <InputMask
-                    mask={mask || null} 
-                    alwaysShowMask={false}
-                    maskPlaceholder=""
+                <input 
                     name={name} 
                     value={value || ''}
                     onChange={handleChange} 

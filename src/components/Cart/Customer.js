@@ -40,9 +40,25 @@ export default function Customer() {
         <>
             <h3 className="cart_step--content--header">Представьтесь, пожалуйста:</h3>
             <div className="cart_step--content--group">
-                <Field name="customer.name" label="Имя" style={{ gridColumn: '1/2' }}/>
-                <Field name="customer.phone" label="Телефон" style={{ gridColumn: '2/3' }}/>
-                <Field name="customer.mail" label="Почта" style={{ gridColumn: '1/3' }}/>
+                <Field 
+                    name="customer.name" 
+                    label="Имя" 
+                    placeholder="Ваше имя"
+                    style={{ gridColumn: '1/2' }}
+                />
+                <Field 
+                    name="customer.phone" 
+                    label="Телефон" 
+                    mask="+7 (999) 999 9999" 
+                    placeholder="+7 (999) 888 7766"
+                    style={{ gridColumn: '2/3' }}
+                />
+                <Field 
+                    name="customer.mail" 
+                    label="Почта" 
+                    placeholder="name@domain.com"
+                    style={{ gridColumn: '1/3' }}
+                />
             </div>
             <h3 className="cart_step--content--header">Как вам удобнее связаться<br/> для обсуждения деталей заказа:</h3>
             <div className={`cart_step--content--group ${

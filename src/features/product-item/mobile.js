@@ -4,11 +4,6 @@ import Product from '~/features/product';
 import './product-item.scss';
 import { ProductShare as Share } from '~/features/product';
 
-const 
-    { API_URL } = process.env,
-    { CDN_URL } = process.env,
-    formFullPath = path => CDN_URL + path;
-
 export default function ProductItemMobile({data, i}) {
 
     const backgroundLocation = useLocation();

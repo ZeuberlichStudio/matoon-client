@@ -54,7 +54,7 @@ export default function step({
                         className="cart_step--footer--go_forward"
                         style={{ opacity: !complete && '.5' }}
                     >
-                        { index === totalSteps - 1 ? 'Оформить' : 'Далее' }
+                        { index === totalSteps - 2 ? 'Оформить' : 'Далее' }
                     </button>
                 </div>
             }

@@ -18,8 +18,8 @@
 }
 
 .field.danger {
-    .field--input,
-    .field--textarea { background: rgba(red, .3); }
+    .field--input:not(:focus),
+    .field--textarea:not(:focus) { background: rgba(red, .3); }
 }
 
 @media #{$pc-screen} {

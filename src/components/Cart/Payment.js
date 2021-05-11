@@ -42,9 +42,19 @@ export default function Customer() {
                 { 
                     paymentMethodValue === 'bill' && 
                     <>
-                        <Field name="payment.inn" label="ИНН"/>
-                        <Field name="payment.companyName" label="Название компании"/>
-                        <Field name="payment.companyAddress" label="Юридический адрес"/>
+                        <Field 
+                            name="payment.inn" 
+                            label="ИНН" 
+                            mask="999999999999"
+                        />
+                        <Field 
+                            name="payment.companyName" 
+                            label="Название компании"
+                        />
+                        <Field 
+                            name="payment.companyAddress" 
+                            label="Юридический адрес"
+                        />
                     </>
                 }
             </div>

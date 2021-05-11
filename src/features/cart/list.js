@@ -8,8 +8,6 @@ import Image from '~/components/Image';
 
 import './styles/list/pc.scss';
 
-const { CDN_URL } = process.env;
-
 function List() {
 
     const itemsStore = useSelector(state => state.cart.items);
@@ -52,7 +50,6 @@ function List() {
 function CartItem({
     storeData,
     _id,
-    images,
     name,
     sku,
     variants,
