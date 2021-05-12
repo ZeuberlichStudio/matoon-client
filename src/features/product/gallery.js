@@ -5,7 +5,7 @@ import './styles/gallery.scss';
 
 const {STATIC_SOURCE} = process.env;
 
-export default function ProductGallery({ images }) {
+export default function ProductGallery({ images = [] }) {
 
     const [currentImage, setCurrentImage] = React.useState(0);
 

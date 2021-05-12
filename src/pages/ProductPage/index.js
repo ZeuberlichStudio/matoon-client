@@ -81,11 +81,11 @@ export function ProductPage({ closeButton }, ref) {
                 <div style={targetDevice == 'mobile' ? mobileScrollableStyle : null} className="product-page_product-wrapper">
                     <div className="product-page_product">
                         <Product.Header {...{ name, closeButton, slug, _id }}/>
-                        <Product.Gallery images={ variants[currVar].images.concat(images) }/>
+                        <Product.Gallery images={ variants[currVar]?.images?.concat(images) }/>
 
                         <div className="product-options-wrapper">
                             <h3>Конфигурация товара</h3>
-                            <Product.Options {...{ show: 3, variants, setCurrVar }}/>
+                            <Product.Options {...{ shown: 3, variants, setCurrVar }}/>
                         </div>
 
                         <Product.Details {...{ desc, specs, sku, stock: variants[currVar].stock }}/>

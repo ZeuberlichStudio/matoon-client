@@ -30,7 +30,7 @@ export default function ProductItemMobile({data, i}) {
     return (
         <div className={`product-item product-item-${i} product-item-mobile`} key={ i }>
             <div className="product-item-mobile_images">
-                <Product.Gallery images={variants[currVar].images.concat(images)}/>
+                <Product.Gallery images={variants[currVar]?.images?.concat(images)}/>
             </div>
 
             <div className="product-item-mobile_options">
