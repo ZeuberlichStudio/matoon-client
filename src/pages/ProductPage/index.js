@@ -1,6 +1,6 @@
 import React from 'react';
 import apiCall from '~/common/api-call.js';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Product from '~/features/product';
 import { Helmet } from 'react-helmet';
@@ -13,6 +13,7 @@ export function ProductPage({ closeButton }, ref) {
     const {slug} = useParams();
     const [item, setItem] = React.useState({});
     const [status, setStatus] = React.useState('idle');
+    const history = useHistory();
 
     function fetchProduct() {
         setStatus('pending');
@@ -88,7 +89,7 @@ export function ProductPage({ closeButton }, ref) {
                             <Product.Options {...{ shown: 3, variants, setCurrVar }}/>
                         </div>
 
-                        <Product.Details {...{ desc, specs, sku, stock: variants[currVar].stock }}/>
+                        <Product.Details {...{ desc, specs, sku, stock: variants[currVar].stock, materials }}/>
                         { targetDevice === 'mobile' && <Product.Suggested {...{materials, cat, exclude: _id}}/> }
                         {
                             targetDevice === 'mobile' ?

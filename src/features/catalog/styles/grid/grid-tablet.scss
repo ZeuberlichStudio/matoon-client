@@ -27,4 +27,15 @@
             position: relative;
         }
     }
+
+    .product-grid_empty {
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @include proxima-semibold(t-get-vw(20px));
+    }
 }

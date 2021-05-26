@@ -115,6 +115,7 @@ export function ProductItemFull({data, i}) {
         desc,
         specs,
         prices,
+        materials
     } = data;
 
     return (
@@ -125,7 +126,7 @@ export function ProductItemFull({data, i}) {
 
             <ProductOptions {...{ show: 3, variants, setCurrVar }}/>
 
-            <ProductDetails {...{ desc, specs, sku, stock: variants[currVar]?.stock }}/>
+            <ProductDetails {...{ desc, specs, sku, stock: variants[currVar]?.stock, materials }}/>
 
             <ProductPrice {...{ qty, setQty, prices, currPrice, setCurrPrice, stock: variants[currVar]?.stock }}/>
 

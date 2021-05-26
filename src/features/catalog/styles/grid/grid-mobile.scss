@@ -15,4 +15,16 @@
             position: relative;
         }
     }
+
+    .product-grid_empty {
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        @include proxima-semibold(m-get-vw(18px));
+    }
 }

@@ -89,17 +89,11 @@ function AttrSet({
 
     const targetDevice = useSelector( state => state.device.target );
 
-    const Wrapper = ({children}) => (
-        targetDevice === 'desktop' ? 
-        <ButtonsGroup {...{shown}}>{children}</ButtonsGroup> : 
-        <Scrollable>{children}</Scrollable>
-    );
-
-    return (
+    if ( targetDevice == 'desktop' ) return (
         <div className="product-options_attr-set">
             { 
                 attrs &&
-                <Wrapper> 
+                <ButtonsGroup {...{shown: 2}}>
                     {
                         attrs.map((attr, i) => 
                             <Attr 
@@ -110,7 +104,27 @@ function AttrSet({
                             /> 
                         ) 
                     }
-                </Wrapper>
+                </ButtonsGroup> 
+            }
+        </div>
+    );
+
+    else return (
+        <div className="product-options_attr-set">
+            { 
+                attrs &&
+                <Scrollable>
+                    {
+                        attrs.map((attr, i) => 
+                            <Attr 
+                                key={i}
+                                i={i}
+                                active={i === config}
+                                {...{...attr, selectConfig}}
+                            /> 
+                        ) 
+                    }
+                </Scrollable> 
             }
         </div>
     );

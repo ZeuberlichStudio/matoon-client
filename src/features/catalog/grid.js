@@ -23,8 +23,6 @@ export default function ProductGrid({ catSlug, search, view = 'mini' }) {
     const [final, setFinal] = React.useState(false);
 
     function buildQuery() {
-        console.log(queryState);
-
         const params = {
             limit,
             offset,

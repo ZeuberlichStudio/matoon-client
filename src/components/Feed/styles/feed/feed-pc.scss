@@ -6,4 +6,16 @@
         display: flex;
         &_column { flex: 1 0 25%; }
     }
+
+    .feed-grid_empty {
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+
+        @include proxima-semibold(get-vw(24px));
+    }
 }

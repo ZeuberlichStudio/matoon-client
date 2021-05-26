@@ -4,7 +4,14 @@ import { Tabs, Tab } from '~/features/tabs/tabs';
 
 import './styles/details.scss';
 
-export default function ProductDetails({ desc, specs, sku, stock }) {
+export default function ProductDetails({ 
+    desc, 
+    specs, 
+    sku, 
+    stock, 
+    materials 
+}) {
+    const [specsList, setSpecsList] = React.useState([]);
 
     const renderSpec = (spec, i) => {
         const [specName, specValue] = spec;
@@ -17,6 +24,14 @@ export default function ProductDetails({ desc, specs, sku, stock }) {
         );
     }
 
+    function materialsToSpec(materials) {
+        return ['Материалы', materials.map(material => material.name).join(';')];
+    }
+
+    React.useEffect(() => {
+        setSpecsList([materialsToSpec(materials), ...specs]);
+    }, [specs, materials]);
+
     return (
         <div className="product-details">
             <span className="product-details_sku">Арт: { sku }</span>
@@ -27,7 +42,9 @@ export default function ProductDetails({ desc, specs, sku, stock }) {
                     <p>{ desc }</p>
                 </Tab>
                 <Tab title="Характеристики">
-                    <ul>{ specs.map( renderSpec ) }</ul>
+                    <ul>
+                        { specsList.map( renderSpec ) }
+                    </ul>
                 </Tab>
             </Tabs>
         </div>

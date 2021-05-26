@@ -61,11 +61,15 @@ export default function Feed() {
             <div className="feed-grid">
                 { 
                     status === 'success' ?
+                    posts.length > 0 ?
                     arrangePosts(posts, targetDevice === 'mobile' ? 2 : targetDevice === 'tablet' ? 3 : 4 ).map((column, i) => 
                         <div className="feed-grid_column">
                             { column.map((post, i) => <FeedPost {...{ ...post, i, key: i }}/> ) }
                         </div> 
                     )  :
+                    <div className="feed-grid_empty">
+                        <span>Пока что никаких новостей. Возвращайтесь позже!</span>
+                    </div> :
                     <Loader/>
                 }
             </div>

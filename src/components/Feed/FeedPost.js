@@ -11,7 +11,7 @@ export default function FeedPost({
     slug,
     size,
     name,
-    content,
+    shortDesc,
     image
 }) {
 
@@ -28,7 +28,7 @@ export default function FeedPost({
 
             <div className="feed-post_content">
                 <h2>{name}</h2>
-                { content && <p>{content}</p> }
+                { shortDesc && <p>{shortDesc}</p> }
             </div>
 
             <Link to={postLink}>

@@ -59,6 +59,7 @@ export default function Filters({ catSlug, closeButton, closeModal}) {
 
         apiCall(`products/filters?${buildApiQuery()}`)
            .then( result => {
+                result.data.for.sort((a, b) => a.name - b.name);
                 setAvailableFilters(result.data);
                 setStatus('succeeded');
             })

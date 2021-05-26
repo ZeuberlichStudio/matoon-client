@@ -50,8 +50,6 @@ export function Modal({
     }
 
     function init() {
-        console.log('fired init function');
-
         if ( !visible ) {
             setVisible(true);
             if ( navFocus ) dispatch(toggleHeaderLayer(true));
