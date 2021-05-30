@@ -120,7 +120,7 @@ export function ProductItemFull({data, i}) {
 
     return (
         <div className={`product-item product-item-${ i } product-item-full`}>
-            <ProductGallery images={variants[currVar]?.images.concat(images)}/>
+            <ProductGallery key={currVar} images={variants[currVar]?.images.concat(images)}/>
 
             <h2 className="product-name">{name}</h2>
 

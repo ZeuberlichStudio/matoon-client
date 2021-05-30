@@ -40,7 +40,7 @@ function FavouriteProduct({ data, buttonCallback }) {
             <Header {...{ name, _id, slug, closeButton }}/>
             {
                 targetDevice !== 'tablet' ?
-                <Gallery images={variants[currVar]?.images?.concat(images)}/> :
+                <Gallery key={currVar} images={variants[currVar]?.images?.concat(images)}/> :
                 <TabletGallery images={variants[currVar]?.images?.concat(images)}/>
             }
             <div className="product-options-wrapper">
