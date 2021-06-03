@@ -16,7 +16,7 @@ export default function CategoryPage() {
     const dispatch = useDispatch();
     const { search } = useParams();
     const query = useQuery();
-    const [bannerPosts, setBannerPosts] = React.useState([]);
+    // const [bannerPosts, setBannerPosts] = React.useState([]);
     const [cat, setCat] = React.useState({});
     const [catStatus, setCatStatus] = React.useState('idle');
     // const [bannerPostsStatus, setBannerPostsStatus] = React.useState('idle');

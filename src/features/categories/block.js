@@ -1,5 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+import { selectTarget } from '~/app/device';
 import './styles/block.scss';
 
 export default function CategoriesBlock({ 
@@ -13,6 +15,12 @@ export default function CategoriesBlock({
     closeButton,
     closeModal
 }) {
+
+    const history = useHistory();
+    const targetDevice = useSelector(selectTarget);
+
+    const goToCat = slug => { history.push(`/catalog/category=${slug}`); closeModal(); }
+    const unfoldChildren = index => select(dimension + 1, index);
 
     return (
         <div className="categories-block-wrapper">
@@ -29,9 +37,9 @@ export default function CategoriesBlock({
                             cat.subcats ?
                             <li 
                                 key={i}
-                                className={i === selection[dimension + 1] ? 'active' : ''} 
-                                onMouseEnter={ () => select(dimension + 1, i) }
-                                onClick={ () => select(dimension + 1, i) }
+                                className={(i === selection[dimension + 1] ? 'active' : '') + ' has_children'} 
+                                onMouseEnter={ targetDevice == 'desktop' ? () => unfoldChildren(i) : null }
+                                onClick={ targetDevice == 'desktop' ? () => goToCat(cat.slug) : () => unfoldChildren(i) }
                             >
                                 <span>{ cat.name }</span>
                             </li> :

@@ -1,8 +1,7 @@
 @media screen and (min-width: 1024px) {
     .banner {
         width: 100vw;
-        // height: get-vw(972px);
-        height: max-content;
+        height: get-vw(972px);
         padding: get-vw(98px) get-vw(64px) get-vw(34px) get-vw(64px);
 
         display: grid;
@@ -38,7 +37,8 @@
 
     .banner-post {
         grid-area: post;
-        margin-top: get-vw(76px);
+        padding-top: get-vw(76px);
+        overflow: hidden;
     }
 
     .banner-posts-preview {

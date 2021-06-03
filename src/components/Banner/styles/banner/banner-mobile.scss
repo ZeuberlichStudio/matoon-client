@@ -33,6 +33,7 @@
     }
 
     .banner-posts-preview {
+        margin-top: m-get-vw(-64px);
         grid-area: preview;
         justify-self: flex-end;    
     }

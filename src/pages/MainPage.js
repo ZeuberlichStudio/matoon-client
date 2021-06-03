@@ -15,7 +15,7 @@ export default function MainPage() {
     function fetchBannerPosts() {
         setBannerPostsStatus('loading');
 
-        apiCall(`posts?page=main&limit=4&sort=createdAt,-1`)
+        apiCall(`posts?type=banner&page=main&limit=4&sort=createdAt,-1`)
             .then(res => {
                 setBannerPosts(res.data);
                 setBannerPostsStatus('success');

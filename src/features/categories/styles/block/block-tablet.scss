@@ -92,7 +92,7 @@
                     text-align: left; 
                 }
 
-                &::before {
+                &.has_children::before {
                     width: t-get-vw(8px);
                     height: t-get-vw(8px);
                     right: t-get-vw(8px);
@@ -116,14 +116,14 @@
                 background-color: rgba( $black, .1 );
                 color: $black;
 
-                &::before { opacity: 1; }
+                &.has_children::before { opacity: 1; }
             }
         }
 
         ul:hover {
             li:not( :hover ) {
                 background-color: rgba( $black, 0);
-                &::before { opacity: 0; }
+                &.has_children::before { opacity: 0; }
             }
         }
     }

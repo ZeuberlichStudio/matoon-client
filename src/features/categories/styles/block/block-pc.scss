@@ -61,7 +61,7 @@
                     text-align: left; 
                 }
 
-                &::before {
+                &.has_children::before {
                     width: get-vw(12px);
                     height: get-vw(12px);
                     right: get-vw(12px);
@@ -86,14 +86,14 @@
                 background-color: rgba( $black, .1 );
                 color: $black;
 
-                &::before { opacity: 1; }
+                &.has_children::before { opacity: 1; }
             }
         }
 
         ul:hover {
             li:not( :hover ) {
                 background-color: rgba( $black, 0);
-                &::before { opacity: 0; }
+                &.has_children::before { opacity: 0; }
             }
         }
     }

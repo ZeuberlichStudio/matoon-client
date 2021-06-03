@@ -59,6 +59,14 @@
                 width: 100%;
                 @include proxima-bold( m-get-vw(16px), m-get-vw(40px) );
                 text-align: center;
+
+                span { 
+                    width: m-get-vw(208px); 
+                    display: inline-block;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                }
             }
 
             button {
@@ -142,8 +150,15 @@
                 color: rgba( $black, .6 );
 
                 cursor: pointer;
+
                 span { 
                     text-align: left; 
+
+                    width: 100%; 
+                    display: inline-block;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
                 }
             }
 
