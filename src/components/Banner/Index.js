@@ -13,7 +13,7 @@ import Search from '~/features/search/index';
 
 const {STATIC_SOURCE} = process.env;
 
-function Banner({ pageTitle, ancestors, posts, catSlug }) {
+function Banner({ pageTitle, ancestors, posts = [], catSlug }) {
 
     const [currentPost, setCurrentPost] = React.useState(0);
 
@@ -39,7 +39,11 @@ function Banner({ pageTitle, ancestors, posts, catSlug }) {
     }
 
     return (
-        <div className="banner" id="banner" style={ targetDevice !== 'desktop' && posts?.length < 1 ? noSliderStyle : null }>
+        <div 
+            className={`banner ${posts.length == 0 ? 'no_posts' : ''}`} 
+            id="banner"
+            style={ targetDevice !== 'desktop' && posts?.length < 1 ? noSliderStyle : null }
+        >
             <div className="banner-title">{ pageTitle ?? 'Matoon Store' }</div>
             { params.search && <span className="banner-search-phrase">{ decodeURI(params.search) }</span>  }
             { <Breadcrumbs {...{ancestors}}/> }

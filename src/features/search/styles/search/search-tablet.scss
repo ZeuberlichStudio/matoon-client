@@ -32,6 +32,8 @@
         border-radius: t-get-vw(18px);
         transition: .3s;
         overflow: hidden;
+
+        .loader-container { margin: t-get-vw(16px); }
     }
 
     .search-field {

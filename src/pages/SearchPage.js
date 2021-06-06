@@ -12,7 +12,7 @@ import { Helmet } from 'react-helmet';
 
 const { SITE_TITLE } = process.env;
 
-export default function CategoryPage() {
+export default function SearchPage() {
     const dispatch = useDispatch();
     const { search } = useParams();
     const query = useQuery();
@@ -76,10 +76,7 @@ export default function CategoryPage() {
             { 
                 catStatus === 'success' /* && bannerPostsStatus === 'success' */ ? 
                 <>
-                    <Banner 
-                        posts={bannerPosts} 
-                        pageTitle={cat.name ? `${cat.name} - поиск` : 'Поиск'} 
-                    />
+                    <Banner pageTitle={cat.name ? `${cat.name} - поиск` : 'Поиск'} />
                     <Catalog/>
                 </> : <Loader position="fixed" />
             }

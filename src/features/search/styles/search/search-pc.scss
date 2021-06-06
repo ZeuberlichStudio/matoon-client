@@ -33,6 +33,8 @@
         transition: .3s;
         overflow: hidden;
         z-index: 5;
+
+        .loader-container { margin: get-vw(20px); }
     }
 
     .search-field {

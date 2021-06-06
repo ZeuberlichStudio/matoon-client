@@ -29,9 +29,8 @@ function FavouriteProduct({ data, buttonCallback }) {
         desc,
         specs,
         prices,
+        materials
     } = data;
-
-    React.useEffect(() => { console.log(variants) }, [variants]);
 
     const closeButton = <CloseButton callback={ buttonCallback }/>;
 
@@ -47,7 +46,7 @@ function FavouriteProduct({ data, buttonCallback }) {
                 <h3> Конфигурация товара </h3>
                 <Options {...{ show: 3, variants, setCurrVar }}/>
             </div>
-            <Details {...{ desc, specs, sku, stock: variants[currVar].stock }}/>
+            <Details {...{ desc, specs, sku, stock: variants[currVar].stock, materials }}/>
             {
                 targetDevice !== 'desktop' ?
                 <div className="product-purchase-wrapper">

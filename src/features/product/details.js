@@ -6,10 +6,10 @@ import './styles/details.scss';
 
 export default function ProductDetails({ 
     desc, 
-    specs, 
+    specs = [], 
     sku, 
     stock, 
-    materials 
+    materials = []
 }) {
     const [specsList, setSpecsList] = React.useState([]);
 

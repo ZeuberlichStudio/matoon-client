@@ -14,6 +14,10 @@
         grid-template-columns: 1fr;
         grid-template-rows: repeat(2, max-content) m-get-vw(245px + 16px) max-content;
     }
+    
+    .banner.no_posts {
+        height: max-content;
+    }
 
     .banner-title {
         grid-area: title;

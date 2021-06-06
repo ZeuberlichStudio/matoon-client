@@ -18,6 +18,10 @@
         // overflow: hidden;
     }
 
+    .banner.no_posts {
+        height: max-content;
+    }
+
     .banner-title {
         grid-area: title;
         @include proxima-bold( t-get-vw(38px) );

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setModalElement, toggleOverlay, toggleSearch } from '~/app/ui';
 import { selectTarget } from '~/app/device';
 import { toggleUI } from '~/features/modal-ui';
+import { SpinningLoader as Loader } from '~/components/Loader/Loader';
 
 import SearchItem from './search-item';
 import './styles/search.scss';
@@ -128,9 +129,9 @@ function Search({ mini, focusCallback, catSlug }) {
                 />
                 <button id="search-reset" onClick={close}/>
             </div>
-
+            { status == 'pending' && <Loader /> }
             {
-                open && 
+                open && status == 'success' &&
                 (
                     results[0] ?
                     <div className="search-results">
@@ -149,8 +150,7 @@ function Search({ mini, focusCallback, catSlug }) {
             }
 
             { 
-                open && 
-                results[0] && 
+                open && status == 'success' && results[0] && 
                 <Link onClick={ close } to={searchPagePath} className="search-more">
                     <span>Все результаты поиска</span>
                 </Link>
