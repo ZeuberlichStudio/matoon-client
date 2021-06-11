@@ -26,9 +26,12 @@ export default function PostContent({ content, link }) {
     return (
         <div className="post-content">
             <p className="post-content_text">{content}</p>
-            <a href={link}>
-                <span>Перейти</span>
-            </a>
+            {
+                link &&
+                <a href={link}>
+                    <span>Перейти</span>
+                </a>
+            }
             {/* { (type === 'link' && link) && <Link to={ createLink() }><span>Перейти</span></Link> } */}
             {/* { (type === 'promo' && promo) && <button onClick={ copyPromocode }><span ref={ copyButtonRef }>Скопировать</span></button> } */}
         </div>

@@ -24,7 +24,8 @@
         .post-image { grid-area: image; }
         .post-header { grid-area: header; }
         .post-content { 
-            margin-top: get-vw(32px);
+            margin-top: get-vw(12px);
+            padding: 0 get-vw(12px);
             grid-area: content; 
         }
 
